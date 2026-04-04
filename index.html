@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Workshop — King's College London</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0E1A2F;
+  --navy-mid: #162340;
+  --navy-light: #1E3054;
+  --slate: #2A3F5F;
+  --gold: #D4AD2B;
+  --gold-light: #F0D456;
+  --gold-dim: rgba(212, 173, 43, 0.18);
+  --amber: #E09540;
+  --cream: #F5F0E8;
+  --cream-dark: #E8E0D0;
+  --parchment: #FAF7F2;
+  --ink: #111111;
+  --ink-light: #3A3A3A;
+  --ink-muted: #6A6A6A;
+  --white: #FFFFFF;
+  --red-accent: #C04040;
+  --green-accent: #3A8A5C;
+  --blue-accent: #3A6B9F;
+
+  --font-display: 'Cormorant Garamond', 'Noto Serif TC', Georgia, serif;
+  --font-body: 'DM Sans', 'Noto Serif TC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 17px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ UTILITY ============ */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ============ SCROLL ANIMATIONS ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(14, 26, 47, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200, 164, 69, 0.15);
+  padding: 0.8rem 0;
+  transform: translateY(-100%);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.nav.visible { transform: translateY(0); }
+.nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold-light); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--navy);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 164, 69, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(58, 107, 159, 0.1) 0%, transparent 60%),
+    linear-gradient(175deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy) 100%);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A445' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(200, 164, 69, 0.1);
+  border: 1px solid rgba(200, 164, 69, 0.25);
+  border-radius: 100px;
+  padding: 0.5rem 1.4rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.3s forwards;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-expo) 0.5s forwards;
+}
+.hero-title .gold { color: var(--gold); }
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: rgba(255,255,255,0.82);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-expo) 0.7s forwards;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-expo) 0.9s forwards;
+}
+.hero-meta-item {
+  text-align: center;
+}
+.hero-meta-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.3rem;
+}
+.hero-meta-value {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-expo) 1.3s forwards;
+}
+.hero-scroll span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.6);
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ SECTION COMMON ============ */
+section { padding: 6rem 0; }
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-desc {
+  font-size: 1.12rem;
+  color: var(--ink-light);
+  max-width: 680px;
+  line-height: 1.85;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 3rem 0;
+}
+
+/* ============ COURSE INFO ============ */
+.course-info {
+  background: var(--white);
+  border-bottom: 1px solid var(--cream-dark);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.info-card {
+  padding: 2rem;
+  background: var(--parchment);
+  border-radius: 12px;
+  border: 1px solid var(--cream-dark);
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+}
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(14, 26, 47, 0.08);
+}
+.info-card-icon {
+  width: 48px; height: 48px;
+  background: var(--gold-dim);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+.info-card p {
+  font-size: 0.95rem;
+  color: var(--ink-light);
+  line-height: 1.75;
+}
+
+/* ============ CAPABILITIES ============ */
+.capabilities { background: var(--navy); color: var(--white); }
+.capabilities .section-label { color: var(--gold-light); }
+.capabilities .section-title { color: var(--white); }
+.capabilities .section-desc { color: rgba(255,255,255,0.82); }
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+@media (max-width: 768px) {
+  .cap-grid { grid-template-columns: 1fr; }
+}
+.cap-card {
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+.cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--amber));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.cap-card:hover::before { transform: scaleX(1); }
+.cap-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(200, 164, 69, 0.2);
+}
+.cap-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(200, 164, 69, 0.2);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.cap-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+}
+.cap-card p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.75;
+}
+.cap-note {
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+  background: rgba(212, 173, 43, 0.12);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+  font-style: italic;
+}
+
+/* ============ TIMELINE ============ */
+.timeline-section { background: var(--white); }
+.timeline {
+  margin-top: 3rem;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--cream-dark));
+}
+@media (max-width: 768px) {
+  .timeline::before { left: 18px; }
+}
+
+.tl-item {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  position: relative;
+}
+.tl-dot {
+  width: 58px;
+  min-width: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.2rem;
+}
+.tl-dot-circle {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--parchment);
+  border: 3px solid var(--gold);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.tl-item:hover .tl-dot-circle {
+  background: var(--gold);
+  box-shadow: 0 0 0 6px rgba(200, 164, 69, 0.15);
+}
+.tl-item.is-break .tl-dot-circle {
+  border-color: var(--ink-muted);
+  background: var(--cream-dark);
+}
+
+.tl-content {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  background: var(--parchment);
+  border-radius: 12px;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.3s var(--ease-out-expo);
+}
+.tl-item:hover .tl-content {
+  border-color: rgba(200, 164, 69, 0.3);
+  box-shadow: 0 4px 20px rgba(14, 26, 47, 0.06);
+}
+.tl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+.tl-part {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.tl-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+.tl-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+.tl-tag.hands-on { background: rgba(58, 138, 92, 0.1); color: var(--green-accent); }
+.tl-tag.discussion { background: rgba(58, 107, 159, 0.1); color: var(--blue-accent); }
+.tl-time {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 768px) {
+  .tl-item { gap: 1rem; }
+  .tl-dot { width: 38px; min-width: 38px; }
+  .tl-content { padding: 1rem 1.2rem; }
+}
+
+/* ============ PART SECTIONS ============ */
+.part-section { border-bottom: 1px solid var(--cream-dark); }
+.part-section:nth-child(even) { background: var(--white); }
+.part-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.part-number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(200, 164, 69, 0.2);
+  line-height: 1;
+}
+
+/* Term table */
+.term-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+.term-table thead th {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1rem 1.2rem;
+  text-align: left;
+}
+.term-table thead th:first-child { border-radius: 10px 0 0 0; }
+.term-table thead th:last-child { border-radius: 0 10px 0 0; }
+.term-table tbody td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--cream-dark);
+  vertical-align: top;
+}
+.term-table tbody tr:last-child td { border-bottom: none; }
+.term-table tbody tr { transition: background 0.2s; }
+.term-table tbody tr:hover { background: rgba(200, 164, 69, 0.04); }
+.term-table .term-name {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.term-table .term-core { position: relative; }
+.term-table .term-core::after {
+  content: 'CORE';
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--gold);
+  color: var(--white);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+.teaching-note {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--gold-dim);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: var(--ink-light);
+}
+.teaching-note strong { color: var(--navy); }
+
+/* Three tier */
+.tier-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 600px;
+}
+.tier-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--cream-dark);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.tier-row:hover { transform: translateX(6px); }
+.tier-label {
+  min-width: 140px;
+  padding: 1.2rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tier-label small {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  margin-top: 0.2rem;
+}
+.tier-label.model { background: var(--navy); color: var(--white); }
+.tier-label.product { background: var(--slate); color: var(--white); }
+.tier-label.agent { background: var(--gold); color: var(--navy); }
+.tier-examples {
+  flex: 1;
+  padding: 1.2rem 1.5rem;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+}
+.tier-examples span {
+  background: var(--parchment);
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .tier-label { min-width: 100px; padding: 0.8rem; font-size: 0.95rem; }
+  .tier-examples { padding: 0.8rem; }
+}
+
+/* Comparison */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+@media (max-width: 768px) {
+  .comparison { grid-template-columns: 1fr; }
+}
+.comparison-col {
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--cream-dark);
+}
+.comparison-col.old {
+  background: var(--cream);
+  opacity: 0.85;
+}
+.comparison-col.new {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--slate);
+}
+.comparison-col h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.comparison-col.new h4 { color: var(--gold-light); }
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.88rem;
+}
+.comparison-col.new .comp-row { border-color: rgba(255,255,255,0.08); }
+.comp-row:last-child { border-bottom: none; }
+.comp-label { color: var(--ink-muted); min-width: 80px; }
+.comparison-col.new .comp-label { color: rgba(255,255,255,0.7); }
+.comp-value { text-align: right; font-weight: 500; }
+
+/* Demo comparison */
+.demo-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+@media (max-width: 768px) {
+  .demo-compare { grid-template-columns: 1fr; }
+}
+.demo-block {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--cream-dark);
+}
+.demo-block-header {
+  padding: 0.8rem 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.demo-block.chatgpt .demo-block-header {
+  background: var(--cream);
+  color: var(--ink-muted);
+}
+.demo-block.claude .demo-block-header {
+  background: var(--navy);
+  color: var(--gold-light);
+}
+.demo-block pre {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  padding: 1.2rem 1.5rem;
+  overflow-x: auto;
+}
+.demo-block.chatgpt pre { background: var(--white); color: var(--ink-light); }
+.demo-block.claude pre { background: var(--navy-mid); color: rgba(255,255,255,0.8); }
+.demo-block.claude pre .success { color: var(--green-accent); }
+
+/* Paradigm shift */
+.paradigm {
+  margin: 2.5rem 0;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius: 16px;
+  color: var(--white);
+  text-align: center;
+}
+.paradigm-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+.paradigm-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.paradigm-node {
+  padding: 0.6rem 1.2rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+}
+.paradigm-node.highlight {
+  background: rgba(200, 164, 69, 0.15);
+  border-color: var(--gold);
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.paradigm-arrow { color: var(--gold); font-size: 1.2rem; }
+.paradigm-takeaway {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.82);
+  margin-top: 1rem;
+}
+
+/* ============ SETUP / CCC ============ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.step-card {
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.3s var(--ease-out-expo);
+}
+.step-card:hover {
+  border-color: rgba(200, 164, 69, 0.3);
+  transform: translateY(-2px);
+}
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.step-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+.step-card p { font-size: 0.85rem; color: var(--ink-light); }
+.step-card code {
+  font-family: var(--font-mono);
+  background: var(--parchment);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--navy);
+}
+
+.exercise-box {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  background: rgba(58, 138, 92, 0.06);
+  border: 1px solid rgba(58, 138, 92, 0.15);
+  border-radius: 12px;
+}
+.exercise-box h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green-accent);
+  margin-bottom: 0.6rem;
+}
+.exercise-box p { font-size: 0.92rem; color: var(--ink-light); }
+
+/* CCC Framework */
+.ccc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+@media (max-width: 768px) {
+  .ccc-grid { grid-template-columns: 1fr; }
+}
+.ccc-card {
+  padding: 2rem;
+  border-radius: 14px;
+  text-align: center;
+  border: 2px solid var(--cream-dark);
+  transition: all 0.3s var(--ease-out-expo);
+}
+.ccc-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(14, 26, 47, 0.08);
+}
+.ccc-letter {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.ccc-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0.5rem 0 0.3rem;
+}
+.ccc-card p { font-size: 0.85rem; color: var(--ink-light); }
+
+.prompt-compare {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .prompt-compare { grid-template-columns: 1fr; }
+}
+.prompt-box {
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+}
+.prompt-box.bad {
+  background: rgba(192, 64, 64, 0.05);
+  border: 1px solid rgba(192, 64, 64, 0.15);
+}
+.prompt-box.good {
+  background: rgba(58, 138, 92, 0.05);
+  border: 1px solid rgba(58, 138, 92, 0.15);
+}
+.prompt-box h5 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+}
+.prompt-box.bad h5 { color: var(--red-accent); }
+.prompt-box.good h5 { color: var(--green-accent); }
+.prompt-box blockquote {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  padding-left: 1rem;
+  border-left: 2px solid var(--cream-dark);
+}
+
+/* ============ SCENARIOS ============ */
+.scenarios-section { background: var(--navy); color: var(--white); padding: 6rem 0; }
+.scenarios-section .section-label { color: var(--gold-light); }
+.scenarios-section .section-title { color: var(--white); }
+.scenarios-section .section-desc { color: rgba(255,255,255,0.75); }
+
+.scenario-cards {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.scenario-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+  cursor: pointer;
+}
+.scenario-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(200, 164, 69, 0.25);
+}
+.scenario-card.expanded .sc-detail { display: block; }
+
+.sc-header {
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .sc-header { padding: 1.2rem; gap: 1rem; flex-wrap: wrap; }
+}
+.sc-letter {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 50px;
+}
+.sc-info { flex: 1; }
+.sc-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+.sc-info p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+}
+.sc-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.sc-difficulty {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.sc-time {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+}
+.sc-expand {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.scenario-card:hover .sc-expand { opacity: 1; }
+
+.sc-detail {
+  display: none;
+  padding: 0 2.5rem 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+@media (max-width: 768px) {
+  .sc-detail { padding: 0 1.2rem 1.5rem; }
+}
+.sc-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 768px) {
+  .sc-detail-grid { grid-template-columns: 1fr; }
+}
+.sc-detail h4 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.sc-detail ol, .sc-detail ul {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+.sc-detail .sc-prompt {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.7;
+}
+.sc-detail .sc-output {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: rgba(200, 164, 69, 0.8);
+}
+.sc-integrity {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(192, 64, 64, 0.12);
+  border: 1px solid rgba(192, 64, 64, 0.2);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.9);
+}
+.sc-integrity strong { color: var(--gold-light); }
+
+.selection-guide {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+}
+.selection-guide h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 1.2rem;
+}
+.sg-table {
+  width: 100%;
+  font-size: 0.88rem;
+}
+.sg-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  vertical-align: top;
+}
+.sg-table td:first-child {
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  width: 200px;
+}
+.sg-table td:last-child { color: rgba(255,255,255,0.92); }
+.sg-table tr:last-child td { border-bottom: none; }
+
+/* ============ GOVERNANCE / PRODUCT / WRAPUP ============ */
+.gov-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+@media (max-width: 768px) {
+  .gov-grid { grid-template-columns: 1fr; }
+}
+.gov-card {
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--cream-dark);
+}
+.gov-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+}
+.gov-card ul {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  padding-left: 1.2rem;
+  line-height: 2;
+}
+
+.product-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin: 2.5rem 0;
+  padding: 2.5rem;
+  background: var(--navy);
+  border-radius: 16px;
+}
+.pf-node {
+  padding: 0.8rem 1.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.88rem;
+  text-align: center;
+}
+.pf-node.active {
+  background: rgba(200, 164, 69, 0.15);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+.pf-arrow {
+  color: rgba(255,255,255,0.25);
+  font-size: 1.3rem;
+}
+
+.advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+@media (max-width: 768px) {
+  .advanced-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.adv-card {
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--cream-dark);
+  text-align: center;
+}
+.adv-card h5 {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+.adv-card p { font-size: 0.8rem; color: var(--ink-muted); }
+
+/* ============ CHECKLIST ============ */
+.checklist-section {
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: var(--navy);
+  padding: 5rem 0;
+}
+.checklist-section .section-label { color: rgba(14, 26, 47, 0.5); }
+.checklist-section .section-title { color: var(--navy); }
+.checklist-list {
+  margin-top: 2rem;
+  max-width: 600px;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(14, 26, 47, 0.1);
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(14, 26, 47, 0.25);
+  min-width: 30px;
+}
+.checklist-item p {
+  font-size: 0.95rem;
+  color: var(--navy);
+  line-height: 1.6;
+}
+.checklist-item code {
+  font-family: var(--font-mono);
+  background: rgba(14, 26, 47, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* ============ QUOTE ============ */
+.quote-section {
+  background: var(--navy);
+  padding: 6rem 0;
+  text-align: center;
+}
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.4;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.quote-text .highlight {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 3rem 0;
+  text-align: center;
+}
+.footer p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+}
+.footer a { color: var(--gold); text-decoration: none; }
+.footer .footer-integrity {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-brand">Claude Code Workshop</div>
+    <ul class="nav-links">
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#terminology">術語</a></li>
+      <li><a href="#three-tier">三層架構</a></li>
+      <li><a href="#scenarios">情境實作</a></li>
+      <li><a href="#checklist">課前準備</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">King's College London · Technology Management</div>
+    <h1 class="hero-title">Claude <span class="gold">Code</span><br>Workshop</h1>
+    <p class="hero-subtitle">From Chat to Command — AI Agent 實戰工作坊</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Duration</div>
+        <div class="hero-meta-value">3 Hours</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Format</div>
+        <div class="hero-meta-value">Hands-on Workshop</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Level</div>
+        <div class="hero-meta-value">No Coding Required</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- COURSE INFO -->
+<section class="course-info">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Course Overview</div>
+      <h2 class="section-title">課程目標</h2>
+      <p class="section-desc">讓非 CS 背景的學生理解 AI Agent 工具，能用 Claude Code 將想法快速變成可運行的成果。</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card reveal reveal-delay-1">
+        <div class="info-card-icon">🎯</div>
+        <h3>對象</h3>
+        <p>Technology Management 碩士生——理解科技、管理專案，但不一定寫過程式。</p>
+      </div>
+      <div class="info-card reveal reveal-delay-2">
+        <div class="info-card-icon">⚡</div>
+        <h3>教學原則</h3>
+        <p>70% 動手 / 30% 講解。商業場景驅動，判斷力 > 技術力。</p>
+      </div>
+      <div class="info-card reveal reveal-delay-3">
+        <div class="info-card-icon">🕐</div>
+        <h3>時長</h3>
+        <p>3 小時（含 10 分鐘休息），8 個段落循序漸進。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="capabilities">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Student Profile</div>
+      <h2 class="section-title">你們需要的三種能力</h2>
+      <p class="section-desc">Technology Management 的核心不是寫 code，而是理解、評估、管理科技。</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal reveal-delay-1">
+        <div class="cap-num">01</div>
+        <h3>技術判斷力</h3>
+        <p>能評估 AI 工具的能力邊界，做出 build vs buy 決策。知道什麼能做、什麼不能做。</p>
+      </div>
+      <div class="cap-card reveal reveal-delay-2">
+        <div class="cap-num">02</div>
+        <h3>AI-augmented 生產力</h3>
+        <p>用 AI 加速原型開發、數據分析、自動化流程。把 2 週的工作壓縮到 2 小時。</p>
+      </div>
+      <div class="cap-card reveal reveal-delay-3">
+        <div class="cap-num">03</div>
+        <h3>跨域溝通</h3>
+        <p>能與工程團隊用同一語言對話，理解技術限制。不被術語嚇到，不被忽悠。</p>
+      </div>
+    </div>
+    <div class="cap-note reveal">
+      你們<strong>不是</strong> CS 學生——重點不在寫完美的 code，而在<strong>用 AI 把想法變成可運行的東西</strong>。
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Schedule</div>
+      <h2 class="section-title">170 分鐘課程流程</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 1 · AI 術語暖身</span>
+            <div class="tl-tags"><span class="tl-tag">講解</span></div>
+          </div>
+          <span class="tl-time">10 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 2 · AI 三層架構 + 為什麼用 Agent</span>
+            <div class="tl-tags"><span class="tl-tag">講解</span><span class="tl-tag hands-on">Demo</span></div>
+          </div>
+          <span class="tl-time">15 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 3 · Setup & First Commands</span>
+            <div class="tl-tags"><span class="tl-tag hands-on">動手</span></div>
+          </div>
+          <span class="tl-time">20 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 4 · 如何跟 AI 有效溝通</span>
+            <div class="tl-tags"><span class="tl-tag">講解</span><span class="tl-tag hands-on">練習</span></div>
+          </div>
+          <span class="tl-time">25 min</span>
+        </div>
+      </div>
+      <div class="tl-item is-break reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content" style="background: var(--cream); text-align: center;">
+          <span class="tl-part" style="font-size: 1.1rem;">☕ Break</span>
+          <span class="tl-time" style="display: block; margin-top: 0.3rem;">10 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 5 · 分組實作：5 個學術情境</span>
+            <div class="tl-tags"><span class="tl-tag hands-on">動手</span></div>
+          </div>
+          <span class="tl-time">50 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 6 · AI Governance & Judgment</span>
+            <div class="tl-tags"><span class="tl-tag discussion">討論</span></div>
+          </div>
+          <span class="tl-time">15 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 7 · From Prototype to Product</span>
+            <div class="tl-tags"><span class="tl-tag">講解</span></div>
+          </div>
+          <span class="tl-time">15 min</span>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+        <div class="tl-content">
+          <div class="tl-header">
+            <span class="tl-part">Part 8 · Wrap-up & Demo</span>
+            <div class="tl-tags"><span class="tl-tag hands-on">展示</span></div>
+          </div>
+          <span class="tl-time">10 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 1: TERMINOLOGY -->
+<section class="part-section" id="terminology">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">01</span>
+      <div>
+        <div class="section-label">Part 1 · 10 min</div>
+        <h2 class="section-title">AI 術語暖身</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">確保所有人在同一個起跑線，不因術語卡住後面的實作。</p>
+
+    <table class="term-table reveal">
+      <thead>
+        <tr>
+          <th>術語</th>
+          <th>白話解釋</th>
+          <th>類比</th>
+          <th>為什麼你要知道</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="term-name term-core">LLM</span></td>
+          <td>讀過海量文字後學會「接話」的 AI 模型</td>
+          <td>讀過整個圖書館的實習生</td>
+          <td>ChatGPT、Claude 背後都是 LLM</td>
+        </tr>
+        <tr>
+          <td><span class="term-name term-core">AI Agent</span></td>
+          <td>能自主規劃步驟、使用工具、完成任務的 AI 系統</td>
+          <td>LLM 是大腦，Agent 是有手有腳的員工</td>
+          <td>Claude Code 就是一個 Agent</td>
+        </tr>
+        <tr>
+          <td><span class="term-name term-core">Prompt</span></td>
+          <td>你給 AI 的指令或問題</td>
+          <td>你對實習生說的那句話</td>
+          <td>最重要的職場技能之一</td>
+        </tr>
+        <tr>
+          <td><span class="term-name">API</span></td>
+          <td>軟體之間溝通的標準介面</td>
+          <td>餐廳的菜單和點餐窗口</td>
+          <td>評估技術方案可行性</td>
+        </tr>
+        <tr>
+          <td><span class="term-name term-core">CLI</span></td>
+          <td>用打字下指令操作電腦</td>
+          <td>跟電腦用文字訊息溝通</td>
+          <td>Claude Code 就是 CLI 工具</td>
+        </tr>
+        <tr>
+          <td><span class="term-name term-core">Terminal</span></td>
+          <td>執行 CLI 的那個視窗</td>
+          <td>電腦的聊天室</td>
+          <td>安裝和操作都在這裡</td>
+        </tr>
+        <tr>
+          <td><span class="term-name">IDE</span></td>
+          <td>工程師寫程式用的全功能編輯器</td>
+          <td>Word 寫文章，IDE 寫程式</td>
+          <td>VS Code 是最常見的 IDE</td>
+        </tr>
+        <tr>
+          <td><span class="term-name">Repository</span></td>
+          <td>專案所有檔案 + 完整修改歷史</td>
+          <td>Google Drive + 每次修改都有備份</td>
+          <td>團隊協作的基礎</td>
+        </tr>
+        <tr>
+          <td><span class="term-name">Git</span></td>
+          <td>追蹤檔案修改歷史的版本控制系統</td>
+          <td>Google Docs 版本紀錄但更強大</td>
+          <td>Claude Code 內建 Git 操作</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="teaching-note reveal">
+      <strong>2 層揭露法</strong>：先講 4 個標有 <span style="background:var(--gold);color:white;font-size:0.6rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:3px;">CORE</span> 的術語（LLM → AI Agent → CLI / Terminal → Prompt），其餘用到再講。
+    </div>
+  </div>
+</section>
+
+<!-- PART 2: THREE TIER -->
+<section class="part-section" id="three-tier">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">02</span>
+      <div>
+        <div class="section-label">Part 2 · 15 min</div>
+        <h2 class="section-title">AI 的三個層級</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">理解 LLM、Product、Agent 的差異——你未來做採購決策時，要分清買的是什麼。</p>
+
+    <div class="tier-stack reveal">
+      <div class="tier-row">
+        <div class="tier-label model">LLM<small>模型</small></div>
+        <div class="tier-examples"><span>Claude Opus 4.6</span><span>GPT-4o</span><span>Gemini 2.5 Pro</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-label product">Product<small>產品</small></div>
+        <div class="tier-examples"><span>ChatGPT</span><span>Claude.ai</span><span>Gemini App</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-label agent">Agent<small>代理</small></div>
+        <div class="tier-examples"><span>Claude Code</span><span>Cursor</span><span>Windsurf</span></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 class="section-title reveal" style="font-size: 1.6rem;">ChatGPT vs Claude Code</h3>
+
+    <div class="comparison reveal">
+      <div class="comparison-col old">
+        <h4>💬 ChatGPT / Claude.ai</h4>
+        <div class="comp-row"><span class="comp-label">互動方式</span><span class="comp-value">貼東西給它，回文字給你</span></div>
+        <div class="comp-row"><span class="comp-label">工作流程</span><span class="comp-value">複製 → 貼 → 拿回覆 → 複製回去</span></div>
+        <div class="comp-row"><span class="comp-label">處理範圍</span><span class="comp-value">一次一段對話，上下文有限</span></div>
+        <div class="comp-row"><span class="comp-label">能做的事</span><span class="comp-value">回答問題、生成文字</span></div>
+        <div class="comp-row"><span class="comp-label">你的角色</span><span class="comp-value">操作員（手動搬運每一步）</span></div>
+      </div>
+      <div class="comparison-col new">
+        <h4>⚡ Claude Code / Cursor / Windsurf</h4>
+        <div class="comp-row"><span class="comp-label">互動方式</span><span class="comp-value">直接讀寫電腦檔案、跑程式</span></div>
+        <div class="comp-row"><span class="comp-label">工作流程</span><span class="comp-value">告訴它做什麼，自己找改測</span></div>
+        <div class="comp-row"><span class="comp-label">處理範圍</span><span class="comp-value">整個專案資料夾，數百檔案</span></div>
+        <div class="comp-row"><span class="comp-label">能做的事</span><span class="comp-value">建檔案、執行程式、分析數據</span></div>
+        <div class="comp-row"><span class="comp-label">你的角色</span><span class="comp-value">管理者（下指令、審核結果）</span></div>
+      </div>
+    </div>
+
+    <h3 class="section-title reveal" style="font-size: 1.3rem; margin-top: 2rem;">同一任務的對比：分析 100 份問卷</h3>
+
+    <div class="demo-compare reveal">
+      <div class="demo-block chatgpt">
+        <div class="demo-block-header">用 ChatGPT</div>
+        <pre>
+1. 打開 CSV，複製前 50 行（有字數限制）
+2. 貼到 ChatGPT：「幫我分析」
+3. 發現沒看到完整資料，再貼後 50 行...
+4. 給你一段 Python code
+5. 自己找地方跑，跑出錯
+6. 複製 error 貼回去問...
+7. 來回 10 次，圖表終於出來
+8. 想改顏色？再來一輪...</pre>
+      </div>
+      <div class="demo-block claude">
+        <div class="demo-block-header">用 Claude Code</div>
+        <pre>
+你：「讀 survey.csv，跑 descriptive stats，
+     做 cross-tab，輸出圖表到 charts/」
+
+Claude Code：
+  <span class="success">✓</span> 讀取 survey.csv（全部 100 筆）
+  <span class="success">✓</span> 執行 pandas 統計分析
+  <span class="success">✓</span> 生成圖表
+  <span class="success">✓</span> 存到 charts/age_vs_adoption.png
+
+你：「改深色背景，字體放大」
+  <span class="success">✓</span> 修改設定，重新生成</pre>
+      </div>
+    </div>
+
+    <div class="paradigm reveal">
+      <div class="paradigm-title">核心觀念：從「對話」到「委派」</div>
+      <div class="paradigm-flow">
+        <div class="paradigm-node">你的想法</div>
+        <span class="paradigm-arrow">→</span>
+        <div class="paradigm-node highlight">AI Agent</div>
+        <span class="paradigm-arrow">→</span>
+        <div class="paradigm-node">檔案系統</div>
+        <span class="paradigm-arrow">→</span>
+        <div class="paradigm-node">程式執行</div>
+        <span class="paradigm-arrow">→</span>
+        <div class="paradigm-node">完成品</div>
+      </div>
+      <p class="paradigm-takeaway">這不只是效率差異，是工作模式的轉變——從「我操作工具」變成「我管理 AI 去操作工具」。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3: SETUP -->
+<section class="part-section">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">03</span>
+      <div>
+        <div class="section-label">Part 3 · 20 min</div>
+        <h2 class="section-title">Setup & First Commands</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">每個人的電腦都要跑起來。</p>
+
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-num">STEP 01</div>
+        <h4>安裝</h4>
+        <p><code>npm install -g @anthropic-ai/claude-code</code></p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 02</div>
+        <h4>第一次對話</h4>
+        <p>在空目錄啟動 <code>claude</code>，問一個簡單問題</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 03</div>
+        <h4>核心概念</h4>
+        <p>Terminal-native AI：它能讀檔案、寫檔案、跑命令</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 04</div>
+        <h4>Permission Model</h4>
+        <p>為什麼它會問「可以嗎？」——人類始終在控制迴圈中</p>
+      </div>
+    </div>
+
+    <div class="exercise-box reveal">
+      <h4>練習 1</h4>
+      <p>讓 Claude Code 幫你建一個 <code>index.html</code>，內容是你的自我介紹頁面。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4: CCC -->
+<section class="part-section">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">04</span>
+      <div>
+        <div class="section-label">Part 4 · 25 min</div>
+        <h2 class="section-title">如何跟 AI 有效溝通</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">Technology Manager 最重要的 AI 技能——下指令。</p>
+
+    <div class="ccc-grid reveal">
+      <div class="ccc-card">
+        <div class="ccc-letter">C</div>
+        <h4>Context</h4>
+        <p>背景：你在做什麼、為什麼</p>
+      </div>
+      <div class="ccc-card">
+        <div class="ccc-letter">C</div>
+        <h4>Constraint</h4>
+        <p>限制：技術棧、時間、範圍</p>
+      </div>
+      <div class="ccc-card">
+        <div class="ccc-letter">C</div>
+        <h4>Criteria</h4>
+        <p>標準：什麼叫「做好了」</p>
+      </div>
+    </div>
+
+    <div class="prompt-compare reveal">
+      <div class="prompt-box bad">
+        <h5>❌ Bad Prompt</h5>
+        <blockquote>"Make me a website"</blockquote>
+      </div>
+      <div class="prompt-box good">
+        <h5>✓ Good Prompt</h5>
+        <blockquote>"Build a responsive landing page for a SaaS product using HTML/Tailwind. Include hero section, 3 feature cards, and a CTA button. Mobile-first."</blockquote>
+      </div>
+    </div>
+
+    <div class="exercise-box reveal">
+      <h4>練習 2</h4>
+      <p>場景：「你的團隊需要一個內部工具追蹤 OKR」。用 CCC 框架寫出 prompt，讓 Claude Code 建出 MVP prototype。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5: SCENARIOS -->
+<section class="scenarios-section" id="scenarios">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Part 5 · 50 min</div>
+      <h2 class="section-title">分組實作：學術場景</h2>
+      <p class="section-desc">每組 3-4 人，從以下情境中選一個。點擊展開詳細資訊。</p>
+    </div>
+
+    <div class="scenario-cards">
+      <!-- Scenario A -->
+      <div class="scenario-card reveal" onclick="this.classList.toggle('expanded')">
+        <div class="sc-header">
+          <div class="sc-letter">A</div>
+          <div class="sc-info">
+            <h3>Literature Review 加速器</h3>
+            <p>批量處理 PDF 論文，自動提取重點生成比較表</p>
+          </div>
+          <div class="sc-meta">
+            <span class="sc-difficulty">⭐⭐⭐</span>
+            <span class="sc-time">20-25 min</span>
+          </div>
+          <span class="sc-expand">展開 ↓</span>
+        </div>
+        <div class="sc-detail">
+          <div class="sc-detail-grid">
+            <div>
+              <h4>Steps</h4>
+              <ol>
+                <li>讀取單篇 PDF，提取 research question / methodology / findings / limitations</li>
+                <li>批量處理，輸出結構化 CSV 比較表</li>
+                <li>根據比較表識別 research gap</li>
+              </ol>
+              <div class="sc-prompt">"Read this PDF and extract: (1) research question, (2) methodology, (3) sample size, (4) key findings, (5) limitations. Output as CSV row."</div>
+            </div>
+            <div>
+              <h4>Output</h4>
+              <p class="sc-output">literature_matrix.csv + gap analysis</p>
+              <h4 style="margin-top:1rem;">Skills</h4>
+              <ul><li>檔案批量處理</li><li>結構化 prompt 設計</li><li>迭代精修欄位</li></ul>
+              <div class="sc-integrity">
+                <strong>Academic Integrity：</strong>可以整理比較。不可以直接生成你沒讀過的 critical analysis。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario B -->
+      <div class="scenario-card reveal" onclick="this.classList.toggle('expanded')">
+        <div class="sc-header">
+          <div class="sc-letter">B</div>
+          <div class="sc-info">
+            <h3>Group Project 會議追蹤</h3>
+            <p>雜亂會議紀錄 → 結構化 minutes + action item tracker</p>
+          </div>
+          <div class="sc-meta">
+            <span class="sc-difficulty">⭐</span>
+            <span class="sc-time">15-20 min</span>
+          </div>
+          <span class="sc-expand">展開 ↓</span>
+        </div>
+        <div class="sc-detail">
+          <div class="sc-detail-grid">
+            <div>
+              <h4>Steps</h4>
+              <ol>
+                <li>貼上 raw meeting notes，整理成 structured minutes</li>
+                <li>生成 tracker.md，checkbox 追蹤 TODO</li>
+                <li>下次開會前 diff 上週 tracker，標出 overdue</li>
+                <li>累積 3 週後生成 progress summary</li>
+              </ol>
+              <div class="sc-prompt">"Organize into: (1) Key Decisions, (2) Action Items with owner and deadline, (3) Open Questions. Then update tracker.md."</div>
+            </div>
+            <div>
+              <h4>Output</h4>
+              <p class="sc-output">meetings/weekN.md + tracker.md</p>
+              <h4 style="margin-top:1rem;">Skills</h4>
+              <ul><li>非結構化 → 結構化轉換</li><li>檔案持續維護</li><li>跨 session 累積使用</li></ul>
+              <div class="sc-integrity">
+                <strong>Academic Integrity：</strong>完全 OK — productivity tool，無學術誠信疑慮。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario C -->
+      <div class="scenario-card reveal" onclick="this.classList.toggle('expanded')">
+        <div class="sc-header">
+          <div class="sc-letter">C</div>
+          <div class="sc-info">
+            <h3>問卷數據快速分析</h3>
+            <p>100 份 CSV 問卷 → 統計分析 + 圖表 + findings 初稿</p>
+          </div>
+          <div class="sc-meta">
+            <span class="sc-difficulty">⭐⭐⭐</span>
+            <span class="sc-time">25-30 min</span>
+          </div>
+          <span class="sc-expand">展開 ↓</span>
+        </div>
+        <div class="sc-detail">
+          <div class="sc-detail-grid">
+            <div>
+              <h4>Steps</h4>
+              <ol>
+                <li>讀取 CSV，產出 descriptive statistics</li>
+                <li>生成 Python 腳本跑 cross-tabulation</li>
+                <li>自動產出圖表（matplotlib/plotly）</li>
+                <li>根據結果撰寫 findings 段落初稿</li>
+              </ol>
+              <div class="sc-prompt">"Read survey.csv. Run descriptive stats. Cross-tabulate Q3 (age) against Q7 (adoption). Generate stacked bar chart for academic paper."</div>
+            </div>
+            <div>
+              <h4>Output</h4>
+              <p class="sc-output">analysis.py + charts/ + findings_draft.md</p>
+              <h4 style="margin-top:1rem;">Skills</h4>
+              <ul><li>數據分析自動化</li><li>圖表客製化迭代</li><li>程式碼生成與執行</li></ul>
+              <div class="sc-integrity">
+                <strong>Academic Integrity：</strong>生成分析腳本 OK。AI 寫的 findings 只能當初稿，你必須驗證每個數字。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario D -->
+      <div class="scenario-card reveal" onclick="this.classList.toggle('expanded')">
+        <div class="sc-header">
+          <div class="sc-letter">D</div>
+          <div class="sc-info">
+            <h3>Reference 管理與格式轉換</h3>
+            <p>散落引用 → 統一 Harvard style + 一致性檢查</p>
+          </div>
+          <div class="sc-meta">
+            <span class="sc-difficulty">⭐⭐</span>
+            <span class="sc-time">15-20 min</span>
+          </div>
+          <span class="sc-expand">展開 ↓</span>
+        </div>
+        <div class="sc-detail">
+          <div class="sc-detail-grid">
+            <div>
+              <h4>Steps</h4>
+              <ol>
+                <li>把各種格式引用資料解析成統一 JSON</li>
+                <li>轉換為 Harvard referencing style</li>
+                <li>檢查 in-text citation vs reference list 一致性</li>
+                <li>產出缺失引用 + 幽靈引用報告</li>
+              </ol>
+              <div class="sc-prompt">"Parse references into structured fields. Format as Harvard style. Cross-check against paper for missing or orphan citations."</div>
+            </div>
+            <div>
+              <h4>Output</h4>
+              <p class="sc-output">references_harvard.md + citation_audit.md</p>
+              <h4 style="margin-top:1rem;">Skills</h4>
+              <ul><li>格式解析與轉換</li><li>Cross-referencing</li><li>品質檢查自動化</li></ul>
+              <div class="sc-integrity">
+                <strong>Academic Integrity：</strong>完全 OK — 格式化工具，等同 Zotero / Mendeley。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario E -->
+      <div class="scenario-card reveal" onclick="this.classList.toggle('expanded')">
+        <div class="sc-header">
+          <div class="sc-letter">E</div>
+          <div class="sc-info">
+            <h3>Dissertation 結構化寫作助手</h3>
+            <p>大論文拆小檔案，AI 當 writing coach 逐章 review</p>
+          </div>
+          <div class="sc-meta">
+            <span class="sc-difficulty">⭐⭐</span>
+            <span class="sc-time">20-25 min</span>
+          </div>
+          <span class="sc-expand">展開 ↓</span>
+        </div>
+        <div class="sc-detail">
+          <div class="sc-detail-grid">
+            <div>
+              <h4>Steps</h4>
+              <ol>
+                <li>根據 outline 建立資料夾 + 檔案結構</li>
+                <li>每個檔案填入 writing prompt（問題、source、字數）</li>
+                <li>寫完一節後讓 AI review 邏輯連貫性</li>
+                <li>合併所有 section，檢查 transition 和 flow</li>
+              </ol>
+              <div class="sc-prompt">"Create folder structure with one .md per section. Include: key question, suggested sources, word count target, connection to previous section."</div>
+            </div>
+            <div>
+              <h4>Output</h4>
+              <p class="sc-output">folder structure + review_feedback.md</p>
+              <h4 style="margin-top:1rem;">Skills</h4>
+              <ul><li>大型文件拆分管理</li><li>AI 作為 reviewer 而非 writer</li><li>迭代改進</li></ul>
+              <div class="sc-integrity">
+                <strong>Academic Integrity：</strong>組織思路 + review 邏輯 = OK。生成 argument + 寫結論 = 不 OK。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selection Guide -->
+    <div class="selection-guide reveal">
+      <h3>情境選擇建議</h3>
+      <table class="sg-table">
+        <tr><td>只有 30 min 實作</td><td><strong>B</strong>（最直覺、人人有感）</td></tr>
+        <tr><td>45 min，展現多面向</td><td><strong>B + D</strong>（流程管理 + 格式自動化）</td></tr>
+        <tr><td>60 min，分組各做</td><td><strong>A / B / C / D</strong> 各一組，最後 demo 互學</td></tr>
+        <tr><td>想引發最深討論</td><td><strong>C 或 E</strong>（academic integrity 灰色地帶最多）</td></tr>
+        <tr><td>技術門檻（低→高）</td><td>B → D → E → A → C</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PART 6: GOVERNANCE -->
+<section class="part-section">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">06</span>
+      <div>
+        <div class="section-label">Part 6 · 15 min</div>
+        <h2 class="section-title">AI Governance & Judgment</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">Technology Manager 必須思考的問題。</p>
+
+    <div class="gov-grid reveal">
+      <div class="gov-card">
+        <h4>能力邊界</h4>
+        <ul>
+          <li>Claude Code 能做什麼、不能做什麼？</li>
+          <li>現場測試邊界——故意給它做不到的事</li>
+          <li>理解 hallucination 的風險</li>
+        </ul>
+      </div>
+      <div class="gov-card">
+        <h4>安全意識</h4>
+        <ul>
+          <li>API keys 不要硬寫在 code 裡</li>
+          <li>生成的 code 要 review，不要盲信</li>
+          <li>Permission model 存在的原因</li>
+        </ul>
+      </div>
+      <div class="gov-card">
+        <h4>組織導入</h4>
+        <ul>
+          <li>誰該用？怎麼用？ROI 怎麼算？</li>
+          <li>Code review 流程怎麼調整？</li>
+          <li>IP / 資料安全政策</li>
+        </ul>
+      </div>
+      <div class="gov-card">
+        <h4>成本結構</h4>
+        <ul>
+          <li>ChatGPT 月費吃到飽 vs. Agent 按 API 用量計費</li>
+          <li>影響你的預算規劃</li>
+          <li>不同場景選不同工具</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 7: PROTOTYPE TO PRODUCT -->
+<section class="part-section">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">07</span>
+      <div>
+        <div class="section-label">Part 7 · 15 min</div>
+        <h2 class="section-title">From Prototype to Product</h2>
+      </div>
+    </div>
+    <p class="section-desc reveal">把 workshop 學到的串進真實工作流程。</p>
+
+    <div class="product-flow reveal">
+      <div class="pf-node">Idea</div>
+      <span class="pf-arrow">→</span>
+      <div class="pf-node active">Claude Code Prototype</div>
+      <span class="pf-arrow">→</span>
+      <div class="pf-node">Feasibility Assessment</div>
+      <span class="pf-arrow">→</span>
+      <div class="pf-node">Engineering Handoff</div>
+      <span class="pf-arrow">→</span>
+      <div class="pf-node">Production</div>
+    </div>
+
+    <div class="advanced-grid reveal">
+      <div class="adv-card">
+        <h5>CLAUDE.md</h5>
+        <p>團隊知識結構化傳遞給 AI</p>
+      </div>
+      <div class="adv-card">
+        <h5>Agentic Workflow</h5>
+        <p>讓 AI 自主完成多步驟任務</p>
+      </div>
+      <div class="adv-card">
+        <h5>Multi-file Editing</h5>
+        <p>同時修改多個檔案</p>
+      </div>
+      <div class="adv-card">
+        <h5>Git Integration</h5>
+        <p>版本管理內建，每步可回溯</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 8 -->
+<section class="part-section">
+  <div class="container">
+    <div class="part-header reveal">
+      <span class="part-number">08</span>
+      <div>
+        <div class="section-label">Part 8 · 10 min</div>
+        <h2 class="section-title">Wrap-up & Demo</h2>
+      </div>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-num">5 MIN</div>
+        <h4>小組 Demo</h4>
+        <p>每組 1 分鐘展示成果</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2 MIN</div>
+        <h4>資源清單</h4>
+        <p>官方文檔、社群、進階學習路徑</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3 MIN</div>
+        <h4>Q&A</h4>
+        <p>開放問答</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="checklist-section" id="checklist">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Pre-Workshop</div>
+      <h2 class="section-title">課前準備清單</h2>
+    </div>
+    <div class="checklist-list">
+      <div class="checklist-item reveal reveal-delay-1">
+        <span class="checklist-num">1</span>
+        <p>安裝 <strong>Node.js 18+</strong>（nodejs.org）</p>
+      </div>
+      <div class="checklist-item reveal reveal-delay-2">
+        <span class="checklist-num">2</span>
+        <p>安裝 Claude Code：<code>npm install -g @anthropic-ai/claude-code</code></p>
+      </div>
+      <div class="checklist-item reveal reveal-delay-3">
+        <span class="checklist-num">3</span>
+        <p>準備 <strong>Anthropic API key</strong>（或使用 Max subscription）</p>
+      </div>
+      <div class="checklist-item reveal reveal-delay-4">
+        <span class="checklist-num">4</span>
+        <p>確認 <strong>Terminal</strong> 能正常運作（macOS Terminal / Windows Terminal / VS Code Terminal）</p>
+      </div>
+      <div class="checklist-item reveal">
+        <span class="checklist-num">5</span>
+        <p>安裝 <strong>VS Code</strong>（選配，但推薦）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="container">
+    <p class="quote-text reveal">
+      「你不需要會寫 code，<br>但你需要會<span class="highlight">指揮 AI 寫 code</span>。」
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>Claude Code Workshop · King's College London · Technology Management</p>
+    <div class="footer-integrity">
+      Academic Integrity Notice: This workshop teaches AI as a productivity tool. All exercises respect King's College academic policies. Students are responsible for understanding the boundaries between AI-assisted work and original contribution.
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav show on scroll
+let lastScroll = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll > 300) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+  lastScroll = currentScroll;
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
