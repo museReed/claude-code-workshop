@@ -112,6 +112,8 @@ body {
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .container { padding: 0 1rem; }
+  section { padding: 3.5rem 0; }
 }
 
 /* ============ HERO ============ */
@@ -530,11 +532,16 @@ section { padding: 6rem 0; }
 }
 
 /* Term table */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 2rem;
+}
 .term-table {
   width: 100%;
+  min-width: 580px;
   border-collapse: separate;
   border-spacing: 0;
-  margin-top: 2rem;
   font-size: 0.95rem;
 }
 .term-table thead th {
@@ -1251,6 +1258,70 @@ section { padding: 6rem 0; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ============ MOBILE COMPREHENSIVE FIX ============ */
+@media (max-width: 480px) {
+  .hero-badge { font-size: 0.68rem; padding: 0.4rem 1rem; }
+  .hero-meta { gap: 1.5rem; }
+  .hero-meta-value { font-size: 0.88rem; }
+
+  .info-card { padding: 1.2rem; }
+  .cap-card { padding: 1.5rem 1.2rem; }
+  .cap-num { font-size: 2rem; }
+
+  .tl-item { padding: 0.8rem 0; }
+  .tl-content { padding: 0.8rem 1rem; }
+  .tl-part { font-size: 1rem; }
+  .tl-header { gap: 0.5rem; }
+
+  .part-number { font-size: 2.5rem; }
+  .part-header { gap: 0.8rem; }
+
+  .tier-label { min-width: 80px; padding: 0.7rem; font-size: 0.85rem; }
+  .tier-label small { font-size: 0.6rem; }
+  .tier-examples { padding: 0.7rem; gap: 0.4rem; }
+  .tier-examples span { font-size: 0.75rem; padding: 0.2rem 0.5rem; }
+
+  .comparison-col { padding: 1.2rem; }
+  .comp-row { flex-direction: column; gap: 0.2rem; }
+  .comp-value { text-align: left; }
+
+  .demo-block pre { font-size: 0.7rem; padding: 0.8rem 1rem; white-space: pre-wrap; word-break: break-word; }
+
+  .paradigm { padding: 1.5rem 1.2rem; }
+  .paradigm-flow { gap: 0.5rem; }
+  .paradigm-node { padding: 0.4rem 0.8rem; font-size: 0.78rem; }
+
+  .ccc-grid { gap: 0.8rem; }
+  .ccc-letter { font-size: 2rem; }
+  .ccc-card { padding: 1.2rem; }
+
+  .prompt-box blockquote { font-size: 0.75rem; }
+
+  .sc-header { padding: 1rem; gap: 0.8rem; }
+  .sc-letter { font-size: 1.8rem; min-width: 35px; }
+  .sc-info h3 { font-size: 1.05rem; }
+  .sc-meta { gap: 0.5rem; }
+  .sc-detail { padding: 0 1rem 1.2rem; }
+  .sc-detail .sc-prompt { font-size: 0.7rem; }
+
+  .selection-guide { padding: 1.2rem; }
+  .sg-table td:first-child { width: auto; white-space: normal; }
+
+  .gov-card { padding: 1.2rem; }
+  .gov-card ul { font-size: 0.82rem; }
+
+  .product-flow { padding: 1.5rem 1rem; gap: 0.5rem; }
+  .pf-node { padding: 0.5rem 0.8rem; font-size: 0.78rem; }
+
+  .advanced-grid { gap: 0.6rem; }
+  .adv-card { padding: 1rem; }
+
+  .steps-grid { gap: 0.8rem; }
+  .step-card { padding: 1rem; }
+
+  .checklist-item { gap: 0.8rem; }
+}
 </style>
 </head>
 <body>
@@ -1466,7 +1537,8 @@ section { padding: 6rem 0; }
     </div>
     <p class="section-desc reveal">確保所有人在同一個起跑線，不因術語卡住後面的實作。</p>
 
-    <table class="term-table reveal">
+    <div class="table-scroll reveal">
+    <table class="term-table">
       <thead>
         <tr>
           <th>術語</th>
@@ -1532,6 +1604,7 @@ section { padding: 6rem 0; }
         </tr>
       </tbody>
     </table>
+    </div>
 
     <div class="teaching-note reveal">
       <strong>2 層揭露法</strong>：先講 4 個標有 <span style="background:var(--gold);color:white;font-size:0.6rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:3px;">CORE</span> 的術語（LLM → AI Agent → CLI / Terminal → Prompt），其餘用到再講。
