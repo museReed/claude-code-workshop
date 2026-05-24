@@ -1,0 +1,101 @@
+respondent_id,program,year_of_study,age_bracket,freq_use_ai,trust_ai_output,concern_integrity,tools_used,monthly_spend_gbp,open_response
+1,Engineering Management,1,26-30,3,3,3,Perplexity,1.77,
+2,Technology Management,1,22-25,3,3,4,Copilot;Claude;Perplexity,20.83,I rely on it too much for first drafts and my own writing has gotten lazy.
+3,Engineering Management,1,22-25,3,3,2,Copilot,1.08,Slow on long PDFs.
+4,Marketing,2,22-25,2,4,2,Gemini;Perplexity;Copilot,0.0,Worried my supervisor thinks I'm cheating even when I just use it for grammar.
+5,Technology Management,1,26-30,3,3,5,Copilot,11.36,I rely on it too much for first drafts and my own writing has gotten lazy.
+6,Business Analytics,1,26-30,3,3,4,Claude,19.14,Information cutoff means recent papers aren't covered.
+7,Technology Management,1,26-30,3,3,5,Gemini,18.8,Don't know which tool to pick.
+8,Marketing,1,22-25,3,4,4,Claude;Gemini,0.74,Slow on long PDFs.
+9,Engineering Management,1,31-35,3,2,3,Perplexity,18.27,
+10,Technology Management,2,22-25,4,2,3,Perplexity;Copilot,20.75,I'm not sure if I can trust the citations it generates.
+11,Engineering Management,1,26-30,4,3,5,ChatGPT;Gemini,18.47,
+12,Engineering Management,2,22-25,4,3,4,Gemini,41.92,"Output is too generic, doesn't fit my specific research context."
+13,Business Analytics,1,22-25,5,2,4,Copilot;ChatGPT,2.79,Privacy — I don't want to upload supervisor's unpublished work.
+14,Technology Management,1,31-35,3,1,4,ChatGPT;Claude,1.98,I rely on it too much for first drafts and my own writing has gotten lazy.
+15,Technology Management,2,22-25,4,3,4,Copilot;Gemini,20.7,Hard to know where to draw the line between help and doing it for me.
+16,Technology Management,1,22-25,5,3,4,ChatGPT,2.12,Worried my supervisor thinks I'm cheating even when I just use it for grammar.
+17,Finance,1,22-25,3,3,4,Claude;Perplexity,24.81,It refuses to help on topics it deems sensitive even when academic.
+18,Technology Management,1,26-30,4,2,2,Gemini;Copilot,19.4,It's expensive when I need the better model.
+19,Technology Management,2,22-25,3,3,3,Perplexity,18.42,Limits on usage when I need it most before deadlines.
+20,Technology Management,1,22-25,5,2,2,ChatGPT;Perplexity;Copilot,1.22,Worry about plagiarism detection picking it up.
+21,Finance,1,22-25,3,3,5,Gemini;Copilot,24.87,Information cutoff means recent papers aren't covered.
+22,Engineering Management,1,22-25,3,3,2,Perplexity;ChatGPT;Gemini,10.17,Cultural and language nuances get lost.
+23,Finance,2,22-25,4,2,5,ChatGPT,20.2,Worry about plagiarism detection picking it up.
+24,Technology Management,2,22-25,5,2,4,Copilot,23.75,Slow on long PDFs.
+25,Technology Management,2,22-25,4,4,3,Copilot;Gemini,42.81,
+26,Engineering Management,2,36+,2,2,4,Claude;Gemini,0.0,Hard to know where to draw the line between help and doing it for me.
+27,Business Analytics,1,22-25,5,3,4,ChatGPT;Gemini;Copilot,2.82,It's expensive when I need the better model.
+28,Marketing,2,26-30,3,3,4,Gemini,2.06,Cultural and language nuances get lost.
+29,Business Analytics,1,22-25,4,3,2,Gemini,40.39,I rely on it too much for first drafts and my own writing has gotten lazy.
+30,Engineering Management,2,26-30,4,2,2,Claude,20.11,Information cutoff means recent papers aren't covered.
+31,Technology Management,1,22-25,4,2,3,Claude,22.31,"Outputs feel formulaic, same structure every time."
+32,Finance,2,22-25,3,3,5,Copilot,0.54,"Outputs feel formulaic, same structure every time."
+33,Marketing,2,26-30,3,3,5,Copilot,40.12,"Hallucinated references that don't exist, wasted hours."
+34,Marketing,1,22-25,3,3,2,Copilot,10.84,Slow on long PDFs.
+35,Business Analytics,2,22-25,5,3,2,Gemini,1.74,"Sometimes the answers sound confident but are wrong, hard to spot."
+36,Technology Management,1,22-25,4,4,4,ChatGPT;Copilot;Gemini,0.76,I'm not sure if I can trust the citations it generates.
+37,Business Analytics,2,26-30,4,3,3,Gemini,20.94,Privacy — I don't want to upload supervisor's unpublished work.
+38,Business Analytics,2,22-25,4,3,4,Claude,19.99,I rely on it too much for first drafts and my own writing has gotten lazy.
+39,Engineering Management,1,22-25,2,3,3,Copilot,0.0,"It can't replace reading the actual paper, but tempted to skip reading."
+40,Engineering Management,1,22-25,3,4,5,ChatGPT,11.55,"I just don't know what prompts work best, trial and error."
+41,Technology Management,1,26-30,4,3,3,ChatGPT,2.95,Worried my supervisor thinks I'm cheating even when I just use it for grammar.
+42,Business Analytics,2,26-30,4,4,3,Claude,24.06,It's expensive when I need the better model.
+43,Marketing,1,22-25,4,4,2,Claude;ChatGPT;Perplexity,2.4,Information cutoff means recent papers aren't covered.
+44,Engineering Management,1,26-30,4,4,5,Copilot;Claude;Gemini,41.42,Hard to know where to draw the line between help and doing it for me.
+45,Marketing,1,26-30,4,4,4,Gemini,18.23,Slow on long PDFs.
+46,Business Analytics,2,22-25,4,3,3,Claude,1.24,Limits on usage when I need it most before deadlines.
+47,Business Analytics,1,26-30,4,2,5,Copilot;Perplexity;ChatGPT,10.9,"Outputs feel formulaic, same structure every time."
+48,Business Analytics,2,22-25,5,3,3,Gemini,19.46,Worry about plagiarism detection picking it up.
+49,Engineering Management,1,31-35,4,1,3,Perplexity;ChatGPT;Copilot,23.29,I rely on it too much for first drafts and my own writing has gotten lazy.
+50,Technology Management,1,22-25,4,3,3,Gemini;Copilot,12.5,Information cutoff means recent papers aren't covered.
+51,Technology Management,1,22-25,3,2,5,Claude,2.52,Hard to know where to draw the line between help and doing it for me.
+52,Technology Management,2,22-25,4,4,4,Gemini;Claude,21.82,It's expensive when I need the better model.
+53,Marketing,1,36+,2,1,3,Copilot;Perplexity;Gemini,0.0,Don't know which tool to pick.
+54,Engineering Management,2,22-25,3,2,5,ChatGPT;Gemini;Copilot,19.98,"I just don't know what prompts work best, trial and error."
+55,Technology Management,1,26-30,3,4,3,Claude;Copilot,2.2,Slow on long PDFs.
+56,Engineering Management,2,26-30,3,4,5,Gemini;Perplexity;ChatGPT,42.8,Limits on usage when I need it most before deadlines.
+57,Technology Management,1,26-30,4,3,2,Gemini;Claude,18.64,"I just don't know what prompts work best, trial and error."
+58,Technology Management,2,26-30,4,2,4,ChatGPT,2.16,Hard to know where to draw the line between help and doing it for me.
+59,Engineering Management,2,26-30,3,2,2,Claude;Copilot,22.73,"No issue, it's been very helpful."
+60,Business Analytics,2,22-25,5,3,3,Gemini;Perplexity,10.69,"I just don't know what prompts work best, trial and error."
+61,Technology Management,2,36+,4,2,3,Gemini;Perplexity,2.5,"No issue, it's been very helpful."
+62,Technology Management,1,26-30,4,3,2,Perplexity,12.09,It refuses to help on topics it deems sensitive even when academic.
+63,Technology Management,1,26-30,4,4,3,Claude;ChatGPT,12.82,Worried my supervisor thinks I'm cheating even when I just use it for grammar.
+64,Business Analytics,1,26-30,3,3,3,Gemini;ChatGPT;Copilot,1.67,"It can't replace reading the actual paper, but tempted to skip reading."
+65,Marketing,1,26-30,3,4,3,Perplexity;Copilot,11.71,It's expensive when I need the better model.
+66,Finance,1,26-30,3,2,3,Claude,20.23,
+67,Business Analytics,2,22-25,3,3,3,Copilot;ChatGPT,22.7,Don't know which tool to pick.
+68,Engineering Management,1,22-25,4,3,4,Gemini,40.43,Privacy — I don't want to upload supervisor's unpublished work.
+69,Engineering Management,2,31-35,3,1,3,Copilot;Gemini,21.62,"It can't replace reading the actual paper, but tempted to skip reading."
+70,Technology Management,1,26-30,5,3,2,Claude,24.51,I'm not sure if I can trust the citations it generates.
+71,Finance,2,26-30,4,2,5,Copilot,21.95,I rely on it too much for first drafts and my own writing has gotten lazy.
+72,Finance,1,26-30,3,2,3,Copilot;Gemini,12.01,"I just don't know what prompts work best, trial and error."
+73,Business Analytics,1,22-25,4,2,3,Gemini,10.97,Worry about plagiarism detection picking it up.
+74,Marketing,1,26-30,4,4,3,Claude,21.09,Limits on usage when I need it most before deadlines.
+75,Marketing,1,22-25,3,3,3,ChatGPT;Perplexity,23.83,I rely on it too much for first drafts and my own writing has gotten lazy.
+76,Business Analytics,1,26-30,3,3,5,Copilot,1.94,Privacy — I don't want to upload supervisor's unpublished work.
+77,Business Analytics,1,22-25,4,4,3,Perplexity;Claude,18.57,"Output is too generic, doesn't fit my specific research context."
+78,Marketing,1,26-30,3,3,5,Gemini;ChatGPT;Claude,22.9,It refuses to help on topics it deems sensitive even when academic.
+79,Marketing,1,22-25,3,3,4,Copilot;Perplexity;Claude,40.57,Don't know which tool to pick.
+80,Business Analytics,1,22-25,4,4,3,Copilot,0.38,"I just don't know what prompts work best, trial and error."
+81,Marketing,1,22-25,3,2,4,Copilot,41.96,It refuses to help on topics it deems sensitive even when academic.
+82,Marketing,1,22-25,3,2,5,Perplexity;Copilot,11.88,It refuses to help on topics it deems sensitive even when academic.
+83,Marketing,1,26-30,3,3,3,Copilot,2.28,It's expensive when I need the better model.
+84,Business Analytics,2,22-25,3,2,3,Gemini,11.12,Cultural and language nuances get lost.
+85,Business Analytics,2,26-30,4,3,2,Copilot;Claude;Perplexity,20.43,Slow on long PDFs.
+86,Business Analytics,2,22-25,4,3,4,Claude;ChatGPT;Perplexity,12.96,"Outputs feel formulaic, same structure every time."
+87,Engineering Management,1,26-30,3,4,5,ChatGPT;Claude,19.72,Privacy — I don't want to upload supervisor's unpublished work.
+88,Technology Management,2,22-25,3,2,4,Gemini;Claude,22.41,"Hallucinated references that don't exist, wasted hours."
+89,Engineering Management,2,26-30,3,2,4,Gemini,41.32,"Output is too generic, doesn't fit my specific research context."
+90,Technology Management,1,22-25,4,3,3,Perplexity,11.59,I rely on it too much for first drafts and my own writing has gotten lazy.
+91,Technology Management,1,36+,4,2,5,Copilot,0.42,Worry about plagiarism detection picking it up.
+92,Finance,2,22-25,3,2,3,ChatGPT;Copilot;Claude,24.25,Worry about plagiarism detection picking it up.
+93,Marketing,1,22-25,3,4,2,Perplexity;Gemini;Copilot,1.94,Limits on usage when I need it most before deadlines.
+94,Finance,1,26-30,2,3,2,Gemini,0.0,It's expensive when I need the better model.
+95,Technology Management,2,22-25,4,3,4,Copilot;Claude;Perplexity,22.3,"Outputs feel formulaic, same structure every time."
+96,Finance,1,22-25,3,3,3,Claude;Gemini,2.94,"No issue, it's been very helpful."
+97,Technology Management,1,22-25,3,4,2,Perplexity,0.15,"Output is too generic, doesn't fit my specific research context."
+98,Marketing,1,22-25,4,3,4,Claude,12.32,"It can't replace reading the actual paper, but tempted to skip reading."
+99,Technology Management,1,36+,5,2,5,ChatGPT,24.6,"No issue, it's been very helpful."
+100,Marketing,1,26-30,2,3,3,Claude,0.0,Cultural and language nuances get lost.
