@@ -940,6 +940,202 @@ button:focus-visible {
   border: 1px solid rgba(184, 144, 46, 0.22);
 }
 
+/* glossary groups (通用 / Claude 專屬) */
+.gloss-group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 40px 0 14px;
+}
+.gloss-group-head:first-of-type { margin-top: 8px; }
+.gloss-group-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.gloss-group-sub { font-size: 13px; color: var(--ink-3); }
+
+/* LLM tier comparison (1.1) */
+.llm-tiers { display: grid; gap: 16px; margin-top: 8px; }
+.llm-tier {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease-out);
+}
+.llm-tier:hover { border-color: rgba(184, 144, 46, 0.4); transform: translateY(-2px); }
+.llm-tier-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.llm-tier-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--gold);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+.llm-tier-h { font-size: 17px; font-weight: 700; color: var(--ink); }
+.llm-tier-cost { margin-left: auto; font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); }
+.llm-tier-use { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin-bottom: 16px; }
+.llm-vendors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.llm-vendor {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+}
+.llm-vendor-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 5px;
+}
+.llm-vendor-model { font-size: 13.5px; color: var(--ink); font-weight: 600; line-height: 1.4; }
+@media (max-width: 880px) { .llm-vendors { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .llm-vendors { grid-template-columns: repeat(2, 1fr); } }
+
+/* clickable card affordance */
+.gloss.js-modal, .tier.js-modal, .ccc-item.js-modal { cursor: pointer; }
+.gloss.js-modal:focus-visible, .tier.js-modal:focus-visible, .ccc-item.js-modal:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.gloss-more {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+
+/* modal content is stored hidden inside each trigger, cloned on open */
+.modal-content { display: none; }
+
+/* generic modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(14, 26, 47, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: modalFade 0.2s var(--ease);
+}
+.modal-overlay[hidden] { display: none; }
+@keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+.modal-box {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  max-width: 760px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 44px 44px 38px;
+  box-shadow: 0 30px 80px rgba(14, 26, 47, 0.3);
+  animation: modalRise 0.25s var(--ease-out);
+}
+@keyframes modalRise { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-alt);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+.modal-close:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+.modal-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 26px;
+}
+.modal-section { margin-bottom: 20px; }
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section h4 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 7px;
+}
+.modal-section p { font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+.modal-section code { font-family: var(--font-mono); font-size: 13px; background: var(--bg-warm); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+.modal-section .llm-tiers { margin-top: 0; }
+
+/* spec list for Product / Agent modal */
+.modal-spec { margin-top: 4px; }
+.modal-spec > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+.modal-spec > div:first-child { border-top: none; }
+.modal-spec dt { color: var(--ink-3); }
+.modal-spec dd { color: var(--ink); font-weight: 600; text-align: right; }
+.modal-spec dd.yes { color: #1a8a4a; }
+.modal-spec dd.yes::before { content: "✓ "; }
+.modal-spec dd.no { color: var(--ink-3); font-weight: 500; }
+@media (max-width: 560px) {
+  .modal-box { padding: 36px 22px 28px; }
+  .modal-title { font-size: 24px; }
+}
+
+/* download button (Cursor / setup.md) */
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+  background: var(--gold-tint);
+  border: 1px solid rgba(184, 144, 46, 0.32);
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-top: 6px;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+.dl-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+.dl-btn .dl-arrow { font-weight: 600; }
+
 /* ─────────────────────────────────────────────────────────
    THREE TIERS
    ───────────────────────────────────────────────────────── */
@@ -1331,6 +1527,8 @@ button:focus-visible {
   line-height: 1.55;
   letter-spacing: -0.015em;
   color: #fff;
+  opacity: 1;
+  font-weight: 500;
 }
 .aha-text strong { color: var(--gold-bright); font-weight: 700; }
 
@@ -1973,6 +2171,43 @@ button:focus-visible {
   border-radius: 4px;
 }
 
+/* CLAUDE.md onboarding analogy map (replaces raw ## table) */
+.cmd-map { display: flex; flex-direction: column; gap: 8px; }
+.cmd-map-lede { font-size: 13px; color: var(--ink-3); line-height: 1.6; margin-bottom: 16px; }
+.cmd-map-lede code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--gold-tint);
+  color: var(--gold);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.cmd-map-row { display: grid; grid-template-columns: 1fr auto 1.3fr; align-items: center; gap: 12px; }
+.cmd-map-from { font-size: 14px; color: var(--ink-2); }
+.cmd-map-arrow { color: var(--gold); font-weight: 700; font-size: 13px; text-align: center; }
+.cmd-map-to {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.cmd-map-hash {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--gold-tint);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 .cmd-context-note {
   font-size: 13px;
   color: var(--ink-3);
@@ -2419,7 +2654,7 @@ button:focus-visible {
       <div class="sched-row" data-jump="#part-0" tabindex="0" role="link"><div class="sched-num">0</div><div class="sched-time">5–8 min</div><div class="sched-title">開場,為什麼學 Claude Code</div><div class="sched-msg">給學員一個「為什麼今天我要在這裡」的答案</div></div>
       <div class="sched-row" data-jump="#part-1" tabindex="0" role="link"><div class="sched-num">1</div><div class="sched-time">10 min</div><div class="sched-title">AI 術語暖身</div><div class="sched-msg">建立共同語言</div></div>
       <div class="sched-row" data-jump="#part-2" tabindex="0" role="link"><div class="sched-num">2</div><div class="sched-time">15 min</div><div class="sched-title">AI 的三個層級</div><div class="sched-msg">LLM 與 Product 與 Agent 的差別</div></div>
-      <div class="sched-row warn" data-jump="#part-3" tabindex="0" role="link"><div class="sched-num">3</div><div class="sched-time">25–35 min ⚠</div><div class="sched-title">安裝與第一次對話</div><div class="sched-msg">Cursor AI 代勞安裝 + 第一次 claude</div></div>
+      <div class="sched-row warn" data-jump="#part-3" tabindex="0" role="link"><div class="sched-num">3</div><div class="sched-time">40–55 min ⚠</div><div class="sched-title">安裝與第一次對話</div><div class="sched-msg">Cursor 代勞安裝 + 面板 + GitHub + 第一次 claude</div></div>
       <div class="sched-row" data-jump="#part-4" tabindex="0" role="link"><div class="sched-num">4</div><div class="sched-time">25 min</div><div class="sched-title">如何跟 AI 溝通,CCC 框架</div><div class="sched-msg">三個字母,徹底擺脫模糊指令</div></div>
       <div class="sched-row is-break"><div class="sched-num">休息</div><div class="sched-time">10 min</div><div class="sched-title">中場</div><div class="sched-msg">咖啡</div></div>
       <div class="sched-row" data-jump="#part-5" tabindex="0" role="link"><div class="sched-num">5</div><div class="sched-time">50 min</div><div class="sched-title">分組實作,挑一個你真的在乎的場景</div><div class="sched-msg">完整循環:下指令 → 看輸出 → 判斷</div></div>
@@ -2487,45 +2722,255 @@ button:focus-visible {
     <div class="section-head r">
       <div class="eyebrow"><span class="dot"></span>第 1 章 · 10 min · 詞彙</div>
       <h2 class="section-title">簡短的詞彙表,讓沒人因為<span class="accent">名詞而卡住</span></h2>
-      <p class="section-lede">九個詞,不要求記住,只要求聽到不慌標 <strong>CORE</strong> 的會在後面反覆出現,自然強化</p>
+      <p class="section-lede">分兩區,不必背,只要聽到不慌<strong>通用 AI 知識</strong>到哪都用得到,<strong>Claude 專屬</strong>是今天的工具每張卡都能點開,看生活比喻和真實例子</p>
     </div>
 
+    <div class="gloss-group-head r">
+      <span class="gloss-group-title">A · 通用 AI 知識</span>
+      <span class="gloss-group-sub">跨廠商通用,換成 ChatGPT、Gemini 也是同一套概念</span>
+    </div>
     <div class="glossary">
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">LLM</span><span class="gloss-zh">大型語言模型</span><span class="gloss-core">CORE</span></div>
-        <div class="gloss-def">預測下一個字的引擎(GPT、Claude 本體)</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">LLM</span></div>
+        <div class="gloss-def">會讀懂你的話、生出文字的 AI 大腦ChatGPT、Claude 背後都是它</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">LLM</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>大型語言模型(Large Language Model)。用海量文字訓練、靠「預測下一個最合理的字」來生成回應的 AI。它不是資料庫、也不是搜尋引擎,而是一個會「接話」的機率引擎。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像一個讀過幾乎整個網路的超級實習生你開個頭,他就能順著文意接下去寫但他是「憑印象」接,不是去查證。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>你在 ChatGPT 打「幫我把這段英文改得更正式」,背後運作的就是 LLM。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Prompt</span><span class="gloss-zh">提示詞</span><span class="gloss-core">CORE</span></div>
-        <div class="gloss-def">你給 AI 的指令</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Generative AI</span></div>
+        <div class="gloss-def">會「生出」新東西的 AI 總稱文字、圖片、影片、程式都算</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Generative AI</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>生成式 AI,指能產生「原本不存在的新內容」的一類 AI對比於只做分類、辨識的傳統 AI。LLM 是其中專做文字的一種,還有生圖(Midjourney)、生影片(Sora)等。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>傳統 AI 像「分揀員」(這是貓還是狗?);生成式 AI 像「創作者」(畫一隻沒人見過的貓)。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>請 AI 生一張簡報封面圖、寫一段行銷文案,都是生成式 AI 在做事。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Context Window</span><span class="gloss-zh">上下文視窗</span><span class="gloss-core">CORE</span></div>
-        <div class="gloss-def">AI 一次能「記得」多少內容</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Prompt</span></div>
+        <div class="gloss-def">你打給 AI 的那段話、那個指令</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Prompt</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>提示詞,是你輸入給 AI 的指令或問題。同一個 AI,prompt 寫得清楚或模糊,結果天差地遠所以「怎麼問」本身是一種技能(今天第 4 章的 CCC 框架)。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像點餐。只說「給我吃的」跟「我要一份不加洋蔥的中辣牛肉麵」,端上來的東西完全不同。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>「用三點摘要這份會議記錄,每點不超過 20 字」就是一個清楚的 prompt。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Token</span><span class="gloss-zh">詞元</span></div>
-        <div class="gloss-def">計費與限制的最小單位,AI 看到的不是字、是 token</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Token</span></div>
+        <div class="gloss-def">AI 計算與收費的最小單位,大約一個詞或半個中文字</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Token</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>詞元。AI 不是一個字一個字看,而是把文字切成 token 來處理。英文約 4 個字母 ≈ 1 token,中文約 1 字 ≈ 1–2 token。用量計費、長度上限都以 token 計。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像水電的「度」。用多少度付多少錢文章越長、對話越久,耗的 token 越多。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>API 帳單寫「本月用了 200 萬 tokens」,就是你輸入加 AI 輸出的文字總量。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Hallucination</span><span class="gloss-zh">幻覺</span><span class="gloss-core">CORE</span></div>
-        <div class="gloss-def">AI 編造不存在的事實,本工作坊最關鍵的紅線</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Context Window</span></div>
+        <div class="gloss-def">AI 一次能「同時記得」的內容上限</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Context Window</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>上下文視窗,是模型單次能讀取的 token 總量(輸入加輸出)。超過上限,最早的內容會被「遺忘」。視窗越大,越能一次塞進整份長文件。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像桌面大小。桌子大,能同時攤開很多份文件對照;桌子小,放新的就得收走舊的。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>把一份 50 頁 PDF 整份丟給 AI 問問題,靠的就是夠大的 context window。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Agent</span><span class="gloss-zh">代理</span><span class="gloss-core">CORE</span></div>
-        <div class="gloss-def">能自主執行多步任務的 AI(Claude Code 就是一個 Agent)</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Tool</span></div>
+        <div class="gloss-def">讓 AI 不只「動嘴」還能「動手」的外掛能力</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Tool</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>工具,是 AI 在對話之外能呼叫的實際功能:讀寫檔案、執行程式、搜尋網路、查資料庫。有了工具,AI 從「會講」變成「會做」。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>光有大腦只能想;給他手腳和一台電腦,他才能真的把事情辦完。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>Claude Code 幫你「讀這個資料夾、改好程式、跑測試」,每一步都是在用 tool。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Tool Use</span><span class="gloss-zh">工具使用</span></div>
-        <div class="gloss-def">AI 呼叫外部能力,讀檔、寫檔、跑命令</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">MCP</span></div>
+        <div class="gloss-def">讓 AI 接上各種外部工具與資料的「萬用插座標準」</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">MCP</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>Model Context Protocol,一套開放標準,規定 AI 該怎麼跟外部工具/資料來源溝通。Anthropic 提出,現在 OpenAI、Google 也跟進採用,等於業界共通的「接線規格」。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像 USB-C。以前每家插頭都不一樣,有了統一規格,任何裝置插上就能用。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>透過 MCP,Claude 可以直接連你的 Google Drive、資料庫或設計稿,不必你手動複製貼上。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">RAG</span><span class="gloss-zh">檢索增強生成</span></div>
-        <div class="gloss-def">讓 AI 查資料再回答,而不是只靠記憶</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">RAG</span></div>
+        <div class="gloss-def">讓 AI「先查資料再回答」,而不是純憑記憶</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">RAG</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>檢索增強生成(Retrieval-Augmented Generation):回答前先從你指定的資料庫或文件撈出相關片段,連同問題一起餵給 AI,讓答案有依據、減少亂編。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>開卷考試。不靠死背,而是「先翻到對的那一頁,再照著回答」。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>公司客服機器人能精準答出「我們的退貨政策」,因為它先 RAG 撈了內部規章。</p></div>
+        </div>
       </div>
-      <div class="gloss r">
-        <div class="gloss-head"><span class="gloss-term">Fine-tuning</span><span class="gloss-zh">微調</span></div>
-        <div class="gloss-def">用特定資料再訓練模型,深度客製化</div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Agentic AI</span></div>
+        <div class="gloss-def">一種讓 AI「自己規劃、自己動手、自己修正」的設計思路</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">Agentic AI</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>代理式 AI,是一種設計範式,強調 AI 不只被動回答,而是能自行拆解目標、決定步驟、呼叫工具、檢查結果再調整。它描述的是「能力取向」,不是某個產品。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>差別在「給答案的顧問」與「直接幫你把事做完的助理」後者會自己安排先做什麼、後做什麼。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>你說「幫我訂下週去東京最便宜的機票」,它自己查、比價、下單這就是 agentic 的行為。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">AI Agent</span></div>
+        <div class="gloss-def">把上面那套自主能力做成的「實際程式」,Claude Code 就是一個</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識</div>
+          <h3 class="modal-title">AI Agent</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>AI Agent 是 agentic 概念的具體載體:一個會循環「思考 → 用工具行動 → 觀察結果 → 再思考」直到完成任務的程式。它有 LLM 當大腦、工具當手腳。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>Agentic 是「自動駕駛」這個概念,AI Agent 就是「那台真的會自己開的車」。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>Claude Code 接到「把這個 bug 修好」,自己讀碼、改檔、跑測試、確認通過它就是個 AI Agent。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Hallucination</span></div>
+        <div class="gloss-def">AI「一本正經地編造不存在的事實」本工作坊最關鍵的紅線</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">通用 AI 知識 · 紅線</div>
+          <h3 class="modal-title">Hallucination</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>幻覺,指 AI 生成了聽起來合理、實際上錯誤或虛構的內容(假的引用、不存在的數據、捏造的人名)。因為它是「預測最合理的字」而非「查證事實」,所以會自信地說錯。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像一個很會講話的人,不懂裝懂也能說得頭頭是道你不查證就會被唬過去。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>你請 AI「給我三篇相關論文」,它列出格式完美、卻根本不存在的論文這就是幻覺,務必自己核實。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gloss-group-head r">
+      <span class="gloss-group-title">B · Claude 專屬</span>
+      <span class="gloss-group-sub">Anthropic 自家的東西,今天的主角</span>
+    </div>
+    <div class="glossary">
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Claude</span></div>
+        <div class="gloss-def">Anthropic 開發的 AI(LLM)家族,今天的主角</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">Claude 專屬</div>
+          <h3 class="modal-title">Claude</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>Claude 是 Anthropic 推出的大型語言模型系列,以較強的推理與安全性著稱。依能力與成本分三級:Opus(最強)、Sonnet(均衡)、Haiku(最快最便宜)詳見第 2 章點開「LLM」層的對照。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像汽車品牌底下的車款分級同品牌,但有旗艦、中階、入門,看需求選。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>寫複雜分析選 Opus,日常對話用 Sonnet,大量簡單分類用 Haiku。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Skill</span></div>
+        <div class="gloss-def">打包好的「專業流程」,讓 Claude 一鍵學會做某類任務</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">Claude 專屬</div>
+          <h3 class="modal-title">Skill</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>Skill 是把某個任務的步驟、規範、範例預先打包成模組;載入後 Claude 就照這套 SOP 執行,品質穩定、不必每次重教。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像一張食譜卡。不必每次從頭教廚師,給他那張卡,他就能穩定做出同一道菜。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>載入一個「論文格式檢查」skill,之後每次丟文件進去,它都用同一套標準審。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gloss-group-head r">
+      <span class="gloss-group-title">C · 平台與工具</span>
+      <span class="gloss-group-sub">今天螢幕上會出現的東西不是概念,是你會點開、會用的 App</span>
+    </div>
+    <div class="glossary">
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Cursor</span></div>
+        <div class="gloss-def">內建 AI 的程式編輯器今天用它「自動幫你安裝環境」</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具</div>
+          <h3 class="modal-title">Cursor</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>一款內建 AI 助手的程式編輯器(基於 VS Code 打造)。你可以直接跟它的 AI 對話、叫它讀檔、改檔、跑指令今天用它來代勞安裝 Node.js、Claude Code 等環境。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像一個會自己動手的 Word你說「幫我把環境裝好」,它就一步步動手做,你只要看著按同意。</p></div>
+          <div class="modal-section"><h4>今天怎麼用</h4><p>第 3 章 Phase B把 <code>setup.md</code> 拖進 Cursor,它就帶你裝完整個環境。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">VS Code</span></div>
+        <div class="gloss-def">微軟的免費編輯器,工程師最常用Cursor 就是基於它做的</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具</div>
+          <h3 class="modal-title">VS Code</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>Visual Studio Code,微軟出的免費程式/文字編輯器,全球工程師最常用的一款。Cursor 就是在它的基礎上加了 AI。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像一個超強的記事本可以同時開一整個資料夾的檔案,預覽 markdown、看表格、改文字。</p></div>
+          <div class="modal-section"><h4>今天怎麼用</h4><p>選用拿來開、預覽 AI 生成的 <code>.md</code> 與 <code>.csv</code> 檔。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Claude Code</span></div>
+        <div class="gloss-def">跑在終端機裡的 Claude,能直接讀寫檔案、完成任務今天的主角</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具 · 今天的主角</div>
+          <h3 class="modal-title">Claude Code</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>Claude Code 是一個以 Claude 為大腦的 AI Agent,在命令列(terminal)中執行。它能看你的專案、改檔案、跑指令,把「對話」變成「真的把事做完」今天整場用的就是它。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>ChatGPT 像隔著玻璃跟你聊的顧問;Claude Code 像走進你辦公室、直接坐下來幫你動手的同事。</p></div>
+          <div class="modal-section"><h4>真實場景</h4><p>「讀這個資料夾、把 100 份問卷整理成一張表」Claude Code 自己讀檔、分析、輸出檔案。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">GitHub</span></div>
+        <div class="gloss-def">程式碼的雲端倉庫 + 版本管理 + 分享平台</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具</div>
+          <h3 class="modal-title">GitHub</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>存放程式碼與文字檔的雲端平台,內建版本管理(記住每一次修改)與分享功能。今天把成果 push 上去,就有了雲端備份與作品連結。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像專為程式/文字檔設計的 Google Drive不只存檔,還會記住「誰在什麼時候改了什麼」,改錯能回到上一版。</p></div>
+          <div class="modal-section"><h4>今天怎麼用</h4><p>第 3 章你會註冊帳號,並讓 Claude Code 自己建一個 repo、把你的成果推上去。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Obsidian</span></div>
+        <div class="gloss-def">把一堆 markdown 筆記變成可連結、可搜尋的個人知識庫</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具</div>
+          <h3 class="modal-title">Obsidian</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>一款免費的筆記軟體,專門把 markdown(<code>.md</code>)檔案變成可互相連結、可搜尋、有關係圖的個人知識庫。工作坊後可以一直用下去。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像你自己的維基百科把零散筆記用連結串起來,越用越像第二個大腦。</p></div>
+          <div class="modal-section"><h4>今天怎麼用</h4><p>第 8 章把 workshop 資料夾「Open as vault」,AI 生成的檔案即時出現在側欄。</p></div>
+        </div>
+      </div>
+      <div class="gloss r js-modal">
+        <div class="gloss-head"><span class="gloss-term">Terminal</span></div>
+        <div class="gloss-def">用「打字指令」操作電腦的視窗Claude Code 就跑在裡面</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">平台與工具</div>
+          <h3 class="modal-title">Terminal</h3>
+          <div class="modal-section"><h4>是什麼</h4><p>終端機,一個用文字指令(而不是滑鼠點圖示)操作電腦的視窗,通常黑底白字。安裝、啟動 Claude Code 都在這裡進行。</p></div>
+          <div class="modal-section"><h4>生活化比喻</h4><p>像跟電腦用「文字對話」下命令打一行字、按 Enter,電腦就照做不用到處找按鈕。</p></div>
+          <div class="modal-section"><h4>今天怎麼用</h4><p>第 3 章你會在終端機輸入 <code>claude</code> 啟動,然後用白話跟它對話。</p></div>
+        </div>
       </div>
     </div>
 
@@ -2545,49 +2990,109 @@ button:focus-visible {
     </div>
 
     <div class="tiers r">
-      <div class="tier tier-agent">
-        <div class="tier-label">Agent<small>第三層 · 動手做</small></div>
-        <div class="tier-examples"><code>Claude Code</code><code>Cursor Composer</code><code>Devin</code></div>
-        <div class="tier-marker">會做事 →</div>
-      </div>
-      <div class="tier tier-product">
-        <div class="tier-label">Product<small>第二層 · 對話介面</small></div>
-        <div class="tier-examples"><code>ChatGPT</code><code>Claude.ai</code><code>Gemini app</code></div>
-        <div class="tier-marker">會聊天 →</div>
-      </div>
-      <div class="tier tier-model">
+      <div class="tier tier-model js-modal">
         <div class="tier-label">Model · LLM<small>第一層 · 基礎引擎</small></div>
         <div class="tier-examples"><code>GPT-4o</code><code>Claude Sonnet</code><code>Gemini Pro</code></div>
-        <div class="tier-marker">會生成 →</div>
+        <div class="tier-marker">會生成 · 點看 →</div>
+        <div class="modal-content">
+          <div class="modal-eyebrow">第一層 · 基礎引擎</div>
+          <h3 class="modal-title">Model · LLM三種能力等級</h3>
+          <div class="modal-section"><p>同一件事,每家廠商都有三種等級愈上層愈聰明也愈貴。Claude Code 用 Opus / Sonnet / Haiku 分層,挑模型 = 挑「夠用的最便宜那一層」。</p></div>
+          <div class="modal-section">
+            <div class="llm-tiers">
+              <div class="llm-tier">
+                <div class="llm-tier-top">
+                  <span class="llm-tier-badge">第 1 級</span>
+                  <span class="llm-tier-h">深度推理,最聰明</span>
+                  <span class="llm-tier-cost">成本 $$$ · 最貴最慢</span>
+                </div>
+                <p class="llm-tier-use">用在:複雜規劃、多步推理、難題拆解、寫架構低頻、值得花錢的硬任務</p>
+                <div class="llm-vendors">
+                  <div class="llm-vendor"><div class="llm-vendor-name">Anthropic</div><div class="llm-vendor-model">Claude Opus 4.8</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">Google</div><div class="llm-vendor-model">Gemini 2.5 Pro</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">OpenAI</div><div class="llm-vendor-model">GPT-5 / o 系列</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">DeepSeek</div><div class="llm-vendor-model">DeepSeek-R1</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">阿里巴巴</div><div class="llm-vendor-model">Qwen Max</div></div>
+                </div>
+              </div>
+              <div class="llm-tier">
+                <div class="llm-tier-top">
+                  <span class="llm-tier-badge">第 2 級</span>
+                  <span class="llm-tier-h">均衡,日常主力</span>
+                  <span class="llm-tier-cost">成本 $$ · 系統預設</span>
+                </div>
+                <p class="llm-tier-use">用在:大多數對話、寫程式、改檔案、整理資料聰明與速度的甜蜜點,八成任務都用它</p>
+                <div class="llm-vendors">
+                  <div class="llm-vendor"><div class="llm-vendor-name">Anthropic</div><div class="llm-vendor-model">Claude Sonnet 4.6</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">Google</div><div class="llm-vendor-model">Gemini 2.5 Flash</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">OpenAI</div><div class="llm-vendor-model">GPT-5 mini</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">DeepSeek</div><div class="llm-vendor-model">DeepSeek-V3</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">阿里巴巴</div><div class="llm-vendor-model">Qwen Plus</div></div>
+                </div>
+              </div>
+              <div class="llm-tier">
+                <div class="llm-tier-top">
+                  <span class="llm-tier-badge">第 3 級</span>
+                  <span class="llm-tier-h">高速,最便宜</span>
+                  <span class="llm-tier-cost">成本 $ · 最快最省</span>
+                </div>
+                <p class="llm-tier-use">用在:高頻批量、分類打標、簡單摘要、即時回應量大、單價要壓到最低的任務</p>
+                <div class="llm-vendors">
+                  <div class="llm-vendor"><div class="llm-vendor-name">Anthropic</div><div class="llm-vendor-model">Claude Haiku 4.5</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">Google</div><div class="llm-vendor-model">Gemini 2.5 Flash-Lite</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">OpenAI</div><div class="llm-vendor-model">GPT-5 nano</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">DeepSeek</div><div class="llm-vendor-model">—</div></div>
+                  <div class="llm-vendor"><div class="llm-vendor-name">阿里巴巴</div><div class="llm-vendor-model">Qwen Turbo</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-section"><h4>記住這個就好</h4><p>模型名稱更新很快,記不住沒關係要記的是「三層」的概念,以及一層比一層貴的關係,跨廠商都成立。</p></div>
+        </div>
+      </div>
+      <div class="tier tier-product js-modal">
+        <div class="tier-label">Product<small>第二層 · 對話介面</small></div>
+        <div class="tier-examples"><code>ChatGPT</code><code>Claude.ai</code><code>Gemini app</code></div>
+        <div class="tier-marker">會聊天 · 點看 →</div>
+        <div class="modal-content">
+          <div class="modal-eyebrow">第二層 · 對話介面</div>
+          <h3 class="modal-title">Product對話型 AI 產品</h3>
+          <div class="modal-section"><p>把 LLM 包成一個聊天 App,讓一般人不寫程式也能用代表作是 ChatGPT。它很強,但只能在對話框裡進出。</p></div>
+          <div class="modal-section">
+            <h4>ChatGPT 能做與不能做</h4>
+            <dl class="modal-spec">
+              <div><dt>互動模式</dt><dd>對話</dd></div>
+              <div><dt>看得到你的檔案?</dt><dd class="no">無法</dd></div>
+              <div><dt>能寫檔案?</dt><dd class="no">無法</dd></div>
+              <div><dt>能跑指令?</dt><dd class="no">無法</dd></div>
+              <div><dt>適合做什麼</dt><dd>問問題、寫文字</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div class="tier tier-agent js-modal">
+        <div class="tier-label">Agent<small>第三層 · 動手做</small></div>
+        <div class="tier-examples"><code>Claude Code</code><code>Cursor Composer</code><code>Devin</code></div>
+        <div class="tier-marker">會做事 · 點看 →</div>
+        <div class="modal-content">
+          <div class="modal-eyebrow">第三層 · 動手做</div>
+          <h3 class="modal-title">Agent會動手的 AI</h3>
+          <div class="modal-section"><p>Agent 不只回答,還會自己用工具把事做完代表作是 Claude Code。它能讀你的檔案、改檔、跑指令,把「對話」變成「交付」。</p></div>
+          <div class="modal-section">
+            <h4>Claude Code 能做與不能做</h4>
+            <dl class="modal-spec">
+              <div><dt>互動模式</dt><dd>對話 + 動手做</dd></div>
+              <div><dt>看得到你的檔案?</dt><dd class="yes">可以</dd></div>
+              <div><dt>能寫檔案?</dt><dd class="yes">可以</dd></div>
+              <div><dt>能跑指令?</dt><dd class="yes">可以</dd></div>
+              <div><dt>適合做什麼</dt><dd>完成任務、改專案</dd></div>
+            </dl>
+          </div>
+        </div>
       </div>
     </div>
 
-    <p class="tier-foot r r-d1">越上層 = 越具體 = 越能直接交付價值</p>
-
-    <div class="compare r">
-      <div class="compare-card">
-        <div class="compare-tag">Product · 對話介面</div>
-        <div class="compare-name">ChatGPT</div>
-        <ul class="compare-list">
-          <li><strong>互動模式</strong><span>對話</span></li>
-          <li><strong>看得到檔案?</strong><span class="n">無法</span></li>
-          <li><strong>能寫檔案?</strong><span class="n">無法</span></li>
-          <li><strong>能跑指令?</strong><span class="n">無法</span></li>
-          <li><strong>適合做什麼</strong><span>問問題、寫文字</span></li>
-        </ul>
-      </div>
-      <div class="compare-card is-good">
-        <div class="compare-tag">Agent · 動手助手</div>
-        <div class="compare-name">Claude <span class="accent">Code</span></div>
-        <ul class="compare-list">
-          <li><strong>互動模式</strong><span>對話 + 動手做</span></li>
-          <li><strong>看得到檔案?</strong><span class="y">可以</span></li>
-          <li><strong>能寫檔案?</strong><span class="y">可以</span></li>
-          <li><strong>能跑指令?</strong><span class="y">可以</span></li>
-          <li><strong>適合做什麼</strong><span>完成任務、改專案</span></li>
-        </ul>
-      </div>
-    </div>
+    <p class="tier-foot r r-d1">越下層 = 越具體 = 越能直接交付價值 · 點任一層看細節</p>
 
     <div class="scenario-vs r">
       <p class="scenario-vs-q">同一任務,兩個世界,<span class="accent">分析 100 份問卷</span></p>
@@ -2627,9 +3132,9 @@ button:focus-visible {
   <div class="container">
 
     <div class="section-head r">
-      <div class="eyebrow"><span class="dot"></span>第 3 章 · 25–35 min · 安裝</div>
-      <h2 class="section-title">安裝與第一次對話,<span class="accent">讓 AI 安裝 AI</span></h2>
-      <p class="section-lede">你只手動裝一個東西:Cursor然後讓它讀 <code style="font-family: var(--font-mono); font-size: 0.92em; background: var(--gold-tint); padding: 2px 8px; border-radius: 5px; color: var(--gold); font-weight: 600;">setup.md</code>,代勞安裝 Node.js、Claude Code、API key安裝本身就是第一堂課</p>
+      <div class="eyebrow"><span class="dot"></span>第 3 章 · 40–55 min · 安裝</div>
+      <h2 class="section-title">安裝與第一次對話,<span class="accent">讓 AI(Cursor) 安裝 AI(Claude Code)</span></h2>
+      <p class="section-lede">你手動的部分很少裝一個 Cursor、註冊一個 GitHub剩下讓 AI 讀 <code style="font-family: var(--font-mono); font-size: 0.92em; background: var(--gold-tint); padding: 2px 8px; border-radius: 5px; color: var(--gold); font-weight: 600;">setup.md</code> 代勞:Node.js、Claude Code、API key、狀態列面板、GitHub repo安裝本身就是第一堂課</p>
     </div>
 
     <div class="phases">
@@ -2641,7 +3146,8 @@ button:focus-visible {
         </div>
         <div class="phase-body">
           <h3>下載 Cursor + 註冊免費帳號</h3>
-          <p>講師展示 <code>cursor.com</code>學員下載對應系統的安裝檔,雙擊安裝開啟後用 Google / GitHub 一鍵登入</p>
+          <p>學員下載對應系統的安裝檔,雙擊安裝開啟後用 Google / GitHub 一鍵登入全班用同一個官方網址,不要自己 Google:</p>
+          <p><a class="dl-btn" href="https://www.cursor.com/downloads" target="_blank" rel="noopener">下載 Cursor → cursor.com/downloads <span class="dl-arrow">↗</span></a></p>
           <p><strong>驗證方式:</strong> Cursor 介面打開,左下角看到登入狀態 = 成功</p>
         </div>
         <div class="phase-meta">
@@ -2657,7 +3163,8 @@ button:focus-visible {
         </div>
         <div class="phase-body">
           <h3>把 setup.md 餵給 Cursor AI,讓它代勞</h3>
-          <p>學員把 <code>setup.md</code> 拖進 Cursor,跟它說「請依照這份文件,幫我設定環境」AI 接著做:</p>
+          <p>先下載這份 <code>setup.md</code>(全班同一份),再拖進 Cursor,跟它說「請依照這份文件,幫我設定環境」AI 接著做:</p>
+          <p><a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/setup.md" target="_blank" rel="noopener">取得 setup.md <span class="dl-arrow">↗</span></a></p>
           <ul>
             <li>下載並安裝 Node.js</li>
             <li>用 npm 安裝 Claude Code</li>
@@ -2677,6 +3184,51 @@ button:focus-visible {
       <div class="phase r">
         <div class="phase-tag">
           <div class="phase-letter">C</div>
+          <div class="phase-tagline">Status HUD</div>
+        </div>
+        <div class="phase-body">
+          <h3>裝上狀態列面板(claude-hud)</h3>
+          <p>在 Claude Code 底部裝一個即時面板隨時看到用的是哪個模型、context 用了多少、花了多少 token。把 <code>panel-setup.md</code> 餵給 Claude Code 讓它帶你裝,或直接把下面三行<strong>貼進 Claude Code 的輸入框</strong>(這是 slash 指令,不是終端機指令):</p>
+          <p><a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/panel-setup.md" target="_blank" rel="noopener">取得 panel-setup.md <span class="dl-arrow">↗</span></a></p>
+          <pre><code>/plugin marketplace add jarrodwatts/claude-hud
+/plugin install claude-hud
+/claude-hud:setup</code></pre>
+          <p>跑完面板立刻出現,不用重啟看到底部多了一條狀態列 = 成功</p>
+        </div>
+        <div class="phase-meta">
+          <div class="phase-time">5 min</div>
+          <div class="phase-actor">學員 + AI</div>
+        </div>
+      </div>
+
+      <div class="phase r">
+        <div class="phase-tag">
+          <div class="phase-letter">D</div>
+          <div class="phase-tagline">GitHub + push</div>
+        </div>
+        <div class="phase-body">
+          <h3>註冊 GitHub,讓 Claude Code 自己建 repo、推上去</h3>
+          <p>先註冊一個免費 GitHub 帳號(講師帶全班一起),接著把 <code>github-setup.md</code> 餵給 Claude Code它會幫你登入、建立一個新的 repo、把檔案 push 上去你幾乎只要按同意:</p>
+          <p>
+            <a class="dl-btn" href="https://github.com/signup" target="_blank" rel="noopener">註冊 GitHub <span class="dl-arrow">↗</span></a>
+            <a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/github-setup.md" target="_blank" rel="noopener" style="margin-left: 8px;">取得 github-setup.md <span class="dl-arrow">↗</span></a>
+          </p>
+          <ul>
+            <li>瀏覽器註冊 GitHub 帳號(唯一需要你動手的部分)</li>
+            <li>把 <code>github-setup.md</code> 餵給 Claude Code,說「請依照這份文件設定我的 GitHub」</li>
+            <li>Claude Code 自己跑 <code>gh</code> 登入、<code>gh repo create</code>、<code>git push</code></li>
+          </ul>
+          <p>到你的 GitHub 看到新建的 repo 裡有檔案 = 成功</p>
+        </div>
+        <div class="phase-meta">
+          <div class="phase-time">10 min</div>
+          <div class="phase-actor">學員 + AI</div>
+        </div>
+      </div>
+
+      <div class="phase r">
+        <div class="phase-tag">
+          <div class="phase-letter">E</div>
           <div class="phase-tagline">Clone materials</div>
         </div>
         <div class="phase-body">
@@ -2696,12 +3248,13 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
 
       <div class="phase r">
         <div class="phase-tag">
-          <div class="phase-letter">D</div>
+          <div class="phase-letter">F</div>
           <div class="phase-tagline">First conversation</div>
         </div>
         <div class="phase-body">
           <h3>在 workshop 資料夾啟動 <code>claude</code></h3>
-          <p>輸入這句話,故意用白話:</p>
+          <p style="font-size: 14px; color: var(--ink-3); background: var(--gold-tint); border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 6px;"><strong style="color: var(--ink);">什麼是 workshop 資料夾?</strong> 就是你上一步 <code>git clone</code> 下來的 <code>claude-code-workshop</code> 資料夾今天所有練習素材都在裡面。要先 <code>cd</code> 進這個資料夾再啟動 <code>claude</code>,它才看得到這些檔案。</p>
+          <p>進到資料夾後輸入 <code>claude</code> 啟動,再打這句話,故意用白話:</p>
           <pre><code>你好,我現在在哪個資料夾?裡面有什麼東西?</code></pre>
           <p>用白話問就好,不用怕「我這樣講對嗎」AI 會跑 <code>pwd</code> 和 <code>ls</code> 給你看,<strong>自己動手</strong></p>
         </div>
@@ -2713,7 +3266,7 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
 
       <div class="phase r">
         <div class="phase-tag">
-          <div class="phase-letter">E</div>
+          <div class="phase-letter">G</div>
           <div class="phase-tagline">Naming it</div>
         </div>
         <div class="phase-body">
@@ -2750,20 +3303,41 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
     </div>
 
     <div class="ccc">
-      <div class="ccc-item r">
+      <div class="ccc-item r js-modal">
         <div class="ccc-headline"><span class="ccc-letter">C</span><span class="ccc-word">ontext</span></div>
         <div class="ccc-zh">背景</div>
         <div class="ccc-desc">任務、輸入、目標讀者、現有檔案,AI 需要知道你站在哪</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">CCC 框架 · 第一個 C</div>
+          <h3 class="modal-title">Context背景</h3>
+          <div class="modal-section"><h4>定義</h4><p>告訴 AI 它需要知道的背景:任務是什麼、輸入是什麼、給誰看、有哪些現有檔案。AI 沒有讀心術你站在哪、要去哪,得講清楚,它才接得上。</p></div>
+          <div class="modal-section"><h4>生活上的使用情境</h4><p>像跟新來的助理交辦。你不會只說「處理一下」,而會說「這是客戶名單、要寄活動邀請、對象是 VIP、用公司信頭」對方才做得對。</p></div>
+        </div>
       </div>
-      <div class="ccc-item r r-d1">
+      <div class="ccc-item r r-d1 js-modal">
         <div class="ccc-headline"><span class="ccc-letter">C</span><span class="ccc-word">onstraints</span></div>
         <div class="ccc-zh">限制</div>
         <div class="ccc-desc">格式、長度、能/不能做什麼、依賴條件,AI 需要知道邊界在哪</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">CCC 框架 · 第二個 C</div>
+          <h3 class="modal-title">Constraints限制</h3>
+          <div class="modal-section"><h4>定義</h4><p>告訴 AI 邊界:輸出格式、長度、能做什麼不能做什麼、要遵守的依賴條件。沒有邊界,AI 會自由發揮到你不要的方向。</p></div>
+          <div class="modal-section"><h4>生活上的使用情境</h4><p>像找設計師裝潢。只說「弄好看」會得到你不想要的風格;說「北歐風、預算 10 萬、不能動牆」才會收斂到對的結果。</p></div>
+        </div>
       </div>
-      <div class="ccc-item r r-d2">
+      <div class="ccc-item r r-d2 js-modal">
         <div class="ccc-headline"><span class="ccc-letter">C</span><span class="ccc-word">heck</span></div>
         <div class="ccc-zh">驗證</div>
         <div class="ccc-desc">AI 給的我有沒有當真?有沒有抽查?採納還是丟掉?,這是你最不能外包的事</div>
+        <span class="gloss-more">點看細節 +</span>
+        <div class="modal-content">
+          <div class="modal-eyebrow">CCC 框架 · 第三個 C</div>
+          <h3 class="modal-title">Check驗證</h3>
+          <div class="modal-section"><h4>定義</h4><p>AI 給的東西,你有沒有當真?有沒有抽查、核對來源?最後採納還是丟掉?這一步是你最不能外包的責任尤其面對「幻覺」。</p></div>
+          <div class="modal-section"><h4>生活上的使用情境</h4><p>像實習生交報告。你不會直接簽名上呈,會先抽幾個數字核對、確認沒亂編,才掛上自己的名字。</p></div>
+        </div>
       </div>
     </div>
 
@@ -3193,16 +3767,6 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
         <div class="vocab-depth">一句話</div>
       </div>
       <div class="vocab-row">
-        <div class="vocab-name">Subagents</div>
-        <div class="vocab-desc">讓 Claude 啟動「子代理」做專門任務,code review、深度搜尋,不打斷主對話</div>
-        <div class="vocab-depth">一句話</div>
-      </div>
-      <div class="vocab-row">
-        <div class="vocab-name">Multi-file Editing</div>
-        <div class="vocab-desc">同時修改多個檔案,AI 跨檔案的重構與改動</div>
-        <div class="vocab-depth">一句話</div>
-      </div>
-      <div class="vocab-row">
         <div class="vocab-name">Git Integration</div>
         <div class="vocab-desc">版本管理內建,每步可回溯,改錯了能 revert</div>
         <div class="vocab-depth">一句話</div>
@@ -3231,13 +3795,14 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
 
       <div class="cmd-analogy r">
         <h3>類比 · 新員工 onboarding 包</h3>
-        <table>
-          <tr><td>公司簡介</td><td>→</td><td><code>## 專案是什麼</code></td></tr>
-          <tr><td>慣例 / 風格</td><td>→</td><td><code>## 設計規範</code></td></tr>
-          <tr><td>技術棧 / 工具</td><td>→</td><td><code>## 技術棧</code></td></tr>
-          <tr><td>Code of Conduct</td><td>→</td><td><code>## 注意事項</code></td></tr>
-          <tr><td>「別碰 X」</td><td>→</td><td><code>## Don't</code></td></tr>
-        </table>
+        <p class="cmd-map-lede">CLAUDE.md 裡用 <code>##</code> 把內容切成一段段(就是 markdown 的「段落標題」)公司給新人的東西,正好對應這些段落:</p>
+        <div class="cmd-map">
+          <div class="cmd-map-row"><span class="cmd-map-from">公司簡介</span><span class="cmd-map-arrow">→</span><span class="cmd-map-to"><span class="cmd-map-hash">#</span>專案是什麼</span></div>
+          <div class="cmd-map-row"><span class="cmd-map-from">慣例 / 風格</span><span class="cmd-map-arrow">→</span><span class="cmd-map-to"><span class="cmd-map-hash">#</span>設計規範</span></div>
+          <div class="cmd-map-row"><span class="cmd-map-from">技術棧 / 工具</span><span class="cmd-map-arrow">→</span><span class="cmd-map-to"><span class="cmd-map-hash">#</span>技術棧</span></div>
+          <div class="cmd-map-row"><span class="cmd-map-from">Code of Conduct</span><span class="cmd-map-arrow">→</span><span class="cmd-map-to"><span class="cmd-map-hash">#</span>注意事項</span></div>
+          <div class="cmd-map-row"><span class="cmd-map-from">「別碰 X」</span><span class="cmd-map-arrow">→</span><span class="cmd-map-to"><span class="cmd-map-hash">#</span>Don't</span></div>
+        </div>
       </div>
 
       <div class="r r-d1">
@@ -3303,7 +3868,7 @@ determines success?
       <div class="wrapup-cell">
         <div class="wrapup-time">4 MIN</div>
         <div class="wrapup-what">成果歸宿</div>
-        <div class="wrapup-note">VS Code + Obsidian demo</div>
+        <div class="wrapup-note">GitHub + Obsidian demo</div>
       </div>
       <div class="wrapup-cell">
         <div class="wrapup-time">4 MIN</div>
@@ -3329,15 +3894,9 @@ determines success?
       </div>
 
       <div class="tool r r-d1">
-        <div class="tool-name">VS Code</div>
-        <div class="tool-use">開 .md 看格式預覽 + 開 .csv 看表格</div>
-        <div class="tool-how">拖整個 <code>claude-code-workshop</code> 進 VS Code,左側檔案樹點點看;按 <code>⌘⇧V</code> 預覽 markdown</div>
-      </div>
-
-      <div class="tool r r-d2">
-        <div class="tool-name">Numbers / Excel</div>
-        <div class="tool-use">開 .csv 看數據</div>
-        <div class="tool-how">雙擊 .csv 即可,Excel 對中文 CSV 有時亂碼,優先用 Numbers,或 VS Code 直接看</div>
+        <div class="tool-name">GitHub</div>
+        <div class="tool-use">把成果備份到雲端、留版本、能分享</div>
+        <div class="tool-how">把你的資料夾 push 到一個 GitHub repo每一版都留痕跡、換電腦也拿得到,還能把連結分享給同學或 supervisor</div>
       </div>
 
     </div>
@@ -3394,6 +3953,14 @@ determines success?
     </div>
   </div>
 </footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close" aria-label="關閉">×</button>
+    <div class="modal-body"></div>
+  </div>
+</div>
 
 <script>
 // Reveal on scroll
@@ -3493,6 +4060,47 @@ document.querySelectorAll('.sched-row[data-jump]').forEach(row => {
     }
   });
 });
+
+// Modal: click any .js-modal to open its embedded .modal-content
+const modal = document.getElementById('modal');
+const modalBody = modal ? modal.querySelector('.modal-body') : null;
+function openModal(contentEl) {
+  if (!modal || !modalBody || !contentEl) return;
+  modalBody.innerHTML = contentEl.innerHTML;
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  const box = modal.querySelector('.modal-box');
+  if (box) box.scrollTop = 0;
+}
+function closeModal() {
+  if (!modal) return;
+  modal.hidden = true;
+  modalBody.innerHTML = '';
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.js-modal').forEach(el => {
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'button');
+  const open = (e) => {
+    if (e.target.closest('a')) return;
+    openModal(el.querySelector('.modal-content'));
+  };
+  el.addEventListener('click', open);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal(el.querySelector('.modal-content'));
+    }
+  });
+});
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.closest('.modal-close')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+}
 
 // Scroll progress bar
 const progress = document.querySelector('.scroll-progress');

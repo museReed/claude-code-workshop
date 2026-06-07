@@ -209,19 +209,43 @@ claude --version
 
 ---
 
-## Step 5 · 完成 + 交棒
+## Step 5 · 核心環境完成 + 交棒
 
 **告訴學員:**
-> 「✅ 環境設定全部完成。
+> 「✅ 核心環境(Node.js + Claude Code + API key)設定完成。
 >
 > **檢查清單:**
 > - Node.js: [印當前版本]
 > - Claude Code: [印當前版本]
 > - API key / 登入: 已設定 ✅
 >
-> 接下來請**離開 Cursor**,回到 terminal,跟講師一起做下一步——`git clone` 拿 workshop 素材。
+> 接下來請**離開 Cursor**,回到 terminal,跟講師一起做下一步——`git clone` 拿 workshop 素材,然後在 workshop 資料夾啟動 `claude`。
 >
-> 待會在 workshop 資料夾啟動 `claude`,你會親自跟 Claude Code 對話。」
+> 啟動 `claude` 之後,還有兩個小設定要做(Step 6、Step 7),這次換 **Claude Code** 帶你做。」
+
+---
+
+## Step 6 · 狀態列面板（在 Claude Code 裡做）
+
+> **接力給 Claude Code。** 學員啟動 `claude` 後,把 `panel-setup.md` 餵給 Claude Code（或說「請依照 panel-setup.md 幫我裝狀態列面板」）。
+>
+> 內容:安裝 `claude-hud` 外掛,在畫面底部加一條即時狀態列（模型 / context / 用量）。完整步驟見同資料夾的 **[`panel-setup.md`](./panel-setup.md)**。
+>
+> 完成標準:Claude Code 畫面最底下出現狀態列。
+
+---
+
+## Step 7 · GitHub（在 Claude Code 裡做）
+
+> **接力給 Claude Code。** 把 `github-setup.md` 餵給 Claude Code（或說「請依照 github-setup.md 幫我設定 GitHub」）。
+>
+> 內容:帶學員註冊 GitHub 帳號,然後 Claude Code 自己 `gh auth login`、`gh repo create`、`git push`,把成果推上雲端。完整步驟見同資料夾的 **[`github-setup.md`](./github-setup.md)**。
+>
+> 完成標準:學員的 GitHub 上出現一個新 repo,裡面有檔案。
+
+---
+
+> ✅ **全部完成 = Step 1–7 都做完。** 跑完這份 `setup.md`、再依序完成 `panel-setup.md`（Step 6）與 `github-setup.md`（Step 7）,環境才算真正就緒。
 
 ---
 
