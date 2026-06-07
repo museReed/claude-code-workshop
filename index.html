@@ -3184,51 +3184,6 @@ button:focus-visible {
       <div class="phase r">
         <div class="phase-tag">
           <div class="phase-letter">C</div>
-          <div class="phase-tagline">Status HUD</div>
-        </div>
-        <div class="phase-body">
-          <h3>裝上狀態列面板(claude-hud)</h3>
-          <p>在 Claude Code 底部裝一個即時面板隨時看到用的是哪個模型、context 用了多少、花了多少 token。把 <code>panel-setup.md</code> 餵給 Claude Code 讓它帶你裝,或直接把下面三行<strong>貼進 Claude Code 的輸入框</strong>(這是 slash 指令,不是終端機指令):</p>
-          <p><a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/panel-setup.md" target="_blank" rel="noopener">取得 panel-setup.md <span class="dl-arrow">↗</span></a></p>
-          <pre><code>/plugin marketplace add jarrodwatts/claude-hud
-/plugin install claude-hud
-/claude-hud:setup</code></pre>
-          <p>跑完面板立刻出現,不用重啟看到底部多了一條狀態列 = 成功</p>
-        </div>
-        <div class="phase-meta">
-          <div class="phase-time">5 min</div>
-          <div class="phase-actor">學員 + AI</div>
-        </div>
-      </div>
-
-      <div class="phase r">
-        <div class="phase-tag">
-          <div class="phase-letter">D</div>
-          <div class="phase-tagline">GitHub + push</div>
-        </div>
-        <div class="phase-body">
-          <h3>註冊 GitHub,讓 Claude Code 自己建 repo、推上去</h3>
-          <p>先註冊一個免費 GitHub 帳號(講師帶全班一起),接著把 <code>github-setup.md</code> 餵給 Claude Code它會幫你登入、建立一個新的 repo、把檔案 push 上去你幾乎只要按同意:</p>
-          <p>
-            <a class="dl-btn" href="https://github.com/signup" target="_blank" rel="noopener">註冊 GitHub <span class="dl-arrow">↗</span></a>
-            <a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/github-setup.md" target="_blank" rel="noopener" style="margin-left: 8px;">取得 github-setup.md <span class="dl-arrow">↗</span></a>
-          </p>
-          <ul>
-            <li>瀏覽器註冊 GitHub 帳號(唯一需要你動手的部分)</li>
-            <li>把 <code>github-setup.md</code> 餵給 Claude Code,說「請依照這份文件設定我的 GitHub」</li>
-            <li>Claude Code 自己跑 <code>gh</code> 登入、<code>gh repo create</code>、<code>git push</code></li>
-          </ul>
-          <p>到你的 GitHub 看到新建的 repo 裡有檔案 = 成功</p>
-        </div>
-        <div class="phase-meta">
-          <div class="phase-time">10 min</div>
-          <div class="phase-actor">學員 + AI</div>
-        </div>
-      </div>
-
-      <div class="phase r">
-        <div class="phase-tag">
-          <div class="phase-letter">E</div>
           <div class="phase-tagline">Clone materials</div>
         </div>
         <div class="phase-body">
@@ -3248,7 +3203,7 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
 
       <div class="phase r">
         <div class="phase-tag">
-          <div class="phase-letter">F</div>
+          <div class="phase-letter">D</div>
           <div class="phase-tagline">First conversation</div>
         </div>
         <div class="phase-body">
@@ -3260,6 +3215,51 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
         </div>
         <div class="phase-meta">
           <div class="phase-time">5–8 min</div>
+          <div class="phase-actor">學員 + AI</div>
+        </div>
+      </div>
+
+      <div class="phase r">
+        <div class="phase-tag">
+          <div class="phase-letter">E</div>
+          <div class="phase-tagline">Status HUD</div>
+        </div>
+        <div class="phase-body">
+          <h3>裝上狀態列面板(claude-hud)</h3>
+          <p>你剛剛已經啟動 claude了現在在 Claude Code 底部裝一個即時面板隨時看到用的是哪個模型、context 用了多少、花了多少 token。把 <code>panel-setup.md</code> 餵給 Claude Code 讓它帶你裝,或直接把下面三行<strong>貼進 Claude Code 的輸入框</strong>(這是 slash 指令,不是終端機指令):</p>
+          <p><a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/panel-setup.md" target="_blank" rel="noopener">取得 panel-setup.md <span class="dl-arrow">↗</span></a></p>
+          <pre><code>/plugin marketplace add jarrodwatts/claude-hud
+/plugin install claude-hud
+/claude-hud:setup</code></pre>
+          <p>跑完面板立刻出現,不用重啟看到底部多了一條狀態列 = 成功</p>
+        </div>
+        <div class="phase-meta">
+          <div class="phase-time">5 min</div>
+          <div class="phase-actor">學員 + AI</div>
+        </div>
+      </div>
+
+      <div class="phase r">
+        <div class="phase-tag">
+          <div class="phase-letter">F</div>
+          <div class="phase-tagline">GitHub + push</div>
+        </div>
+        <div class="phase-body">
+          <h3>註冊 GitHub,讓 Claude Code 自己建 repo、推上去</h3>
+          <p>先註冊一個免費 GitHub 帳號(講師帶全班一起),接著把 <code>github-setup.md</code> 餵給 Claude Code它會幫你登入、建立一個新的 repo、把檔案 push 上去你幾乎只要按同意:</p>
+          <p>
+            <a class="dl-btn" href="https://github.com/signup" target="_blank" rel="noopener">註冊 GitHub <span class="dl-arrow">↗</span></a>
+            <a class="dl-btn" href="https://github.com/museReed/claude-code-workshop/blob/main/github-setup.md" target="_blank" rel="noopener" style="margin-left: 8px;">取得 github-setup.md <span class="dl-arrow">↗</span></a>
+          </p>
+          <ul>
+            <li>瀏覽器註冊 GitHub 帳號(唯一需要你動手的部分)</li>
+            <li>把 <code>github-setup.md</code> 餵給 Claude Code,說「請依照這份文件設定我的 GitHub」</li>
+            <li>Claude Code 自己跑 <code>gh</code> 登入、<code>gh repo create</code>、<code>git push</code></li>
+          </ul>
+          <p>到你的 GitHub 看到新建的 repo 裡有檔案 = 成功</p>
+        </div>
+        <div class="phase-meta">
+          <div class="phase-time">10 min</div>
           <div class="phase-actor">學員 + AI</div>
         </div>
       </div>
