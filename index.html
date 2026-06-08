@@ -1231,6 +1231,28 @@ body.slide-mode .r { opacity: 1 !important; transform: none !important; }
   #slide-next { right: 8px; }
 }
 
+/* onboarding + faq reference pages */
+.prep-checklist { list-style: none; display: grid; gap: 11px; margin-top: 8px; }
+.prep-checklist li { position: relative; padding-left: 30px; font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+.prep-checklist li::before { content: "\2610"; position: absolute; left: 0; top: -1px; color: var(--gold); font-size: 18px; }
+.prep-checklist a { color: var(--gold); border-bottom: 1px solid rgba(184, 144, 46, 0.4); }
+
+.tips, .faq-list { display: grid; gap: 14px; margin-top: 8px; }
+.tip, .faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 20px 22px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease-out);
+}
+.tip:hover, .faq-item:hover { border-color: rgba(184, 144, 46, 0.4); transform: translateY(-2px); }
+.tip.warn { border-color: rgba(184, 144, 46, 0.55); background: var(--gold-tint); }
+.tip-h, .faq-q { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.tip-num, .faq-mark { font-family: var(--font-mono); color: var(--gold); margin-right: 9px; }
+.tip-b, .faq-a { font-size: 14.5px; color: var(--ink-2); line-height: 1.65; }
+.tip-b code, .faq-a code { font-family: var(--font-mono); font-size: 13px; background: var(--bg-warm); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+.faq-a a { color: var(--gold); border-bottom: 1px solid rgba(184, 144, 46, 0.4); }
+
 /* ─────────────────────────────────────────────────────────
    THREE TIERS
    ───────────────────────────────────────────────────────── */
@@ -2653,9 +2675,12 @@ body.slide-mode .r { opacity: 1 !important; transform: none !important; }
     <a class="nav-brand" href="#" id="nav-brand-link" aria-label="回到頂端">Claude Code Workshop</a>
     <ul class="nav-links">
       <li><a href="#schedule">時間表</a></li>
+      <li><a href="#onboarding">課前準備</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li class="nav-dropdown">
         <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">章節</button>
         <div class="nav-dropdown-panel" role="menu">
+          <a href="#onboarding" role="menuitem"><span class="nav-dd-num">前</span><span class="nav-dd-label">課前準備</span></a>
           <a href="#part-0" role="menuitem"><span class="nav-dd-num">0</span><span class="nav-dd-label">為什麼在這裡</span></a>
           <a href="#part-1" role="menuitem"><span class="nav-dd-num">1</span><span class="nav-dd-label">AI 詞彙</span></a>
           <a href="#part-2" role="menuitem"><span class="nav-dd-num">2</span><span class="nav-dd-label">三層架構</span></a>
@@ -2665,6 +2690,7 @@ body.slide-mode .r { opacity: 1 !important; transform: none !important; }
           <a href="#part-7" role="menuitem"><span class="nav-dd-num">7</span><span class="nav-dd-label">原型到產品</span></a>
           <a href="#claude-md" role="menuitem"><span class="nav-dd-num">7.1</span><span class="nav-dd-label">CLAUDE.md</span></a>
           <a href="#part-8" role="menuitem"><span class="nav-dd-num">8</span><span class="nav-dd-label">收尾</span></a>
+          <a href="#faq" role="menuitem"><span class="nav-dd-num">FAQ</span><span class="nav-dd-label">常見問題</span></a>
         </div>
       </li>
       <li><button class="slide-btn" id="slide-toggle" aria-label="進入簡報模式">▶ Slide</button></li>
@@ -4024,6 +4050,94 @@ determines success?
   </div>
 </section>
 
+<!-- ONBOARDING -->
+<section id="onboarding" class="noslide">
+  <div class="container">
+
+    <div class="section-head r">
+      <div class="eyebrow"><span class="dot"></span>課前準備 · 新手必看</div>
+      <h2 class="section-title">課前準備 + <span class="accent">新手操作小抄</span></h2>
+      <p class="section-lede">上課 90% 的卡關都來自下面這幾件「操作」小事先看過,當天會順很多看不懂沒關係,先做能做的,卡住就標記是哪一步,當天直接問</p>
+    </div>
+
+    <div class="gloss-group-head r">
+      <span class="gloss-group-title">一 · 課前 30 分鐘 checklist</span>
+    </div>
+    <ul class="prep-checklist r">
+      <li>下載並安裝 <a href="https://www.cursor.com/downloads" target="_blank" rel="noopener">Cursor</a>(選對應你系統的版本)</li>
+      <li>用 Google 或 GitHub 登入 Cursor(<strong>選免費方案,不要選 Pro</strong>)</li>
+      <li>註冊一個 <a href="https://github.com/signup" target="_blank" rel="noopener">GitHub</a> 帳號</li>
+      <li>下載今天會用到的三份檔案:<a href="https://github.com/museReed/claude-code-workshop/blob/main/setup.md" target="_blank" rel="noopener">setup.md</a> / <a href="https://github.com/museReed/claude-code-workshop/blob/main/panel-setup.md" target="_blank" rel="noopener">panel-setup.md</a> / <a href="https://github.com/museReed/claude-code-workshop/blob/main/github-setup.md" target="_blank" rel="noopener">github-setup.md</a></li>
+      <li>確認可以分享螢幕(Google Meet / Zoom 先測一次)</li>
+    </ul>
+
+    <div class="gloss-group-head r">
+      <span class="gloss-group-title">二 · 操作小抄(最常卡的 7 件事)</span>
+    </div>
+    <div class="tips r">
+      <div class="tip warn">
+        <div class="tip-h">⚠️ Cursor 登入:選「免費」,不要選 Pro</div>
+        <div class="tip-b">看到「Pro plan / Upgrade / $20/month」<strong>先不要點</strong>,今天用免費就夠。看到要刷卡＝你點到付費了,退回上一頁重選。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">1</span>切換視窗(最常迷路)</div>
+        <div class="tip-b">Mac:<strong>四/五指往上滑</strong>看所有視窗,或 <code>Cmd + Tab</code> 切 App,或點下方 Dock。分不清「Cursor 桌面 App」和「瀏覽器網頁」我們要用的是<strong>桌面 App</strong>。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">2</span>分享「整個螢幕」,不要分享單一視窗</div>
+        <div class="tip-b">選 <strong>整個螢幕（Entire Screen）</strong>。<strong>不要中途按「停止共享」</strong>切視窗時畫面會自己跟著換。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">3</span>複製貼上:確認前後沒有多餘空格</div>
+        <div class="tip-b"><strong>最常見的失敗。</strong>從網頁複製指令貼上時常黏到空格或半個字,導致它「認不出檔案/指令」。貼上後檢查開頭結尾乾不乾淨,不確定就刪掉重貼失敗時 80% 是這個。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">4</span>Claude Code 只能用鍵盤,不能用滑鼠點</div>
+        <div class="tip-b">選項用 <code>↑↓</code> 移動、<code>Enter</code> 確認;取消按 <code>Esc</code>(連按兩次回上一步);換行不送出 <code>Shift + Enter</code>。<strong>滑鼠點不動是正常的</strong>。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">5</span><code>@</code> 引用檔案(口語「小老鼠」)</div>
+        <div class="tip-b"><code>@</code> 後面<strong>緊接檔名</strong>,前後不要黏字或空格;打幾個字會<strong>自動跳出補全</strong>,用方向鍵選、Enter 帶入。</div>
+      </div>
+      <div class="tip">
+        <div class="tip-h"><span class="tip-num">6</span>Slash 指令 <code>/...</code> 貼進「Claude Code 輸入框」</div>
+        <div class="tip-b">像 <code>/plugin install ...</code>、<code>/claude-hud:setup</code> 這種斜線指令,貼到 <strong>Claude Code 的輸入框</strong>(不是 Mac 終端機、也不是 Cursor 聊天框),一行一行貼、一行一行 Enter。</div>
+      </div>
+    </div>
+
+    <div class="glossary-note r r-d1"><strong>卡關自救三步:</strong>① 先用白話問 Claude/Cursor 本人「我卡在 X、畫面顯示 Y,怎麼辦?」② 逐行讀它的回覆 ③ 真的不行,記下「卡在哪一步、畫面顯示什麼」當天問講師。笨問題都可以問。</div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="noslide section-warm">
+  <div class="container">
+
+    <div class="section-head r">
+      <div class="eyebrow"><span class="dot"></span>課後 FAQ</div>
+      <h2 class="section-title">常見問題 <span class="accent">Q &amp; A</span></h2>
+      <p class="section-lede">整理自課堂上同學問過的問題給上完課想再確認、或當天沒問到的人</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q1</span>我不是工程師(PM / Data Scientist / 學生),需要用 GitHub 嗎?</div><div class="faq-a">需要、而且很值得。GitHub 是你成果的<strong>雲端備份 + 版本歷史 + 分享連結</strong>。連上 Claude Code 後,你可以用自然語言叫它幫你推檔案、或從 GitHub 抓東西,不必自己點網站。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q2</span>各家 LLM(Claude / GPT / Gemini / DeepSeek)差在哪?只有 context window 不同嗎?</div><div class="faq-a">不只。它們在<strong>推理能力、訓練資料、強項、速度、價格</strong>都有差,context window 只是其中一個維度。選法:難任務用最強(Opus 級)、日常用均衡(Sonnet 級)、大量簡單任務用最便宜(Haiku 級)。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q3</span>CLAUDE.md 和 MEMORY.md 差在哪?</div><div class="faq-a"><strong>CLAUDE.md</strong>＝你寫給 AI 的「專案說明書」,每次自動讀,是 Claude Code <strong>原生</strong>的記憶機制。<strong>「跨對話自動記住你習慣」</strong>屬進階用法,通常要搭配<strong>記憶外掛(如 claude-mem)</strong>,不是內建。初學先會用 CLAUDE.md 就夠。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q4</span>不同 session(對話)之間怎麼共享進度?</div><div class="faq-a"><strong>不是靠某個檔案自動同步。</strong>常見做法:叫舊 session 把進度「寫成一份交接檔(handoff)」,新 session 再讀;或把重點寫進 CLAUDE.md。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q5</span><code>/compact</code> 是什麼?有什麼代價?</div><div class="faq-a">對話太長時,<code>/compact</code> 把對話<strong>壓縮成摘要</strong>釋放空間。代價是<strong>去脈絡化</strong>細節可能遺失。建議 context 到 ~70% 時做,或改用「寫交接檔 + 開新 session」。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q6</span>MCP 是什麼?是各工具自己做、還是 Claude Code 做?</div><div class="faq-a">MCP 是 Anthropic 提出的<strong>協定/標準</strong>(像 AI 版的 USB-C),規定 AI 怎麼接外部工具。<strong>各家(GitHub、Figma)依這標準做自己的 MCP server</strong>所以是「各工具自己做、遵守同一套規格」。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q7</span>某個工具還沒有 MCP,就沒辦法用了嗎?</div><div class="faq-a">不會。Claude Code 還能用 <strong>Playwright</strong> 這類工具直接開網頁、模擬點選來操作沒 MCP 的服務(只是慢、陽春一點)。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q8</span>用中文還是英文跟 AI 溝通比較好?中文比較耗 token 嗎?</div><div class="faq-a">中文 token 確實<strong>略多</strong>,但差距很小、不影響到要在意。<strong>重點是「哪種語言更能把問題講清楚」</strong>清楚表達 &gt; 省 token。用中文完全 OK(連 skill 都能用中文寫)。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q9</span>Skill 該做多大才合適?</div><div class="faq-a">Skill 是<strong>高層的工作流程 SOP</strong>(步驟+規範+範例,可附腳本),不是單一小函式。判準:<strong>會重複用、有固定步驟</strong>的流程適合;一整個獨立系統就做成 project。不確定就問 Claude「這適合做成 skill 還是 project?」</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q10</span>中途換模型,會把前面的對話清掉嗎?</div><div class="faq-a"><strong>不會</strong>,對話內容還在。只是會讓<strong>快取(cache)失效</strong>,下一輪稍微變貴、變慢。真的要換,建議<strong>開新 session</strong> 比較乾淨。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q11</span>Cursor 登入看到「Pro / $20」是不是會被收費?</div><div class="faq-a">那是付費方案。<strong>今天用免費就夠,不要點 Pro / Upgrade。</strong>不小心點到(要刷卡)就退回上一頁重選免費。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q12</span>我裝環境一直卡關怎麼辦?</div><div class="faq-a">先看上方<a href="#onboarding">課前準備</a>的操作小抄(90% 卡關是:視窗切換、複製帶到空格、Claude Code 只能鍵盤、<code>@</code> 引用)。再不行,<strong>直接用白話問 Claude 本人</strong>,或記下卡在哪一步問講師。</div></div>
+    </div>
+
+  </div>
+</section>
+
 <!-- INTEGRITY -->
 <div class="integrity">
   <div class="container">
@@ -4219,7 +4333,7 @@ const slideChrome = document.getElementById('slide-chrome');
 let slides = [], slideIdx = 0, slideOn = false;
 function collectSlides() {
   const hero = document.querySelector('header.hero');
-  return [hero, ...document.querySelectorAll('section')].filter(Boolean);
+  return [hero, ...document.querySelectorAll('section:not(.noslide)')].filter(Boolean);
 }
 function goSlide(i) {
   if (!slides.length) return;
