@@ -11,8 +11,16 @@
 不只。它們在**推理能力、訓練資料、強項、速度、價格**上都有差別，context window（一次能記多少）只是其中一個維度。實務上的選法：難任務用最強的（Opus 級），日常用均衡的（Sonnet 級），大量簡單任務用最便宜的（Haiku 級）。
 
 ### Q3. CLAUDE.md 和 MEMORY.md 差在哪？
-- **CLAUDE.md**：你寫給 AI 的「專案說明書」，每次對話自動讀。放專案脈絡、規範、紅線。這是 **Claude Code 原生**的記憶機制（分專案層和個人層 `~/.claude/CLAUDE.md`）。
-- **MEMORY.md / 自動記憶**：讓 AI「跨對話自動記住你的習慣」屬於**進階用法，通常要搭配記憶外掛（如 claude-mem）**，不是內建。初學只要先會用 CLAUDE.md 就夠。
+**兩個都是 Claude Code 官方原生功能，差別只在「誰寫」：**
+- **CLAUDE.md**＝**你**寫的指令／規則（專案脈絡、規範、紅線）。
+- **MEMORY.md（Auto memory）**＝**Claude 自己**根據你的更正與偏好寫的筆記（build 指令、除錯心得、你的習慣）。需 Claude Code `v2.1.59+`，存在 `~/.claude/projects/<project>/memory/`，每個 repo 一份、machine-local。
+
+兩者**每個 session 開頭都會載入**。衝突時官方**沒有硬性優先級**（都只是 context，不是強制設定）；實務上 CLAUDE.md（你明確下的規則）應勝過 MEMORY.md（Claude 的筆記），要**強制**就用 hook。初學先會用 CLAUDE.md 就夠。
+
+> 真正的第三方是 `claude-mem`（有自己的站 docs.claude-mem.ai），跟官方 Auto memory 無關。
+
+### Q3b. 不同層級的 CLAUDE.md 衝突呢？（user vs project）
+這個跟 Q3 不同——CLAUDE.md **各層級之間「有」明確優先順序**。載入由廣到細：**managed（企業/組織，不可被排除）→ user（`~/.claude/CLAUDE.md`）→ project（`./CLAUDE.md`）→ local**；愈靠近你工作目錄、愈晚載入的，優先級愈高。官方原話：「user-level rules 比 project rules 先載入，所以 **project 優先級較高**」。簡記：**企業 > 專案 > 個人**（企業層永遠套用）。
 
 ### Q4. 不同 session（對話）之間怎麼共享進度？
 **不是靠某個檔案自動同步。** 常見做法是：在舊 session 叫 Claude「把目前進度寫成一份交接檔（handoff）」，新 session 再讀那份檔；或把重點寫進 CLAUDE.md。

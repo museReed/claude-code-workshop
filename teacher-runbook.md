@@ -54,7 +54,7 @@
 | **Generative vs Agentic** | 「Generative AI 是會判斷用哪個工具、操作電腦那層」 | **Generative AI＝會生成新內容的總稱（含 LLM）**；會自己動手的是 **Agentic AI / AI Agent**。兩者分開講、別用同一個神經比喻混。 |
 | **幻覺成因** | 「context window 太大會導致幻覺」 | 幻覺＝它在**生成、不是查證**，跟 context 大小**沒有因果**。對策＝給依據 + 事後驗證。 |
 | **Context window** | 「context window 大於 70B / 對標 1TB」 | context window 的單位是 **token**（記憶廣度）；**70B 是參數量**（腦多大），是**兩回事**。台上別丟參數數字。 |
-| **CLAUDE.md / MEMORY.md** | 「MEMORY.md 自動維護、覆蓋 CLAUDE.md、session 間靠它溝通」 | 原生記憶就是 **CLAUDE.md**（專案層 + `~/.claude/CLAUDE.md`）。**「自動維護記憶」是外掛（如 claude-mem）行為，不是內建**——要講就標明「這是進階/外掛」。 |
+| **CLAUDE.md / MEMORY.md** | 「MEMORY.md 是外掛、不是內建」「MEMORY.md 覆蓋 CLAUDE.md」 | **兩個都是官方原生**，差別只在誰寫：CLAUDE.md＝你寫的指令；MEMORY.md（Auto memory）＝Claude 自己寫的筆記（需 v2.1.59+，存 `~/.claude/projects/<project>/memory/`），**兩者每 session 都載入**。衝突**無硬優先級**（都是 context）；實務 CLAUDE.md（你的規則）勝過 MEMORY.md（它的筆記），要強制用 hook。**但 CLAUDE.md 各層級有明確階層：企業(managed)>專案>個人(user)。** 真正第三方是 claude-mem。 |
 | **OpenAI 開源** | 「OpenAI 把語言模型開源」 | OpenAI（GPT）是**閉源**；開源浪潮是 **Meta Llama** 帶起（還有 Mistral/DeepSeek/Qwen）。 |
 | **MCP** | 「MCP 是一個 tool」「Hermes System 外流」 | MCP 是**協定/標準**（像 USB-C），各家照它做自己的 server。**別提未證實的『Hermes System / source code 外流』。** |
 | **換 model** | 「換 model 會把前面 context 移除、不記憶」 | 對話**不會被刪**；只是 **prompt cache 失效**（變貴變慢）。要換建議開新 session。 |

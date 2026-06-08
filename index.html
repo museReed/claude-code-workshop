@@ -3883,7 +3883,7 @@ cd claude-code-workshop &amp;&amp; ls exercises/</code></pre>
       </div>
       <div class="vocab-row">
         <div class="vocab-name">Memory · <code>MEMORY.md</code></div>
-        <div class="vocab-desc">把要長期記住的事寫進記憶檔,之後對話自動帶回原生記憶就是 CLAUDE.md;「自動維護」記憶需搭配記憶外掛</div>
+        <div class="vocab-desc">Auto memory:Claude 自己寫的跨對話筆記(官方功能,需 v2.1.59+),每次 session 自動帶回你手寫的指令則放 CLAUDE.md</div>
         <div class="vocab-depth">一句話</div>
       </div>
       <div class="vocab-row">
@@ -4123,7 +4123,7 @@ determines success?
     <div class="faq-list">
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q1</span>我不是工程師(PM / Data Scientist / 學生),需要用 GitHub 嗎?</div><div class="faq-a">需要、而且很值得。GitHub 是你成果的<strong>雲端備份 + 版本歷史 + 分享連結</strong>。連上 Claude Code 後,你可以用自然語言叫它幫你推檔案、或從 GitHub 抓東西,不必自己點網站。</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q2</span>各家 LLM(Claude / GPT / Gemini / DeepSeek)差在哪?只有 context window 不同嗎?</div><div class="faq-a">不只。它們在<strong>推理能力、訓練資料、強項、速度、價格</strong>都有差,context window 只是其中一個維度。選法:難任務用最強(Opus 級)、日常用均衡(Sonnet 級)、大量簡單任務用最便宜(Haiku 級)。</div></div>
-      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q3</span>CLAUDE.md 和 MEMORY.md 差在哪?</div><div class="faq-a"><strong>CLAUDE.md</strong>＝你寫給 AI 的「專案說明書」,每次自動讀,是 Claude Code <strong>原生</strong>的記憶機制。<strong>「跨對話自動記住你習慣」</strong>屬進階用法,通常要搭配<strong>記憶外掛(如 claude-mem)</strong>,不是內建。初學先會用 CLAUDE.md 就夠。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q3</span>CLAUDE.md 和 MEMORY.md 差在哪?</div><div class="faq-a"><strong>兩個都是 Claude Code 官方原生功能,差別只在「誰寫」:</strong>CLAUDE.md＝<strong>你</strong>寫的指令/規則;MEMORY.md(Auto memory)＝<strong>Claude 自己</strong>根據你的更正與偏好寫的筆記。兩者<strong>每個 session 開頭都會載入</strong>。Auto memory 需 Claude Code <code>v2.1.59+</code>,存在 <code>~/.claude/projects/&lt;project&gt;/memory/</code>。<br>衝突時官方<strong>沒有硬性優先級</strong>(都只是 context);實務上 CLAUDE.md(你明確下的規則)應勝過 MEMORY.md(Claude 的筆記),要<strong>強制</strong>則用 hook。初學先會用 CLAUDE.md 就夠。<br>(真正的第三方是 <code>claude-mem</code>,跟官方 Auto memory 無關。)</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q4</span>不同 session(對話)之間怎麼共享進度?</div><div class="faq-a"><strong>不是靠某個檔案自動同步。</strong>常見做法:叫舊 session 把進度「寫成一份交接檔(handoff)」,新 session 再讀;或把重點寫進 CLAUDE.md。</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q5</span><code>/compact</code> 是什麼?有什麼代價?</div><div class="faq-a">對話太長時,<code>/compact</code> 把對話<strong>壓縮成摘要</strong>釋放空間。代價是<strong>去脈絡化</strong>細節可能遺失。建議 context 到 ~70% 時做,或改用「寫交接檔 + 開新 session」。</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q6</span>MCP 是什麼?是各工具自己做、還是 Claude Code 做?</div><div class="faq-a">MCP 是 Anthropic 提出的<strong>協定/標準</strong>(像 AI 版的 USB-C),規定 AI 怎麼接外部工具。<strong>各家(GitHub、Figma)依這標準做自己的 MCP server</strong>所以是「各工具自己做、遵守同一套規格」。</div></div>
@@ -4133,6 +4133,7 @@ determines success?
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q10</span>中途換模型,會把前面的對話清掉嗎?</div><div class="faq-a"><strong>不會</strong>,對話內容還在。只是會讓<strong>快取(cache)失效</strong>,下一輪稍微變貴、變慢。真的要換,建議<strong>開新 session</strong> 比較乾淨。</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q11</span>Cursor 登入看到「Pro / $20」是不是會被收費?</div><div class="faq-a">那是付費方案。<strong>今天用免費就夠,不要點 Pro / Upgrade。</strong>不小心點到(要刷卡)就退回上一頁重選免費。</div></div>
       <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q12</span>我裝環境一直卡關怎麼辦?</div><div class="faq-a">先看上方<a href="#onboarding">課前準備</a>的操作小抄(90% 卡關是:視窗切換、複製帶到空格、Claude Code 只能鍵盤、<code>@</code> 引用)。再不行,<strong>直接用白話問 Claude 本人</strong>,或記下卡在哪一步問講師。</div></div>
+      <div class="faq-item r"><div class="faq-q"><span class="faq-mark">Q13</span>那不同層級的 CLAUDE.md 衝突呢?(user vs project)</div><div class="faq-a">這個跟 CLAUDE.md↔MEMORY.md 不同——CLAUDE.md <strong>各層級之間「有」明確優先順序</strong>。載入順序由廣到細:<strong>managed(企業/組織,不可被排除)→ user(<code>~/.claude/CLAUDE.md</code>)→ project(專案的 <code>CLAUDE.md</code>)→ local</strong>;愈靠近你工作目錄、愈晚載入的,優先級愈高。官方原話:「user-level rules 比 project-level 先載入,所以 <strong>project 優先級較高</strong>」。簡記:<strong>企業 &gt; 專案 &gt; 個人</strong>(企業層永遠套用、無法被蓋過)。</div></div>
     </div>
 
   </div>
