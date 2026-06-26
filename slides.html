@@ -1145,6 +1145,130 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 
 </div><!-- /#deck -->
 
+  <!-- ── S12: Demo — 三個 Agent 同一個任務 ──────────────────── -->
+  <section class="slide slide-dark" id="s12" data-slide="12">
+
+    <div class="slide-body" style="max-width:1040px; zoom:1.15;">
+
+      <p class="slide-eyebrow">Demo</p>
+      <h2 class="slide-title" style="font-size:clamp(32px,4vw,56px); white-space:nowrap;">三個 Agent，<span class="accent">同一個任務</span></h2>
+
+      <!-- Task prompt card -->
+      <div class="r" style="width:100%; margin-top:22px; background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.3); border-radius:14px; padding:18px 24px; display:flex; align-items:flex-start; gap:14px;">
+        <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-square.svg" style="width:20px;height:20px;filter:invert(1) sepia(0.4);opacity:0.8;flex-shrink:0;margin-top:2px;">
+        <p style="font-family:var(--font-sans); font-size:clamp(13px,1.15vw,17px); color:#fff; line-height:1.65;">
+          幫我上網搜尋 <strong style="color:var(--gold-bright);">SpaceX</strong> 這一個月每天的股價變化，並下載下來，放到 <strong style="color:var(--gold-bright);">CSV</strong> 中。
+          並用 <strong style="color:var(--gold-bright);">Matrix framework</strong> 呈現出來，並部署在 <strong style="color:var(--gold-bright);">localhost</strong> 上。
+        </p>
+      </div>
+
+      <!-- 3 columns -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px; width:100%;">
+
+        <!-- GUI -->
+        <div class="r" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:16px; padding:22px 20px; display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/layout-grid.svg" style="width:18px;height:18px;filter:invert(1);opacity:0.6;">
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.10em; color:rgba(255,255,255,0.45);">GUI BASED</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.6);">網路搜尋股價資訊</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.6);">摘要整理成表格</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">❌</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.35);">無法下載 CSV 到電腦</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">❌</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.35);">無法建立 Web App</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">❌</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.35);">無法部署 localhost</span>
+            </div>
+          </div>
+          <div style="margin-top:auto; padding-top:10px; border-top:1px solid rgba(255,255,255,0.07);">
+            <span style="font-family:var(--font-mono); font-size:10px; color:rgba(255,255,255,0.3);">做到一半就卡住</span>
+          </div>
+        </div>
+
+        <!-- AI IDE -->
+        <div class="r" style="background:rgba(184,144,46,0.06); border:1px solid rgba(184,144,46,0.25); border-radius:16px; padding:22px 20px; display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/monitor-cog.svg" style="width:18px;height:18px;filter:invert(1) sepia(0.4);opacity:0.8;">
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.10em; color:var(--gold);">AI IDE</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.6);">幫你寫爬蟲 + 圖表程式</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.6);">看整個專案結構</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">⚠️</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.5);">需要你自己裝套件、跑</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">⚠️</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.5);">部署步驟要手動確認</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.6);">可看 diff、逐行審核</span>
+            </div>
+          </div>
+          <div style="margin-top:auto; padding-top:10px; border-top:1px solid rgba(184,144,46,0.15);">
+            <span style="font-family:var(--font-mono); font-size:10px; color:rgba(184,144,46,0.5);">做得到，但需要配合</span>
+          </div>
+        </div>
+
+        <!-- CLI (Claude Code) — 金色完整 -->
+        <div class="r" style="background:rgba(184,144,46,0.11); border:1.5px solid rgba(184,144,46,0.50); border-radius:16px; padding:22px 20px; display:flex; flex-direction:column; gap:12px; box-shadow:0 0 28px rgba(184,144,46,0.12);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/terminal.svg" style="width:18px;height:18px;filter:invert(1) sepia(0.4);opacity:0.9;">
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.10em; color:var(--gold-bright);">CLI BASED — Claude Code</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.75);">自動上網搜尋股價</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.75);">寫程式、下載、存成 CSV</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.75);">建 Matrix framework App</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.75);">自動 pip install、跑起來</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:8px;">
+              <span style="font-size:13px;">✅</span>
+              <span style="font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.75);">部署到 localhost — 全自動</span>
+            </div>
+          </div>
+          <div style="margin-top:auto; padding-top:10px; border-top:1px solid rgba(184,144,46,0.2);">
+            <span style="font-family:var(--font-mono); font-size:10px; color:var(--gold); font-weight:700;">一句話，全部做完 ⚡</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
 <!-- ── Nav controls ── -->
 <button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
   <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-left.svg" alt="←">
