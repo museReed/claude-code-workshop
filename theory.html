@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理論篇 — Claude Code Workshop</title>
+<meta name="description" content="從 ChatGPT 到 AI Agent：Terminal、Git、prompt 指令全攻略。為非工程背景的大學生設計的理論課程。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/workshop.css">
+</head>
+<body>
+<div class="page">
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" aria-hidden="true">
+  <div class="progress-fill" id="progress-fill"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Claude Code Workshop</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="切換選單" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="index.html">首頁</a>
+      <a class="nav-link active" href="theory.html">理論篇</a>
+      <a class="nav-link" href="practice.html">實戰篇</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     T1: 為什麼要學 AI Agent（15 min）
+     ============================================================ -->
+<section class="section" id="t1">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T1 — 15 min</span>
+      <h2 class="section-title r r-d1">為什麼要學 <span class="accent">AI Agent</span></h2>
+      <p class="section-lede r r-d2">你用過 ChatGPT 嗎？大部分人都用過。但你有沒有想過，為什麼你還是得自己動手做事？</p>
+
+      <div class="mt-3 r r-d3">
+        <p class="body-text">ChatGPT 是「你問它答」—— 你得自己複製貼上、自己開檔案、自己整理。</p>
+        <p class="body-text mt-2"><strong>AI Agent 是「你說它做」—— 它直接幫你建檔案、寫內容、跑指令。</strong></p>
+      </div>
+
+      <!-- Analogy cards -->
+      <div class="card-grid-2 mt-4 r r-d3">
+        <div class="card">
+          <p class="meta mb-1">ChatGPT</p>
+          <p class="body-text">打電話問朋友怎麼組家具，朋友在電話裡講步驟，<strong>你自己動手</strong>。</p>
+        </div>
+        <div class="card" style="border: 2px solid var(--gold);">
+          <p class="meta mb-1">Claude Code</p>
+          <p class="body-text">朋友直接來你家，你說要什麼，<strong>他幫你組</strong>。</p>
+        </div>
+      </div>
+
+      <!-- Lottie animation -->
+      <div class="lottie-container lottie-concept mt-4 r r-d4" id="lottie-agent-vs-chat"></div>
+
+      <!-- 2026 callout -->
+      <div class="card-warm mt-4 r r-d4">
+        <p class="body-text"><strong>2026 年為什麼重要：</strong>AI 從「對話工具」變成「執行 Agent」。會下指令的能力，會變得跟會用 Excel 一樣基本。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     T2: Terminal 是什麼（25 min）
+     ============================================================ -->
+<section class="section-warm" id="t2">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T2 — 25 min</span>
+      <h2 class="section-title r r-d1">Terminal <span class="accent">是什麼</span></h2>
+      <p class="section-lede r r-d2">終端機是「用打字跟電腦對話的工具」。你平常用滑鼠點資料夾、開檔案 —— terminal 做的是同一件事，只是把點擊換成打字。</p>
+
+      <!-- Analogy -->
+      <div class="card-grid-2 mt-4 r r-d3">
+        <div class="card">
+          <p class="meta mb-1">圖形介面（GUI）</p>
+          <p class="body-text">像去餐廳內用 —— 看菜單、用手指點。</p>
+        </div>
+        <div class="card" style="border: 2px solid var(--gold);">
+          <p class="meta mb-1">Terminal（CLI）</p>
+          <p class="body-text">像直接打電話給廚房，用特定詞彙告訴主廚你要什麼。兩者做的事一樣，方式不同。</p>
+        </div>
+      </div>
+
+      <!-- Why engineers prefer terminal -->
+      <div class="mt-4 r r-d3">
+        <h3 style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 12px;">為什麼工程師愛用 Terminal？</h3>
+        <p class="body-text">更快、某些工具只有 terminal 版、可以自動化。而且 —— Claude Code 住在 terminal 裡。</p>
+      </div>
+
+      <!-- The $ prompt -->
+      <div class="card-warm mt-3 r r-d3">
+        <p class="body-text"><code>$</code> 符號叫做<strong>提示字元（prompt）</strong>—— 意思是 terminal 在等你打指令。</p>
+      </div>
+
+      <!-- 6 essential commands -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 20px;">6 個必學指令</h3>
+
+      <div class="card-grid-3 r r-d2">
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>pwd</code></pre>
+          <p class="body-text"><strong>我在哪？</strong><br>Print Working Directory<br>顯示你現在在電腦的哪個資料夾</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>ls</code></pre>
+          <p class="body-text"><strong>這裡有什麼？</strong><br>List<br>列出當前資料夾的內容</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>cd folder-name</code></pre>
+          <p class="body-text"><strong>進入某個資料夾</strong><br>Change Directory<br>移動到指定的資料夾</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>cd ..</code></pre>
+          <p class="body-text"><strong>回上一層</strong><br><code>..</code> 代表「上一層」</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>mkdir name</code></pre>
+          <p class="body-text"><strong>建立新資料夾</strong><br>Make Directory<br>建立一個新的資料夾</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>touch name</code></pre>
+          <p class="body-text"><strong>建立新檔案</strong><br>建立一個空白檔案</p>
+        </div>
+      </div>
+
+      <!-- Terminal mockup -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 16px;">實際操作長什麼樣</h3>
+      <pre class="terminal r r-d1"><code>$ pwd
+/Users/student/Desktop
+$ ls
+homework.pdf  photos  notes.txt
+$ cd photos
+$ pwd
+/Users/student/Desktop/photos
+$ ls
+vacation.jpg  graduation.jpg</code></pre>
+
+      <!-- Key takeaway -->
+      <div class="card-warm mt-4 r r-d2">
+        <p class="body-text">你不需要記住所有指令。只要記住：<code>pwd</code>（我在哪）、<code>ls</code>（有什麼）、<code>cd</code>（去哪裡）。其他的，問 Claude Code 就好。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     T3: Git 與 GitHub（30 min）
+     ============================================================ -->
+<section class="section" id="t3">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T3 — 30 min</span>
+      <h2 class="section-title r r-d1">Git 與 <span class="accent">GitHub</span></h2>
+      <p class="section-lede r r-d2">你有沒有存過「報告_v1.docx」「報告_v2_final.docx」「報告_v2_final_真的最終版.docx」？Git 就是解決這個問題的工具。</p>
+
+      <!-- What is Git -->
+      <div class="mt-3 r r-d3">
+        <p class="body-text"><strong>Git</strong> = Google Docs 的版本紀錄功能，但更強大。它記住每一次修改的「是什麼」「誰改的」「為什麼改」。</p>
+        <p class="body-text mt-2"><strong>GitHub</strong> = 把你的版本紀錄放上雲端，別人也能看到、協作。同時也是你的「程式作品集」。</p>
+      </div>
+
+      <!-- Only 3 commands -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 20px;">只要學 3 個指令</h3>
+
+      <div class="card-grid-3 r r-d2">
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>git add .</code></pre>
+          <p class="body-text"><strong>選取要存檔的改動</strong><br>像購物車「加入」—— 把你改過的檔案放進準備區</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>git commit -m "說明"</code></pre>
+          <p class="body-text"><strong>確認存檔，附上說明</strong><br>像「結帳」—— 正式存下這次的改動，附一句說明</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 10px;"><code>git push</code></pre>
+          <p class="body-text"><strong>推上 GitHub</strong><br>像「寄出」—— 把本地的紀錄同步到雲端</p>
+        </div>
+      </div>
+
+      <!-- Flow diagram -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 16px;">完整流程</h3>
+      <div class="flow r r-d1">
+        <span class="flow-node">改動檔案</span>
+        <span class="flow-arrow">&#8594;</span>
+        <span class="flow-node active">git add</span>
+        <span class="flow-arrow">&#8594;</span>
+        <span class="flow-node active">git commit</span>
+        <span class="flow-arrow">&#8594;</span>
+        <span class="flow-node active">git push</span>
+        <span class="flow-arrow">&#8594;</span>
+        <span class="flow-node" style="background-color: var(--navy); color: #fff;">GitHub</span>
+      </div>
+
+      <!-- Callout -->
+      <div class="card-warm mt-4 r r-d2">
+        <p class="body-text">今天的 workshop 結束時，你會把你的練習成果用這三個指令推上 GitHub，變成你的作品集。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     T4: Model → Product → Agent（20 min）
+     ============================================================ -->
+<section class="section-dark" id="t4">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T4 — 20 min</span>
+      <h2 class="section-title r r-d1">Model &rarr; Product &rarr; <span class="accent">Agent</span></h2>
+      <p class="section-lede r r-d2">AI 的世界分三層。理解這三層，你就知道 Claude Code 在哪裡、為什麼它跟 ChatGPT 不一樣。</p>
+
+      <!-- Three-tier cards -->
+      <div class="card-grid-3 mt-4 r r-d3">
+        <div class="card-dark">
+          <p class="meta mb-1" style="color: var(--ink-5);">第一層</p>
+          <h3 style="font-size: 22px; margin-bottom: 8px; color: #fff;">Model 模型</h3>
+          <p class="body-text">底層的 AI 引擎。像汽車的引擎 —— 你看不到它，但所有能力來自它。</p>
+          <p class="meta mt-2" style="color: var(--ink-5);">例：Claude Opus、GPT-4、Gemini</p>
+        </div>
+        <div class="card-dark" style="background-color: var(--navy-2);">
+          <p class="meta mb-1" style="color: var(--ink-5);">第二層</p>
+          <h3 style="font-size: 22px; margin-bottom: 8px; color: #fff;">Product 產品</h3>
+          <p class="body-text">把模型包裝成你能用的東西。像整台車 —— 有方向盤、座椅、儀表板。</p>
+          <p class="meta mt-2" style="color: var(--ink-5);">例：ChatGPT、Claude.ai、Gemini App</p>
+        </div>
+        <div class="card-dark" style="border: 2px solid var(--gold-bright);">
+          <p class="meta mb-1" style="color: var(--gold-bright);">第三層</p>
+          <h3 style="font-size: 22px; margin-bottom: 8px; color: #fff;">Agent 代理</h3>
+          <p class="body-text">產品加上「動手能力」。像自動駕駛 —— 車子自己開、自己導航、自己停車。</p>
+          <p class="meta mt-2" style="color: var(--gold-bright);">例：Claude Code、Cursor Agent、Devin</p>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 16px; color: #fff;">Product vs Agent 差異</h3>
+      <div class="r r-d1" style="overflow-x: auto;">
+        <table class="schedule">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product（如 ChatGPT）</th>
+              <th>Agent（如 Claude Code）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>位置</strong></td>
+              <td>瀏覽器</td>
+              <td>你的電腦 terminal</td>
+            </tr>
+            <tr>
+              <td><strong>能力</strong></td>
+              <td>回答問題</td>
+              <td>讀/寫檔案、跑指令</td>
+            </tr>
+            <tr>
+              <td><strong>互動</strong></td>
+              <td>你複製貼上</td>
+              <td>它直接改你的檔案</td>
+            </tr>
+            <tr>
+              <td><strong>比喻</strong></td>
+              <td>電話諮詢</td>
+              <td>到你家幫忙</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Focus callout -->
+      <div class="mt-4 r r-d2" style="background: rgba(184, 144, 46, 0.12); border-radius: var(--radius-md); padding: 28px;">
+        <p class="body-text">我們今天要學的是第三層 —— <strong style="color: var(--gold-bright);">Agent</strong>。具體來說，是 Anthropic 的 <strong style="color: var(--gold-bright);">Claude Code</strong>。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     T5: 怎麼跟 AI Agent 溝通（30 min）⭐ Most important
+     ============================================================ -->
+<section class="section" id="t5">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T5 — 30 min &#11088; 最重要</span>
+      <h2 class="section-title r r-d1">怎麼跟 AI Agent <span class="accent">溝通</span></h2>
+      <p class="section-lede r r-d2">跟 AI Agent 溝通，不是「打字聊天」。是「指揮一個很厲害但沒有 context 的新同事做事」。你給的指令越精確，它做出來的東西越接近你要的。</p>
+
+      <!-- Lottie: four stages -->
+      <div class="lottie-container lottie-concept mt-3 r r-d3" id="lottie-four-stages"></div>
+
+      <!-- Official four-stage workflow -->
+      <h3 class="mt-4 r" style="font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 24px;">官方四階段工作流</h3>
+
+      <!-- Stage 1 -->
+      <div class="accordion mt-2 r r-d1">
+        <button class="accordion-header" aria-expanded="true">Stage 1: 驗證 (Verify) — 先想好「怎麼判斷做對了」</button>
+        <div class="accordion-body" aria-hidden="false">
+          <div>
+            <p class="body-text">這是最重要的一步，Anthropic 官方放在第一條。</p>
+            <p class="body-text mt-2">你必須在開始之前就知道<strong>「成功長什麼樣」</strong>。</p>
+            <p class="body-text mt-2">例：要 Claude 整理文獻 &rarr; 驗證標準是「每篇都有作者、年份、期刊名、跟我的研究問題的關聯」。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="accordion mt-2 r r-d2">
+        <button class="accordion-header" aria-expanded="false">Stage 2: 探索 (Explore) — 先看再動手</button>
+        <div class="accordion-body" aria-hidden="true">
+          <div>
+            <p class="body-text">讓 Claude 先讀現有檔案、了解狀況，不要一上來就改。</p>
+            <p class="body-text mt-2">用 plan mode（<code>Shift + Tab</code>）讓 Claude 只看不動。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="accordion mt-2 r r-d3">
+        <button class="accordion-header" aria-expanded="false">Stage 3: 規劃 (Plan) — 列出步驟</button>
+        <div class="accordion-body" aria-hidden="true">
+          <div>
+            <p class="body-text">請 Claude 列出它打算怎麼做，你審完才讓它動手。</p>
+            <p class="body-text mt-2">「先告訴我你的計畫，不要直接做。」</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="accordion mt-2 r r-d4">
+        <button class="accordion-header" aria-expanded="false">Stage 4: 執行 (Execute) — 動手 + 驗證</button>
+        <div class="accordion-body" aria-hidden="true">
+          <div>
+            <p class="body-text">Claude 寫 code / 建檔案 / 跑指令。</p>
+            <p class="body-text mt-2">完成後用 Stage 1 定好的標準驗證。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Before / After Examples -->
+      <h3 class="mt-4 r" style="font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 24px;">指令對比：Before / After</h3>
+
+      <!-- Example 1 -->
+      <p class="meta mb-1 r">範例 1 — 學術場景</p>
+      <div class="demo r r-d1">
+        <div class="demo-bad">
+          <p class="body-text">「幫我整理文獻」</p>
+        </div>
+        <div class="demo-good">
+          <p class="body-text">「讀 references/ 資料夾裡的 5 篇 PDF。幫我建一個 literature-matrix.md，每篇列出：作者、年份、研究方法、主要發現、跟我的研究問題『AI 對管理決策的影響』的關聯。完成後確認 5 篇都有，沒有遺漏。」</p>
+        </div>
+      </div>
+
+      <!-- Example 2 -->
+      <p class="meta mb-1 mt-3 r">範例 2 — 求職場景</p>
+      <div class="demo r r-d1">
+        <div class="demo-bad">
+          <p class="body-text">「幫我改履歷」</p>
+        </div>
+        <div class="demo-good">
+          <p class="body-text">「讀 resume.md 和 job-description.txt。根據 JD 裡的關鍵要求，調整履歷的 bullet points，讓每條都對應到 JD 的某個要求。不要編造經歷。完成後列出『JD 要求 vs 履歷對應』的對照表讓我確認。」</p>
+        </div>
+      </div>
+
+      <!-- Example 3 -->
+      <p class="meta mb-1 mt-3 r">範例 3 — 生活場景</p>
+      <div class="demo r r-d1">
+        <div class="demo-bad">
+          <p class="body-text">「幫我找房子」</p>
+        </div>
+        <div class="demo-good">
+          <p class="body-text">「讀 apartments.md 裡的 8 間房源資料。幫我做一個比較表，欄位：地址、月租、通勤時間到 KCL Strand、是否含帳單、房東評價。按月租排序。」</p>
+        </div>
+      </div>
+
+      <!-- Let Claude interview you -->
+      <h3 class="mt-4 r" style="font-size: clamp(18px, 2vw, 22px); margin-bottom: 16px;">進階技巧：讓 Claude 反過來問你</h3>
+      <div class="r r-d1">
+        <p class="body-text">大型任務不知道怎麼寫指令？讓 Claude 反過來問你。</p>
+        <pre class="mt-2"><code>我想做 [簡短描述]。先詳細問我需求：
+問技術實作、邊界條件、取捨。
+問到清楚為止，然後寫一份完整 spec。</code></pre>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="card-warm mt-4 r r-d2">
+        <p class="body-text"><strong>記住這四步：驗證 &rarr; 探索 &rarr; 規劃 &rarr; 執行。</strong><br>驗證放第一步，是因為你不知道怎麼判斷對錯的話，給再多 context 也沒用。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     T6: CLAUDE.md 與 Skills（20 min）
+     ============================================================ -->
+<section class="section-warm" id="t6">
+  <div class="container">
+    <div class="text-container" style="padding:0;">
+
+      <span class="eyebrow r">T6 — 20 min</span>
+      <h2 class="section-title r r-d1">CLAUDE.md 與 <span class="accent">Skills</span></h2>
+      <p class="section-lede r r-d2">讓 Claude Code 每次開工都記得你的偏好和規則。</p>
+
+      <!-- CLAUDE.md -->
+      <h3 class="mt-4 r" style="font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 16px;">CLAUDE.md = 給 AI 的 Onboarding 手冊</h3>
+
+      <div class="card-grid-2 r r-d1">
+        <div class="card">
+          <p class="meta mb-1">你的經驗</p>
+          <p class="body-text">你新進一家公司，第一天會拿到員工手冊：公司規定、做事流程、注意事項。</p>
+        </div>
+        <div class="card" style="border: 2px solid var(--gold);">
+          <p class="meta mb-1">CLAUDE.md</p>
+          <p class="body-text">Claude Code 的員工手冊 —— 它每次開始工作前都會讀。你的偏好、規則、禁忌，全寫在這裡。</p>
+        </div>
+      </div>
+
+      <h4 class="mt-3 r" style="font-size: 17px; margin-bottom: 12px;">範例 CLAUDE.md</h4>
+      <pre class="r r-d1"><code># 我的專案
+
+## 關於我
+我是 KCL Technology Management 碩士生，研究 AI 對管理決策的影響。
+
+## 規則
+- 用繁體中文回答
+- 學術內容必須附出處，不可以編造引用
+- 檔案命名用英文小寫加連字號（如 literature-review.md）
+
+## 不要做的事
+- 不要幫我寫 critical analysis 的核心論點
+- 不要編造不存在的文獻</code></pre>
+
+      <!-- Skills -->
+      <h3 class="mt-4 r" style="font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 16px;">Skills = 可重複使用的指令模板</h3>
+
+      <div class="r r-d1">
+        <p class="body-text">你每天早上到公司都會做同一套動作（開信箱、看行事曆、泡咖啡）。Skill 就是把這套動作寫成一個「一鍵執行」的模板。</p>
+      </div>
+
+      <h4 class="mt-3 r" style="font-size: 17px; margin-bottom: 16px;">今天會安裝的 4 個 Skills</h4>
+
+      <div class="card-grid-2 r r-d2">
+        <div class="card">
+          <pre style="margin-bottom: 8px;"><code>HUD</code></pre>
+          <p class="body-text">狀態列，顯示 Claude Code 現在在幹嘛。像車子的儀表板。</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 8px;"><code>auto-rename</code></pre>
+          <p class="body-text">自動幫對話取名字，之後好找。</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 8px;"><code>structured-question</code></pre>
+          <p class="body-text">Claude 要問你問題時，用選項而不是散文（更好回答）。</p>
+        </div>
+        <div class="card">
+          <pre style="margin-bottom: 8px;"><code>handoff</code></pre>
+          <p class="body-text">工作到一半要交接時，自動產生交接文件。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="section-dark" style="padding: clamp(40px, 6vh, 64px) 0;">
+  <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px;">
+    <div>
+      <p style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 6px;">Claude Code Workshop</p>
+      <p class="meta" style="color: rgba(255,255,255,0.64);">為 King's College London 科技管理碩士課程設計</p>
+    </div>
+    <div style="text-align: right;">
+      <a href="practice.html" class="btn-gold">下一步：實戰篇 &rarr;</a>
+    </div>
+  </div>
+  <div class="container mt-3">
+    <p class="meta" style="color: rgba(255,255,255,0.4);">
+      <a href="https://github.com/museReed/claude-code-workshop" target="_blank" rel="noopener" style="color: rgba(255,255,255,0.5);">museReed / claude-code-workshop</a> &middot; Vol. 1 &middot; Summer 2026
+    </p>
+  </div>
+</footer>
+
+</div><!-- .page -->
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── Lottie Init ──────────────────────────────────────── */
+  function initLottie(containerId, path) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    try {
+      lottie.loadAnimation({
+        container: el,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: path
+      });
+    } catch (e) {
+      // graceful degradation if animation file missing
+    }
+  }
+
+  initLottie('lottie-agent-vs-chat', 'assets/lottie/agent-vs-chat.json');
+  initLottie('lottie-four-stages', 'assets/lottie/four-stages.json');
+
+
+  /* ── Nav Toggle (mobile) ──────────────────────────────── */
+  var navToggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('open');
+    });
+  }
+
+
+  /* ── Scroll Reveal ────────────────────────────────────── */
+  var reveals = document.querySelectorAll('.r');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(function (el) { observer.observe(el); });
+  } else {
+    // Fallback: show everything
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+
+  /* ── Progress Bar ─────────────────────────────────────── */
+  var progressFill = document.getElementById('progress-fill');
+
+  if (progressFill) {
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressFill.style.width = Math.min(pct, 100) + '%';
+    }, { passive: true });
+  }
+
+
+  /* ── Accordion Toggle ─────────────────────────────────── */
+  var headers = document.querySelectorAll('.accordion-header');
+
+  headers.forEach(function (header) {
+    header.addEventListener('click', function () {
+      var expanded = header.getAttribute('aria-expanded') === 'true';
+      var body = header.nextElementSibling;
+
+      // Toggle this accordion
+      header.setAttribute('aria-expanded', String(!expanded));
+      if (body) {
+        body.setAttribute('aria-hidden', String(expanded));
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

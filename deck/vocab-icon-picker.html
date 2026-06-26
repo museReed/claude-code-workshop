@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>詞彙 Icon 候選挑選 · 跨素材庫(tag 索引比對)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#0E1A2F; --gold:#B8902E; --gold-bright:#D4AD2B; --cream:#FBFBFD; --card:#fff; --ink:#16202e; --ink-2:#4a5568; --ink-3:#8a93a0; --line:#e8e7e3; --gold-tint:rgba(184,144,46,.10); }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"DM Sans","Noto Serif TC",sans-serif; padding:40px 26px 130px; }
+  .wrap{ max-width:1180px; margin:0 auto; }
+  .eyebrow{ font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+  h1{ font-family:"Cormorant Garamond","Noto Serif TC",serif; font-size:42px; font-weight:700; margin:.16em 0 .1em; }
+  .sub{ color:var(--ink-2); font-size:15px; line-height:1.6; max-width:50em; }
+  .note{ font-size:13px; color:var(--ink-2); background:var(--gold-tint); border:1px solid rgba(184,144,46,.25); border-radius:10px; padding:11px 15px; margin:14px 0 24px; }
+  .term-block{ border:1px solid var(--line); border-radius:16px; background:var(--card); padding:18px 20px; margin-bottom:16px; }
+  .term-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .term-name{ font-family:"JetBrains Mono",monospace; font-size:17px; font-weight:700; }
+  .term-def{ font-size:13px; color:var(--ink-2); }
+  .lib-row{ display:flex; align-items:center; gap:10px; padding:8px 0; border-top:1px dashed var(--line); flex-wrap:wrap; }
+  .lib-tag{ font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:700; width:78px; flex-shrink:0; padding:3px 0; }
+  .lib-lucide{ color:#0E7C66; } .lib-tabler{ color:#2b6cb0; } .lib-material{ color:#b04a3a; } .lib-phosphor{ color:#7a4fb0; }
+  .cand{ display:inline-flex; flex-direction:column; align-items:center; gap:5px; width:104px; padding:10px 6px; border:1.5px solid var(--line); border-radius:11px; cursor:pointer; transition:all .12s; background:#fff; }
+  .cand:hover{ border-color:var(--gold); }
+  .cand.sel{ border-color:var(--gold); background:var(--gold-tint); box-shadow:0 0 0 3px rgba(184,144,46,.15); }
+  .cand img{ width:32px; height:32px; }
+  .cand .slug{ font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink); text-align:center; line-height:1.2; word-break:break-all; }
+  .brand-sec{ border:1px solid var(--line); border-radius:16px; background:var(--card); padding:18px 20px; margin-top:8px; }
+  .brand-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; }
+  .brand{ display:flex; flex-direction:column; align-items:center; gap:6px; width:96px; }
+  .brand img{ width:38px; height:38px; }
+  .brand span{ font-size:12px; color:var(--ink-2); }
+  .bar{ position:fixed; left:0; right:0; bottom:0; background:var(--navy); color:#fff; padding:13px 22px; display:flex; gap:12px; align-items:center; z-index:10; }
+  .bar textarea{ flex:1; height:42px; resize:none; font-family:"JetBrains Mono",monospace; font-size:11.5px; border-radius:8px; border:none; padding:7px 10px; }
+  .bar button{ font-weight:700; font-size:13px; background:var(--gold); color:var(--navy); border:none; padding:10px 16px; border-radius:100px; cursor:pointer; white-space:nowrap; }
+  .bar .lbl{ font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--gold-bright); white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">● 詞彙 Icon 候選 · 跨素材庫(用官方 tag 索引比對)</div>
+  <h1>每個詞挑 <span style="color:var(--gold)">一個你最喜歡的 icon</span>(可跨庫混搭)</h1>
+  <p class="sub">候選是用 <strong>Lucide / Tabler / Material Symbols / Phosphor 各自的官方 tag 索引</strong>對每個概念做關鍵字比對挑出來的(Heroicons 無 tag 層,已放棄)。每列一個庫,點你喜歡的;底部即時生成「我的選擇」清單,複製貼回給我定稿。</p>
+  <div class="note">⚙️ icon 原色 on 淺底,只為比線條;正式套金色 + inline 離線化。庫顏色標籤:<span class="lib-lucide">Lucide</span>(ISC)· <span class="lib-tabler">Tabler</span>(MIT)· <span class="lib-material">Material</span>(Apache)· <span class="lib-phosphor">Phosphor</span>(MIT)。預設選每詞的 Lucide 第一個,可改。</div>
+  <div id="list"></div>
+
+  <div class="brand-sec">
+    <div class="term-head"><span class="term-name" style="color:#444">Simple Icons</span><span class="term-def">CC0 · 品牌 logo(沒有概念 tag,用品牌名比對)給「平台/三層架構」放真 logo 用,不屬上面 11 個概念。</span></div>
+    <div class="brand-row" id="brands"></div>
+    <p style="font-size:12px;color:var(--ink-3);margin:10px 0 0;">⚠️ VS Code、ChatGPT 的 logo 近期因商標已從 Simple Icons 下架(404),需另尋。</p>
+  </div>
+</div>
+
+<div class="bar">
+  <span class="lbl">我的選擇 →</span>
+  <textarea id="out" readonly></textarea>
+  <button onclick="copyOut()">複製</button>
+</div>
+
+<script>
+const URL={
+  lucide:s=>`https://cdn.jsdelivr.net/npm/lucide-static/icons/${s}.svg`,
+  tabler:s=>`https://cdn.jsdelivr.net/npm/@tabler/icons/icons/outline/${s}.svg`,
+  material:s=>`https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/${s}.svg`,
+  phosphor:s=>`https://cdn.jsdelivr.net/npm/@phosphor-icons/core/assets/regular/${s}.svg`,
+};
+const LIBS=["lucide","tabler","material","phosphor"];
+const DATA=[
+ ["LLM","會讀懂你的話、生出文字的 AI 大腦",{lucide:["brain-circuit","brain","cpu"],tabler:["brain","cpu"],material:["psychology","developer_board"],phosphor:["brain","cpu","circuitry"]}],
+ ["Generative AI","會「生出」新東西的 AI 總稱",{lucide:["sparkles","wand-sparkles"],tabler:["sparkles","wand"],material:["auto_awesome","stars"],phosphor:["magic-wand","sparkle"]}],
+ ["Prompt","你打給 AI 的那段話、那個指令",{lucide:["message-square-text","square-terminal"],tabler:["message","terminal-2"],material:["chat_bubble","chat"],phosphor:["chat","chat-text"]}],
+ ["Token","計算與收費的最小單位",{lucide:["coins","hash"],tabler:["coins","currency-dollar"],material:["token","paid"],phosphor:["coins","coin"]}],
+ ["Context Window","一次能同時記得的內容上限",{lucide:["layout-panel-top","square-stack"],tabler:["layout-grid","stack-2"],material:["window","tab"],phosphor:["app-window","layout"]}],
+ ["Tool","讓 AI 能動手的外掛能力",{lucide:["wrench","cog"],tabler:["tool","hammer"],material:["build","handyman"],phosphor:["wrench","screwdriver"]}],
+ ["MCP","接上外部工具的萬用插座標準",{lucide:["plug","cable"],tabler:["plug-connected","usb"],material:["cable","power_input"],phosphor:["plug","plugs-connected"]}],
+ ["RAG","先查資料再回答",{lucide:["book-search","database"],tabler:["database-search","book"],material:["find_in_page","manage_search"],phosphor:["magnifying-glass","book"]}],
+ ["Agentic AI","自己規劃、動手、修正的設計思路",{lucide:["workflow","refresh-cw"],tabler:["route","repeat"],material:["account_tree","autorenew"],phosphor:["flow-arrow","git-branch"]}],
+ ["AI Agent","把自主能力做成的實際程式",{lucide:["bot","bot-message-square"],tabler:["robot","robot-face"],material:["smart_toy","precision_manufacturing"],phosphor:["robot","android-logo"]}],
+ ["Hallucination","一本正經地編造不存在的事實",{lucide:["triangle-alert","ghost"],tabler:["alert-triangle"],material:["warning","crisis_alert"],phosphor:["warning","ghost"]}],
+];
+const BRANDS=[["claude","Claude"],["cursor","Cursor"],["github","GitHub"],["obsidian","Obsidian"],["googlegemini","Gemini"]];
+const sel={};
+const list=document.getElementById("list");
+DATA.forEach(([term,def,cands])=>{
+  const blk=document.createElement("div"); blk.className="term-block";
+  blk.innerHTML=`<div class="term-head"><span class="term-name">${term}</span><span class="term-def">${def}</span></div>`;
+  LIBS.forEach(lib=>{
+    const slugs=cands[lib]||[]; if(!slugs.length) return;
+    const row=document.createElement("div"); row.className="lib-row";
+    row.innerHTML=`<span class="lib-tag lib-${lib}">${lib}</span>`;
+    slugs.forEach(s=>{
+      const key=lib+":"+s;
+      if(!sel[term] && lib==="lucide") sel[term]=key; // default first lucide
+      const c=document.createElement("div"); c.className="cand"+(sel[term]===key?" sel":""); c.dataset.term=term; c.dataset.key=key;
+      c.innerHTML=`<img src="${URL[lib](s)}" alt="${s}"><span class="slug">${s}</span>`;
+      c.onclick=()=>{ sel[term]=key; blk.querySelectorAll(".cand").forEach(x=>x.classList.remove("sel")); c.classList.add("sel"); upd(); };
+      row.appendChild(c);
+    });
+    blk.appendChild(row);
+  });
+  list.appendChild(blk);
+});
+const brandsEl=document.getElementById("brands");
+BRANDS.forEach(([slug,label])=>{
+  const b=document.createElement("div"); b.className="brand";
+  b.innerHTML=`<img src="https://cdn.simpleicons.org/${slug}" alt="${label}"><span>${label}</span>`;
+  brandsEl.appendChild(b);
+});
+function upd(){ document.getElementById("out").value=DATA.map(([t])=>`${t} = ${sel[t]}`).join("  |  "); }
+function copyOut(){ const o=document.getElementById("out"); o.select(); document.execCommand("copy"); }
+upd();
+</script>
+</body>
+</html>

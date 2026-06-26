@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>實戰篇：動手做 — Claude Code 工作坊</title>
+  <meta name="description" content="3 小時實戰：從零搭建 Claude Code 環境，完成真實場景練習，把成果推上 GitHub。">
+  <meta name="author" content="Claude Code Workshop">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="實戰篇：動手做 — Claude Code 工作坊">
+  <meta property="og:description" content="3 小時實戰：從零搭建 Claude Code 環境，完成真實場景練習，把成果推上 GitHub。">
+  <meta property="og:locale" content="zh_TW">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="實戰篇：動手做 — Claude Code 工作坊">
+  <meta name="twitter:description" content="3 小時實戰練習：環境搭建、Skills 設定、學術與生活場景實作">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F916;</text></svg>">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="assets/css/workshop.css">
+
+  <!-- Lottie Web -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============================================ -->
+    <!-- Nav                                          -->
+    <!-- ============================================ -->
+    <nav class="nav" id="main-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Claude Code Workshop</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+          <a href="index.html" class="nav-link">首頁</a>
+          <a href="theory.html" class="nav-link">理論篇</a>
+          <a href="practice.html" class="nav-link" aria-current="page">實戰篇</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- Hero                                         -->
+    <!-- ============================================ -->
+    <header class="section hero" id="hero">
+      <div class="container text-container text-center">
+        <h1 class="hero-title r">實戰篇：動手做</h1>
+        <p class="section-lede r r-d1">接下來 3 小時，你會從零搭建一個 Claude Code 環境，完成真實場景的練習，最後把成果推上 GitHub。</p>
+      </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- P1: 環境安裝（40 min）                        -->
+    <!-- ============================================ -->
+    <section class="section" id="p1-install">
+      <div class="container">
+        <p class="eyebrow r">P1 &mdash; 40 min</p>
+        <h2 class="section-title r">環境安裝</h2>
+        <p class="section-lede r r-d1">跟著下面 6 步走，裝好你的 Claude Code 開發環境。</p>
+
+        <div class="lottie-container lottie-concept r r-d2" id="lottie-install" aria-hidden="true"></div>
+
+        <div class="text-container">
+          <ul class="checklist" id="install-checklist">
+
+            <!-- Step 1 -->
+            <li class="checklist-item r">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 1：安裝 Cursor IDE</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text"><strong>What：</strong>Cursor 是一個內建 AI 功能的程式編輯器（像 Word，但是給程式碼用的）。</p>
+                  <p class="body-text"><strong>How：</strong>到 <a href="https://www.cursor.com/" target="_blank" rel="noopener">cursor.com</a> 下載，拖進應用程式資料夾。</p>
+                  <p class="body-text"><strong>Verify：</strong>打開 Cursor，看到歡迎畫面就成功了。</p>
+                </div>
+              </div>
+            </li>
+
+            <!-- Step 2 -->
+            <li class="checklist-item r r-d1">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 2：安裝 Node.js</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text"><strong>What：</strong>Node.js 是讓 Claude Code 能跑起來的基礎環境（像電要先通才能開燈）。</p>
+                  <p class="body-text"><strong>How：</strong>打開 Cursor 的 terminal（快捷鍵：<code>Ctrl+`</code>），輸入：</p>
+                  <pre class="terminal">curl -fsSL https://fnm.vercel.app/install | bash</pre>
+                  <p class="body-text">然後<strong>重新開 terminal</strong>，輸入：</p>
+                  <pre class="terminal">fnm install --lts</pre>
+                  <p class="body-text"><strong>Verify：</strong>輸入 <code>node --version</code>，看到版本號就成功了。</p>
+                </div>
+              </div>
+            </li>
+
+            <!-- Step 3 -->
+            <li class="checklist-item r r-d2">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 3：安裝 Claude Code</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text"><strong>How：</strong>在 terminal 輸入：</p>
+                  <pre class="terminal">curl -fsSL https://claude.ai/install.sh | bash</pre>
+                  <p class="body-text"><strong>Verify：</strong>輸入 <code>claude --version</code>，看到版本號就成功了。</p>
+                </div>
+              </div>
+            </li>
+
+            <!-- Step 4 -->
+            <li class="checklist-item r r-d3">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 4：設定 API Key</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text"><strong>What：</strong>API Key 是你的「通行證」，讓 Claude Code 知道你是誰。</p>
+                  <p class="body-text"><strong>How：</strong></p>
+                  <ol class="body-text">
+                    <li>到 <a href="https://console.anthropic.com/" target="_blank" rel="noopener">console.anthropic.com</a> 註冊／登入</li>
+                    <li>建立一個 API Key</li>
+                    <li>在 terminal 輸入 <code>claude</code> 啟動，第一次會問你登入方式</li>
+                    <li>選擇 API Key，貼上你的 key</li>
+                  </ol>
+                  <div class="card card-warm">
+                    <p class="body-text"><strong>API Key 要保密！</strong>不要截圖分享、不要貼到聊天群組。就像你的銀行密碼一樣。</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Step 5 -->
+            <li class="checklist-item r r-d4">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 5：第一次啟動</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text"><strong>How：</strong>建立一個練習資料夾：</p>
+                  <pre class="terminal">mkdir ~/workshop && cd ~/workshop
+claude</pre>
+                  <p class="body-text">看到 Claude Code 的歡迎訊息就成功了！</p>
+                </div>
+              </div>
+            </li>
+
+            <!-- Step 6 -->
+            <li class="checklist-item r r-d4">
+              <div class="accordion">
+                <button class="accordion-header" aria-expanded="false">
+                  <span>Step 6：基本設定</span>
+                </button>
+                <div class="accordion-body">
+                  <p class="body-text">輸入 <code>/model</code> 選擇模型（建議用 Sonnet，便宜又快）。</p>
+                  <p class="body-text">輸入 <code>/permissions</code> 了解權限設定。</p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- Troubleshooting -->
+          <div class="card card-warm r">
+            <h3>卡住了？</h3>
+            <ul class="body-text">
+              <li><strong>卡在 Node.js 安裝？</strong> &rarr; 試試直接到 <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a> 下載安裝檔。</li>
+              <li><strong>Claude Code 安裝失敗？</strong> &rarr; 確認 terminal 有網路連線，試 <code>ping google.com</code>。</li>
+              <li><strong>API Key 不 work？</strong> &rarr; 確認 key 沒有多餘的空白，重新複製貼上一次。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P2: 第一次對話（15 min）                      -->
+    <!-- ============================================ -->
+    <section class="section section-warm" id="p2-first-chat">
+      <div class="container">
+        <p class="eyebrow r">P2 &mdash; 15 min</p>
+        <h2 class="section-title r">第一次對話</h2>
+        <p class="section-lede r r-d1">確認環境能跑，感受 Agent 跟 ChatGPT 的差別。</p>
+
+        <div class="text-container">
+          <ol class="body-text r r-d2">
+            <li>確認你在 <code>~/workshop</code> 資料夾</li>
+            <li>跟 Claude Code 說：
+              <pre class="terminal">你好，請幫我建立一個 hello.md 檔案，內容寫上我的名字和今天的日期</pre>
+            </li>
+            <li>觀察 Claude Code 做了什麼 &mdash; 它會讀你的指令、建立檔案、告訴你它做了什麼</li>
+            <li>打開 Cursor 的檔案瀏覽器，確認 <code>hello.md</code> 出現了</li>
+          </ol>
+
+          <div class="card card-warm r r-d3">
+            <h3>Key Learning</h3>
+            <p class="body-text">注意！你沒有寫任何程式碼。你只是用中文說了你要什麼，Claude Code 就幫你做了。這就是 Agent 跟 ChatGPT 的差別。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P3: 安裝 4 個 Skill（20 min）                 -->
+    <!-- ============================================ -->
+    <section class="section" id="p3-skills">
+      <div class="container">
+        <p class="eyebrow r">P3 &mdash; 20 min</p>
+        <h2 class="section-title r">安裝 4 個 Skill</h2>
+        <p class="section-lede r r-d1">Skills 是 Claude Code 的「外掛」，讓它多學一些本領。</p>
+
+        <div class="card-grid card-grid-2">
+
+          <!-- Skill 1: HUD -->
+          <article class="card r r-d1">
+            <h3>Skill 1：HUD（狀態列）</h3>
+            <p class="body-text">安裝指令：</p>
+            <pre class="terminal">claude plugin add claude-hud</pre>
+            <p class="body-text">安裝後輸入 <code>/claude-hud:setup</code> 設定。</p>
+            <p class="body-text"><strong>效果：</strong>terminal 底部會出現一個狀態列，顯示 model、token 用量、session 名稱。</p>
+          </article>
+
+          <!-- Skill 2: auto-rename -->
+          <article class="card r r-d2">
+            <h3>Skill 2：auto-rename</h3>
+            <p class="body-text">已內建，不需安裝。</p>
+            <p class="body-text"><strong>功能：</strong>每次對話結束會自動取一個有意義的名字。</p>
+            <p class="body-text"><strong>Demo：</strong>開一個新對話，做點事情，然後看 session 名稱自動更新。</p>
+          </article>
+
+          <!-- Skill 3: structured-question -->
+          <article class="card r r-d3">
+            <h3>Skill 3：structured-question</h3>
+            <p class="body-text">Claude 要問你問題時，會列出選項讓你選，不用自己打字回答。</p>
+            <p class="body-text">已內建 skill，在 <code>CLAUDE.md</code> 裡啟用 &mdash; 加上：</p>
+            <pre class="terminal">## 溝通方式
+- 遇到需要我做決定的時候，用 structured-question 技能列出選項讓我選</pre>
+          </article>
+
+          <!-- Skill 4: handoff -->
+          <article class="card r r-d4">
+            <h3>Skill 4：handoff（交接）</h3>
+            <p class="body-text">工作做到一半要結束 session 時，自動產生交接文件，下次開新 session 可以接著做。</p>
+            <p class="body-text">已內建 skill。</p>
+            <p class="body-text"><strong>Demo：</strong>在對話中輸入 <code>/handoff</code>，看它產生什麼。</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P4: 寫你的 CLAUDE.md（20 min）                -->
+    <!-- ============================================ -->
+    <section class="section section-dark" id="p4-claudemd">
+      <div class="container">
+        <p class="eyebrow r">P4 &mdash; 20 min</p>
+        <h2 class="section-title r">寫你的 CLAUDE.md</h2>
+        <p class="section-lede r r-d1">現在你要寫自己的 CLAUDE.md &mdash; 給 Claude Code 的「員工手冊」。</p>
+
+        <div class="text-container">
+          <ol class="body-text r r-d2">
+            <li>在 Claude Code 裡說：「請幫我建立一個 CLAUDE.md 檔案」</li>
+            <li>Claude 會問你一些問題（用 structured-question！）</li>
+            <li>或者，直接用下面的模板開始：</li>
+          </ol>
+
+          <pre class="terminal r r-d3"># [你的專案名稱]
+
+## 關於我
+[你是誰？什麼科系？研究什麼？]
+
+## 語言
+- 用繁體中文回答
+- 技術名詞保留英文
+
+## 規則
+- [你的特定規則，例如：學術內容必須附出處]
+- [例如：不要編造引用或數據]
+
+## 偏好
+- [你喜歡怎麼收到回覆？簡短 or 詳細？]
+- [你的檔案命名習慣？]</pre>
+
+          <div class="card card-warm r r-d4">
+            <h3>練習</h3>
+            <p class="body-text">花 10 分鐘填寫你自己的版本，然後用 Claude Code 幫你 polish。<code>CLAUDE.md</code> 會越用越好 &mdash; 它是你跟 AI 之間的長期默契。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P5: 情境練習 — 學術場景（30 min）              -->
+    <!-- ============================================ -->
+    <section class="section" id="p5-academic">
+      <div class="container">
+        <p class="eyebrow r">P5 &mdash; 30 min</p>
+        <h2 class="section-title r">情境練習：學術場景</h2>
+        <p class="section-lede r r-d1">選一個你有興趣的學術任務，用 Claude Code 完成它。</p>
+
+        <div class="card-grid card-grid-2">
+
+          <!-- Option A -->
+          <article class="card r r-d2">
+            <p class="eyebrow accent">Option A</p>
+            <h3>文獻整理矩陣</h3>
+            <p class="body-text">建立一個 <code>literature-matrix.md</code>。</p>
+            <p class="body-text"><strong>Prompt 範例：</strong></p>
+            <pre class="terminal">幫我建立一個文獻整理矩陣 literature-matrix.md。我的研究主題是 [你的主題]。矩陣的欄位：作者/年份、研究方法、主要發現、跟我研究的關聯、我的評論。先建好表格結構，我會自己填入資料。</pre>
+          </article>
+
+          <!-- Option B -->
+          <article class="card r r-d3">
+            <p class="eyebrow accent">Option B</p>
+            <h3>論文大綱</h3>
+            <p class="body-text">建立 <code>dissertation-outline.md</code>。</p>
+            <p class="body-text"><strong>Prompt 範例：</strong></p>
+            <pre class="terminal">幫我建立一份論文大綱 dissertation-outline.md。我的題目是 [你的題目]。列出建議的章節結構（Introduction、Literature Review、Methodology、Findings、Discussion、Conclusion），每個章節下列出 3-5 個你建議討論的子題。這是建議，我會自己修改。</pre>
+          </article>
+
+        </div>
+
+        <div class="text-container">
+          <div class="card card-warm r r-d4">
+            <h3>Academic Integrity 學術誠信</h3>
+            <p class="body-text">Claude 可以幫你建表格結構和論文大綱，但<strong>不可以幫你寫 critical analysis</strong>。表格裡的「我的評論」欄位，你必須自己填。</p>
+            <p class="body-text">Claude 建議的結構是起點，不是終點。你必須根據你自己的研究問題和導師的指導來調整。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P6: 情境練習 — 生活/職涯場景（30 min）         -->
+    <!-- ============================================ -->
+    <section class="section section-warm" id="p6-life">
+      <div class="container">
+        <p class="eyebrow r">P6 &mdash; 30 min</p>
+        <h2 class="section-title r">情境練習：生活／職涯場景</h2>
+        <p class="section-lede r r-d1">選一個跟你生活相關的任務來練習。</p>
+
+        <div class="card-grid card-grid-2">
+
+          <!-- Option A -->
+          <article class="card r r-d2">
+            <p class="eyebrow accent">Option A</p>
+            <h3>倫敦租屋比較表</h3>
+            <p class="body-text">建立 <code>housing-comparison.md</code>。</p>
+            <p class="body-text"><strong>Prompt 範例：</strong></p>
+            <pre class="terminal">幫我建一個租屋比較表 housing-comparison.md。我在看以下幾間房：[描述 3-5 間房的資訊]。欄位：地址、月租（&pound;）、含/不含 bills、距離 KCL Strand 通勤時間、房型、優點、缺點。按月租排序。</pre>
+          </article>
+
+          <!-- Option B -->
+          <article class="card r r-d3">
+            <p class="eyebrow accent">Option B</p>
+            <h3>履歷客製化</h3>
+            <p class="body-text">建立 <code>tailored-resume.md</code>。</p>
+            <p class="body-text"><strong>Prompt 範例：</strong></p>
+            <pre class="terminal">讀 resume.md 和 job-description.txt。根據 JD 裡要求的技能和經驗，調整我的履歷 bullet points，讓每條都盡量對應到 JD 的要求。不要編造經歷。完成後做一個「覆蓋率表」列出：JD 要求 &rarr; 我的對應經歷 &rarr; 匹配程度（高/中/低）。</pre>
+          </article>
+
+        </div>
+
+        <div class="text-container">
+          <div class="card card-warm r r-d4">
+            <h3>提醒</h3>
+            <p class="body-text">不要讓 Claude 編造你沒有的經歷或技能。它可以幫你重新措辭，但內容必須是真的。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P7: 推上 GitHub（15 min）                     -->
+    <!-- ============================================ -->
+    <section class="section section-dark" id="p7-github">
+      <div class="container">
+        <p class="eyebrow r">P7 &mdash; 15 min</p>
+        <h2 class="section-title r">推上 GitHub</h2>
+        <p class="section-lede r r-d1">把今天的成果上架到你的 GitHub，變成你的「AI 技能證明」。</p>
+
+        <div class="text-container">
+          <ol class="body-text r r-d2">
+            <li>在 terminal 確認你在 <code>~/workshop</code> 資料夾</li>
+            <li>初始化 git repo：
+              <pre class="terminal">git init
+git add .
+git commit -m "My first Claude Code workshop output"</pre>
+            </li>
+            <li>在 GitHub 建立一個新 repo（名字建議：<code>claude-code-workshop-output</code>）</li>
+            <li>連結並推上去：
+              <pre class="terminal">git remote add origin https://github.com/YOUR_USERNAME/claude-code-workshop-output.git
+git push -u origin main</pre>
+            </li>
+            <li>打開 GitHub 確認你的檔案出現了</li>
+          </ol>
+
+          <div class="card card-warm r r-d3">
+            <p class="body-text">恭喜！你現在有了一個 GitHub 上的作品。這是你的「AI 技能證明」&mdash; 未來面試時可以分享。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- P8: 離開後怎麼繼續（10 min）                   -->
+    <!-- ============================================ -->
+    <section class="section" id="p8-next">
+      <div class="container">
+        <p class="eyebrow r">P8 &mdash; 10 min</p>
+        <h2 class="section-title r">離開後怎麼繼續</h2>
+        <p class="section-lede r r-d1">工作坊結束不是終點，而是起點。</p>
+
+        <!-- 費用說明 -->
+        <div class="text-container">
+          <h3 class="r r-d1">費用說明</h3>
+          <ul class="body-text r r-d2">
+            <li>Claude Code 本身<strong>免費</strong></li>
+            <li>需要 Anthropic API credit（用多少付多少）</li>
+            <li>Sonnet 模型最實惠：一般使用約 <strong>$5&ndash;10/月</strong></li>
+            <li>也可以用 Claude Pro 訂閱（<strong>$20/月</strong>）</li>
+          </ul>
+        </div>
+
+        <!-- 自學路線 -->
+        <div class="card-grid card-grid-2">
+          <article class="card r r-d2">
+            <h3>claude2code.com</h3>
+            <p class="body-text">完整的中文自學課程，從零到進階，14 章。</p>
+            <p class="body-text"><a href="https://claude2code.com/" target="_blank" rel="noopener">前往 claude2code.com &rarr;</a></p>
+          </article>
+          <article class="card r r-d3">
+            <h3>官方文件</h3>
+            <p class="body-text"><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">code.claude.com/docs</a> &mdash; 英文，但最權威。</p>
+          </article>
+        </div>
+
+        <!-- Handoff demo -->
+        <div class="text-container">
+          <h3 class="r r-d3">Handoff 交接 Demo</h3>
+          <ol class="body-text r r-d3">
+            <li>在 Claude Code 裡輸入 <code>/handoff</code></li>
+            <li>看它產生的交接文件</li>
+            <li>下次開新 session 時，用 <code>Read docs/handoff/xxx.md</code> 讀取，就能接著做</li>
+          </ol>
+        </div>
+
+        <!-- Keep going -->
+        <div class="text-container">
+          <div class="card card-warm r r-d4">
+            <h3>Keep Going</h3>
+            <ul class="body-text">
+              <li>每天用 Claude Code 做一件小事（整理筆記、比較選項、建模板）</li>
+              <li>累積你的 <code>CLAUDE.md</code> &mdash; 它會越來越懂你</li>
+              <li>有問題？查官方文件或 <a href="https://claude2code.com/" target="_blank" rel="noopener">claude2code.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- Footer                                       -->
+    <!-- ============================================ -->
+    <footer class="section footer">
+      <div class="container text-center">
+        <div class="r">
+          <a href="theory.html" class="btn btn-outline">&larr; 回到理論篇</a>
+        </div>
+        <p class="meta mt-2">Claude Code Workshop &mdash; 2026</p>
+        <nav class="footer-links">
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub Repo</a>
+          <a href="https://claude2code.com/" target="_blank" rel="noopener">claude2code.com（延伸學習）</a>
+          <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Anthropic 官方文件</a>
+        </nav>
+        <p class="meta mt-2">
+          <small>學術誠信聲明：本工作坊鼓勵學生在學習過程中善用 AI 工具，但所有課堂作業與學術報告仍需遵守各校學術誠信規範。AI 是輔助工具，不是替代思考的捷徑。</small>
+        </p>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
+
+  <!-- Inline JS -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ─── Nav Mobile Toggle ───────────────────────
+      var toggle = document.getElementById('nav-toggle');
+      var links = document.getElementById('nav-links');
+
+      if (toggle && links) {
+        toggle.addEventListener('click', function () {
+          var expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.classList.toggle('open');
+          toggle.classList.toggle('active');
+        });
+
+        links.querySelectorAll('.nav-link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            links.classList.remove('open');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // ─── Scroll Reveal Observer ──────────────────
+      var revealEls = document.querySelectorAll('.r');
+
+      if ('IntersectionObserver' in window && revealEls.length > 0) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        revealEls.forEach(function (el) {
+          observer.observe(el);
+        });
+      } else {
+        revealEls.forEach(function (el) {
+          el.classList.add('revealed');
+        });
+      }
+
+      // ─── Lottie Install Animation ────────────────
+      function initLottie() {
+        if (typeof lottie === 'undefined') return;
+
+        var installContainer = document.getElementById('lottie-install');
+        if (installContainer) {
+          lottie.loadAnimation({
+            container: installContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'assets/lottie/install-progress.json'
+          });
+        }
+      }
+
+      if (document.readyState === 'complete') {
+        initLottie();
+      } else {
+        window.addEventListener('load', initLottie);
+      }
+
+      // ─── Nav Scroll Behavior ─────────────────────
+      var nav = document.getElementById('main-nav');
+
+      if (nav) {
+        window.addEventListener('scroll', function () {
+          if (window.pageYOffset > 60) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+        }, { passive: true });
+      }
+
+      // ─── Checklist Click-to-Done ─────────────────
+      document.querySelectorAll('.checklist-item').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          // Don't toggle if clicking a link or button inside accordion
+          if (e.target.closest('a') || e.target.closest('.accordion-header') || e.target.closest('.accordion-body')) return;
+          item.classList.toggle('done');
+        });
+      });
+
+      // ─── Accordion Toggle ────────────────────────
+      document.querySelectorAll('.accordion-header').forEach(function (header) {
+        header.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var expanded = header.getAttribute('aria-expanded') === 'true';
+          header.setAttribute('aria-expanded', String(!expanded));
+
+          var body = header.nextElementSibling;
+          if (body && body.classList.contains('accordion-body')) {
+            if (expanded) {
+              body.style.maxHeight = '0';
+              body.style.opacity = '0';
+              body.style.paddingTop = '0';
+              body.style.paddingBottom = '0';
+            } else {
+              body.style.maxHeight = body.scrollHeight + 40 + 'px';
+              body.style.opacity = '1';
+              body.style.paddingTop = '';
+              body.style.paddingBottom = '';
+            }
+          }
+        });
+      });
+
+      // Initialize all accordion bodies as collapsed
+      document.querySelectorAll('.accordion-body').forEach(function (body) {
+        body.style.maxHeight = '0';
+        body.style.opacity = '0';
+        body.style.overflow = 'hidden';
+        body.style.transition = 'max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease';
+        body.style.paddingTop = '0';
+        body.style.paddingBottom = '0';
+      });
+
+    })();
+  </script>
+</body>
+</html>

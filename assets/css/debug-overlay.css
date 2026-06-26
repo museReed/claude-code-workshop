@@ -1,0 +1,63 @@
+/*
+ * html-debug-overlay styles. Namespaced under .dbg-* and body.dbg-active so they
+ * never collide with the host product. Override the two vars to re-theme.
+ */
+:root {
+  --dbg-accent: #B8902E;        /* highlight / button accent */
+  --dbg-panel-bg: #0E1A2F;      /* panel background */
+}
+
+/* affordances while debug mode is on */
+body.dbg-active { cursor: text; }
+body.dbg-active ::selection { background: var(--dbg-accent); color: #fff; }
+
+/* floating hover box — outlines the component under the cursor (any element) */
+#dbg-hl {
+  position: fixed; z-index: 2147483645; display: none; pointer-events: none;
+  border: 2px solid var(--dbg-accent);
+  background: rgba(184, 144, 46, .14);
+  border-radius: 2px; transition: all .04s ease-out;
+}
+
+/* toggle button */
+#dbg-btn {
+  position: fixed; left: 14px; bottom: 14px; z-index: 2147483646;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, .15); background: #fff;
+  font-size: 20px; line-height: 1; cursor: pointer; opacity: .5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .15); transition: opacity .15s;
+}
+#dbg-btn:hover { opacity: 1; }
+#dbg-btn.on { background: var(--dbg-accent); opacity: 1; border-color: var(--dbg-accent); }
+
+/* fix-list panel */
+#dbg-panel {
+  position: fixed; top: 0; right: 0; width: 320px; max-height: 100vh;
+  overflow: auto; background: var(--dbg-panel-bg); color: #fff;
+  z-index: 2147483647; font-size: 13px; padding: 12px;
+  font-family: system-ui, -apple-system, "PingFang TC", "Noto Sans TC", sans-serif;
+  box-shadow: -4px 0 22px rgba(0, 0, 0, .35);
+}
+.dbg-h { display: flex; gap: 6px; align-items: center; font-weight: 700; margin-bottom: 8px; flex-wrap: wrap; }
+.dbg-h button {
+  font-size: 11px; background: var(--dbg-accent); color: var(--dbg-panel-bg);
+  border: none; border-radius: 100px; padding: 5px 10px; cursor: pointer; font-weight: 700;
+}
+.dbg-row { border-top: 1px solid rgba(255, 255, 255, .15); padding: 9px 0; position: relative; }
+.dbg-loc {
+  font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 11px; color: #E7C66B; word-break: break-all; padding-right: 18px;
+}
+.dbg-kind { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 100px; margin-right: 5px; vertical-align: middle; }
+.dbg-kind-data-loc { background: #2E7D32; color: #fff; }
+.dbg-kind-dom-path { background: #6b5210; color: #fff; }
+.dbg-cur { font-size: 11px; color: rgba(255, 255, 255, .7); margin: 3px 0; }
+.dbg-cur b { color: #fff; }
+.dbg-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 2px; }
+.dbg-chip { font-size: 11px; padding: 3px 8px; border-radius: 100px; cursor: pointer; border: 1px solid rgba(255, 255, 255, .3); background: transparent; color: rgba(255, 255, 255, .75); }
+.dbg-chip.on { background: var(--dbg-accent); color: var(--dbg-panel-bg); border-color: var(--dbg-accent); font-weight: 700; }
+.dbg-field { margin: 5px 0; }
+.dbg-flabel { display: block; font-size: 10px; color: #E7C66B; margin-bottom: 2px; }
+.dbg-fix { width: 100%; min-height: 38px; font-size: 12px; border-radius: 6px; border: none; padding: 6px; resize: vertical; font-family: inherit; box-sizing: border-box; }
+.dbg-del { position: absolute; top: 7px; right: 0; background: none; border: none; color: rgba(255, 255, 255, .5); cursor: pointer; font-size: 15px; line-height: 1; }
+.dbg-empty { color: rgba(255, 255, 255, .5); font-size: 12px; padding: 10px 0; }

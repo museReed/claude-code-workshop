@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通用 AI 知識 · Icon 素材庫比較</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#0E1A2F; --gold:#B8902E; --gold-bright:#D4AD2B; --cream:#FBFBFD; --card:#fff; --ink:#16202e; --ink-2:#4a5568; --ink-3:#8a93a0; --line:#e8e7e3; --gold-tint:rgba(184,144,46,.10); }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"DM Sans","Noto Serif TC",sans-serif; padding:44px 28px 80px; }
+  .wrap{ max-width:1180px; margin:0 auto; }
+  .eyebrow{ font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+  h1{ font-family:"Cormorant Garamond","Noto Serif TC",serif; font-size:44px; font-weight:700; margin:.18em 0 .1em; }
+  .sub{ color:var(--ink-2); font-size:15px; line-height:1.6; max-width:48em; }
+  .note{ font-size:13px; color:var(--ink-2); background:var(--gold-tint); border:1px solid rgba(184,144,46,.25); border-radius:10px; padding:11px 15px; margin:16px 0 22px; }
+  /* tabs */
+  .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; position:sticky; top:0; background:var(--cream); padding:12px 0; z-index:5; }
+  .tab{ font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:700; border:1px solid var(--line); background:#fff; color:var(--ink-2); padding:9px 16px; border-radius:100px; cursor:pointer; transition:all .15s; }
+  .tab:hover{ border-color:var(--gold); color:var(--gold); }
+  .tab.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .meta{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin:4px 0 18px; }
+  .meta .lib{ font-size:22px; font-weight:700; }
+  .meta .lic{ font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); background:#fff; border:1px solid var(--line); padding:3px 10px; border-radius:100px; }
+  .meta .cov{ font-size:13px; color:var(--ink-3); }
+  /* grid */
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media(max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:600px){ .grid{ grid-template-columns:1fr;} }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px 22px; }
+  .card-top{ display:flex; align-items:center; gap:12px; margin-bottom:9px; }
+  .ic{ width:34px; height:34px; flex-shrink:0; }
+  .term{ font-family:"JetBrains Mono",monospace; font-size:15px; font-weight:600; color:var(--ink); }
+  .def{ font-size:14px; color:var(--ink-2); line-height:1.55; }
+  .slug{ font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-3); margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">● A · 通用 AI 知識 · Icon 素材庫比較</div>
+  <h1>同一組詞彙卡,<span style="color:var(--gold)">換不同素材庫的 icon</span></h1>
+  <p class="sub">點上方任一素材庫,整組 11 張卡的 icon 就換成那一家,讓你 A/B 比較線條風格與辨識度。每張卡左下角標該庫實際用到的 <span style="font-family:monospace">glyph 名</span>。</p>
+  <div class="note">⚙️ icon 用<strong>原色（深色）on 淺底</strong>只為公平比線條;正式 deck 會套 KCL 主題色。圖示走各家官方 CDN（需連網），選定後我會把那一套 inline 進 deck（離線可用）。</div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="meta"><span class="lib" id="m-lib"></span><span class="lic" id="m-lic"></span><span class="cov" id="m-cov"></span></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+const LIBS = {
+  lucide:   { name:"Lucide",            lic:"ISC · 線性 · ~1500",      url:n=>`https://cdn.jsdelivr.net/npm/lucide-static/icons/${n}.svg`, cov:"涵蓋最齊全,每個概念都有專屬 icon" },
+  phosphor: { name:"Phosphor",          lic:"MIT · 可填色/多粗細",      url:n=>`https://cdn.jsdelivr.net/npm/@phosphor-icons/core/assets/regular/${n}.svg`, cov:"風格圓潤,涵蓋齊全" },
+  tabler:   { name:"Tabler",            lic:"MIT · 線性 · ~5000",      url:n=>`https://cdn.jsdelivr.net/npm/@tabler/icons/icons/outline/${n}.svg`, cov:"量最大,風格俐落" },
+  heroicons:{ name:"Heroicons",         lic:"MIT · Tailwind · ~300",   url:n=>`https://cdn.jsdelivr.net/npm/heroicons/24/outline/${n}.svg`, cov:"最精簡:無 brain/robot/plug → LLM 與 AI Agent 都用 cpu-chip、MCP 用 link 代替" },
+  material: { name:"Material Symbols",  lic:"Apache · Google",         url:n=>`https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/${n}.svg`, cov:"Google 風,涵蓋齊全(含 token 同名 icon)" },
+};
+// term, def, {lib: glyph}
+const TERMS = [
+  ["LLM","會讀懂你的話、生出文字的 AI 大腦,ChatGPT、Claude 背後都是它",      {lucide:"brain",phosphor:"brain",tabler:"brain",heroicons:"cpu-chip",material:"neurology"}],
+  ["Generative AI","會「生出」新東西的 AI 總稱文字、圖片、影片、程式都算",  {lucide:"sparkles",phosphor:"sparkle",tabler:"sparkles",heroicons:"sparkles",material:"auto_awesome"}],
+  ["Prompt","你打給 AI 的那段話、那個指令",                                {lucide:"message-square",phosphor:"chat-text",tabler:"message",heroicons:"chat-bubble-left-right",material:"chat"}],
+  ["Token","AI 計算與收費的最小單位,大約一個詞或半個中文字",              {lucide:"coins",phosphor:"coins",tabler:"coins",heroicons:"currency-dollar",material:"token"}],
+  ["Context Window","AI 一次能「同時記得」的內容上限",                      {lucide:"book-open",phosphor:"book-open",tabler:"app-window",heroicons:"window",material:"web_asset"}],
+  ["Tool","讓 AI 不只「動嘴」還能「動手」的外掛能力",                       {lucide:"wrench",phosphor:"wrench",tabler:"tool",heroicons:"wrench",material:"build"}],
+  ["MCP","讓 AI 接上各種外部工具與資料的「萬用插座標準」",                  {lucide:"plug",phosphor:"plugs-connected",tabler:"plug-connected",heroicons:"link",material:"cable"}],
+  ["RAG","讓 AI「先查資料再回答」,而不是純憑記憶",                         {lucide:"search",phosphor:"magnifying-glass",tabler:"search",heroicons:"magnifying-glass",material:"manage_search"}],
+  ["Agentic AI","一種讓 AI「自己規劃、自己動手、自己修正」的設計思路",       {lucide:"workflow",phosphor:"flow-arrow",tabler:"route",heroicons:"arrow-path",material:"account_tree"}],
+  ["AI Agent","把上面那套自主能力做成的「實際程式」,Claude Code 就是一個",  {lucide:"bot",phosphor:"robot",tabler:"robot",heroicons:"cpu-chip",material:"smart_toy"}],
+  ["Hallucination","AI「一本正經地編造不存在的事實」本工作坊最關鍵的紅線",  {lucide:"triangle-alert",phosphor:"warning",tabler:"alert-triangle",heroicons:"exclamation-triangle",material:"warning"}],
+];
+const tabsEl=document.getElementById("tabs"), gridEl=document.getElementById("grid");
+let current="lucide";
+Object.keys(LIBS).forEach(k=>{
+  const b=document.createElement("button"); b.className="tab"+(k===current?" on":""); b.textContent=LIBS[k].name; b.dataset.k=k;
+  b.onclick=()=>{ current=k; render(); }; tabsEl.appendChild(b);
+});
+function render(){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.k===current));
+  const lib=LIBS[current];
+  document.getElementById("m-lib").textContent=lib.name;
+  document.getElementById("m-lic").textContent=lib.lic;
+  document.getElementById("m-cov").textContent="· "+lib.cov;
+  gridEl.innerHTML=TERMS.map(([term,def,g])=>{
+    const slug=g[current];
+    return `<div class="card"><div class="card-top"><img class="ic" src="${lib.url(slug)}" alt="${slug}"><span class="term">${term}</span></div><div class="def">${def}</div><div class="slug">${slug}</div></div>`;
+  }).join("");
+}
+render();
+</script>
+</body>
+</html>

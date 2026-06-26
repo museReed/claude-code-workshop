@@ -50,6 +50,7 @@ html, body {
 /* ── Slide types ── */
 .slide-dark  { background: var(--navy-deep); color: #fff; }
 .slide-navy  { background: var(--navy);      color: #fff; }
+.slide-warm  { background: #F7F3EE;          color: #18181B; }
 .slide-light { background: var(--bg);        color: var(--ink); }
 .slide-warm  { background: var(--bg-warm);   color: var(--ink); }
 .slide-divider { background: var(--navy-2);  color: #fff; }
@@ -811,6 +812,84 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
             <p style="font-family:var(--font-mono); font-size:clamp(11px,0.9vw,13px); color:rgba(255,255,255,0.18); line-height:1.65; text-align:center;">自我介紹內容<br>待填寫</p>
           </div>
 
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── S07: 課程時間表 ────────────────────────────────────── -->
+  <section class="slide slide-warm" id="s07" data-slide="7">
+    <div class="slide-body" style="max-width:860px;">
+
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">今天的安排</p>
+      <h2 class="slide-title" style="color:#18181B;" data-loc="s07.title">六小時<span class="accent"> 地圖</span></h2>
+
+      <!-- agenda rows -->
+      <div style="margin-top:36px; display:flex; flex-direction:column; width:100%; border-top:1px solid rgba(24,24,27,0.10);">
+
+        <!-- Row 3 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row3">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">3</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:#B8902E; white-space:nowrap;">40–55 min △</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">安裝與第一次對話</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">Cursor 代勞安裝 + 面板 + GitHub + 第一次 claude</span>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row4">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">4</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">25 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">如何跟 AI 溝通，CCC 框架</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">三個字母，徹底擺脫模糊指令</span>
+        </div>
+
+        <!-- Break -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:14px 0; border-bottom:1px solid rgba(24,24,27,0.10); background:rgba(184,144,46,0.06); margin:0 -20px; padding-left:20px; padding-right:20px;" data-loc="s07.break">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.12);">—</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.30); white-space:nowrap;">10 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:500; color:rgba(24,24,27,0.45);">中場</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.30); text-align:right;">☕ 咖啡</span>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0;" data-loc="s07.row5">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">5</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">50 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">分組實作，挑一個你真的在乎的場景</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">完整循環：下指令 → 看輸出 → 判斷</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S08: 今天的三個承諾 ──────────────────────────────────── -->
+  <section class="slide slide-dark" id="s08" data-slide="8">
+    <div class="slide-body" style="max-width:920px;">
+
+      <p class="slide-eyebrow">今天的三個承諾</p>
+      <h2 class="slide-title" data-loc="s08.title">你會帶走<span class="accent"> 什麼</span></h2>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-top:48px; width:100%;">
+
+        <!-- Promise 1 -->
+        <div class="r" style="display:flex; flex-direction:column; gap:16px; padding:28px 24px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); border-radius:16px;" data-loc="s08.p1">
+          <span style="font-family:var(--font-sans); font-size:36px; font-weight:900; color:var(--gold); line-height:1;">→</span>
+          <p style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,16px); color:rgba(255,255,255,0.80); line-height:1.7;" data-loc="s08.p1.text">你會帶走一個<br><strong style="color:#fff;">能跑的 Claude Code 環境</strong></p>
+        </div>
+
+        <!-- Promise 2 -->
+        <div class="r" style="display:flex; flex-direction:column; gap:16px; padding:28px 24px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); border-radius:16px;" data-loc="s08.p2">
+          <span style="font-family:var(--font-sans); font-size:36px; font-weight:900; color:var(--gold); line-height:1;">→</span>
+          <p style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,16px); color:rgba(255,255,255,0.80); line-height:1.7;" data-loc="s08.p2.text">你會跑過一個跟你真實生活有關的場景<br><strong style="color:#fff;">找房、論文、履歷</strong></p>
+        </div>
+
+        <!-- Promise 3 -->
+        <div class="r" style="display:flex; flex-direction:column; gap:16px; padding:28px 24px; background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.25); border-radius:16px;" data-loc="s08.p3">
+          <span style="font-family:var(--font-sans); font-size:36px; font-weight:900; color:var(--gold); line-height:1;">→</span>
+          <p style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,16px); color:rgba(255,255,255,0.80); line-height:1.7;" data-loc="s08.p3.text">你會知道 AI 不能做什麼<br><strong style="color:var(--gold-bright);">以及為什麼這比知道它能做什麼更重要</strong></p>
         </div>
 
       </div>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icon 素材庫比較 · 你 → AI Agent → 工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#0E1A2F; --gold:#B8902E; --gold-bright:#D4AD2B; --cream:#FBFBFD; --ink:#16202e; --ink-2:#4a5568; --line:#e4e3df; --gold-tint:rgba(184,144,46,.10); }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"DM Sans","Noto Serif TC",sans-serif; padding:48px 32px 80px; }
+  .wrap{ max-width:1080px; margin:0 auto; }
+  .eyebrow{ font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+  h1{ font-family:"Cormorant Garamond","Noto Serif TC",serif; font-size:46px; font-weight:700; margin:.2em 0 .1em; }
+  .sub{ color:var(--ink-2); font-size:15px; line-height:1.6; max-width:46em; margin-bottom:8px; }
+  .note{ font-size:13px; color:var(--ink-2); background:var(--gold-tint); border:1px solid rgba(184,144,46,.25); border-radius:10px; padding:12px 16px; margin:18px 0 28px; }
+  .lib{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px 26px; margin-bottom:16px; }
+  .lib-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+  .lib-name{ font-size:20px; font-weight:700; }
+  .lib-name .rec{ font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:700; color:#fff; background:var(--gold); padding:2px 8px; border-radius:100px; margin-left:8px; vertical-align:middle; }
+  .lib-lic{ font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); }
+  .lib-glyph{ font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--gold); margin-left:auto; }
+  .row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .fig{ display:flex; flex-direction:column; align-items:center; gap:8px; width:118px; }
+  .fig img{ width:54px; height:54px; }
+  .fig span{ font-size:14px; color:var(--ink); }
+  .fig.ai span{ color:var(--gold); font-weight:600; }
+  .arrow{ color:var(--gold); font-size:26px; font-weight:700; }
+  /* brand row */
+  .brand .fig img{ width:46px; height:46px; }
+  .brand .fig span{ font-size:13px; color:var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">● Icon 素材庫比較</div>
+  <h1>同一張圖,<span style="color:var(--gold)">六種素材庫</span></h1>
+  <p class="sub">同樣的「你 → AI Agent → 工具」,用不同 icon 庫各畫一次,讓你比較線條風格。每排左邊標<strong>素材庫名 + 授權</strong>,右邊標<strong>實際用到的 glyph 名</strong>。</p>
+  <div class="note">⚙️ 這裡 icon 用<strong>原色（深色）on 淺底</strong>,只為公平比較線條風格;正式 deck 會套 KCL 主題色（深藍底 + 金色），跟你看到的 Part 2 收尾頁一樣。圖示透過各家官方 CDN 載入（需連網），選定後我會把那一套 inline 進 deck（離線可用）。</div>
+
+  <!-- Lucide -->
+  <div class="lib">
+    <div class="lib-head"><span class="lib-name">Lucide<span class="rec">推薦</span></span><span class="lib-lic">ISC · 線性 · ~1500</span><span class="lib-glyph">user · bot · wrench</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/user.svg" alt="user"><span>你</span></div>
+      <span class="arrow">→</span>
+      <div class="fig ai"><img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/bot.svg" alt="bot"><span>AI Agent</span></div>
+      <span class="arrow">→</span>
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/wrench.svg" alt="wrench"><span>工具</span></div>
+    </div>
+  </div>
+
+  <!-- Phosphor -->
+  <div class="lib">
+    <div class="lib-head"><span class="lib-name">Phosphor</span><span class="lib-lic">MIT · 多粗細/可填色</span><span class="lib-glyph">user · robot · wrench（regular）</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@phosphor-icons/core/assets/regular/user.svg" alt="user"><span>你</span></div>
+      <span class="arrow">→</span>
+      <div class="fig ai"><img src="https://cdn.jsdelivr.net/npm/@phosphor-icons/core/assets/regular/robot.svg" alt="robot"><span>AI Agent</span></div>
+      <span class="arrow">→</span>
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@phosphor-icons/core/assets/regular/wrench.svg" alt="wrench"><span>工具</span></div>
+    </div>
+  </div>
+
+  <!-- Tabler -->
+  <div class="lib">
+    <div class="lib-head"><span class="lib-name">Tabler</span><span class="lib-lic">MIT · 線性 · ~5000</span><span class="lib-glyph">user · robot · tool（outline）</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/outline/user.svg" alt="user"><span>你</span></div>
+      <span class="arrow">→</span>
+      <div class="fig ai"><img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/outline/robot.svg" alt="robot"><span>AI Agent</span></div>
+      <span class="arrow">→</span>
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/outline/tool.svg" alt="tool"><span>工具</span></div>
+    </div>
+  </div>
+
+  <!-- Heroicons -->
+  <div class="lib">
+    <div class="lib-head"><span class="lib-name">Heroicons</span><span class="lib-lic">MIT（Tailwind）· 簡潔</span><span class="lib-glyph">user · cpu-chip* · wrench（24 outline）</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/heroicons/24/outline/user.svg" alt="user"><span>你</span></div>
+      <span class="arrow">→</span>
+      <div class="fig ai"><img src="https://cdn.jsdelivr.net/npm/heroicons/24/outline/cpu-chip.svg" alt="cpu-chip"><span>AI Agent</span></div>
+      <span class="arrow">→</span>
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/heroicons/24/outline/wrench.svg" alt="wrench"><span>工具</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-2);margin:10px 0 0;">* Heroicons 沒有 robot 圖,AI 改用 <code>cpu-chip</code>。</p>
+  </div>
+
+  <!-- Material Symbols -->
+  <div class="lib">
+    <div class="lib-head"><span class="lib-name">Material Symbols</span><span class="lib-lic">Apache（Google）</span><span class="lib-glyph">person · smart_toy · build（outlined）</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/person.svg" alt="person"><span>你</span></div>
+      <span class="arrow">→</span>
+      <div class="fig ai"><img src="https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/smart_toy.svg" alt="smart_toy"><span>AI Agent</span></div>
+      <span class="arrow">→</span>
+      <div class="fig"><img src="https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/build.svg" alt="build"><span>工具</span></div>
+    </div>
+  </div>
+
+  <!-- Simple Icons (brand logos, different use) -->
+  <div class="lib brand">
+    <div class="lib-head"><span class="lib-name">Simple Icons</span><span class="lib-lic">CC0 · 品牌 logo（不同用途）</span><span class="lib-glyph">給三層架構放真 logo 用</span></div>
+    <div class="row">
+      <div class="fig"><img src="https://cdn.simpleicons.org/anthropic" alt="Anthropic"><span>Claude</span></div>
+      <div class="fig"><img src="https://cdn.simpleicons.org/github" alt="GitHub"><span>GitHub</span></div>
+      <div class="fig"><img src="https://cdn.simpleicons.org/obsidian" alt="Obsidian"><span>Obsidian</span></div>
+      <div class="fig"><img src="https://cdn.simpleicons.org/googlegemini" alt="Gemini"><span>Gemini</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-2);margin:10px 0 0;">品牌 logo 不是用在「你→AI→工具」那種概念圖,而是放在<strong>三層架構/平台</strong>那種「列出實際產品」的地方。(ChatGPT logo 因商標近期從 Simple Icons 下架,需另尋。)</p>
+  </div>
+
+</div>
+</body>
+</html>
