@@ -896,6 +896,87 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+
+  <!-- ── S09: 三個層級 ──────────────────────────────────────── -->
+  <section class="slide slide-dark" id="s09" data-slide="9">
+
+    <!-- content (inside zoom:1.25 context) -->
+    <div class="slide-body" style="max-width:920px;">
+
+      <p class="slide-eyebrow">T1 · 名詞解說</p>
+      <h2 class="slide-title" data-loc="s09.title">你會遇到的<span class="accent"> 三個層級</span></h2>
+      <p style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,16px); color:rgba(255,255,255,0.45); margin-top:6px;" data-loc="s09.lede">「公司說我們要投資 AI」——是哪一層？不同層、不同價、不同槓桿</p>
+
+      <!-- Tier rows -->
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:28px; width:100%;">
+
+        <!-- Row 1: Model / LLM -->
+        <div class="r s09-tier" data-tier="model" role="button" tabindex="0"
+             style="display:grid; grid-template-columns:44px 180px 1fr auto 72px; align-items:center; gap:16px; padding:18px 22px; background:rgba(99,102,241,0.07); border:1px solid rgba(99,102,241,0.22); border-radius:14px; cursor:pointer; transition:background 0.2s;">
+          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:rgba(99,102,241,0.6); letter-spacing:0.05em;">01</span>
+          <div>
+            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#fff; line-height:1.1;">Model · LLM</p>
+            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">第一層 · 基礎引擎</p>
+          </div>
+          <div style="display:flex; gap:7px; flex-wrap:wrap;">
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">GPT-4o</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Claude Sonnet</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Gemini Pro</code>
+          </div>
+          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:rgba(99,102,241,0.75); white-space:nowrap;">會生成</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); white-space:nowrap; text-align:right;">點看 →</span>
+        </div>
+
+        <!-- Row 2: Product -->
+        <div class="r s09-tier" data-tier="product" role="button" tabindex="0"
+             style="display:grid; grid-template-columns:44px 180px 1fr auto 72px; align-items:center; gap:16px; padding:18px 22px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:14px; cursor:pointer; transition:background 0.2s;">
+          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.05em;">02</span>
+          <div>
+            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#fff; line-height:1.1;">Product</p>
+            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">第二層 · 對話介面</p>
+          </div>
+          <div style="display:flex; gap:7px; flex-wrap:wrap;">
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">ChatGPT</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Claude.ai</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Gemini app</code>
+          </div>
+          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:rgba(255,255,255,0.45); white-space:nowrap;">會聊天</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); white-space:nowrap; text-align:right;">點看 →</span>
+        </div>
+
+        <!-- Row 3: Agent -->
+        <div class="r s09-tier" data-tier="agent" role="button" tabindex="0"
+             style="display:grid; grid-template-columns:44px 180px 1fr auto 72px; align-items:center; gap:16px; padding:18px 22px; background:rgba(184,144,46,0.09); border:1px solid rgba(184,144,46,0.30); border-radius:14px; cursor:pointer; transition:background 0.2s;">
+          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:rgba(184,144,46,0.7); letter-spacing:0.05em;">03</span>
+          <div>
+            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:var(--gold-bright); line-height:1.1;">Agent</p>
+            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">第三層 · 動手做</p>
+          </div>
+          <div style="display:flex; gap:7px; flex-wrap:wrap;">
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(184,144,46,0.12); border:1px solid rgba(184,144,46,0.25); border-radius:5px; padding:3px 8px; color:var(--gold-bright);">Claude Code</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Cursor Composer</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Devin</code>
+          </div>
+          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:var(--gold); white-space:nowrap;">會做事</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); white-space:nowrap; text-align:right;">點看 →</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal overlay — outside .slide-body so it's not affected by zoom:1.25 -->
+    <div id="s09-modal"
+         style="display:none; position:absolute; inset:0; z-index:50; background:rgba(5,11,23,0.82); backdrop-filter:blur(10px); align-items:center; justify-content:center;">
+      <div id="s09-modal-box"
+           style="position:relative; background:#0E1A2F; border:1px solid rgba(255,255,255,0.14); border-radius:20px; padding:36px 40px; width:min(680px,88vw); max-height:80vh; overflow-y:auto;">
+        <button id="s09-close"
+                style="position:absolute; top:16px; right:18px; background:rgba(255,255,255,0.08); border:none; border-radius:8px; color:rgba(255,255,255,0.55); font-size:18px; width:32px; height:32px; cursor:pointer; line-height:1;">×</button>
+        <div id="s09-modal-content"></div>
+      </div>
+    </div>
+
+  </section>
+
 </div><!-- /#deck -->
 
 <!-- ── Nav controls ── -->
@@ -1011,6 +1092,110 @@ document.addEventListener('click', e => {
 /* ── Init: read hash or start at slide 1 ── */
 const initSlide = parseInt(location.hash.slice(1), 10);
 goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
+</script>
+
+<!-- ── S09 Tier Popup ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s09-modal');
+  var modalBox = document.getElementById('s09-modal-box');
+  var content  = document.getElementById('s09-modal-content');
+  var closeBtn = document.getElementById('s09-close');
+  if (!modal) return;
+
+  /* ── Modal content per tier ── */
+  var CONTENT = {
+    model: `
+      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(99,102,241,0.7);letter-spacing:.08em;margin-bottom:6px;">第一層 · 基礎引擎</p>
+      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;">Model · LLM <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">三種能力等級</span></h3>
+      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">同一件事，每家廠商都有三種等級——愈上層愈聰明也愈貴。<br>Claude Code 讓你選 Opus / Sonnet / Haiku。</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        ${[
+          {badge:'第 1 級',label:'深度推理，最聰明',cost:'$$$',use:'複雜規劃、多步推理、難題拆解',models:'Claude Opus 4.8 · Gemini 2.5 Pro · GPT-5 / o 系列',color:'rgba(239,68,68,0.15)',border:'rgba(239,68,68,0.30)',costColor:'#F87171'},
+          {badge:'第 2 級',label:'均衡，日常主力',cost:'$$',use:'日常開發、資料處理、寫作',models:'Claude Sonnet 4.6 · Gemini 2.5 Flash · GPT-5 mini',color:'rgba(99,102,241,0.10)',border:'rgba(99,102,241,0.25)',costColor:'#818CF8'},
+          {badge:'第 3 級',label:'速度，大量批次',cost:'$',use:'大量分類、簡單摘要、快速回覆',models:'Claude Haiku 4.5 · Gemini 2.5 Flash-Lite · GPT-5 nano',color:'rgba(255,255,255,0.04)',border:'rgba(255,255,255,0.10)',costColor:'rgba(255,255,255,0.4)'}
+        ].map(t => `
+          <div style="background:${t.color};border:1px solid ${t.border};border-radius:12px;padding:14px 18px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);">${t.badge}</span>
+              <span style="font-family:var(--font-sans);font-size:13px;font-weight:700;color:#fff;flex:1;">${t.label}</span>
+              <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:${t.costColor};">${t.cost}</span>
+            </div>
+            <p style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:5px;">${t.use}</p>
+            <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);">${t.models}</p>
+          </div>`).join('')}
+      </div>`,
+
+    product: `
+      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.08em;margin-bottom:6px;">第二層 · 對話介面</p>
+      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;">Product <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">對話型 AI 產品</span></h3>
+      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">把 LLM 包成一個聊天 App，讓一般人不寫程式也能用。<br>代表作是 ChatGPT。</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        ${[
+          {label:'互動模式',val:'對話',ok:true},
+          {label:'看得到你的檔案？',val:'無法',ok:false},
+          {label:'能寫檔案？',val:'無法',ok:false},
+          {label:'能跑指令？',val:'無法',ok:false}
+        ].map(r => `
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.45);">${r.label}</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:${r.ok?'#4ADE80':'#F87171'};">${r.val}</span>
+          </div>`).join('')}
+      </div>`,
+
+    agent: `
+      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(184,144,46,0.8);letter-spacing:.08em;margin-bottom:6px;">第三層 · 動手做</p>
+      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:var(--gold-bright);margin-bottom:12px;">Agent <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">會動手的 AI</span></h3>
+      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">Agent 不只回答，還會自己用工具把事做完。<br>代表作是 Claude Code。</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        ${[
+          {label:'互動模式',val:'對話 + 動手做',ok:true},
+          {label:'看得到你的檔案？',val:'可以',ok:true},
+          {label:'能寫檔案？',val:'可以',ok:true},
+          {label:'能跑指令？',val:'可以',ok:true}
+        ].map(r => `
+          <div style="background:rgba(184,144,46,0.07);border:1px solid rgba(184,144,46,0.20);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.45);">${r.label}</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:#4ADE80;">${r.val}</span>
+          </div>`).join('')}
+      </div>`
+  };
+
+  function openModal(tier) {
+    content.innerHTML = CONTENT[tier] || '';
+    modal.style.display = 'flex';
+  }
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  /* Tier row clicks — only open if already revealed */
+  document.querySelectorAll('.s09-tier').forEach(function (tier) {
+    tier.addEventListener('click', function (e) {
+      if (!tier.classList.contains('revealed')) return; // let main handler reveal it
+      e.stopPropagation();
+      openModal(tier.dataset.tier);
+    });
+    tier.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        if (tier.classList.contains('revealed')) openModal(tier.dataset.tier);
+      }
+    });
+  });
+
+  /* Close controls */
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (e.target === modal) closeModal(); // click outside box
+  });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
 </script>
 
 <!-- Debug overlay (dev only) -->
