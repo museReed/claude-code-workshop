@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Workshop — Slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/workshop.css">
+<link rel="stylesheet" href="../assets/css/debug-overlay.css">
+
+<style>
+/* ============================================================
+   SLIDES SYSTEM
+   ============================================================ */
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+
+/* Deck */
+#deck {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Individual slide */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Slide types ── */
+.slide-dark  { background: var(--navy-deep); color: #fff; }
+.slide-navy  { background: var(--navy);      color: #fff; }
+.slide-light { background: var(--bg);        color: var(--ink); }
+.slide-warm  { background: var(--bg-warm);   color: var(--ink); }
+.slide-divider { background: var(--navy-2);  color: #fff; }
+
+/* ── Lottie background layer ── */
+.lottie-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.lottie-bg svg { width: 100% !important; height: 100% !important; }
+
+/* ── Slide content wrapper ── */
+.slide-body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 clamp(32px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  zoom: 1.25;
+}
+
+.slide-body.center {
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Typography in slides ── */
+.slide-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.slide-title {
+  font-family: 'Bricolage Grotesque', var(--font-sans);
+  font-size: clamp(45px, 6.9vw, 100px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.slide-title .accent { color: var(--gold-bright); }
+
+.slide-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(26px, 2.5vw, 38px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  margin-top: 24px;
+  max-width: 760px;
+  opacity: 0.8;
+}
+
+.slide-meta {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  color: var(--ink-4);
+  margin-top: 40px;
+}
+
+/* on dark slides, lede text is white/70 */
+.slide-dark .slide-lede,
+.slide-navy .slide-lede,
+.slide-divider .slide-lede {
+  color: rgba(255,255,255,0.65);
+  opacity: 1;
+}
+
+/* ── Cover icon ── */
+.cover-icon {
+  width: 52px;
+  height: 52px;
+  filter: invert(1);
+  opacity: 0.5;
+  margin-bottom: 28px;
+}
+
+/* ── Nav arrows ── */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  opacity: 0.4;
+}
+.nav-arrow:hover { background: rgba(255,255,255,0.14); opacity: 1; }
+.nav-arrow.prev { left: 20px; }
+.nav-arrow.next { right: 20px; }
+.nav-arrow img  { width: 20px; height: 20px; filter: invert(1); }
+
+/* on light slides, arrows flip to dark */
+.slide-light ~ .nav-arrow img,
+.slide-warm  ~ .nav-arrow img { filter: none; }
+
+/* ── Slide counter ── */
+#slide-counter {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  z-index: 100;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+#slide-counter.visible { opacity: 1; }
+
+/* on light slides, counter text flips */
+body.slide-is-light #slide-counter { color: var(--ink-4); }
+
+/* ── Click-to-reveal elements ── */
+.r {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  cursor: pointer;
+}
+.r.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.r-d1 { transition-delay: 0.05s; }
+.r-d2 { transition-delay: 0.12s; }
+.r-d3 { transition-delay: 0.20s; }
+.r-d4 { transition-delay: 0.30s; }
+
+/* ── Code block ── */
+.slide-code {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 1.75vw, 25px);
+  line-height: 1.7;
+  color: #e8e8ed;
+  margin-top: 28px;
+  width: 100%;
+}
+.slide-code .cmd  { color: var(--gold-bright); }
+.slide-code .cmt  { color: var(--ink-4); }
+.slide-code .kw   { color: #79b8ff; }
+.slide-code .str  { color: #9ecbff; }
+
+/* ── Card grid ── */
+.slide-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 32px;
+}
+.slide-cards.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+.slide-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+.slide-card.accent-border { border-color: var(--gold); }
+
+/* on light slides, cards flip */
+.slide-light .slide-card,
+.slide-warm  .slide-card {
+  background: var(--bg-card);
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-card);
+}
+
+.slide-card-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 10px;
+}
+.slide-dark  .slide-card-label,
+.slide-navy  .slide-card-label,
+.slide-divider .slide-card-label { color: rgba(255,255,255,0.35); }
+
+.slide-card-text {
+  font-family: var(--font-sans);
+  font-size: clamp(21px, 1.75vw, 26px);
+  line-height: 1.55;
+}
+
+/* ── Terminal simulator ── */
+.terminal {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: 0;
+  overflow: hidden;
+  margin-top: 28px;
+  width: 100%;
+}
+.terminal-bar {
+  background: #1c1c1e;
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.terminal-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+}
+.terminal-dot.red   { background: #ff5f57; }
+.terminal-dot.yellow{ background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-body {
+  padding: 20px 24px;
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 1.56vw, 24px);
+  line-height: 1.8;
+  color: #c9d1d9;
+}
+.terminal-prompt { color: var(--gold-bright); }
+.terminal-output { color: rgba(255,255,255,0.45); font-size: 0.9em; }
+.terminal-cursor {
+  display: inline-block;
+  width: 8px; height: 1.1em;
+  background: var(--gold-bright);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Divider slide icon ── */
+.divider-icon {
+  width: 56px;
+  height: 56px;
+  filter: invert(1);
+  opacity: 0.35;
+  margin-bottom: 20px;
+}
+.divider-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(184,144,46,0.4);
+  border-radius: var(--radius-pill);
+  padding: 4px 14px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     DECK
+     ============================================================ -->
+<div id="deck">
+
+  <!-- ── S01: Cover ───────────────────────────────────────── -->
+  <section class="slide slide-dark active" id="s01" data-slide="1" data-hide-counter>
+
+    <!-- Ambient particles background -->
+    <div class="lottie-bg" id="lottie-hero-bg"></div>
+
+    <div class="slide-body center">
+      <img class="cover-icon"
+           src="https://cdn.jsdelivr.net/npm/lucide-static/icons/bot-message-square.svg"
+           alt="">
+
+      <h1 class="slide-title" data-loc="s01.title">
+        Claude Code<br><span class="accent">Workshop</span>
+      </h1>
+
+      <p class="slide-lede" data-loc="s01.lede">
+        從 ChatGPT 到 AI Agent
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ── S02: 你怎麼和 AI 合作？ ──────────────────────────── -->
+  <section class="slide slide-dark" id="s02" data-slide="2">
+
+    <div class="slide-body" style="gap: 0; max-width: 1200px;">
+
+      <!-- Header -->
+      <p class="slide-eyebrow">暖場</p>
+      <h2 class="slide-title" style="font-size: clamp(40px, 5vw, 75px);" data-loc="s02.title">
+        你目前是怎麼和 <span class="accent">AI 合作</span>的？
+      </h2>
+      <p class="slide-lede" style="margin-top: 12px; font-size: clamp(20px, 1.75vw, 27.5px);" data-loc="s02.scenario">
+        場景：你有 100 份問卷需要分析
+      </p>
+
+      <!-- Two-column comparison -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; margin-top: 32px;">
+
+        <!-- LEFT: ChatGPT workflow -->
+        <div class="r" data-loc="s02.left-col">
+          <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 10px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-circle.svg"
+                 style="width:18px; filter:invert(1); opacity:0.4;">
+            <span style="font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35);">你現在的做法（ChatGPT）</span>
+          </div>
+
+          <!-- Step cards -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/clipboard-paste.svg" style="width:18px; filter:invert(1); opacity:0.6;">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:rgba(255,255,255,0.3); margin-bottom:4px;">步驟 1</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.75); line-height:1.4;" data-loc="s02.left.s1">把問卷資料一筆筆複製貼上到 ChatGPT</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-circle.svg" style="width:18px; filter:invert(1); opacity:0.6;">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:rgba(255,255,255,0.3); margin-bottom:4px;">步驟 2</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.75); line-height:1.4;" data-loc="s02.left.s2">AI 用文字描述「應該這樣分析」</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/file-spreadsheet.svg" style="width:18px; filter:invert(1); opacity:0.6;">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:rgba(255,255,255,0.3); margin-bottom:4px;">步驟 3</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.75); line-height:1.4;" data-loc="s02.left.s3">你自己去 Excel 跑公式、整理結果</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Outcome -->
+          <div style="margin-top: 12px; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 8px; background: rgba(182,83,42,0.12); border: 1px solid rgba(182,83,42,0.25);">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/clock.svg" style="width:16px; filter:invert(1); opacity:0.5; flex-shrink:0;">
+            <span style="font-family:var(--font-mono); font-size: clamp(15px, 1.25vw, 17.5px); color:rgba(255,255,255,0.45);" data-loc="s02.left.outcome">⏱ 30 分鐘以上　⚠️ 半成品</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Claude Code workflow -->
+        <div class="r" data-loc="s02.right-col">
+          <div style="border-bottom: 1px solid rgba(184,144,46,0.3); padding-bottom: 10px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/square-terminal.svg"
+                 style="width:18px; filter:invert(80%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(110%); opacity:0.8;">
+            <span style="font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);">學完今天之後（Claude Code）</span>
+          </div>
+
+          <!-- Step cards -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(184,144,46,0.06); border: 1px solid rgba(184,144,46,0.20); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(184,144,46,0.15); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/file-text.svg" style="width:18px; filter:invert(80%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(110%);">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:var(--gold); opacity:0.6; margin-bottom:4px;">步驟 1</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.9); line-height:1.4;" data-loc="s02.right.s1">告訴 Claude「讀 survey.csv，分析這些問卷」</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(184,144,46,0.06); border: 1px solid rgba(184,144,46,0.20); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(184,144,46,0.15); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/code.svg" style="width:18px; filter:invert(80%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(110%);">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:var(--gold); opacity:0.6; margin-bottom:4px;">步驟 2</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.9); line-height:1.4;" data-loc="s02.right.s2">AI 自己寫 Python、自己執行，不需要你動手</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: 14px; background: rgba(184,144,46,0.06); border: 1px solid rgba(184,144,46,0.20); border-radius: 12px; padding: 16px;">
+              <div style="flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(184,144,46,0.15); display:flex; align-items:center; justify-content:center;">
+                <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chart-line.svg" style="width:18px; filter:invert(80%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(110%);">
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:14px; letter-spacing:0.08em; color:var(--gold); opacity:0.6; margin-bottom:4px;">步驟 3</div>
+                <div style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.5vw, 21px); color: rgba(255,255,255,0.9); line-height:1.4;" data-loc="s02.right.s3">圖表、報告自動輸出，你直接用</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Outcome -->
+          <div style="margin-top: 12px; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 8px; background: rgba(46,125,91,0.15); border: 1px solid rgba(46,125,91,0.35);">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/zap.svg" style="width:16px; filter:invert(60%) sepia(50%) saturate(400%) hue-rotate(100deg) brightness(120%); flex-shrink:0;">
+            <span style="font-family:var(--font-mono); font-size: clamp(15px, 1.25vw, 17.5px); color:rgba(255,255,255,0.7);" data-loc="s02.right.outcome">⚡ 10 分鐘　✅ 完整初稿</span>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+
+      <!-- Bottom callout -->
+      <div class="r" style="margin-top: 24px; width: 100%; padding: 18px 24px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); display: flex; align-items: center; gap: 14px;" data-loc="s02.callout">
+        <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/arrow-down.svg" style="width:20px; filter:invert(1); opacity:0.4; flex-shrink:0; transform:rotate(-90deg);">
+        <p style="font-family:var(--font-sans); font-size: clamp(17.5px, 1.6vw, 22.5px); color:rgba(255,255,255,0.7); line-height:1.5;" data-loc="s02.callout.text">
+          這不只是效率差異 🔄 工作模式正在轉變：從<strong style="color:#fff;">「我操作工具」</strong>變成<strong style="color:var(--gold-bright);">「我管理 AI 去操作工具」</strong>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── S03: 2026 轉折點 ──────────────────────────────────── -->
+  <section class="slide slide-navy" id="s03" data-slide="3">
+    <div class="slide-body">
+
+      <p class="slide-eyebrow">Why Now</p>
+      <h2 class="slide-title" data-loc="s03.title">
+        為什麼是<span class="accent"> 現在</span>？
+      </h2>
+      <p class="slide-lede" style="margin-top:14px; white-space:nowrap;" data-loc="s03.lede">
+        AI 工具的演化，正在讓「會下指令」變成核心競爭力
+      </p>
+
+      <!-- Vertical timeline -->
+      <div style="margin-top: 44px; display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 680px;">
+
+        <!-- 2023 -->
+        <div class="r" style="display: flex; align-items: flex-start; gap: 24px;" data-loc="s03.y2023">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-square.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+            </div>
+            <div style="width:2px; height:48px; background:rgba(255,255,255,0.10); margin-top:4px;"></div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.3); margin-bottom:6px;">2023</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(17px,1.5vw,22px); font-weight:600; color:rgba(255,255,255,0.6);" data-loc="s03.y2023.label">ChatGPT</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,17px); color:rgba(255,255,255,0.35); margin-top:3px;" data-loc="s03.y2023.desc">你問它答，你自己動手</div>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="r" style="display: flex; align-items: flex-start; gap: 24px;" data-loc="s03.y2024">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/cpu.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+            </div>
+            <div style="width:2px; height:48px; background:rgba(255,255,255,0.10); margin-top:4px;"></div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.3); margin-bottom:6px;">2024</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(17px,1.5vw,22px); font-weight:600; color:rgba(255,255,255,0.6);" data-loc="s03.y2024.label">AI 輔助工具普及</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,17px); color:rgba(255,255,255,0.35); margin-top:3px;" data-loc="s03.y2024.desc">AI 建議你接受，你還是要審核每一行</div>
+          </div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="r" style="display: flex; align-items: flex-start; gap: 24px;" data-loc="s03.y2025">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/zap.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+            </div>
+            <div style="width:2px; height:48px; background:rgba(184,144,46,0.25); margin-top:4px;"></div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.3); margin-bottom:6px;">2025</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(17px,1.5vw,22px); font-weight:600; color:rgba(255,255,255,0.6);" data-loc="s03.y2025.label">Agent 開始執行</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,17px); color:rgba(255,255,255,0.35); margin-top:3px;" data-loc="s03.y2025.desc">AI 自己讀檔、跑程式、寫報告</div>
+          </div>
+        </div>
+
+        <!-- 2026 — GOLD highlight -->
+        <div class="r" style="display: flex; align-items: flex-start; gap: 24px;" data-loc="s03.y2026">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:52px; height:52px; border-radius:50%; background:rgba(184,144,46,0.18); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; box-shadow: 0 0 20px rgba(184,144,46,0.3);">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/star.svg" style="width:22px; filter:invert(75%) sepia(60%) saturate(500%) hue-rotate(5deg) brightness(110%);">
+            </div>
+          </div>
+          <div style="padding-top:10px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:var(--gold); opacity:0.7; margin-bottom:6px;">2026 — 你在這裡</div>
+            <div style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(24px,2.4vw,38px); font-weight:800; color:var(--gold-bright); letter-spacing:-0.02em; line-height:1.1;" data-loc="s03.y2026.label">學會指揮 AI<br>就是學會放大自己</div>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+    </div>
+  </section>
+
+
+  <!-- ── S04: No. 02 — 為什麼我 ───────────────────────────── -->
+  <section class="slide slide-navy" id="s04" data-slide="4">
+    <div class="slide-body">
+
+      <p class="slide-eyebrow">No. 02</p>
+      <h2 class="slide-title" data-loc="s04.title">為什麼<span class="accent"> 我</span></h2>
+      <p class="slide-lede" style="margin-top:14px; white-space:nowrap;" data-loc="s04.lede">不寫程式 也能是最強的 AI 指揮官</p>
+
+      <div style="margin-top:44px; display:flex; flex-direction:column; gap:0; width:100%; max-width:700px;">
+
+        <!-- Q node — always visible -->
+        <div style="display:flex; align-items:flex-start; gap:24px;">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-circle-question-mark.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+            </div>
+            <div style="width:2px; height:52px; background:rgba(255,255,255,0.10); margin-top:4px;"></div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.3); margin-bottom:6px;">問題</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(18px,1.8vw,26px); font-weight:600; color:rgba(255,255,255,0.65); line-height:1.4; font-style:italic;" data-loc="s04.q">我又不寫 code 跟我有什麼關係</div>
+          </div>
+        </div>
+
+        <!-- A1 node -->
+        <div class="r" style="display:flex; align-items:flex-start; gap:24px;" data-loc="s04.a1">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(184,144,46,0.15); border:2px solid rgba(184,144,46,0.4); display:flex; align-items:center; justify-content:center;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/trending-up.svg" style="width:20px; filter:invert(75%) sepia(60%) saturate(400%) hue-rotate(5deg) brightness(115%);">
+            </div>
+            <div style="width:2px; height:52px; background:rgba(184,144,46,0.25); margin-top:4px;"></div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:var(--gold); opacity:0.6; margin-bottom:6px;">效率</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(17px,1.6vw,24px); color:rgba(255,255,255,0.85); line-height:1.5;" data-loc="s04.a1.text">同樣的工作 你可以用 AI 把產出<strong style="color:#fff;"> 放大 10 倍</strong></div>
+          </div>
+        </div>
+
+        <!-- A2 node — last, no connector -->
+        <div class="r" style="display:flex; align-items:flex-start; gap:24px;" data-loc="s04.a2">
+          <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+            <div style="width:44px; height:44px; border-radius:50%; background:rgba(184,144,46,0.15); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; box-shadow:0 0 16px rgba(184,144,46,0.25);">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/arrow-right.svg" style="width:20px; filter:invert(75%) sepia(60%) saturate(400%) hue-rotate(5deg) brightness(115%);">
+            </div>
+          </div>
+          <div style="padding-top:8px;">
+            <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.12em; color:var(--gold); margin-bottom:6px;">未來</div>
+            <div style="font-family:var(--font-sans); font-size:clamp(17px,1.6vw,24px); color:rgba(255,255,255,0.85); line-height:1.5;" data-loc="s04.a2.text">會指揮 AI 的人 和不會的人<strong style="color:var(--gold-bright);"> 差距只會越來越大</strong></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S05: No. 03 — 為什麼這個 Workshop ─────────────────── -->
+  <section class="slide slide-dark" id="s05" data-slide="5">
+    <div class="slide-body" style="max-width:900px;">
+
+      <p class="slide-eyebrow">No. 03</p>
+      <h2 class="slide-title" style="white-space:nowrap;" data-loc="s05.title">為什麼<span class="accent"> 這個 Workshop</span></h2>
+
+      <div style="margin-top:44px; display:flex; flex-direction:column; gap:16px; width:100%;">
+
+        <!-- Q1 -->
+        <div class="r" style="display:flex; align-items:center; gap:16px;" data-loc="s05.q1">
+          <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.06); border:2px solid rgba(255,255,255,0.14); flex-shrink:0;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-circle-question-mark.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+          </div>
+          <p style="font-family:var(--font-sans); font-size:clamp(20px,2.2vw,32px); font-style:italic; color:rgba(255,255,255,0.55); line-height:1.35;" data-loc="s05.q1.text">
+            網路上教學那麼多 我自己看不就好了
+          </p>
+        </div>
+
+        <!-- Q2 -->
+        <div class="r" style="display:flex; align-items:center; gap:16px;" data-loc="s05.q2">
+          <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.06); border:2px solid rgba(255,255,255,0.14); flex-shrink:0;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/message-circle-question-mark.svg" style="width:20px; filter:invert(1); opacity:0.5;">
+          </div>
+          <p style="font-family:var(--font-sans); font-size:clamp(20px,2.2vw,32px); font-style:italic; color:rgba(255,255,255,0.55); line-height:1.35;" data-loc="s05.q2.text">
+            自己邊用邊摸索 學不到嗎
+          </p>
+        </div>
+
+        <!-- divider -->
+        <div class="r" style="width:100%; height:1px; background:rgba(255,255,255,0.08); margin:8px 0;"></div>
+
+        <!-- A -->
+        <div class="r" style="display:flex; align-items:flex-start; gap:20px;" data-loc="s05.answer">
+          <div style="display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(184,144,46,0.18); border:2px solid var(--gold); flex-shrink:0; box-shadow:0 0 18px rgba(184,144,46,0.25);">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/lightbulb.svg" style="width:20px; filter:invert(75%) sepia(60%) saturate(400%) hue-rotate(5deg) brightness(115%);">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; flex:1;" data-loc="s05.answer.text">
+
+            <!-- Card 1 -->
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/layers.svg" style="width:22px; filter:invert(1); opacity:0.55;">
+              <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:700; color:#fff; line-height:1.3;" data-loc="s05.card1.title">把關 + 統整</p>
+              <p style="font-family:var(--font-sans); font-size:clamp(12px,1vw,15px); color:rgba(255,255,255,0.5); line-height:1.55;" data-loc="s05.card1.content">幫你篩選網路和官方的 AI 資料 去蕪存菁</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10); border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/wrench.svg" style="width:22px; filter:invert(1); opacity:0.55;">
+              <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:700; color:#fff; line-height:1.3;" data-loc="s05.card2.title">實戰經驗</p>
+              <p style="font-family:var(--font-sans); font-size:clamp(12px,1vw,15px); color:rgba(255,255,255,0.5); line-height:1.55;" data-loc="s05.card2.content">結合軟體開發與 AI Agent 協作的第一線經驗</p>
+            </div>
+
+            <!-- Card 3 — gold -->
+            <div style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.28); border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+              <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/gift.svg" style="width:22px; filter:invert(75%) sepia(60%) saturate(400%) hue-rotate(5deg) brightness(115%);">
+              <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:700; color:var(--gold-bright); line-height:1.3;" data-loc="s05.card3.title">6 小時直達</p>
+              <p style="font-family:var(--font-sans); font-size:clamp(12px,1vw,15px); color:rgba(255,255,255,0.5); line-height:1.55;" data-loc="s05.card3.content">今天全部傳授給你 不需要自己踩坑</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── S06: 講師 & 助教 ─────────────────────────────────── -->
+  <section class="slide slide-dark" id="s06" data-slide="6">
+    <div class="slide-body" style="max-width:1200px;">
+
+      <p class="slide-eyebrow">今天的人</p>
+      <h2 class="slide-title" data-loc="s06.title">講師 <span class="accent">&</span> 神隊友</h2>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:27px; margin-top:48px; width:100%; align-items:stretch;">
+
+        <!-- ══════════ Reed card ══════════ -->
+        <div class="r" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:24px; padding:33px 30px; display:flex; flex-direction:column; gap:24px;" data-loc="s06.reed">
+
+          <!-- Top: avatar + name/role -->
+          <div style="display:flex; align-items:flex-start; gap:18px;">
+            <!-- avatar -->
+            <div style="width:114px; height:114px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,rgba(184,144,46,0.30),rgba(14,26,47,0.9)); border:2px solid rgba(184,144,46,0.50); display:flex; align-items:center; justify-content:center;">
+              <span style="font-family:var(--font-sans); font-size:26px; font-weight:900; color:var(--gold-bright);">R</span>
+            </div>
+            <!-- name + role stacked -->
+            <div style="display:flex; flex-direction:column; gap:12px; flex:1; min-width:0;">
+              <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:11px 18px;" data-loc="s06.reed.name">
+                <p style="font-family:var(--font-sans); font-size:clamp(15px,1.4vw,20px); font-weight:800; color:#fff; line-height:1.1;">Reed</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:11px 18px;" data-loc="s06.reed.role">
+                <p style="font-family:var(--font-mono); font-size:clamp(10px,0.85vw,12px); color:var(--gold); line-height:1.55;">Senior Software Engineer<br>AI Consultant</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company logo circles row -->
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:9px;" data-loc="s06.reed.companies">
+            <!-- TikTok -->
+            <div style="width:66px; height:66px; border-radius:50%; background:#fff; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px rgba(255,255,255,0.10);">
+              <img src="https://cdn.simpleicons.org/tiktok" style="width:48px; height:48px; object-fit:contain;">
+            </div>
+            <!-- Crypto.com -->
+            <div style="width:66px; height:66px; border-radius:50%; background:#fff; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px rgba(255,255,255,0.10);">
+              <img src="https://www.google.com/s2/favicons?domain=crypto.com&sz=256" style="width:66px; height:66px; object-fit:cover;">
+            </div>
+            <!-- 17Live -->
+            <div style="width:66px; height:66px; border-radius:50%; background:#fff; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px rgba(255,255,255,0.10);">
+              <img src="https://www.google.com/s2/favicons?domain=17.live&sz=256" style="width:66px; height:66px; object-fit:cover;">
+            </div>
+            <!-- Pinkoi -->
+            <div style="width:66px; height:66px; border-radius:50%; background:#fff; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px rgba(255,255,255,0.10);">
+              <img src="https://www.google.com/s2/favicons?domain=pinkoi.com&sz=256" style="width:66px; height:66px; object-fit:cover;">
+            </div>
+            <!-- KKBox -->
+            <div style="width:66px; height:66px; border-radius:50%; background:#fff; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 1px rgba(255,255,255,0.10);">
+              <img src="https://www.google.com/s2/favicons?domain=kkbox.com&sz=256" style="width:66px; height:66px; object-fit:cover;">
+            </div>
+          </div>
+
+          <!-- Consultant box -->
+          <div style="background:rgba(184,144,46,0.07); border:1px solid rgba(184,144,46,0.20); border-radius:15px; padding:18px 21px; margin-top:auto;" data-loc="s06.reed.consultant">
+            <p style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(255,255,255,0.65); line-height:1.65; text-align:center;">現同時擔任兩家新創公司<br><span style="color:var(--gold-bright); font-weight:600;">AI 驅動軟體開發流程導入 Consultant</span></p>
+          </div>
+
+        </div>
+
+        <!-- ══════════ Vivian placeholder card ══════════ -->
+        <div class="r" style="background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.12); border-radius:24px; padding:33px 30px; display:flex; flex-direction:column; gap:24px;" data-loc="s06.vivian">
+
+          <div style="display:flex; align-items:flex-start; gap:18px;">
+            <div style="width:114px; height:114px; border-radius:50%; flex-shrink:0; background:rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <span style="font-family:var(--font-sans); font-size:26px; font-weight:900; color:rgba(255,255,255,0.25);">V</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; flex:1; min-width:0;">
+              <div style="background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.10); border-radius:12px; padding:11px 18px;" data-loc="s06.vivian.name">
+                <p style="font-family:var(--font-sans); font-size:clamp(15px,1.4vw,20px); font-weight:800; color:rgba(255,255,255,0.30); line-height:1.1;">Vivian</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.07); border-radius:12px; padding:11px 18px;" data-loc="s06.vivian.role">
+                <p style="font-family:var(--font-mono); font-size:clamp(10px,0.85vw,12px); color:rgba(255,255,255,0.18); line-height:1.55;">助教 TA<br>&nbsp;</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:9px;">
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.08); border-radius:15px; padding:18px 21px; margin-top:auto;" data-loc="s06.vivian.desc">
+            <p style="font-family:var(--font-mono); font-size:clamp(11px,0.9vw,13px); color:rgba(255,255,255,0.18); line-height:1.65; text-align:center;">自我介紹內容<br>待填寫</p>
+          </div>
+
+        </div>
+
+        <!-- ══════════ Darren placeholder card ══════════ -->
+        <div class="r" style="background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.12); border-radius:24px; padding:33px 30px; display:flex; flex-direction:column; gap:24px;" data-loc="s06.darren">
+
+          <div style="display:flex; align-items:flex-start; gap:18px;">
+            <div style="width:114px; height:114px; border-radius:50%; flex-shrink:0; background:rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;">
+              <span style="font-family:var(--font-sans); font-size:26px; font-weight:900; color:rgba(255,255,255,0.25);">D</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; flex:1; min-width:0;">
+              <div style="background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.10); border-radius:12px; padding:11px 18px;" data-loc="s06.darren.name">
+                <p style="font-family:var(--font-sans); font-size:clamp(15px,1.4vw,20px); font-weight:800; color:rgba(255,255,255,0.30); line-height:1.1;">Darren</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.07); border-radius:12px; padding:11px 18px;" data-loc="s06.darren.role">
+                <p style="font-family:var(--font-mono); font-size:clamp(10px,0.85vw,12px); color:rgba(255,255,255,0.18); line-height:1.55;">助教 TA<br>&nbsp;</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:9px;">
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.08);"></div>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.08); border-radius:15px; padding:18px 21px; margin-top:auto;" data-loc="s06.darren.desc">
+            <p style="font-family:var(--font-mono); font-size:clamp(11px,0.9vw,13px); color:rgba(255,255,255,0.18); line-height:1.65; text-align:center;">自我介紹內容<br>待填寫</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#deck -->
+
+<!-- ── Nav controls ── -->
+<button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
+  <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-left.svg" alt="←">
+</button>
+<button class="nav-arrow next" id="btn-next" aria-label="下一頁">
+  <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-right.svg" alt="→">
+</button>
+
+<div id="slide-counter">1 / 1</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+/* ── Lottie init ── */
+const lotties = {};
+
+function initLottie(id, path, opts = {}) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  lotties[id] = lottie.loadAnimation({
+    container: el,
+    renderer: 'svg',
+    loop: opts.loop !== false,
+    autoplay: opts.autoplay !== false,
+    path: path
+  });
+}
+
+// S01 background
+initLottie('lottie-hero-bg', '../assets/lottie/hero-ambient.json');
+
+/* ── Slide engine ── */
+const slides  = Array.from(document.querySelectorAll('.slide'));
+const counter = document.getElementById('slide-counter');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+let current = 0;
+
+function isLight(slide) {
+  return slide.classList.contains('slide-light') ||
+         slide.classList.contains('slide-warm');
+}
+
+function goTo(n, { updateHash = true } = {}) {
+  const total = slides.length;
+  const next  = (n + total) % total;
+
+  slides[current].classList.remove('active');
+  slides[next].classList.add('active');
+  current = next;
+
+  const slide = slides[current];
+
+  // counter
+  if (slide.dataset.hideCounter !== undefined) {
+    counter.classList.remove('visible');
+  } else {
+    counter.textContent = `${current + 1} / ${total}`;
+    counter.classList.add('visible');
+  }
+
+  // arrow color context
+  document.body.classList.toggle('slide-is-light', isLight(slide));
+
+  // reset reveal elements on the newly-active slide
+  slide.querySelectorAll('.r').forEach(el => el.classList.remove('revealed'));
+
+  // sync URL hash (1-indexed, e.g. #3)
+  if (updateHash) history.replaceState(null, '', '#' + (current + 1));
+}
+
+btnPrev.addEventListener('click', () => goTo(current - 1));
+btnNext.addEventListener('click', () => goTo(current + 1));
+
+// Browser back/forward
+window.addEventListener('hashchange', () => {
+  const n = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(n)) goTo(n - 1, { updateHash: false });
+});
+
+document.addEventListener('keydown', e => {
+  if (document.body.classList.contains('dbg-active')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault();
+    goTo(current + 1);
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    goTo(current - 1);
+  }
+});
+
+/* ── Click-to-reveal ── */
+document.addEventListener('click', e => {
+  if (document.body.classList.contains('dbg-active')) return;
+  if (e.target.closest('#dbg-panel') || e.target.closest('#dbg-btn')) return;
+  const slide = slides[current];
+  if (e.target.closest('.nav-arrow') || e.target.closest('#slide-counter')) return;
+
+  // find next unrevealed .r in active slide
+  const unrevealed = slide.querySelector('.r:not(.revealed)');
+  if (unrevealed) {
+    unrevealed.classList.add('revealed');
+  } else {
+    goTo(current + 1);
+  }
+});
+
+/* ── Init: read hash or start at slide 1 ── */
+const initSlide = parseInt(location.hash.slice(1), 10);
+goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
+</script>
+
+<!-- Debug overlay (dev only) -->
+<script src="../assets/js/debug-overlay.js"></script>
+
+</body>
+</html>
