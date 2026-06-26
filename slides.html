@@ -1005,6 +1005,73 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 
   </section>
 
+  <!-- ── S10: AI Agent 三種介面 ──────────────────────────────── -->
+  <section class="slide slide-dark" id="s10" data-slide="10">
+
+    <div class="slide-body" style="max-width:960px; zoom:1.1;">
+
+      <p class="slide-eyebrow">T2 · Agent 介面</p>
+      <h2 class="slide-title" style="white-space:nowrap;">AI Agent 的<span class="accent"> 三種形態</span></h2>
+      <p style="font-family:var(--font-sans); font-size:clamp(13px,1.1vw,16px); color:rgba(255,255,255,0.45); margin-top:6px;">依照操作介面分類——三種形態，三種使用習慣</p>
+
+      <!-- 3 cards -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:32px; width:100%;">
+
+        <!-- Card 1: GUI -->
+        <div class="r s10-card" data-modal="gui" role="button" tabindex="0"
+             style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:36px 28px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; cursor:pointer; transition:transform 0.3s ease, border-color 0.2s;">
+          <div style="width:64px; height:64px; background:rgba(255,255,255,0.07); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/layout-grid.svg" style="width:32px;height:32px;filter:invert(1);opacity:0.8;">
+          </div>
+          <div>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">GUI Based</p>
+            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:#fff; line-height:1.1;">AI Agent</h3>
+          </div>
+          <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); margin-top:auto;">點擊看介紹 →</p>
+        </div>
+
+        <!-- Card 2: CLI (gold accent — 今天主角) -->
+        <div class="r s10-card" data-modal="cli" role="button" tabindex="0"
+             style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.35); border-radius:20px; padding:36px 28px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; cursor:pointer; transition:transform 0.3s ease, border-color 0.2s;">
+          <div style="width:64px; height:64px; background:rgba(184,144,46,0.15); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/terminal.svg" style="width:32px;height:32px;filter:invert(1) sepia(0.4);opacity:0.9;">
+          </div>
+          <div>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">CLI Based</p>
+            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:var(--gold-bright); line-height:1.1;">AI Agent</h3>
+          </div>
+          <p style="font-family:var(--font-mono); font-size:11px; color:rgba(184,144,46,0.45); margin-top:auto;">點擊看介紹 →</p>
+        </div>
+
+        <!-- Card 3: IDE -->
+        <div class="r s10-card" data-modal="ide" role="button" tabindex="0"
+             style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:36px 28px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; cursor:pointer; transition:transform 0.3s ease, border-color 0.2s;">
+          <div style="width:64px; height:64px; background:rgba(255,255,255,0.07); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/monitor-cog.svg" style="width:32px;height:32px;filter:invert(1);opacity:0.8;">
+          </div>
+          <div>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">IDE</p>
+            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:#fff; line-height:1.1;">AI Agent</h3>
+          </div>
+          <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); margin-top:auto;">點擊看介紹 →</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal overlay -->
+    <div id="s10-modal"
+         style="display:none; position:absolute; inset:0; z-index:50; background:rgba(5,11,23,0.82); backdrop-filter:blur(10px); align-items:center; justify-content:center;">
+      <div id="s10-modal-box"
+           style="position:relative; background:#0E1A2F; border:1px solid rgba(255,255,255,0.14); border-radius:20px; padding:36px 40px; width:min(640px,88vw); max-height:80vh; overflow-y:auto;">
+        <button id="s10-close"
+                style="position:absolute; top:16px; right:18px; background:rgba(255,255,255,0.08); border:none; border-radius:8px; color:rgba(255,255,255,0.55); font-size:18px; width:32px; height:32px; cursor:pointer; line-height:1;">×</button>
+        <div id="s10-modal-content"></div>
+      </div>
+    </div>
+
+  </section>
+
 </div><!-- /#deck -->
 
 <!-- ── Nav controls ── -->
@@ -1222,6 +1289,82 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
     e.stopPropagation();
     if (e.target === modal) closeModal(); // click outside box
   });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S10 Card Popup ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s10-modal');
+  var modalBox = document.getElementById('s10-modal-box');
+  var content  = document.getElementById('s10-modal-content');
+  var closeBtn = document.getElementById('s10-close');
+  if (!modal) return;
+
+  function badge(text) {
+    return '<code style="font-family:var(--font-mono);font-size:12px;background:rgba(255,255,255,0.08);border:none;border-radius:100px;padding:4px 12px;color:rgba(255,255,255,0.75);">' + text + '</code>';
+  }
+  function goldBadge(text) {
+    return '<code style="font-family:var(--font-mono);font-size:12px;background:rgba(184,144,46,0.15);border:none;border-radius:100px;padding:4px 12px;color:var(--gold-bright);">' + text + '</code>';
+  }
+
+  var CONTENT = {
+    gui:
+      '<p class="modal-eyebrow">GUI Based AI Agent</p>' +
+      '<h3 class="modal-title">在一般 App 裡指揮 AI 做事</h3>' +
+      '<div class="modal-section"><p>打開網頁或手機 App 就能用，不需要安裝任何額外工具。操作方式和你習慣的 SaaS 一樣——點選、上傳、輸入，AI 幫你在介面內完成任務。</p></div>' +
+      '<div class="modal-section"><h4>代表產品</h4>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
+        badge('Claude Cowork') + badge('ChatGPT Projects') +
+      '</div></div>' +
+      '<div class="modal-section"><h4>適合誰</h4><p>不想碰終端機、只需要在熟悉的介面完成工作的使用者。</p></div>',
+
+    cli:
+      '<p class="modal-eyebrow" style="color:var(--gold);">CLI Based AI Agent</p>' +
+      '<h3 class="modal-title" style="color:var(--gold-bright);">用駭客任務的文字指令讓 AI 進資料夾做事</h3>' +
+      '<div class="modal-section"><p>在終端機（Terminal）輸入指令，AI 直接操作你本機的資料夾、檔案、執行程式。沒有圖形介面，但威力最強——可以處理整個專案。</p></div>' +
+      '<div class="modal-section"><h4>代表產品</h4>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
+        goldBadge('Claude Code') + goldBadge('Codex') +
+      '</div></div>' +
+      '<div class="modal-section"><h4>今天學的就是這個</h4><p>Claude Code 是 CLI Agent 的代表——打開終端機、輸入 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;">claude</code>，就開始指揮 AI。</p></div>',
+
+    ide:
+      '<p class="modal-eyebrow">AI Agent IDE</p>' +
+      '<h3 class="modal-title">像在加強版的工作室裡和 AI 一起工作</h3>' +
+      '<div class="modal-section"><p>把程式碼編輯器（IDE）和 AI 深度整合在一起。AI 能看到你的整個專案結構、即時建議、直接修改程式碼，像一個坐在你旁邊的工程師。</p></div>' +
+      '<div class="modal-section"><h4>代表產品</h4>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
+        badge('Cursor') + badge('Antigravity') +
+      '</div></div>' +
+      '<div class="modal-section"><h4>適合誰</h4><p>有寫程式需求、想要 AI 深入整合到開發流程的使用者。</p></div>'
+  };
+
+  function openModal(key) {
+    content.innerHTML = CONTENT[key] || '';
+    modal.style.display = 'flex';
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  document.querySelectorAll('.s10-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (!card.classList.contains('revealed')) return;
+      e.stopPropagation();
+      openModal(card.dataset.modal);
+    });
+    card.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && card.classList.contains('revealed')) {
+        e.preventDefault(); e.stopPropagation(); openModal(card.dataset.modal);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === modal) closeModal(); });
   modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
