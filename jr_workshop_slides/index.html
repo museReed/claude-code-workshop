@@ -1331,8 +1331,6 @@ document.addEventListener('click', e => {
   const unrevealed = slide.querySelector('.r:not(.revealed)');
   if (unrevealed) {
     unrevealed.classList.add('revealed');
-  } else {
-    goTo(current + 1);
   }
 });
 
