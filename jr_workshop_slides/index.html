@@ -308,6 +308,33 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 /* ── S09 tier hover ── */
 .s09-tier.revealed:hover { transform: translateX(6px) !important; }
 
+/* ── S09 Modal content ── */
+.modal-eyebrow { font-family:var(--font-mono); font-size:11px; letter-spacing:0.10em; color:var(--gold); text-transform:uppercase; margin-bottom:8px; }
+.modal-title { font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(20px,2.2vw,28px); font-weight:800; color:#fff; line-height:1.15; margin-bottom:14px; }
+.modal-section { margin-bottom:20px; }
+.modal-section:last-child { margin-bottom:0; }
+.modal-section > p { font-family:var(--font-sans); font-size:14px; line-height:1.7; color:rgba(255,255,255,0.6); }
+.modal-section h4 { font-family:var(--font-sans); font-size:11px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
+.llm-tiers { display:flex; flex-direction:column; gap:10px; }
+.llm-tier { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:12px; padding:16px 18px; }
+.llm-tier-top { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:7px; }
+.llm-tier-badge { font-family:var(--font-mono); font-size:10px; font-weight:700; background:var(--gold); color:#050B17; border-radius:100px; padding:2px 10px; letter-spacing:0.06em; white-space:nowrap; }
+.llm-tier-h { font-family:var(--font-sans); font-size:15px; font-weight:700; color:#fff; flex:1; }
+.llm-tier-cost { font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); white-space:nowrap; }
+.llm-tier-use { font-family:var(--font-sans); font-size:12px; color:rgba(255,255,255,0.5); line-height:1.55; margin-bottom:12px; }
+.llm-vendors { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+.llm-vendor { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 10px; }
+.llm-vendor-name { font-family:var(--font-mono); font-size:9px; letter-spacing:0.10em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px; }
+.llm-vendor-model { font-family:var(--font-sans); font-size:12px; font-weight:700; color:#fff; line-height:1.3; }
+.modal-spec { display:flex; flex-direction:column; margin-top:4px; }
+.modal-spec > div { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+.modal-spec > div:first-child { border-top:1px solid rgba(255,255,255,0.07); }
+.modal-spec dt { font-family:var(--font-sans); font-size:13px; color:rgba(255,255,255,0.45); }
+.modal-spec dd { font-family:var(--font-mono); font-size:13px; font-weight:700; color:#fff; }
+.modal-spec dd.yes { color:#4ADE80; }
+.modal-spec dd.yes::before { content:"✓ "; }
+.modal-spec dd.no { color:rgba(255,255,255,0.3); font-weight:500; }
+
 /* ── Divider slide icon ── */
 .divider-icon {
   width: 56px;
@@ -1103,61 +1130,64 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   if (!modal) return;
 
   /* ── Modal content per tier ── */
+  var LLM_TIERS = [
+    {badge:'第 1 級', h:'深度推理，最聰明', cost:'成本 $$$ · 最貴最慢',
+     use:'用在：複雜規劃、多步推理、難題拆解、寫架構——低頻、值得花錢的硬任務',
+     vendors:[['Anthropic','Claude Opus 4.8'],['Google','Gemini 2.5 Pro'],['OpenAI','GPT-5 / o 系列'],['DeepSeek','DeepSeek-R1'],['阿里巴巴','Qwen Max']]},
+    {badge:'第 2 級', h:'均衡，日常主力', cost:'成本 $$ · 系統預設',
+     use:'用在：大多數對話、寫程式、改檔案、整理資料——聰明與速度的甜蜜點，八成任務都用它',
+     vendors:[['Anthropic','Claude Sonnet 4.6'],['Google','Gemini 2.5 Flash'],['OpenAI','GPT-5 mini'],['DeepSeek','DeepSeek-V3'],['阿里巴巴','Qwen Plus']]},
+    {badge:'第 3 級', h:'高速，最便宜', cost:'成本 $ · 最快最省',
+     use:'用在：高頻批量、分類打標、簡單摘要、即時回應——量大、單價要壓到最低的任務',
+     vendors:[['Anthropic','Claude Haiku 4.5'],['Google','Gemini 2.5 Flash-Lite'],['OpenAI','GPT-5 nano'],['DeepSeek','—'],['阿里巴巴','Qwen Turbo']]}
+  ];
+
   var CONTENT = {
-    model: `
-      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(99,102,241,0.7);letter-spacing:.08em;margin-bottom:6px;">第一層 · 基礎引擎</p>
-      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;">Model · LLM <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">三種能力等級</span></h3>
-      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">同一件事，每家廠商都有三種等級——愈上層愈聰明也愈貴。<br>Claude Code 讓你選 Opus / Sonnet / Haiku。</p>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        ${[
-          {badge:'第 1 級',label:'深度推理，最聰明',cost:'$$$',use:'複雜規劃、多步推理、難題拆解',models:'Claude Opus 4.8 · Gemini 2.5 Pro · GPT-5 / o 系列',color:'rgba(239,68,68,0.15)',border:'rgba(239,68,68,0.30)',costColor:'#F87171'},
-          {badge:'第 2 級',label:'均衡，日常主力',cost:'$$',use:'日常開發、資料處理、寫作',models:'Claude Sonnet 4.6 · Gemini 2.5 Flash · GPT-5 mini',color:'rgba(99,102,241,0.10)',border:'rgba(99,102,241,0.25)',costColor:'#818CF8'},
-          {badge:'第 3 級',label:'速度，大量批次',cost:'$',use:'大量分類、簡單摘要、快速回覆',models:'Claude Haiku 4.5 · Gemini 2.5 Flash-Lite · GPT-5 nano',color:'rgba(255,255,255,0.04)',border:'rgba(255,255,255,0.10)',costColor:'rgba(255,255,255,0.4)'}
-        ].map(t => `
-          <div style="background:${t.color};border:1px solid ${t.border};border-radius:12px;padding:14px 18px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-              <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);">${t.badge}</span>
-              <span style="font-family:var(--font-sans);font-size:13px;font-weight:700;color:#fff;flex:1;">${t.label}</span>
-              <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:${t.costColor};">${t.cost}</span>
-            </div>
-            <p style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:5px;">${t.use}</p>
-            <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);">${t.models}</p>
-          </div>`).join('')}
-      </div>`,
+    model: '<p class="modal-eyebrow">第一層 · 基礎引擎</p>' +
+      '<h3 class="modal-title">Model · LLM <span style="font-weight:400;font-size:17px;color:rgba(255,255,255,0.4);">三種能力等級</span></h3>' +
+      '<div class="modal-section"><p>同一件事，每家廠商都有三種等級——愈上層愈聰明也愈貴。Claude Code 用 Opus / Sonnet / Haiku 分層，挑模型 = 挑「夠用的最便宜那一層」。</p></div>' +
+      '<div class="modal-section"><div class="llm-tiers">' +
+      LLM_TIERS.map(function(t) {
+        return '<div class="llm-tier">' +
+          '<div class="llm-tier-top">' +
+            '<span class="llm-tier-badge">' + t.badge + '</span>' +
+            '<span class="llm-tier-h">' + t.h + '</span>' +
+            '<span class="llm-tier-cost">' + t.cost + '</span>' +
+          '</div>' +
+          '<p class="llm-tier-use">' + t.use + '</p>' +
+          '<div class="llm-vendors">' +
+            t.vendors.map(function(v) {
+              return '<div class="llm-vendor"><div class="llm-vendor-name">' + v[0] + '</div><div class="llm-vendor-model">' + v[1] + '</div></div>';
+            }).join('') +
+          '</div>' +
+        '</div>';
+      }).join('') +
+      '</div></div>' +
+      '<div class="modal-section"><h4>記住這個就好</h4><p>模型名稱更新很快，記不住沒關係。要記的是「三層」的概念，以及一層比一層貴的關係，跨廠商都成立。</p></div>',
 
-    product: `
-      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.08em;margin-bottom:6px;">第二層 · 對話介面</p>
-      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;">Product <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">對話型 AI 產品</span></h3>
-      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">把 LLM 包成一個聊天 App，讓一般人不寫程式也能用。<br>代表作是 ChatGPT。</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        ${[
-          {label:'互動模式',val:'對話',ok:true},
-          {label:'看得到你的檔案？',val:'無法',ok:false},
-          {label:'能寫檔案？',val:'無法',ok:false},
-          {label:'能跑指令？',val:'無法',ok:false}
-        ].map(r => `
-          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.45);">${r.label}</span>
-            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:${r.ok?'#4ADE80':'#F87171'};">${r.val}</span>
-          </div>`).join('')}
-      </div>`,
+    product: '<p class="modal-eyebrow">第二層 · 對話介面</p>' +
+      '<h3 class="modal-title">AI 產品 <span style="font-weight:400;font-size:17px;color:rgba(255,255,255,0.4);">對話型 AI App</span></h3>' +
+      '<div class="modal-section"><p>把 LLM 包成一個聊天 App，讓一般人不寫程式也能用。代表作是 ChatGPT。它很強，但只能在對話框裡進出。</p></div>' +
+      '<div class="modal-section"><h4>ChatGPT 能做與不能做</h4>' +
+      '<dl class="modal-spec">' +
+        '<div><dt>互動模式</dt><dd>對話</dd></div>' +
+        '<div><dt>看得到你的檔案？</dt><dd class="no">無法</dd></div>' +
+        '<div><dt>能寫檔案？</dt><dd class="no">無法</dd></div>' +
+        '<div><dt>能跑指令？</dt><dd class="no">無法</dd></div>' +
+        '<div><dt>適合做什麼</dt><dd>問問題、寫文字</dd></div>' +
+      '</dl></div>',
 
-    agent: `
-      <p style="font-family:var(--font-mono);font-size:11px;color:rgba(184,144,46,0.8);letter-spacing:.08em;margin-bottom:6px;">第三層 · 動手做</p>
-      <h3 style="font-family:var(--font-sans);font-size:22px;font-weight:800;color:var(--gold-bright);margin-bottom:12px;">Agent <span style="color:rgba(255,255,255,0.35);font-weight:400;font-size:15px;">會動手的 AI</span></h3>
-      <p style="font-family:var(--font-sans);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:24px;">Agent 不只回答，還會自己用工具把事做完。<br>代表作是 Claude Code。</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        ${[
-          {label:'互動模式',val:'對話 + 動手做',ok:true},
-          {label:'看得到你的檔案？',val:'可以',ok:true},
-          {label:'能寫檔案？',val:'可以',ok:true},
-          {label:'能跑指令？',val:'可以',ok:true}
-        ].map(r => `
-          <div style="background:rgba(184,144,46,0.07);border:1px solid rgba(184,144,46,0.20);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.45);">${r.label}</span>
-            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:#4ADE80;">${r.val}</span>
-          </div>`).join('')}
-      </div>`
+    agent: '<p class="modal-eyebrow">第三層 · 動手做</p>' +
+      '<h3 class="modal-title" style="color:var(--gold-bright);">Agent <span style="font-weight:400;font-size:17px;color:rgba(255,255,255,0.4);">會動手的 AI</span></h3>' +
+      '<div class="modal-section"><p>Agent 不只回答，還會自己用工具把事做完。代表作是 Claude Code。它能讀你的檔案、改檔、跑指令，把「對話」變成「交付」。</p></div>' +
+      '<div class="modal-section"><h4>Claude Code 能做與不能做</h4>' +
+      '<dl class="modal-spec">' +
+        '<div><dt>互動模式</dt><dd>對話 + 動手做</dd></div>' +
+        '<div><dt>看得到你的檔案？</dt><dd class="yes">可以</dd></div>' +
+        '<div><dt>能寫檔案？</dt><dd class="yes">可以</dd></div>' +
+        '<div><dt>能跑指令？</dt><dd class="yes">可以</dd></div>' +
+        '<div><dt>適合做什麼</dt><dd>完成任務、改專案</dd></div>' +
+      '</dl></div>'
   };
 
   function openModal(tier) {
