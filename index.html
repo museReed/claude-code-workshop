@@ -1136,100 +1136,6 @@ button:focus-visible {
 .dl-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
 .dl-btn .dl-arrow { font-weight: 600; }
 
-/* slide / presentation mode */
-.slide-btn {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--navy-deep);
-  background: var(--gold);
-  border: none;
-  padding: 7px 14px;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background 0.15s var(--ease), transform 0.15s var(--ease);
-}
-.slide-btn:hover { background: var(--gold-bright); transform: translateY(-1px); }
-
-body.slide-mode { overflow: hidden; }
-body.slide-mode .nav,
-body.slide-mode .scroll-progress { display: none; }
-body.slide-mode .is-slide { display: none !important; }
-body.slide-mode .is-slide.slide-current {
-  display: block !important;
-  position: fixed;
-  inset: 0;
-  margin: 0;
-  border: none;
-  max-height: 100vh;
-  overflow-y: auto;
-  background: var(--bg);
-  padding: 64px 0;
-}
-body.slide-mode .is-slide.slide-current.section-dark { background: var(--navy-deep); }
-body.slide-mode .is-slide.slide-current.section-warm { background: var(--bg-warm); }
-body.slide-mode .is-slide.slide-current.hero { background: var(--navy-deep); }
-body.slide-mode .r { opacity: 1 !important; transform: none !important; }
-
-.slide-chrome[hidden] { display: none !important; }
-.slide-nav-btn {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 320;
-  box-shadow: 0 6px 20px rgba(14, 26, 47, 0.18);
-  transition: background 0.15s var(--ease), color 0.15s var(--ease);
-}
-.slide-nav-btn:hover { background: var(--gold); color: #fff; }
-#slide-prev { left: 18px; }
-#slide-next { right: 18px; }
-.slide-topbar {
-  position: fixed;
-  top: 16px;
-  right: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 320;
-}
-.slide-counter {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink-2);
-  background: rgba(255, 255, 255, 0.92);
-  padding: 6px 12px;
-  border-radius: 100px;
-  border: 1px solid var(--line);
-}
-.slide-exit {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  background: var(--navy-deep);
-  border: none;
-  padding: 7px 14px;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background 0.15s var(--ease);
-}
-.slide-exit:hover { background: var(--gold); }
-@media (max-width: 560px) {
-  .slide-nav-btn { width: 44px; height: 44px; font-size: 22px; }
-  #slide-prev { left: 8px; }
-  #slide-next { right: 8px; }
-}
 
 /* onboarding + faq reference pages */
 .prep-checklist { list-style: none; display: grid; gap: 11px; margin-top: 8px; }
@@ -2693,7 +2599,6 @@ body.slide-mode .r { opacity: 1 !important; transform: none !important; }
           <a href="#faq" role="menuitem"><span class="nav-dd-num">FAQ</span><span class="nav-dd-label">常見問題</span></a>
         </div>
       </li>
-      <li><button class="slide-btn" id="slide-toggle" aria-label="進入簡報模式">▶ Slide</button></li>
     </ul>
   </div>
 </nav>
@@ -4170,16 +4075,6 @@ determines success?
   </div>
 </footer>
 
-<!-- SLIDE CHROME -->
-<div class="slide-chrome" id="slide-chrome" hidden>
-  <button class="slide-nav-btn" id="slide-prev" aria-label="上一張">‹</button>
-  <button class="slide-nav-btn" id="slide-next" aria-label="下一張">›</button>
-  <div class="slide-topbar">
-    <div class="slide-counter"><span id="slide-cur">1</span> / <span id="slide-total">1</span></div>
-    <button class="slide-exit" id="slide-exit" aria-label="離開簡報模式">✕ 離開</button>
-  </div>
-</div>
-
 <!-- MODAL -->
 <div class="modal-overlay" id="modal" hidden>
   <div class="modal-box" role="dialog" aria-modal="true">
@@ -4327,56 +4222,6 @@ if (modal) {
     if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
 }
-
-// Slide / presentation mode
-const slideToggle = document.getElementById('slide-toggle');
-const slideChrome = document.getElementById('slide-chrome');
-let slides = [], slideIdx = 0, slideOn = false;
-function collectSlides() {
-  const hero = document.querySelector('header.hero');
-  return [hero, ...document.querySelectorAll('section:not(.noslide)')].filter(Boolean);
-}
-function goSlide(i) {
-  if (!slides.length) return;
-  slideIdx = Math.max(0, Math.min(slides.length - 1, i));
-  slides.forEach((s, k) => s.classList.toggle('slide-current', k === slideIdx));
-  const cur = document.getElementById('slide-cur');
-  if (cur) cur.textContent = slideIdx + 1;
-  const box = slides[slideIdx];
-  if (box) box.scrollTop = 0;
-}
-function enterSlides(startIdx) {
-  slides = collectSlides();
-  if (!slides.length) return;
-  document.body.classList.add('slide-mode');
-  slideChrome.hidden = false;
-  document.getElementById('slide-total').textContent = slides.length;
-  slides.forEach(s => s.classList.add('is-slide'));
-  slideOn = true;
-  goSlide(startIdx || 0);
-}
-function exitSlides() {
-  document.body.classList.remove('slide-mode');
-  slideChrome.hidden = true;
-  const cur = slides[slideIdx];
-  slides.forEach(s => s.classList.remove('is-slide', 'slide-current'));
-  slideOn = false;
-  if (cur) cur.scrollIntoView({ block: 'start' });
-}
-if (slideToggle) slideToggle.addEventListener('click', () => slideOn ? exitSlides() : enterSlides(0));
-const sp = document.getElementById('slide-prev');
-const sn = document.getElementById('slide-next');
-const se = document.getElementById('slide-exit');
-if (sp) sp.addEventListener('click', () => goSlide(slideIdx - 1));
-if (sn) sn.addEventListener('click', () => goSlide(slideIdx + 1));
-if (se) se.addEventListener('click', exitSlides);
-document.addEventListener('keydown', (e) => {
-  if (!slideOn) return;
-  if (modal && !modal.hidden) return; // let the modal own Escape first
-  if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goSlide(slideIdx + 1); }
-  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goSlide(slideIdx - 1); }
-  else if (e.key === 'Escape') { e.preventDefault(); exitSlides(); }
-});
 
 // Scroll progress bar
 const progress = document.querySelector('.scroll-progress');
