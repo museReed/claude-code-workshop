@@ -305,6 +305,9 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ── S09 tier hover ── */
+.s09-tier.revealed:hover { transform: translateX(6px) !important; }
+
 /* ── Divider slide icon ── */
 .divider-icon {
   width: 56px;
@@ -910,52 +913,52 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
       <!-- Tier rows -->
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:28px; width:100%;">
 
-        <!-- Row 1: Model / LLM -->
+        <!-- Row 1: Model / LLM — dark navy bg, gold-pale text -->
         <div class="r s09-tier" data-tier="model" role="button" tabindex="0"
-             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:rgba(99,102,241,0.07); border:1px solid rgba(99,102,241,0.22); border-radius:14px; cursor:pointer; transition:background 0.2s;">
-          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#818CF8; letter-spacing:0.05em;">01</span>
+             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:#050B17; border:1px solid rgba(240,222,158,0.12); border-radius:14px; cursor:pointer; transition:transform 0.3s ease;">
+          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#F0DE9E; letter-spacing:0.05em;">01</span>
           <div>
-            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#fff; line-height:1.1;">Model · LLM</p>
-            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">基礎引擎 大腦</p>
+            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#F0DE9E; line-height:1.1;">Model · LLM</p>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,222,158,0.5); margin-top:4px;">基礎引擎</p>
           </div>
           <div style="display:flex; gap:7px; flex-wrap:wrap;">
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">GPT-4o</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Claude Sonnet</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Gemini Pro</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.12); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.75);">GPT-4o</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.12); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.75);">Claude Sonnet</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.12); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.75);">Gemini Pro</code>
           </div>
-          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:rgba(99,102,241,0.75); white-space:nowrap;">會思考</span>
+          <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; color:#F0DE9E; opacity:0.7; white-space:nowrap;">會思考</span>
         </div>
 
-        <!-- Row 2: Product -->
+        <!-- Row 2: Product — navy-2 bg, white text -->
         <div class="r s09-tier" data-tier="product" role="button" tabindex="0"
-             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:14px; cursor:pointer; transition:background 0.2s;">
+             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:#1F2C45; border:1px solid rgba(255,255,255,0.08); border-radius:14px; cursor:pointer; transition:transform 0.3s ease;">
           <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:rgba(255,255,255,0.55); letter-spacing:0.05em;">02</span>
           <div>
             <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#fff; line-height:1.1;">Product</p>
-            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">對話介面 大腦 + 嘴巴</p>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:4px;">對話介面</p>
           </div>
           <div style="display:flex; gap:7px; flex-wrap:wrap;">
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">ChatGPT</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Claude.ai</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Gemini app</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.18); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.85);">ChatGPT</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.18); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.85);">Claude.ai</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.18); border:none; border-radius:100px; padding:3px 10px; color:rgba(255,255,255,0.85);">Gemini app</code>
           </div>
-          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:rgba(255,255,255,0.45); white-space:nowrap;">會聊天</span>
+          <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; color:rgba(255,255,255,0.7); white-space:nowrap;">會聊天</span>
         </div>
 
-        <!-- Row 3: Agent -->
+        <!-- Row 3: Agent — gold gradient bg, dark text -->
         <div class="r s09-tier" data-tier="agent" role="button" tabindex="0"
-             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:rgba(184,144,46,0.09); border:1px solid rgba(184,144,46,0.30); border-radius:14px; cursor:pointer; transition:background 0.2s;">
-          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--gold-bright); letter-spacing:0.05em;">03</span>
+             style="display:grid; grid-template-columns:44px 180px 1fr auto; align-items:center; gap:16px; padding:18px 22px; background:linear-gradient(135deg,#B8902E,#D4AD2B); border:none; border-radius:14px; cursor:pointer; transition:transform 0.3s ease;">
+          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#050B17; letter-spacing:0.05em;">03</span>
           <div>
-            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:var(--gold-bright); line-height:1.1;">Agent</p>
-            <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.35); margin-top:3px;">動手做 大腦 + 嘴巴 + 手腳</p>
+            <p style="font-family:var(--font-sans); font-size:clamp(14px,1.2vw,18px); font-weight:800; color:#050B17; line-height:1.1;">Agent</p>
+            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(5,11,23,0.55); margin-top:4px;">動手做</p>
           </div>
           <div style="display:flex; gap:7px; flex-wrap:wrap;">
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(184,144,46,0.12); border:1px solid rgba(184,144,46,0.25); border-radius:5px; padding:3px 8px; color:var(--gold-bright);">Claude Code</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Codex</code>
-            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:5px; padding:3px 8px; color:rgba(255,255,255,0.65);">Cursor</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(5,11,23,0.15); border:none; border-radius:100px; padding:3px 10px; color:#050B17;">Claude Code</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(5,11,23,0.15); border:none; border-radius:100px; padding:3px 10px; color:#050B17;">Codex</code>
+            <code style="font-family:var(--font-mono); font-size:11px; background:rgba(5,11,23,0.15); border:none; border-radius:100px; padding:3px 10px; color:#050B17;">Cursor</code>
           </div>
-          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; color:var(--gold); white-space:nowrap;">會做事</span>
+          <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:0.06em; color:#050B17; white-space:nowrap;">會做事</span>
         </div>
 
       </div>
