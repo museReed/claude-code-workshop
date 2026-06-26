@@ -1023,10 +1023,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="width:64px; height:64px; background:rgba(255,255,255,0.07); border-radius:16px; display:flex; align-items:center; justify-content:center;">
             <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/layout-grid.svg" style="width:32px;height:32px;filter:invert(1);opacity:0.8;">
           </div>
-          <div>
-            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">GUI Based</p>
-            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:#fff; line-height:1.1;">AI Agent</h3>
-          </div>
+          <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:#fff; line-height:1.1; letter-spacing:-0.02em;">GUI BASED</h3>
           <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); margin-top:auto;">點擊看介紹 →</p>
         </div>
 
@@ -1036,24 +1033,18 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="width:64px; height:64px; background:rgba(184,144,46,0.15); border-radius:16px; display:flex; align-items:center; justify-content:center;">
             <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/terminal.svg" style="width:32px;height:32px;filter:invert(1) sepia(0.4);opacity:0.9;">
           </div>
-          <div>
-            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">CLI Based</p>
-            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:var(--gold-bright); line-height:1.1;">AI Agent</h3>
-          </div>
+          <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:var(--gold-bright); line-height:1.1; letter-spacing:-0.02em;">CLI BASED</h3>
           <p style="font-family:var(--font-mono); font-size:11px; color:rgba(184,144,46,0.45); margin-top:auto;">點擊看介紹 →</p>
         </div>
 
-        <!-- Card 3: IDE -->
+        <!-- Card 3: IDE (gold accent) -->
         <div class="r s10-card" data-modal="ide" role="button" tabindex="0"
-             style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:36px 28px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; cursor:pointer; transition:transform 0.3s ease, border-color 0.2s;">
-          <div style="width:64px; height:64px; background:rgba(255,255,255,0.07); border-radius:16px; display:flex; align-items:center; justify-content:center;">
-            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/monitor-cog.svg" style="width:32px;height:32px;filter:invert(1);opacity:0.8;">
+             style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.35); border-radius:20px; padding:36px 28px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; cursor:pointer; transition:transform 0.3s ease, border-color 0.2s;">
+          <div style="width:64px; height:64px; background:rgba(184,144,46,0.15); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/monitor-cog.svg" style="width:32px;height:32px;filter:invert(1) sepia(0.4);opacity:0.9;">
           </div>
-          <div>
-            <p style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">IDE</p>
-            <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:#fff; line-height:1.1;">AI Agent</h3>
-          </div>
-          <p style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.25); margin-top:auto;">點擊看介紹 →</p>
+          <h3 style="font-family:'Bricolage Grotesque',var(--font-sans); font-size:clamp(18px,1.6vw,24px); font-weight:800; color:var(--gold-bright); line-height:1.1; letter-spacing:-0.02em;">AI IDE</h3>
+          <p style="font-family:var(--font-mono); font-size:11px; color:rgba(184,144,46,0.45); margin-top:auto;">點擊看介紹 →</p>
         </div>
 
       </div>
@@ -1326,17 +1317,17 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
     cli:
       '<p class="modal-eyebrow" style="color:var(--gold);">CLI Based AI Agent</p>' +
       '<h3 class="modal-title" style="color:var(--gold-bright);">用駭客任務的文字指令讓 AI 進資料夾做事</h3>' +
-      '<div class="modal-section"><p>在終端機（Terminal）輸入指令，AI 直接操作你本機的資料夾、檔案、執行程式。沒有圖形介面，但威力最強——可以處理整個專案。</p></div>' +
+      '<div class="modal-section"><p>像駭客任務一樣輸入指令，AI 直接操作你本機的資料夾、檔案、執行程式。沒有圖形介面，但威力最強——可以處理整個專案。</p></div>' +
       '<div class="modal-section"><h4>代表產品</h4>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
         goldBadge('Claude Code') + goldBadge('Codex') +
       '</div></div>' +
-      '<div class="modal-section"><h4>今天學的就是這個</h4><p>Claude Code 是 CLI Agent 的代表——打開終端機、輸入 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;">claude</code>，就開始指揮 AI。</p></div>',
+      '<div class="modal-section"><h4>今天學的就是這個</h4><p>Claude Code 是 CLI Agent 的代表——打開終端機、輸入 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,80,80,0.15);padding:1px 8px;border-radius:4px;color:#FF6B6B;font-weight:700;">claude</code>，就開始指揮 AI。</p></div>',
 
     ide:
       '<p class="modal-eyebrow">AI Agent IDE</p>' +
       '<h3 class="modal-title">像在加強版的工作室裡和 AI 一起工作</h3>' +
-      '<div class="modal-section"><p>把程式碼編輯器（IDE）和 AI 深度整合在一起。AI 能看到你的整個專案結構、即時建議、直接修改程式碼，像一個坐在你旁邊的工程師。</p></div>' +
+      '<div class="modal-section"><p>在加強版的 Microsoft 裡和 AI 一起工作——AI 能看到你的整個專案結構、即時建議、直接修改程式碼，像一個坐在你旁邊的工程師。</p></div>' +
       '<div class="modal-section"><h4>代表產品</h4>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
         badge('Cursor') + badge('Antigravity') +
