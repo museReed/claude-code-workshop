@@ -332,7 +332,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 .modal-spec dt { font-family:var(--font-sans); font-size:13px; color:rgba(255,255,255,0.45); }
 .modal-spec dd { font-family:var(--font-mono); font-size:13px; font-weight:700; color:#fff; }
 .modal-spec dd.yes { color:#4ADE80; }
-.modal-spec dd.yes::before { content:"✓ "; }
 .modal-spec dd.no { color:rgba(255,255,255,0.3); font-weight:500; }
 
 /* ── Divider slide icon ── */
@@ -931,7 +930,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
   <section class="slide slide-dark" id="s09" data-slide="9">
 
     <!-- content (inside zoom:1.25 context) -->
-    <div class="slide-body" style="max-width:920px;">
+    <div class="slide-body" style="max-width:920px; zoom:1.25;">
 
       <p class="slide-eyebrow">T1 · 名詞解說</p>
       <h2 class="slide-title" data-loc="s09.title" style="white-space:nowrap;">你會遇到的<span class="accent"> 三個層級</span></h2>
@@ -1171,9 +1170,9 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
       '<div class="modal-section"><h4>ChatGPT 能做與不能做</h4>' +
       '<dl class="modal-spec">' +
         '<div><dt>互動模式</dt><dd>對話</dd></div>' +
-        '<div><dt>看得到你的檔案？</dt><dd class="no">無法</dd></div>' +
-        '<div><dt>能寫檔案？</dt><dd class="no">無法</dd></div>' +
-        '<div><dt>能跑指令？</dt><dd class="no">無法</dd></div>' +
+        '<div><dt>看得到你的檔案？</dt><dd class="no">❌</dd></div>' +
+        '<div><dt>能寫檔案？</dt><dd class="no">❌</dd></div>' +
+        '<div><dt>能跑指令？</dt><dd class="no">❌</dd></div>' +
         '<div><dt>適合做什麼</dt><dd>問問題、寫文字</dd></div>' +
       '</dl></div>',
 
@@ -1183,9 +1182,9 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
       '<div class="modal-section"><h4>Claude Code 能做與不能做</h4>' +
       '<dl class="modal-spec">' +
         '<div><dt>互動模式</dt><dd>對話 + 動手做</dd></div>' +
-        '<div><dt>看得到你的檔案？</dt><dd class="yes">可以</dd></div>' +
-        '<div><dt>能寫檔案？</dt><dd class="yes">可以</dd></div>' +
-        '<div><dt>能跑指令？</dt><dd class="yes">可以</dd></div>' +
+        '<div><dt>看得到你的檔案？</dt><dd class="yes">✅</dd></div>' +
+        '<div><dt>能寫檔案？</dt><dd class="yes">✅</dd></div>' +
+        '<div><dt>能跑指令？</dt><dd class="yes">✅</dd></div>' +
         '<div><dt>適合做什麼</dt><dd>完成任務、改專案</dd></div>' +
       '</dl></div>'
   };
