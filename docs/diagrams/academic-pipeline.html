@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KCL 論文第二章 · AI 輔助寫作 Pipeline</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --role-a: #F97316;   /* 👤 學生 — orange */
+    --role-g: #6366F1;   /* 🤖 AI Agent Claude Code — indigo */
+    --mix:    #37474F;
+    --success: #16A34A;
+    --failure: #DC2626;
+    --done:    #F59E0B;
+    --kill:    #DC2626;
+    --highlight: #FF6B00;
+    --bg:         #F4F6FA;
+    --card:       #FFFFFF;
+    --text:       #1A202C;
+    --text-light: #4A5568;
+    --border:     #E2E8F0;
+    --output-color: #F9A825;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 36px 16px 80px;
+  }
+  .container { max-width: 1300px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 44px; }
+  header h1 { font-size: 1.75rem; margin-bottom: 8px; letter-spacing: -0.02em; }
+  header .subtitle { color: var(--text-light); font-size: 0.93rem; }
+  header .meta {
+    display: inline-flex; gap: 12px; margin-top: 12px;
+    background: #EEF2FF; border-radius: 8px; padding: 8px 18px;
+    font-size: 0.82rem; color: #4338CA;
+  }
+  header .meta strong { font-weight: 700; }
+
+  h2 {
+    font-size: 1.25rem; margin: 48px 0 12px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-desc {
+    color: var(--text-light); font-size: 0.9rem;
+    margin-bottom: 20px; max-width: 1100px; line-height: 1.65;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; padding: 5px 12px;
+    border-radius: 14px; background: var(--card);
+    border: 1px solid var(--border); color: var(--text-light);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-line { width: 28px; height: 3px; border-radius: 2px; background: var(--success); }
+  .legend-line.failure { height: 0; border-bottom: 2px dashed var(--failure); border-radius: 0; background: transparent; }
+
+  .hflow-scroll {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto; overflow-y: hidden;
+  }
+  .hflow-inner { position: relative; width: 1900px; height: 460px; }
+  .hflow-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hflow-svg .failure-arc { transition: opacity 0.18s, stroke-width 0.18s; }
+  .hflow-svg .failure-label { transition: opacity 0.18s; pointer-events: none; }
+  .hflow-nodes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .hflow-node {
+    position: absolute; width: 140px; height: 80px;
+    border-radius: 9px; padding: 10px 8px 8px;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    color: white; font-weight: 600; font-size: 0.82rem; line-height: 1.3;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12); user-select: none;
+  }
+  .hflow-node:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.22); z-index: 5; }
+  .hflow-node.selected { outline: 3px solid var(--highlight); outline-offset: 2px; z-index: 6; }
+  .hflow-node .num { position: absolute; top: 5px; left: 9px; font-size: 0.65rem; opacity: 0.85; font-weight: 700; }
+  .hflow-node .fail-badge {
+    position: absolute; bottom: 4px; right: 6px; font-size: 0.6rem;
+    background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 8px; font-weight: 600;
+  }
+  .hflow-node .name { padding: 0 2px; }
+  .hflow-node .role-badge {
+    position: absolute; top: 5px; right: 8px;
+    font-size: 0.65rem; opacity: 0.9;
+  }
+
+  .hflow-node.role-a { background: var(--role-a); }
+  .hflow-node.role-g { background: var(--role-g); }
+  .hflow-node.mix    { background: var(--mix); }
+  .hflow-node.done   {
+    background: var(--done); color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 4px rgba(245,158,11,0.18);
+  }
+
+  /* ── Detail panel ── */
+  .detail-below {
+    margin-top: 20px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .detail-empty { padding: 50px 20px; text-align: center; color: var(--text-light); }
+  .detail-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px; background: linear-gradient(135deg, #FAFBFC, #F0F4F8);
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--text); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+  }
+  .detail-num.role-a { background: var(--role-a); }
+  .detail-num.role-g { background: var(--role-g); }
+  .detail-num.mix    { background: var(--mix); }
+  .detail-header h3 { font-size: 1.05rem; }
+
+  .detail-3col { display: grid; grid-template-columns: 0.7fr 1.6fr 1.1fr; gap: 0; }
+  .dcol { padding: 16px 20px; border-right: 1px solid var(--border); }
+  .dcol:last-child { border-right: none; }
+  .dcol h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px; font-weight: 700; }
+  .dcol.what-col h4 { color: #059669; }
+  .dcol.output-col h4 { color: #B45309; }
+
+  .role-tag {
+    display: inline-block; font-size: 0.73rem; padding: 3px 10px;
+    border-radius: 10px; margin: 2px 4px 4px 0; font-weight: 600;
+    background: #E2E8F0; color: var(--text);
+  }
+  .role-tag.role-a-t { background: var(--role-a); color: white; }
+  .role-tag.role-g-t { background: var(--role-g); color: white; }
+
+  .subsection { margin-bottom: 12px; }
+  .subsection:last-child { margin-bottom: 0; }
+  .sublabel { font-size: 0.83rem; font-weight: 700; margin-bottom: 5px; padding-left: 10px; border-left: 3px solid var(--text-light); }
+  .sublabel.did      { border-left-color: #3B82F6; color: #1D4ED8; }
+  .sublabel.pain     { border-left-color: var(--failure); color: #991B1B; }
+  .sublabel.solution { border-left-color: #10B981; color: #065F46; }
+  .sublabel.happy    { border-left-color: var(--success); color: #166534; }
+  .sublabel.failure-out { border-left-color: var(--failure); color: #991B1B; }
+  .subcontent { font-size: 0.86rem; line-height: 1.65; padding-left: 13px; }
+  .subcontent ul, ul.subcontent { list-style: none; padding-left: 13px; }
+  .subcontent li, ul.subcontent li { padding: 3px 0 3px 14px; position: relative; }
+  .subcontent li::before, ul.subcontent li::before { content: '·'; position: absolute; left: 0; color: var(--text-light); font-weight: 700; }
+  .failure-list li { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 6px; padding: 7px 12px !important; margin: 5px 0; list-style: none; }
+  .failure-list li::before { display: none; }
+  .failure-list .goto { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 10px; font-weight: 600; font-size: 0.76rem; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .failure-list .goto:hover { background: #FCA5A5; color: white; }
+  .muted { color: var(--text-light); font-style: italic; }
+
+  /* ── Mermaid ── */
+  .role-diagram { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; overflow-x: auto; }
+  .role-diagram .mermaid { text-align: center; }
+
+  .insight { background: #FFF8E1; border-left: 4px solid var(--output-color); padding: 14px 18px; border-radius: 6px; margin-top: 20px; font-size: 0.9rem; line-height: 1.65; }
+  .insight strong { color: #BF360C; }
+  .insight ul { margin: 6px 0 0 18px; line-height: 1.7; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 0.82rem; }
+  footer code { background: var(--card); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.78rem; }
+
+  /* ── Prompt block ── */
+  .prompt-block {
+    border-top: 1px solid var(--border);
+    background: #0E1A2F;
+    padding: 16px 20px 18px;
+  }
+  .prompt-block-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .prompt-block-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: #4ADE80;
+  }
+  .prompt-copy-btn {
+    font-size: 0.73rem; padding: 4px 12px; border-radius: 6px;
+    background: rgba(255,255,255,0.08); color: #CBD5E1;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    font-family: inherit; transition: background 0.15s, color 0.15s;
+  }
+  .prompt-copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+  .prompt-copy-btn.copied { background: #16A34A; color: #fff; border-color: #16A34A; }
+  .prompt-text {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.83rem; color: #F0DE9E; line-height: 1.75;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📚 論文第二章 · AI 輔助寫作 Pipeline</h1>
+    <p class="subtitle">KCL MSc Technology Management · 從 4 份混亂素材到可送審的 chapter2_draft.md</p>
+    <div class="meta">
+      <span>素材：<strong>lit-review · references · survey · outline</strong></span>
+      <span>|</span>
+      <span>產出：<strong>chapter2_draft.md</strong></span>
+      <span>|</span>
+      <span>預計時間：<strong>50 min</strong></span>
+    </div>
+  </header>
+
+  <h2>🌳 Happy Path Pipeline</h2>
+  <p class="section-desc">
+    <strong style="color:var(--success)">綠色實線</strong> = 正常流程（左→右）；
+    <strong style="color:var(--failure)">紅色虛線弧</strong> = 失敗路徑（點擊節點時高亮）。
+    <br><strong>👉 點擊任意節點</strong>查看：由誰負責 / 做了什麼 / 輸出是什麼 / 失敗怎麼辦。
+  </p>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-line"></span>Happy Path</span>
+    <span class="legend-item"><span class="legend-line failure"></span>失敗路徑（點擊高亮）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-a)"></span>👤 學生 — 決策 / 判斷 / 人工操作（橘色）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-g)"></span>🤖 AI Agent（Claude Code）— 執行 / 產出</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--done)"></span>最終產出</span>
+  </div>
+
+  <div class="hflow-scroll">
+    <div class="hflow-inner" id="hflow-inner">
+      <svg class="hflow-svg" id="hflow-svg" viewBox="0 0 1900 460" preserveAspectRatio="xMinYMin meet"></svg>
+      <div class="hflow-nodes" id="hflow-nodes"></div>
+    </div>
+  </div>
+
+  <div class="detail-below" id="detail-panel">
+    <div class="detail-empty">👆 點擊上方任意節點查看詳細說明</div>
+  </div>
+
+  <h2>🔗 角色分工關係</h2>
+  <p class="section-desc">學生是「方向決策者 + 品質把關者」；AI 是「執行者 + 素材處理者」。兩者交替推進。</p>
+  <div class="role-diagram">
+    <div class="mermaid">
+flowchart LR
+    S(["👤 <b>學生</b><br/>決策 · 判斷 · 把關"])
+    AI(["🤖 <b>Claude Code</b><br/>執行 · 產出 · 建議"])
+    CT["📄 comparison_table.md"]
+    RC["📄 refs_clean.md"]
+    KS["📊 key_stats.md"]
+    DR["📝 chapter2_draft.md v1"]
+    Final["✅ <b>可送審草稿</b>"]
+
+    S -->|"啟動 + 給方向"| AI
+    AI -->|"Step 01 文獻比較"| CT
+    AI -->|"Step 02 整理引用"| RC
+    AI -->|"Step 03 挖數字"| KS
+    CT --> S
+    RC --> S
+    KS --> S
+    S -->|"確認後整合"| AI
+    AI -->|"Step 04 撰寫草稿"| DR
+    DR --> S
+    S -->|"補引用 + 改寫"| Final
+
+    classDef student fill:#F97316,stroke:#C2410C,color:#fff,font-weight:bold;
+    classDef ai fill:#6366F1,stroke:#4338CA,color:#fff,font-weight:bold;
+    classDef artifact fill:#FEF3C7,stroke:#D97706,color:#1A202C,font-weight:600;
+    classDef output fill:#F59E0B,stroke:#D97706,color:#1A202C,font-weight:bold;
+
+    class S student;
+    class AI ai;
+    class CT,RC,KS,DR artifact;
+    class Final output;
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>關鍵洞察</strong>：這條 pipeline 的核心不是「讓 AI 寫論文」，而是讓 AI 處理你不需要親自動手的事（格式轉換、CSV 分析、初稿框架），讓你的時間集中在「只有你能做的事」上：</p>
+    <ul>
+      <li><strong>判斷</strong>：這個引用真的支撐我的論點嗎？</li>
+      <li><strong>理解</strong>：AI 寫的每個段落，我都能解釋它在說什麼嗎？</li>
+      <li><strong>改寫</strong>：把 AI 的架構換成自己的語言和思路</li>
+    </ul>
+    <p style="margin-top:8px;">學生在整條 pipeline 裡不是「旁觀者」，而是每一步的<strong>品質把關者</strong>。</p>
+  </div>
+
+  <footer>
+    <p>Workshop: <code>exercises/academic/</code> · KCL Claude Code Workshop 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 80;
+  const GAP = 30;
+  const START_X = 30;
+  const MAIN_Y = 240;
+
+  const flowNodes = [
+    { id: 1,      name: "👤 啟動<br/>Claude Code",   color: "role-a" },
+    { id: 2,      name: "🤖 探索<br/>素材全覽",       color: "role-g" },
+    { id: 3,      name: "🤖 Step 01<br/>文獻比較表",  color: "role-g" },
+    { id: 4,      name: "👤 校對<br/>表格準確性",     color: "role-a" },
+    { id: 5,      name: "🤖 Step 02<br/>整理引用",    color: "role-g" },
+    { id: 6,      name: "🤖 Step 03<br/>挖關鍵數字",  color: "role-g" },
+    { id: 7,      name: "👤 評估<br/>數字相關性",     color: "role-a" },
+    { id: 8,      name: "🤖 Step 04<br/>撰寫草稿",    color: "role-g" },
+    { id: 9,      name: "👤 補上<br/>真實引用",       color: "role-a" },
+    { id: 10,     name: "👤 改寫<br/>成自己的字",     color: "role-a" },
+    { id: "done", name: "✅ chapter2<br/>_draft.md",  color: "done"   }
+  ];
+
+  const failurePaths = [
+    { from: 4,  to: 3,  label: "表格有誤，重下 prompt" },
+    { from: 7,  to: 6,  label: "數字不相關，換方向" },
+    { from: 8,  to: 3,  label: "文獻支撐不足" },
+    { from: 10, to: 8,  label: "段落不懂，重新生成" }
+  ];
+
+  function getNodeIndex(id) { return flowNodes.findIndex(n => String(n.id) === String(id)); }
+  function getX(id)         { return START_X + getNodeIndex(id) * (NODE_WIDTH + GAP); }
+  function getCenterX(id)   { return getX(id) + NODE_WIDTH / 2; }
+
+  function renderFlow() {
+    const svg = document.getElementById('hflow-svg');
+    const container = document.getElementById('hflow-nodes');
+
+    let svgHtml = `
+      <defs>
+        <marker id="arr-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#16A34A"/>
+        </marker>
+        <marker id="arr-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#DC2626"/>
+        </marker>
+      </defs>
+    `;
+
+    for (let i = 0; i < flowNodes.length - 1; i++) {
+      const sx = getX(flowNodes[i].id) + NODE_WIDTH;
+      const tx = getX(flowNodes[i+1].id);
+      svgHtml += `<line x1="${sx}" y1="${MAIN_Y}" x2="${tx - 4}" y2="${MAIN_Y}" stroke="#16A34A" stroke-width="3" marker-end="url(#arr-h)"/>`;
+    }
+
+    failurePaths.forEach((f, idx) => {
+      const sx = getCenterX(f.from);
+      const tx = getCenterX(f.to);
+      const span = Math.abs(getNodeIndex(f.from) - getNodeIndex(f.to));
+      const arcHeight = 28 + span * 18;
+      const sy = MAIN_Y - NODE_HEIGHT / 2;
+      const peakY = sy - arcHeight;
+      svgHtml += `<path d="M ${sx} ${sy} C ${sx} ${peakY}, ${tx} ${peakY}, ${tx} ${sy - 4}" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.28" fill="none" marker-end="url(#arr-f)" data-from="${f.from}" data-idx="${idx}" class="failure-arc"/>`;
+      const midX = (sx + tx) / 2;
+      svgHtml += `<text x="${midX}" y="${peakY - 5}" text-anchor="middle" font-size="10.5" fill="#7F1D1D" class="failure-label" data-from="${f.from}" data-idx="${idx}" font-weight="600" opacity="0">${f.label}</text>`;
+    });
+
+    svg.innerHTML = svgHtml;
+
+    let html = '';
+    flowNodes.forEach(n => {
+      const x = getX(n.id);
+      const failures = failurePaths.filter(f => f.from === n.id).length;
+      const num = typeof n.id === 'number' ? n.id : '';
+      html += `
+        <div class="hflow-node ${n.color}" data-id="${n.id}"
+             style="left:${x}px; top:${MAIN_Y - NODE_HEIGHT/2}px;"
+             onclick="onNodeClick('${n.id}')"
+             onmouseenter="onNodeHover('${n.id}', true)"
+             onmouseleave="onNodeHover('${n.id}', false)">
+          ${num ? `<div class="num">${num}</div>` : ''}
+          <div class="name">${n.name}</div>
+          ${failures > 0 ? `<div class="fail-badge">⚠ ${failures}</div>` : ''}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  const nodeData = {
+    "1": {
+      name: "啟動 Claude Code",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "在 terminal 輸入 <code>cd exercises/academic/ && claude</code>，讓 Claude Code 啟動在正確的工作目錄。第一句話：<em>「你能看到這個目錄裡有什麼？」</em>",
+        pains: ["不知道先做哪個步驟", "不確定 Claude 看不看得到所有素材"],
+        solutions: ["💡 先讓 Claude 列出目錄結構，確認 4 份素材都在", "✅ 把 Starter Prompt 貼進去就可以開始"]
+      },
+      output: {
+        happy: "Claude Code 啟動，工作目錄確認 → 進入 Step 2 探索素材",
+        failure: []
+      }
+    },
+    "2": {
+      name: "探索素材全覽",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "自動讀取目錄下所有檔案，回報結構：幾篇論文、引用筆數、問卷欄位數、大綱有幾個章節。讓學生在動手前先掌握全局。",
+        pains: ["AI 可能誤解某份素材的用途", "讀到不相關的檔案（如 README）"],
+        solutions: ["🔧 在 prompt 裡說明每份素材的角色：『lit-review/ 是要拿來比較的論文，不是你要寫的東西』", "💡 先問「你看到什麼」，確認後再進下一步"]
+      },
+      output: {
+        happy: "素材清單 + 初步摘要 → 學生確認方向後進 Step 01",
+        failure: []
+      },
+      prompt: `你是學術助理。我在 exercises/academic/ 目錄下。請：
+1. 列出所有子目錄和檔案的完整結構
+2. 對每份素材說明：類型、大概內容、字數/筆數
+3. 告訴我這四份素材各自扮演什麼角色（lit-review/ 是待比較的論文，不是我要寫的東西）
+4. 建議一條從這四份素材到 chapter2_draft.md 的 pipeline 步驟順序，並說明每步的輸入和輸出是什麼
+
+確認你能看到以下四份素材再開始：lit-review/samples/、references/refs_messy.txt、survey-analysis/survey.csv、dissertation/outline.md`
+    },
+    "3": {
+      name: "Step 01 · 文獻比較表格",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 <code>lit-review/samples/</code> 三篇論文，產出 <code>comparison_table.md</code>，欄位：研究問題 / 方法 / 樣本規模 / 主要發現 / 局限。",
+        pains: ["表格某些欄位空白或不準確", "AI 把不同論文的發現混在一起"],
+        solutions: ["🔧 在 prompt 裡給範例欄位格式：『不確定的填 [unclear]，不要自己猜』", "💡 要求 AI 每個欄位後面加 (p.X) 標出原文頁數"]
+      },
+      output: {
+        happy: "📄 <strong>comparison_table.md</strong> → 學生校對（Step 4）",
+        failure: [
+          { condition: "學生發現表格有誤（回去重下 prompt）", target: 3 }
+        ]
+      },
+      prompt: `你是學術助理。讀 lit-review/samples/ 裡的三篇 .md 論文（paper1、paper2、paper3），產出 comparison_table.md。
+
+表格欄位（每篇論文一行）：
+| 論文 | 研究問題 | 方法 | 樣本規模 | 主要發現 | 局限 |
+
+要求：
+- 不確定的欄位填 [unclear]，不可自行猜測或填補
+- 主要發現只寫最重要的一點（一句話）
+- 局限只寫論文自己承認的局限，不是你的評論
+- 完成後告訴我：哪一篇論文最能支撐「KCL 研究生 AI 工具使用頻率與學術誠信疑慮之關係」這個論點？為什麼？`
+    },
+    "4": {
+      name: "校對表格準確性",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "對照原始論文抽查 2-3 個欄位，確認 AI 的摘要是否準確。重點查：主要發現 + 局限（這兩欄最容易出錯）。",
+        pains: ["讀不懂英文論文，難判斷是否正確", "不知道哪些欄位最重要要查"],
+        solutions: ["💡 問 Claude：『paper1 的主要發現，你是從第幾段提取的？』讓 AI 定位原文", "✅ 不需要每格都查，只抽查你論文最依賴的那幾個"]
+      },
+      output: {
+        happy: "確認 comparison_table.md 準確 → 進 Step 02 整理引用（Step 5）",
+        failure: [
+          { condition: "發現表格不準確 → 重下更精確的 prompt", target: 3 }
+        ]
+      }
+    },
+    "5": {
+      name: "Step 02 · 整理引用格式",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 <code>refs_messy.txt</code>（格式四散的書目清單），統一轉成 APA 7 格式，依字母排序，缺欄位標 <code>[缺出版年]</code>。",
+        pains: ["AI 猜補缺失欄位而非標記", "同一篇論文出現兩次（重複引用）"],
+        solutions: ["🔧 在 prompt 裡強調：『缺欄位一律標 [缺]，不可自行填補任何資訊』", "💡 要求 AI 在最後列出「可能重複的引用」"]
+      },
+      output: {
+        happy: "📄 <strong>refs_clean.md</strong>（APA 7 格式）→ 進 Step 03（Step 6）",
+        failure: []
+      },
+      prompt: `你是學術助理。讀 references/refs_messy.txt，把所有引用統一整理為 APA 7 格式，產出 refs_clean.md。
+
+要求：
+- 依第一作者姓氏字母順序排列
+- 缺失欄位（如出版年、期刊名、頁碼、DOI）一律標 [缺]，禁止自行猜測或填補
+- 保留原始資訊，不得刪除任何引用
+- 最後附上一個「⚠️ 可能重複的引用」清單（相同作者+年份或相同標題）
+- 最後附上一個「❓ 格式異常」清單（只有 URL 沒有書目資訊的條目）
+
+完成後告訴我：這份清單裡有幾篇跟 AI 在企業或教育應用相關的文獻？`
+    },
+    "6": {
+      name: "Step 03 · 挖關鍵數字",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 <code>survey.csv</code>，分析各欄位分佈，找出 3 個支撐論點的關鍵趨勢（如：工具使用頻率 vs 學術誠信疑慮的相關性）。",
+        pains: ["AI 找的趨勢和你的論點方向不符", "數字看起來重要但不知道學術上夠不夠顯著"],
+        solutions: ["🔧 在 prompt 裡告訴 Claude 你的論點方向：『我要說明 AI 工具使用頻率越高，誠信疑慮越高』", "💡 問 Claude：『這個趨勢在統計上顯著嗎？有多少樣本支撐？』"]
+      },
+      output: {
+        happy: "📊 <strong>key_stats.md</strong>（關鍵數字 + 趨勢說明）→ 學生評估（Step 7）",
+        failure: [
+          { condition: "數字不夠相關論點 → 換方向重新分析", target: 6 }
+        ]
+      },
+      prompt: `你是資料分析助理。讀 survey-analysis/survey.csv（100 位 KCL 研究生 AI 工具使用問卷）。
+
+我的論點方向：KCL 研究生的 AI 工具使用頻率越高，學術誠信疑慮也越高，但信任度不一定同步上升。
+
+請分析以下欄位並找出 3 個最能支撐這個論點的關鍵趨勢：
+- freq_use_ai（使用頻率 1-5）
+- trust_ai_output（信任度 1-5）
+- concern_integrity（誠信疑慮 1-5）
+- tools_used（使用的工具）
+- monthly_spend_gbp（月花費）
+
+對每個趨勢說明：
+1. 具體數字（平均值、比例、或相關性）
+2. 支撐這個數字的樣本數
+3. 這個數字為什麼能支撐我的論點（一句話）
+
+產出 key_stats.md。如果發現反例（使用頻率高但誠信疑慮低的群體），也要標出來。`
+    },
+    "7": {
+      name: "評估數字相關性",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "判斷 <code>key_stats.md</code> 的數字是否能支撐 Chapter 2 的核心論點。這一步需要學生自己做判斷——不能讓 AI 代勞。",
+        pains: ["統計不熟，不確定這個數字有沒有說服力", "趨勢和論點感覺有關但說不清楚為什麼"],
+        solutions: ["💡 問 Claude：『假設讀者是評審委員，這個數字能說服他嗎？為什麼？』", "✅ 如果你自己都說不清楚數字和論點的關係，先不要用"]
+      },
+      output: {
+        happy: "確認數字相關，標記哪幾個要在草稿裡引用 → Step 04 撰寫草稿（Step 8）",
+        failure: [
+          { condition: "數字與論點無關 → 請 Claude 帶著論點重新分析", target: 6 }
+        ]
+      }
+    },
+    "8": {
+      name: "Step 04 · 撰寫章節草稿",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "整合 <code>outline.md</code> + <code>comparison_table.md</code> + <code>refs_clean.md</code> + <code>key_stats.md</code>，擴寫成完整 Chapter 2 段落。所有引用標 <code>[needs citation]</code>。",
+        pains: ["草稿太泛泛，缺乏學術深度", "論點跳躍，段落之間沒有銜接"],
+        solutions: ["🔧 在 prompt 裡先說明你的核心 argument：『這章要主張的是 X，每個段落都要服務這個論點』", "💡 要求 AI 在每段開頭寫一句 topic sentence，讓你容易判斷段落方向對不對"]
+      },
+      output: {
+        happy: "📝 <strong>chapter2_draft.md v1</strong>（含 [needs citation] 標記）→ 補引用（Step 9）",
+        failure: [
+          { condition: "草稿文獻支撐不足 → 回去補更多文獻比對", target: 3 },
+          { condition: "段落概念學生不理解 → 重生成更簡明版本", target: 8 }
+        ]
+      },
+      prompt: `你是學術寫作助理。請讀以下四份檔案：
+- dissertation/outline.md（Chapter 2 大綱和核心論點）
+- comparison_table.md（三篇論文比較表）
+- refs_clean.md（APA 7 引用清單）
+- key_stats.md（問卷關鍵數字）
+
+我的核心論點：KCL 研究生的 AI 工具使用頻率越高，學術誠信疑慮也越高，但信任度不一定同步上升——這說明學生在「工具能力」和「判斷能力」之間存在落差。
+
+依照 outline.md 的 Chapter 2 結構，擴寫成完整學術段落，產出 chapter2_draft.md。
+
+寫作要求：
+1. 每個段落第一句是 topic sentence（清楚說明這段的論點）
+2. 引用文獻時標 [needs citation: 論文標題關鍵字]，讓我知道應該填哪篇
+3. 引用 key_stats.md 的數字時，附原始欄位名和樣本數，例如：（freq_use_ai 平均 3.6，n=100）
+4. 不得自行編造數字或引用不在 refs_clean.md 裡的文獻
+5. 每個子章節結束後加一行 [END OF SECTION X]，方便我核對大綱
+
+完成後說明：哪些地方你認為論點銜接最薄弱，需要我補充說明？`
+    },
+    "9": {
+      name: "補上真實引用",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "把 <code>chapter2_draft.md</code> 裡的 <code>[needs citation]</code> 逐一替換成 <code>refs_clean.md</code> 裡的真實引用。找不到對應的標 <code>[missing ref]</code>。",
+        pains: ["refs_clean.md 裡找不到對應的論文", "[missing ref] 太多，論點撐不起來"],
+        solutions: ["💡 問 Claude：『這個論點在我現有的三篇論文裡有沒有對應說法？在哪一篇的哪一段？』", "🔧 如果真的找不到引用，先標記起來，這是論文修改時需要補充新文獻的地方"]
+      },
+      output: {
+        happy: "引用填入完畢，標出所有 [missing ref] → 改寫潤稿（Step 10）",
+        failure: []
+      }
+    },
+    "10": {
+      name: "改寫成自己的字",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "用自己的語言改寫 AI 生成的段落——確保每一句話你都能用自己的話解釋，論點的邏輯是你自己理解的，不是直接複製 AI 的架構。",
+        pains: ["AI 語氣太正式、太標準化，沒有個人觀點", "某些段落邏輯跟自己想的不一樣但改不了"],
+        solutions: ["✅ 把 AI 草稿當「提綱」——只保留論點順序，其他用自己的語言重寫", "💡 改不了的段落，先把 AI 的段落貼給 Claude，問：『這段在說什麼？用一句白話解釋。』再自己寫"]
+      },
+      output: {
+        happy: "有個人思路的 Chapter 2 → 完成（Done）",
+        failure: [
+          { condition: "某段概念完全不懂，改不了 → 讓 Claude 重新解釋後再寫", target: 8 }
+        ]
+      }
+    },
+    "done": {
+      name: "chapter2_draft.md ✅ 完成",
+      colorClass: "mix",
+      who: [["👤 學生（成果）", "role-a-t"]],
+      what: {
+        did: "完整的第二章草稿：有真實文獻引用、有問卷數據支撐、有個人論點、用自己的語言撰寫。",
+        pains: [],
+        solutions: []
+      },
+      output: {
+        happy: "✅ 可以送給指導教授審閱的 chapter2_draft.md",
+        failure: []
+      }
+    }
+  };
+
+  let selectedId = null;
+
+  window.onNodeClick = function(id) {
+    selectedId = String(id);
+    showDetail(selectedId);
+    highlightSelection();
+  };
+
+  window.onNodeHover = function(id, entering) {
+    if (selectedId === String(id)) return;
+    if (entering) highlightFailures(String(id), 0.9, 1);
+    else highlightSelection();
+  };
+
+  function highlightSelection() {
+    if (selectedId) {
+      highlightFailures(selectedId, 0.9, 1);
+    } else {
+      document.querySelectorAll('.failure-arc').forEach(a => { a.style.opacity = '0.28'; a.style.strokeWidth = ''; });
+      document.querySelectorAll('.failure-label').forEach(l => { l.style.opacity = '0'; });
+    }
+  }
+
+  function highlightFailures(id, arcOpacity, labelOpacity) {
+    document.querySelectorAll('.failure-arc').forEach(a => {
+      if (a.dataset.from === id) { a.style.opacity = arcOpacity; a.style.strokeWidth = '2.5'; }
+      else { a.style.opacity = '0.12'; a.style.strokeWidth = ''; }
+    });
+    document.querySelectorAll('.failure-label').forEach(l => {
+      l.style.opacity = l.dataset.from === id ? labelOpacity : '0';
+    });
+    document.querySelectorAll('.hflow-node').forEach(n => {
+      n.classList.toggle('selected', n.dataset.id === id);
+    });
+  }
+
+  function showDetail(id) {
+    const data = nodeData[id];
+    if (!data) return;
+
+    const who = data.who.map(([n, cls]) => `<span class="role-tag ${cls}">${n}</span>`).join(' ');
+    const pains = data.what.pains.length
+      ? data.what.pains.map(p => `<li>${p}</li>`).join('')
+      : '<li class="muted">—</li>';
+    const solutions = data.what.solutions.length
+      ? data.what.solutions.map(s => `<li>${s}</li>`).join('')
+      : '<li class="muted">—</li>';
+
+    let failureHtml;
+    if (data.output.failure.length === 0) {
+      failureHtml = '<div class="subcontent muted">（無失敗路徑）</div>';
+    } else {
+      failureHtml = `<ul class="failure-list">${
+        data.output.failure.map(f =>
+          `<li><strong>${f.condition}</strong> → <span class="goto" onclick="onNodeClick('${f.target}')">回到 Step ${f.target}</span></li>`
+        ).join('')
+      }</ul>`;
+    }
+
+    const numDisplay = id === 'done' ? '✅' : id;
+
+    let promptHtml = '';
+    if (data.prompt) {
+      const escapedPrompt = data.prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      promptHtml = `
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-label">▶ PROMPT · 複製貼入 Claude Code</span>
+            <button class="prompt-copy-btn" onclick="copyPrompt(this, \`${data.prompt.replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`)">複製</button>
+          </div>
+          <pre class="prompt-text">${escapedPrompt}</pre>
+        </div>`;
+    }
+
+    document.getElementById('detail-panel').innerHTML = `
+      <div class="detail-header">
+        <div class="detail-num ${data.colorClass}">${numDisplay}</div>
+        <h3>${data.name}</h3>
+      </div>
+      <div class="detail-3col">
+        <div class="dcol who-col">
+          <h4>WHO · 誰負責</h4>
+          <div>${who}</div>
+        </div>
+        <div class="dcol what-col">
+          <h4>WHAT · 做了什麼 · 痛點 · 解法</h4>
+          <div class="subsection">
+            <div class="sublabel did">📋 做了什麼</div>
+            <div class="subcontent">${data.what.did}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel pain">⚠️ 常見痛點</div>
+            <ul class="subcontent">${pains}</ul>
+          </div>
+          <div class="subsection">
+            <div class="sublabel solution">💡 解法 / 提示</div>
+            <ul class="subcontent">${solutions}</ul>
+          </div>
+        </div>
+        <div class="dcol output-col">
+          <h4>OUTPUT · 產出與去向</h4>
+          <div class="subsection">
+            <div class="sublabel happy">✅ 成功產出</div>
+            <div class="subcontent">${data.output.happy}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel failure-out">🔁 失敗路徑</div>
+            ${failureHtml}
+          </div>
+        </div>
+      </div>
+      ${promptHtml}
+    `;
+  }
+
+  window.copyPrompt = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已複製 ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      btn.textContent = '請手動複製';
+    });
+  };
+
+  renderFlow();
+  highlightSelection();
+  setTimeout(() => onNodeClick("1"), 120);
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 14 },
+    securityLevel: 'loose',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif'
+  });
+</script>
+</body>
+</html>

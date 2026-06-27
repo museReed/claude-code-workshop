@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>會議記錄整理 · AI 輔助工作流</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --role-a: #F97316;   /* 👤 學生 — orange */
+    --role-g: #6366F1;   /* 🤖 AI Agent Claude Code — indigo */
+    --mix:    #37474F;
+    --success: #16A34A;
+    --failure: #DC2626;
+    --done:    #F59E0B;
+    --kill:    #DC2626;
+    --highlight: #FF6B00;
+    --bg:         #F4F6FA;
+    --card:       #FFFFFF;
+    --text:       #1A202C;
+    --text-light: #4A5568;
+    --border:     #E2E8F0;
+    --output-color: #F9A825;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 36px 16px 80px;
+  }
+  .container { max-width: 1300px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 44px; }
+  header h1 { font-size: 1.75rem; margin-bottom: 8px; letter-spacing: -0.02em; }
+  header .subtitle { color: var(--text-light); font-size: 0.93rem; }
+  header .meta {
+    display: inline-flex; gap: 12px; margin-top: 12px;
+    background: #EEF2FF; border-radius: 8px; padding: 8px 18px;
+    font-size: 0.82rem; color: #4338CA;
+  }
+  header .meta strong { font-weight: 700; }
+
+  h2 {
+    font-size: 1.25rem; margin: 48px 0 12px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-desc {
+    color: var(--text-light); font-size: 0.9rem;
+    margin-bottom: 20px; max-width: 1100px; line-height: 1.65;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; padding: 5px 12px;
+    border-radius: 14px; background: var(--card);
+    border: 1px solid var(--border); color: var(--text-light);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-line { width: 28px; height: 3px; border-radius: 2px; background: var(--success); }
+  .legend-line.failure { height: 0; border-bottom: 2px dashed var(--failure); border-radius: 0; background: transparent; }
+
+  .hflow-scroll {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto; overflow-y: hidden;
+  }
+  .hflow-inner { position: relative; width: 1300px; height: 460px; }
+  .hflow-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hflow-svg .failure-arc { transition: opacity 0.18s, stroke-width 0.18s; }
+  .hflow-svg .failure-label { transition: opacity 0.18s; pointer-events: none; }
+  .hflow-nodes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .hflow-node {
+    position: absolute; width: 140px; height: 80px;
+    border-radius: 9px; padding: 10px 8px 8px;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    color: white; font-weight: 600; font-size: 0.82rem; line-height: 1.3;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12); user-select: none;
+  }
+  .hflow-node:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.22); z-index: 5; }
+  .hflow-node.selected { outline: 3px solid var(--highlight); outline-offset: 2px; z-index: 6; }
+  .hflow-node .num { position: absolute; top: 5px; left: 9px; font-size: 0.65rem; opacity: 0.85; font-weight: 700; }
+  .hflow-node .fail-badge {
+    position: absolute; bottom: 4px; right: 6px; font-size: 0.6rem;
+    background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 8px; font-weight: 600;
+  }
+  .hflow-node .name { padding: 0 2px; }
+  .hflow-node .role-badge {
+    position: absolute; top: 5px; right: 8px;
+    font-size: 0.65rem; opacity: 0.9;
+  }
+
+  .hflow-node.role-a { background: var(--role-a); }
+  .hflow-node.role-g { background: var(--role-g); }
+  .hflow-node.mix    { background: var(--mix); }
+  .hflow-node.done   {
+    background: var(--done); color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 4px rgba(245,158,11,0.18);
+  }
+
+  /* ── Detail panel ── */
+  .detail-below {
+    margin-top: 20px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .detail-empty { padding: 50px 20px; text-align: center; color: var(--text-light); }
+  .detail-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px; background: linear-gradient(135deg, #FAFBFC, #F0F4F8);
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--text); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+  }
+  .detail-num.role-a { background: var(--role-a); }
+  .detail-num.role-g { background: var(--role-g); }
+  .detail-num.mix    { background: var(--mix); }
+  .detail-header h3 { font-size: 1.05rem; }
+
+  .detail-3col { display: grid; grid-template-columns: 0.7fr 1.6fr 1.1fr; gap: 0; }
+  .dcol { padding: 16px 20px; border-right: 1px solid var(--border); }
+  .dcol:last-child { border-right: none; }
+  .dcol h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px; font-weight: 700; }
+  .dcol.what-col h4 { color: #059669; }
+  .dcol.output-col h4 { color: #B45309; }
+
+  .role-tag {
+    display: inline-block; font-size: 0.73rem; padding: 3px 10px;
+    border-radius: 10px; margin: 2px 4px 4px 0; font-weight: 600;
+    background: #E2E8F0; color: var(--text);
+  }
+  .role-tag.role-a-t { background: var(--role-a); color: white; }
+  .role-tag.role-g-t { background: var(--role-g); color: white; }
+
+  .subsection { margin-bottom: 12px; }
+  .subsection:last-child { margin-bottom: 0; }
+  .sublabel { font-size: 0.83rem; font-weight: 700; margin-bottom: 5px; padding-left: 10px; border-left: 3px solid var(--text-light); }
+  .sublabel.did      { border-left-color: #3B82F6; color: #1D4ED8; }
+  .sublabel.pain     { border-left-color: var(--failure); color: #991B1B; }
+  .sublabel.solution { border-left-color: #10B981; color: #065F46; }
+  .sublabel.happy    { border-left-color: var(--success); color: #166534; }
+  .sublabel.failure-out { border-left-color: var(--failure); color: #991B1B; }
+  .subcontent { font-size: 0.86rem; line-height: 1.65; padding-left: 13px; }
+  .subcontent ul, ul.subcontent { list-style: none; padding-left: 13px; }
+  .subcontent li, ul.subcontent li { padding: 3px 0 3px 14px; position: relative; }
+  .subcontent li::before, ul.subcontent li::before { content: '·'; position: absolute; left: 0; color: var(--text-light); font-weight: 700; }
+  .failure-list li { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 6px; padding: 7px 12px !important; margin: 5px 0; list-style: none; }
+  .failure-list li::before { display: none; }
+  .failure-list .goto { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 10px; font-weight: 600; font-size: 0.76rem; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .failure-list .goto:hover { background: #FCA5A5; color: white; }
+  .muted { color: var(--text-light); font-style: italic; }
+
+  /* ── Mermaid ── */
+  .role-diagram { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; overflow-x: auto; }
+  .role-diagram .mermaid { text-align: center; }
+
+  .insight { background: #FFF8E1; border-left: 4px solid var(--output-color); padding: 14px 18px; border-radius: 6px; margin-top: 20px; font-size: 0.9rem; line-height: 1.65; }
+  .insight strong { color: #BF360C; }
+  .insight ul { margin: 6px 0 0 18px; line-height: 1.7; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 0.82rem; }
+  footer code { background: var(--card); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.78rem; }
+
+  /* ── Prompt block ── */
+  .prompt-block {
+    border-top: 1px solid var(--border);
+    background: #0E1A2F;
+    padding: 16px 20px 18px;
+  }
+  .prompt-block-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .prompt-block-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: #4ADE80;
+  }
+  .prompt-copy-btn {
+    font-size: 0.73rem; padding: 4px 12px; border-radius: 6px;
+    background: rgba(255,255,255,0.08); color: #CBD5E1;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    font-family: inherit; transition: background 0.15s, color 0.15s;
+  }
+  .prompt-copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+  .prompt-copy-btn.copied { background: #16A34A; color: #fff; border-color: #16A34A; }
+  .prompt-text {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.83rem; color: #F0DE9E; line-height: 1.75;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📋 會議記錄整理 · AI 輔助工作流</h1>
+    <p class="subtitle">KCL 碩士研究組 · 從三週生肉筆記到可分享的追蹤表</p>
+    <div class="meta">
+      <span>輸入：<strong>raw_notes.txt</strong></span>
+      <span>|</span>
+      <span>產出：<strong>week1/2/3.md + tracker.md</strong></span>
+      <span>|</span>
+      <span>預計時間：<strong>20 min</strong></span>
+    </div>
+  </header>
+
+  <h2>🌳 Happy Path Pipeline</h2>
+  <p class="section-desc">
+    <strong style="color:var(--success)">綠色實線</strong> = 正常流程（左→右）；
+    <strong style="color:var(--failure)">紅色虛線弧</strong> = 失敗路徑（點擊節點時高亮）。
+    <br><strong>👉 點擊任意節點</strong>查看：由誰負責 / 做了什麼 / 輸出是什麼 / 失敗怎麼辦。
+  </p>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-line"></span>Happy Path</span>
+    <span class="legend-item"><span class="legend-line failure"></span>失敗路徑（點擊高亮）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-a)"></span>👤 學生 — 決策 / 判斷 / 人工操作（橘色）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-g)"></span>🤖 AI Agent（Claude Code）— 執行 / 產出</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--done)"></span>最終產出</span>
+  </div>
+
+  <div class="hflow-scroll">
+    <div class="hflow-inner" id="hflow-inner">
+      <svg class="hflow-svg" id="hflow-svg" viewBox="0 0 1300 460" preserveAspectRatio="xMinYMin meet"></svg>
+      <div class="hflow-nodes" id="hflow-nodes"></div>
+    </div>
+  </div>
+
+  <div class="detail-below" id="detail-panel">
+    <div class="detail-empty">👆 點擊上方任意節點查看詳細說明</div>
+  </div>
+
+  <h2>🔗 角色分工關係</h2>
+  <p class="section-desc">學生是「方向決策者 + 品質把關者」；AI 是「執行者 + 素材處理者」。兩者交替推進。</p>
+  <div class="role-diagram">
+    <div class="mermaid">
+flowchart LR
+    S(["👤 <b>學生</b><br/>確認 · 核對 · 判斷"])
+    AI(["🤖 <b>Claude Code</b><br/>解析 · 結構化 · 整合"])
+    RN["📄 raw_notes.txt"]
+    W1["📄 week1.md"]
+    W2["📄 week2.md"]
+    W3["📄 week3.md"]
+    TR["📋 tracker.md"]
+
+    S -->|"啟動 + 提供日期"| AI
+    RN --> AI
+    AI -->|"解析拆週"| W1
+    AI --> W2
+    AI --> W3
+    W1 --> S
+    W2 --> S
+    W3 --> S
+    S -->|"核對確認"| AI
+    AI -->|"整合"| TR
+    TR --> S
+    S -->|"簽發"| TR
+
+    classDef student fill:#F97316,stroke:#C2410C,color:#fff,font-weight:bold;
+    classDef ai fill:#6366F1,stroke:#4338CA,color:#fff,font-weight:bold;
+    classDef artifact fill:#FEF3C7,stroke:#D97706,color:#1A202C,font-weight:600;
+    classDef output fill:#F59E0B,stroke:#D97706,color:#1A202C,font-weight:bold;
+
+    class S student;
+    class AI ai;
+    class RN,W1,W2,W3 artifact;
+    class TR output;
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>關鍵洞察</strong>：會議記錄的難點不是「記什麼」，而是「誰負責什麼、什麼時候」——這正是 AI 最容易出錯的地方。你的工作是：</p>
+    <ul>
+      <li><strong>核對人名</strong>：「I」是誰？每個 Owner 名字是否全名一致？</li>
+      <li><strong>判斷日期</strong>：[estimated] 的日期合理嗎？還是 AI 猜的太寬鬆？</li>
+      <li><strong>決定什麼可發</strong>：[paraphrased] 的轉述你願意負責嗎？</li>
+    </ul>
+    <p style="margin-top:8px;">AI 幫你節省了格式化的時間，但<strong>準確性的把關是你的責任</strong>——發出去的追蹤表代表你的名字。</p>
+  </div>
+
+  <footer>
+    <p>Workshop: <code>exercises/collaboration/meeting-tracker/</code> · KCL Claude Code Workshop 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 80;
+  const GAP = 30;
+  const START_X = 30;
+  const MAIN_Y = 240;
+
+  const flowNodes = [
+    { id: 1,      name: "👤 啟動<br/>Claude Code",  color: "role-a" },
+    { id: 2,      name: "🤖 解析<br/>三週生肉",      color: "role-g" },
+    { id: 3,      name: "🤖 結構化<br/>週記錄",       color: "role-g" },
+    { id: 4,      name: "👤 核對<br/>人名與日期",     color: "role-a" },
+    { id: 5,      name: "🤖 整合<br/>追蹤表",         color: "role-g" },
+    { id: 6,      name: "👤 確認<br/>簽發",           color: "role-a" },
+    { id: "done", name: "✅ tracker<br/>.md",        color: "done"   }
+  ];
+
+  const failurePaths = [
+    { from: 4, to: 3, label: "人名或日期有誤，重新結構化" },
+    { from: 6, to: 5, label: "格式不適合主管，重整合" }
+  ];
+
+  function getNodeIndex(id) { return flowNodes.findIndex(n => String(n.id) === String(id)); }
+  function getX(id)         { return START_X + getNodeIndex(id) * (NODE_WIDTH + GAP); }
+  function getCenterX(id)   { return getX(id) + NODE_WIDTH / 2; }
+
+  function renderFlow() {
+    const svg = document.getElementById('hflow-svg');
+    const container = document.getElementById('hflow-nodes');
+
+    let svgHtml = `
+      <defs>
+        <marker id="arr-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#16A34A"/>
+        </marker>
+        <marker id="arr-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#DC2626"/>
+        </marker>
+      </defs>
+    `;
+
+    for (let i = 0; i < flowNodes.length - 1; i++) {
+      const sx = getX(flowNodes[i].id) + NODE_WIDTH;
+      const tx = getX(flowNodes[i+1].id);
+      svgHtml += `<line x1="${sx}" y1="${MAIN_Y}" x2="${tx - 4}" y2="${MAIN_Y}" stroke="#16A34A" stroke-width="3" marker-end="url(#arr-h)"/>`;
+    }
+
+    failurePaths.forEach((f, idx) => {
+      const sx = getCenterX(f.from);
+      const tx = getCenterX(f.to);
+      const span = Math.abs(getNodeIndex(f.from) - getNodeIndex(f.to));
+      const arcHeight = 28 + span * 18;
+      const sy = MAIN_Y - NODE_HEIGHT / 2;
+      const peakY = sy - arcHeight;
+      svgHtml += `<path d="M ${sx} ${sy} C ${sx} ${peakY}, ${tx} ${peakY}, ${tx} ${sy - 4}" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.28" fill="none" marker-end="url(#arr-f)" data-from="${f.from}" data-idx="${idx}" class="failure-arc"/>`;
+      const midX = (sx + tx) / 2;
+      svgHtml += `<text x="${midX}" y="${peakY - 5}" text-anchor="middle" font-size="10.5" fill="#7F1D1D" class="failure-label" data-from="${f.from}" data-idx="${idx}" font-weight="600" opacity="0">${f.label}</text>`;
+    });
+
+    svg.innerHTML = svgHtml;
+
+    let html = '';
+    flowNodes.forEach(n => {
+      const x = getX(n.id);
+      const failures = failurePaths.filter(f => f.from === n.id).length;
+      const num = typeof n.id === 'number' ? n.id : '';
+      html += `
+        <div class="hflow-node ${n.color}" data-id="${n.id}"
+             style="left:${x}px; top:${MAIN_Y - NODE_HEIGHT/2}px;"
+             onclick="onNodeClick('${n.id}')"
+             onmouseenter="onNodeHover('${n.id}', true)"
+             onmouseleave="onNodeHover('${n.id}', false)">
+          ${num ? `<div class="num">${num}</div>` : ''}
+          <div class="name">${n.name}</div>
+          ${failures > 0 ? `<div class="fail-badge">⚠ ${failures}</div>` : ''}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  const nodeData = {
+    "1": {
+      name: "啟動 Claude Code",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "cd exercises/collaboration/meeting-tracker/ && claude，先問：「你看到什麼檔案？大概有多少行？描述 raw_notes.txt 的結構。」確認 Claude 能看到檔案後再進下一步。",
+        pains: ["不知道 raw_notes.txt 有多亂", "不確定 Claude 能不能正確辨識週次邊界"],
+        solutions: ["💡 先讓 Claude 描述內容結構，不急著跑完整 prompt", "✅ 確認 Claude 看到三個 === 分隔符再開始"]
+      },
+      output: {
+        happy: "Claude Code 啟動，確認讀到 raw_notes.txt → 進入解析（Step 2）",
+        failure: []
+      }
+    },
+    "2": {
+      name: "解析三週生肉",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 raw_notes.txt，辨識三個週次邊界（=== 分隔符），列出所有出現的人名、未明確指派 Owner 的任務、以及可過濾的 off-topic 段落。",
+        pains: ["混淆 'we agreed' 和 Action Item", "把閒聊段落（kebab place、TikTok）也納入摘要"],
+        solutions: ["🔧 prompt 裡給 Action Item 定義：有明確責任人 + 有具體任務的才算", "💡 要求 AI 先列出它打算過濾掉的 off-topic 段落，讓你確認"]
+      },
+      output: {
+        happy: "週次結構 + 人名清單 + 無主任務清單 → 確認後進結構化（Step 3）",
+        failure: []
+      },
+      prompt: `你是行政助理。讀 collaboration/meeting-tracker/raw_notes.txt。
+
+先回答以下問題，等我確認後再輸出任何文件：
+1. 這份記錄涵蓋幾次會議？各是什麼日期？
+2. 所有出現過的人名有哪些？（包括 via text 提到的）
+3. 有哪些段落是 off-topic 的閒聊（不涉及工作）？列出來讓我確認要過濾。
+4. 有哪些 Action Items 是「有任務但沒有明確負責人」的？列出讓我指派。
+
+Action Item 的定義：有人明確說要做某件事，且那件事有具體產出。"we agreed" 是決議，不是 Action Item。`
+    },
+    "3": {
+      name: "結構化週記錄",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "依序產出 week1.md、week2.md、week3.md，每份含：出席者清單、本週決議、Action Items 表格（Owner / Task / Due / Status）、Open Questions。",
+        pains: ["Due date 沒明確給時 AI 自行填一個日期", "Owner 推斷錯誤（e.g. 第一人稱 'I' 沒有具名）"],
+        solutions: ["🔧 prompt 裡指定：沒明確 due date 標 [estimated]、owner 不明確標 [TBC]", "💡 要求 AI 把原句不清楚的表述標 [paraphrased]"]
+      },
+      output: {
+        happy: "📄 week1.md · week2.md · week3.md（含 [TBC]/[estimated]/[paraphrased] 標記）→ 學生核對（Step 4）",
+        failure: [
+          { condition: "人名或日期有誤 → 重新給明確指令", target: 3 }
+        ]
+      },
+      prompt: `你是行政助理。根據 raw_notes.txt，依序產出 week1.md、week2.md、week3.md。
+
+每份文件格式：
+# Week N — [日期]
+
+## 出席
+[名單，全名，不用縮寫]
+
+## 本週決議
+- [決議事項]（有投票的標明結果，例如「4-1 通過」）
+
+## Action Items
+| Owner | Task | Due | Status |
+|-------|------|-----|--------|
+| [全名] | [具體任務，一句話] | [具體日期或 [estimated]] | Pending |
+
+## Open Questions（未解決）
+- [問題描述] — 由誰提出
+
+格式規則：
+- 原文不清楚的轉述標 [paraphrased]
+- Due date 不明確標 [estimated]  
+- Owner 不明確標 [TBC]
+- off-topic 段落完全省略
+- 第一人稱 "I" 請用 [作者] 代替，等學生填入自己的名字`
+    },
+    "4": {
+      name: "核對人名與日期",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "對照 raw_notes.txt 原文，確認：(1) Owner 全名正確 (2) [estimated] 日期是否合理 (3) [paraphrased] 的轉述是否準確 (4) 有沒有漏掉的 Action Item。",
+        pains: ["有人名字在不同週用了不同寫法（e.g. 'jamal' vs 'Jamal'）", "Week 2 的 'I' 沒有具名，不知道是誰"],
+        solutions: ["💡 找 raw_notes.txt 第一行確認「people here」的完整名單", "✅ [TBC] 的 Owner 需要你自己填入正確名字才能發送"]
+      },
+      output: {
+        happy: "確認所有人名/日期準確，[TBC]/[estimated] 已處理 → 進整合（Step 5）",
+        failure: [
+          { condition: "名字或日期有誤 → 給 Claude 正確資訊重新生成", target: 3 }
+        ]
+      }
+    },
+    "5": {
+      name: "整合追蹤表",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 week1.md、week2.md、week3.md，整合成 tracker.md：含所有 Action Items 總表（跨週）、未解決問題、重要決議，並標出可能 overdue 的任務。",
+        pains: ["跨週同一個任務被列成兩條（e.g. Week 1 說要做、Week 2 說還沒做）", "判斷哪些任務 overdue 需要知道今天日期"],
+        solutions: ["🔧 prompt 裡告訴 AI 去重複：相同任務跨週出現只算一條，保留最新狀態", "💡 告訴 AI 今天的日期讓它判斷 overdue"]
+      },
+      output: {
+        happy: "📄 tracker.md（含 All Actions、Open Questions、Key Decisions）→ 學生確認（Step 6）",
+        failure: [
+          { condition: "格式不適合主管 → 重整合格式", target: 5 }
+        ]
+      },
+      prompt: `你是行政助理。讀 week1.md、week2.md、week3.md，整合產出 tracker.md。
+
+今天日期：[請填入今天日期]
+
+格式：
+# 會議追蹤表 — AI Adoption in London Creative Industries 研究組
+
+## 進度摘要
+[一段話，說明三週整體進度，點出當前 blockers]
+
+## 所有 Action Items（跨週整合）
+| 週次 | Owner | Task | Due | Status | 備注 |
+|------|-------|------|-----|--------|------|
+[去重複：同一個任務跨週出現只列一次，保留最新進度]
+[標記 ⚠️ check 的條件：(1) Due date 已過 (2) 連續兩週未完成 (3) Owner 是 [TBC]]
+
+## 未解決問題
+| 週次 | 問題 | 由誰提出 | 狀態 |
+|------|------|---------|------|
+
+## 重要決議
+| 週次 | 決議內容 | 決策方式 |
+|------|---------|---------|
+
+完成後告訴我：有幾個任務你認為是 overdue 或高風險的？`
+    },
+    "6": {
+      name: "確認簽發",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "最後審查 tracker.md，確認所有 [paraphrased] 轉述準確、[estimated] 日期已確認或標注待確認，再決定是否可以分享給主管。",
+        pains: ["不確定某些 [paraphrased] 是否準確，但不想再去問與會者", "tracker 裡有 [TBC] Owner 還沒填"],
+        solutions: ["✅ 發送前把 [paraphrased] 改成你確定的說法，或直接刪掉不確定的", "💡 [TBC] Owner 必須填入才能發——不可發送帶 [TBC] 的追蹤表"]
+      },
+      output: {
+        happy: "所有標記清理完畢，tracker.md 可分享 → 完成",
+        failure: [
+          { condition: "格式不合主管習慣 → 請 Claude 重整", target: 5 }
+        ]
+      }
+    },
+    "done": {
+      name: "tracker.md ✅ 完成",
+      colorClass: "mix",
+      who: [["👤 學生（成果）", "role-a-t"]],
+      what: {
+        did: "可分享的週會追蹤表：出席者、決議、Action Items（含 Owner/Due/Status）、Open Questions。所有轉述都已確認，沒有 [TBC]。",
+        pains: [],
+        solutions: []
+      },
+      output: {
+        happy: "✅ tracker.md 準備好分享給主管或與會者",
+        failure: []
+      }
+    }
+  };;
+
+  let selectedId = null;
+
+  window.onNodeClick = function(id) {
+    selectedId = String(id);
+    showDetail(selectedId);
+    highlightSelection();
+  };
+
+  window.onNodeHover = function(id, entering) {
+    if (selectedId === String(id)) return;
+    if (entering) highlightFailures(String(id), 0.9, 1);
+    else highlightSelection();
+  };
+
+  function highlightSelection() {
+    if (selectedId) {
+      highlightFailures(selectedId, 0.9, 1);
+    } else {
+      document.querySelectorAll('.failure-arc').forEach(a => { a.style.opacity = '0.28'; a.style.strokeWidth = ''; });
+      document.querySelectorAll('.failure-label').forEach(l => { l.style.opacity = '0'; });
+    }
+  }
+
+  function highlightFailures(id, arcOpacity, labelOpacity) {
+    document.querySelectorAll('.failure-arc').forEach(a => {
+      if (a.dataset.from === id) { a.style.opacity = arcOpacity; a.style.strokeWidth = '2.5'; }
+      else { a.style.opacity = '0.12'; a.style.strokeWidth = ''; }
+    });
+    document.querySelectorAll('.failure-label').forEach(l => {
+      l.style.opacity = l.dataset.from === id ? labelOpacity : '0';
+    });
+    document.querySelectorAll('.hflow-node').forEach(n => {
+      n.classList.toggle('selected', n.dataset.id === id);
+    });
+  }
+
+  function showDetail(id) {
+    const data = nodeData[id];
+    if (!data) return;
+
+    const who = data.who.map(([n, cls]) => `<span class="role-tag ${cls}">${n}</span>`).join(' ');
+    const pains = data.what.pains.length
+      ? data.what.pains.map(p => `<li>${p}</li>`).join('')
+      : '<li class="muted">—</li>';
+    const solutions = data.what.solutions.length
+      ? data.what.solutions.map(s => `<li>${s}</li>`).join('')
+      : '<li class="muted">—</li>';
+
+    let failureHtml;
+    if (data.output.failure.length === 0) {
+      failureHtml = '<div class="subcontent muted">（無失敗路徑）</div>';
+    } else {
+      failureHtml = `<ul class="failure-list">${
+        data.output.failure.map(f =>
+          `<li><strong>${f.condition}</strong> → <span class="goto" onclick="onNodeClick('${f.target}')">回到 Step ${f.target}</span></li>`
+        ).join('')
+      }</ul>`;
+    }
+
+    const numDisplay = id === 'done' ? '✅' : id;
+
+    let promptHtml = '';
+    if (data.prompt) {
+      const escapedPrompt = data.prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      promptHtml = `
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-label">▶ PROMPT · 複製貼入 Claude Code</span>
+            <button class="prompt-copy-btn" onclick="copyPrompt(this, \`${data.prompt.replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`)">複製</button>
+          </div>
+          <pre class="prompt-text">${escapedPrompt}</pre>
+        </div>`;
+    }
+
+    document.getElementById('detail-panel').innerHTML = `
+      <div class="detail-header">
+        <div class="detail-num ${data.colorClass}">${numDisplay}</div>
+        <h3>${data.name}</h3>
+      </div>
+      <div class="detail-3col">
+        <div class="dcol who-col">
+          <h4>WHO · 誰負責</h4>
+          <div>${who}</div>
+        </div>
+        <div class="dcol what-col">
+          <h4>WHAT · 做了什麼 · 痛點 · 解法</h4>
+          <div class="subsection">
+            <div class="sublabel did">📋 做了什麼</div>
+            <div class="subcontent">${data.what.did}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel pain">⚠️ 常見痛點</div>
+            <ul class="subcontent">${pains}</ul>
+          </div>
+          <div class="subsection">
+            <div class="sublabel solution">💡 解法 / 提示</div>
+            <ul class="subcontent">${solutions}</ul>
+          </div>
+        </div>
+        <div class="dcol output-col">
+          <h4>OUTPUT · 產出與去向</h4>
+          <div class="subsection">
+            <div class="sublabel happy">✅ 成功產出</div>
+            <div class="subcontent">${data.output.happy}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel failure-out">🔁 失敗路徑</div>
+            ${failureHtml}
+          </div>
+        </div>
+      </div>
+      ${promptHtml}
+    `;
+  }
+
+  window.copyPrompt = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已複製 ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      btn.textContent = '請手動複製';
+    });
+  };
+
+  renderFlow();
+  highlightSelection();
+  setTimeout(() => onNodeClick("1"), 120);
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 14 },
+    securityLevel: 'loose',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif'
+  });
+</script>
+</body>
+</html>

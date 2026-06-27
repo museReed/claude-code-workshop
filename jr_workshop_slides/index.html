@@ -1682,6 +1682,463 @@ claude</pre>
     </div>
   </section>
 
+  <!-- ════════════════════════════════════════
+       CHAPTER 5 — 分組實作 S28–S36
+       ════════════════════════════════════════ -->
+
+  <!-- S28 · Chapter 5 Intro -->
+  <section class="slide slide-warm" id="s28" data-slide="28">
+    <div class="slide-body" style="max-width:960px;display:flex;flex-direction:column;gap:28px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(184,144,46,0.12);border-radius:100px;padding:6px 16px;width:fit-content;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#B8902E;flex-shrink:0;"></span>
+        <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:#B8902E;letter-spacing:0.06em;text-transform:uppercase;">第 5 章 · 50 min · 分組實作</span>
+      </div>
+      <div>
+        <h2 style="font-size:clamp(32px,4vw,56px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#1D1D1F;margin:0 0 16px;">挑一個你<br><span style="color:#B8902E;">真的在乎</span>的場景</h2>
+        <p style="font-size:clamp(16px,1.8vw,22px);color:#555;max-width:580px;line-height:1.55;margin:0;">4 個情境，選一個，50 分鐘內讓 Claude Code 幫你真正完成一件事。</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div style="background:#fff;border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">📚</span><span style="font-size:13px;font-weight:600;color:#1D1D1F;">學術研究 Pipeline</span><span style="font-family:var(--font-mono);font-size:10px;color:#6366F1;margin-left:2px;font-weight:600;">4 素材 → 1 學術報告</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🤝</span><span style="font-size:13px;font-weight:600;color:#1D1D1F;">職場協作</span><span style="font-family:var(--font-mono);font-size:11px;color:#059669;margin-left:2px;font-weight:600;">E</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🏠</span><span style="font-size:13px;font-weight:600;color:#1D1D1F;">倫敦生活</span><span style="font-family:var(--font-mono);font-size:11px;color:#0EA5E9;margin-left:2px;font-weight:600;">F</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">💼</span><span style="font-size:13px;font-weight:600;color:#1D1D1F;">求職</span><span style="font-family:var(--font-mono);font-size:11px;color:#D97706;margin-left:2px;font-weight:600;">G</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S29 · Purpose + 怎麼選 -->
+  <section class="slide slide-warm" id="s29" data-slide="29">
+    <div class="slide-body" style="max-width:1080px;display:flex;flex-direction:column;gap:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <!-- 不是讓你 -->
+        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:24px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:#999;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">✗ 不是讓你</div>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555;"><span style="color:#CCC;font-weight:700;flex-shrink:0;">—</span>記住所有 AI 工具的指令</li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555;"><span style="color:#CCC;font-weight:700;flex-shrink:0;">—</span>第一次就做出完美成果</li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555;"><span style="color:#CCC;font-weight:700;flex-shrink:0;">—</span>學完所有場景</li>
+          </ul>
+        </div>
+        <!-- 真正想讓你 -->
+        <div style="background:rgba(184,144,46,0.08);border:1.5px solid rgba(184,144,46,0.25);border-radius:18px;padding:24px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:#B8902E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">✓ 真正想讓你</div>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#1D1D1F;font-weight:500;"><span style="color:#B8902E;font-weight:700;flex-shrink:0;">→</span>親身體驗把一件真實的事情做完</li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#1D1D1F;font-weight:500;"><span style="color:#B8902E;font-weight:700;flex-shrink:0;">→</span>感受 prompt 好壞造成的輸出差距</li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#1D1D1F;font-weight:500;"><span style="color:#B8902E;font-weight:700;flex-shrink:0;">→</span>帶回家一個可以繼續用的工作流</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 怎麼選 -->
+      <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:18px;padding:20px 24px;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:#B8902E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">怎麼選</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+          <div style="text-align:center;padding:14px 8px;background:#EEF2FF;border-radius:10px;">
+            <div style="font-size:18px;margin-bottom:6px;">📚</div>
+            <div style="font-size:11px;font-weight:700;color:#1D1D1F;margin-bottom:4px;">在做學術研究</div>
+            <div style="font-size:10px;color:#6366F1;font-weight:600;line-height:1.4;">論文 / 文獻 / 問卷<br>→ 學術 Pipeline</div>
+          </div>
+          <div style="text-align:center;padding:14px 8px;background:#ECFDF5;border-radius:10px;">
+            <div style="font-size:18px;margin-bottom:6px;">📋</div>
+            <div style="font-size:11px;font-weight:700;color:#1D1D1F;margin-bottom:4px;">常需要開會記錄</div>
+            <div style="font-size:10px;color:#059669;font-weight:600;line-height:1.4;">雜亂筆記 → 行動清單<br>→ 場景 E</div>
+          </div>
+          <div style="text-align:center;padding:14px 8px;background:#E0F2FE;border-radius:10px;">
+            <div style="font-size:18px;margin-bottom:6px;">🏠</div>
+            <div style="font-size:11px;font-weight:700;color:#1D1D1F;margin-bottom:4px;">準備搬去倫敦</div>
+            <div style="font-size:10px;color:#0EA5E9;font-weight:600;line-height:1.4;">房源清單 → 推薦排名<br>→ 場景 F</div>
+          </div>
+          <div style="text-align:center;padding:14px 8px;background:#FFFBEB;border-radius:10px;">
+            <div style="font-size:18px;margin-bottom:6px;">💼</div>
+            <div style="font-size:11px;font-weight:700;color:#1D1D1F;margin-bottom:4px;">正在找工作</div>
+            <div style="font-size:10px;color:#D97706;font-weight:600;line-height:1.4;">CV + JD → 對標缺口<br>→ 場景 G</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S30 · Academic Research Pipeline (merged A+B+C+D) -->
+  <section class="slide slide-warm" id="s30" data-slide="30">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:22px;">📚</span>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#6366F1;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">學術研究 · 四份素材 · 一條 Pipeline</div>
+          <h2 style="font-size:clamp(18px,2vw,26px);font-weight:800;color:#1D1D1F;margin:0;">混亂的材料 → 可以送審的章節草稿</h2>
+      </div>
+    </div>
+    <!-- Problem Description -->
+    <div style="background:#EEF2FF;border-left:3px solid #6366F1;border-radius:0 12px 12px 0;padding:14px 18px;">
+      <p style="font-size:13px;color:#1D1D1F;line-height:1.7;margin:0;"><strong>情境：</strong>你是 KCL 碩士生，正在為指導教授準備論文第二章草稿。手上的資料<strong>豐富但混亂</strong>——三篇只掃過一眼的論文、格式四散的引用清單、上學期問卷的原始 CSV、和一個只有 bullet 的大綱。<br><strong>問題：</strong>怎麼讓 Claude Code 把這堆素材，在 50 分鐘內變成一份可以送審的 <code style="font-family:var(--font-mono);font-size:11px;background:rgba(99,102,241,0.12);padding:1px 6px;border-radius:4px;">chapter2_draft.md</code>？<strong>這條 pipeline 要怎麼拆？</strong></p>
+    </div>
+    <!-- Pipeline Steps (click to preview file) -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+      <div class="s30-card" data-s30-preview="01" style="background:#fff;border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(99,102,241,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+        <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#6366F1;background:#EEF2FF;border-radius:4px;padding:2px 6px;">01</div>
+        <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">讀懂文獻</div>
+        <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">讀三篇論文 → 比較表格（研究問題 / 方法 / 發現 / 局限）</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📁 lit-review/samples/</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#6366F1;font-weight:600;">→ comparison_table.md</div>
+        <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#A5B4FC;">點擊預覽 ↗</div>
+      </div>
+      <div class="s30-card" data-s30-preview="02" style="background:#fff;border:1px solid rgba(139,92,246,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(139,92,246,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+        <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#8B5CF6;background:#F5F3FF;border-radius:4px;padding:2px 6px;">02</div>
+        <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">整理引用</div>
+        <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">格式混亂的書目 → APA 7 統一，缺欄位標 [缺出版年]</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📁 references/refs_messy.txt</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#8B5CF6;font-weight:600;">→ refs_clean.md</div>
+        <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#C4B5FD;">點擊預覽 ↗</div>
+      </div>
+      <div class="s30-card" data-s30-preview="03" style="background:#fff;border:1px solid rgba(79,70,229,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(79,70,229,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+        <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#4F46E5;background:#EEF2FF;border-radius:4px;padding:2px 6px;">03</div>
+        <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">挖統計數字</div>
+        <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">問卷 CSV → 找三個支撐論點的關鍵趨勢</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📁 survey-analysis/survey.csv</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#4F46E5;font-weight:600;">→ key_stats.md</div>
+        <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#A5B4FC;">點擊預覽 ↗</div>
+      </div>
+      <div class="s30-card" data-s30-preview="04" style="background:rgba(99,102,241,0.06);border:1.5px solid #6366F1;border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(99,102,241,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+        <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:#6366F1;border-radius:4px;padding:2px 6px;">04</div>
+        <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">撰寫章節</div>
+        <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">大綱 + 前三步產出 → 完整段落，引用標 [needs citation]</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📁 dissertation/outline.md + 以上三份</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:#6366F1;font-weight:700;">→ chapter2_draft.md ✓</div>
+        <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#A5B4FC;">點擊預覽 ↗</div>
+      </div>
+    </div>
+    <!-- Bottom: Kickoff + Integrity -->
+    <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;">
+      <div style="background:#0E1A2F;border-radius:12px;padding:14px 16px;">
+        <div style="font-size:10px;font-weight:700;color:#4ADE80;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">▶ Step 01 Kickoff · 跑完後讓 Claude 建議下一步，你來決定怎麼走</div>
+        <p style="font-family:var(--font-mono);font-size:11px;color:#F0DE9E;line-height:1.7;margin:0;">你是學術助理。讀 lit-review/samples/ 裡的三篇 .md 論文，產出 comparison_table.md：欄位為研究問題 / 方法 / 樣本規模 / 主要發現 / 局限。完成後，告訴我你認為接下來哪一步最重要。</p>
+      </div>
+      <div style="background:#FFF1F2;border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:14px;">
+        <div style="font-size:10px;font-weight:700;color:#DC2626;letter-spacing:0.05em;margin-bottom:6px;">⚠ 學術誠信</div>
+        <p style="font-size:11px;color:#7F1D1D;line-height:1.5;margin:0;">AI 產的段落不可直接提交。草稿是起點，你需要用自己的思路改寫並補上真實引用。標 [needs citation] 的地方必須查原始文獻。</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- ── S30 File Preview Modal ── -->
+<div id="s30-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
+  <div id="s30-modal-box" style="background:#0E1A2F;border-radius:20px;max-width:680px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div id="s30-modal-title" style="font-family:var(--font-mono);font-size:15px;color:#A5B4FC;font-weight:600;"></div>
+      <button id="s30-close" style="background:rgba(255,255,255,0.08);border:none;border-radius:6px;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;">✕</button>
+    </div>
+    <div id="s30-modal-content" style="overflow-y:auto;padding:20px;font-family:var(--font-mono);font-size:14px;color:#E2E8F0;line-height:1.75;white-space:pre-wrap;"></div>
+  </div>
+</div>
+
+  <!-- S31 · Academic Pipeline 互動流程圖 -->
+  <section class="slide slide-warm" id="s31" data-slide="31">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:16px;">📊</div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:#6366F1;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">學術 Pipeline · 互動流程圖</div>
+            <h2 style="font-size:clamp(14px,1.5vw,20px);font-weight:800;color:#1D1D1F;margin:0;">點擊每個節點 → 查看 Prompt · 確認誰負責</h2>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;font-family:var(--font-mono);font-size:10px;font-weight:600;">
+          <span style="background:#FEF3C7;color:#92400E;border-radius:6px;padding:4px 10px;">🟠 學生 — 決策 / 判斷</span>
+          <span style="background:#EEF2FF;color:#4338CA;border-radius:6px;padding:4px 10px;">🟣 AI Agent — 執行 / 產出</span>
+        </div>
+      </div>
+      <iframe
+        src="../docs/diagrams/academic-pipeline.html"
+        style="width:100%;height:68vh;border:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- S32 · Scenario E: 會議記錄整理 -->
+  <section class="slide slide-warm" id="s32" data-slide="32">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:22px;font-weight:800;color:#fff;">E</span>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">職場協作 · 一份原始筆記 · 一條 Pipeline</div>
+          <h2 style="font-size:clamp(18px,2vw,26px);font-weight:800;color:#1D1D1F;margin:0;">混亂的會議生肉 → 可以寄給主管的週報</h2>
+        </div>
+      </div>
+      <div style="background:#ECFDF5;border-left:3px solid #059669;border-radius:0 12px 12px 0;padding:14px 18px;">
+        <p style="font-size:13px;color:#1D1D1F;line-height:1.7;margin:0;"><strong>情境：</strong>你剛加入一家新公司的 PM 團隊。前任留下了三週的會議原始筆記——一份完全沒有格式的 txt 檔。<strong>問題：</strong>你的主管今天下班前要看到每週行動清單，清楚列出誰要做什麼、什麼時候完成。怎麼把 <code style="font-family:var(--font-mono);font-size:11px;background:rgba(5,150,105,0.12);padding:1px 6px;border-radius:4px;">raw_notes.txt</code> 在 30 分鐘內變成可寄出的 <code style="font-family:var(--font-mono);font-size:11px;background:rgba(5,150,105,0.12);padding:1px 6px;border-radius:4px;">week1/2/3.md</code>？</p>
+      </div>
+      <!-- Pipeline Steps -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <div class="s32-card" data-s32-preview="01" style="background:#fff;border:1px solid rgba(5,150,105,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(5,150,105,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;border-radius:4px;padding:2px 6px;">01</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">讀懂原始筆記</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">掃描 raw_notes.txt → 摘要結構、識別三週邊界、標出模糊承諾</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 raw_notes.txt</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#059669;font-weight:600;">→ 結構摘要（心理地圖）</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#6EE7B7;">點擊預覽 ↗</div>
+        </div>
+        <div class="s32-card" data-s32-preview="02" style="background:#fff;border:1px solid rgba(5,150,105,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(5,150,105,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;border-radius:4px;padding:2px 6px;">02</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">拆週 + Action Items</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">依週拆分 → 每週：出席 / 決議 / Action Items 表格（Owner / Task / Due）</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 raw_notes.txt</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#059669;font-weight:600;">→ week1.md / week2.md / week3.md</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#6EE7B7;">點擊預覽 ↗</div>
+        </div>
+        <div class="s32-card" data-s32-preview="03" style="background:rgba(5,150,105,0.06);border:1.5px solid #059669;border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(5,150,105,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:#059669;border-radius:4px;padding:2px 6px;">03</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">產出 Tracker</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">三週 Action Items 匯總 → 跨週追蹤表，標出逾期 / 未指派 / 狀態不明</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 week1/2/3.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#059669;font-weight:700;">→ tracker.md ✓</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#6EE7B7;">點擊預覽 ↗</div>
+        </div>
+      </div>
+      <!-- Kickoff + Integrity -->
+      <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;">
+        <div style="background:#0E1A2F;border-radius:12px;padding:14px 16px;">
+          <div style="font-size:10px;font-weight:700;color:#4ADE80;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">▶ Step 01 Kickoff · 跑完後讓 Claude 建議下一步</div>
+          <p style="font-family:var(--font-mono);font-size:11px;color:#F0DE9E;line-height:1.7;margin:0;">你是一位專業行政助理。讀 raw_notes.txt（三週會議生肉），先告訴我你看到的結構：共幾次會議、三週邊界在哪裡、有哪些承諾沒有指定截止日期。</p>
+        </div>
+        <div style="background:#FFF1F2;border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;color:#DC2626;letter-spacing:0.05em;margin-bottom:6px;">⚠ 誠信提示</div>
+          <p style="font-size:11px;color:#7F1D1D;line-height:1.5;margin:0;">Action Items 的 Owner 和 Due 需與與會者確認，不可直接發送未核對的記錄。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ── S32 File Preview Modal ── -->
+<div id="s32-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
+  <div id="s32-modal-box" style="background:#0E1A2F;border-radius:20px;max-width:680px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div id="s32-modal-title" style="font-family:var(--font-mono);font-size:15px;color:#6EE7B7;font-weight:600;"></div>
+      <button id="s32-close" style="background:rgba(255,255,255,0.08);border:none;border-radius:6px;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;">✕</button>
+    </div>
+    <div id="s32-modal-content" style="overflow-y:auto;padding:20px;font-family:var(--font-mono);font-size:14px;color:#E2E8F0;line-height:1.75;white-space:pre-wrap;"></div>
+  </div>
+</div>
+
+  <!-- S33 · Meeting Tracker Pipeline 互動流程圖 -->
+  <section class="slide slide-warm" id="s33" data-slide="33">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:16px;">🗂</div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:#059669;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">會議記錄 Pipeline · 互動流程圖</div>
+            <h2 style="font-size:clamp(14px,1.5vw,20px);font-weight:800;color:#1D1D1F;margin:0;">點擊每個節點 → 查看 Prompt · 確認誰負責</h2>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;font-family:var(--font-mono);font-size:10px;font-weight:600;">
+          <span style="background:#FEF3C7;color:#92400E;border-radius:6px;padding:4px 10px;">🟠 學生 — 決策 / 判斷</span>
+          <span style="background:#EEF2FF;color:#4338CA;border-radius:6px;padding:4px 10px;">🟣 AI Agent — 執行 / 產出</span>
+        </div>
+      </div>
+      <iframe
+        src="../docs/diagrams/meeting-tracker-pipeline.html"
+        style="width:100%;height:68vh;border:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- S34 · Scenario F: 倫敦找房分析 -->
+  <section class="slide slide-warm" id="s34" data-slide="34">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:#0EA5E9;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:22px;font-weight:800;color:#fff;">F</span>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#0EA5E9;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">倫敦生活 · 八個房源 · 一條 Pipeline</div>
+          <h2 style="font-size:clamp(18px,2vw,26px);font-weight:800;color:#1D1D1F;margin:0;">混亂的房源清單 → 標出地雷、找出最佳三選</h2>
+        </div>
+      </div>
+      <div style="background:#E0F2FE;border-left:3px solid #0EA5E9;border-radius:0 12px 12px 0;padding:14px 18px;">
+        <p style="font-size:13px;color:#1D1D1F;line-height:1.7;margin:0;"><strong>情境：</strong>你剛收到 KCL 的錄取通知，三週後搬去倫敦。你找到了八個候選房源，但完全不熟悉英國租屋的眉角——什麼是 TDS？押金幾週合理？通勤多久太久？<strong>問題：</strong>怎麼讓 Claude Code 幫你快速篩掉地雷、找出最值得看房的選項？</p>
+      </div>
+      <!-- Pipeline Steps -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <div class="s34-card" data-s34-preview="01" style="background:#fff;border:1px solid rgba(14,165,233,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(14,165,233,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#0EA5E9;background:#E0F2FE;border-radius:4px;padding:2px 6px;">01</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">讀懂房源清單</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">掃描八個房源 → 標出詐騙信號、違法條款、紅旗模式</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">🏠 listings.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#0EA5E9;font-weight:600;">→ 地雷識別報告</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#7DD3FC;">點擊預覽 ↗</div>
+        </div>
+        <div class="s34-card" data-s34-preview="02" style="background:#fff;border:1px solid rgba(14,165,233,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(14,165,233,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#0EA5E9;background:#E0F2FE;border-radius:4px;padding:2px 6px;">02</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">對標條件篩選</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">對照 criteria.md 逐條比對 → 通勤時間 / 預算 / 押金週數 / 擔保人要求</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📋 criteria.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#0EA5E9;font-weight:600;">→ 比較表格（含 🚩 標記）</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#7DD3FC;">點擊預覽 ↗</div>
+        </div>
+        <div class="s34-card" data-s34-preview="03" style="background:rgba(14,165,233,0.06);border:1.5px solid #0EA5E9;border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(14,165,233,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:#0EA5E9;border-radius:4px;padding:2px 6px;">03</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">產出推薦清單</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">去掉地雷 + 排除不符條件 → 前三名推薦，附詢問房東的問題清單</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 listings.md + criteria.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#0EA5E9;font-weight:700;">→ shortlist.md ✓</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#7DD3FC;">點擊預覽 ↗</div>
+        </div>
+      </div>
+      <!-- Kickoff + Integrity -->
+      <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;">
+        <div style="background:#0E1A2F;border-radius:12px;padding:14px 16px;">
+          <div style="font-size:10px;font-weight:700;color:#4ADE80;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">▶ Step 01 Kickoff · 先掃地雷，再做比較</div>
+          <p style="font-family:var(--font-mono);font-size:11px;color:#F0DE9E;line-height:1.7;margin:0;">你是熟悉 UK tenancy law 的顧問。讀 listings.md，先列出所有你判斷為詐騙或違規的信號（不合理押金、拒絕視訊、無地址等），再告訴我哪幾個直接排除、哪幾個需要進一步確認。</p>
+        </div>
+        <div style="background:#FFFBEB;border:1px solid rgba(184,144,46,0.25);border-radius:12px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;color:#B8902E;letter-spacing:0.05em;margin-bottom:6px;">⚠ 誠信提示</div>
+          <p style="font-size:11px;color:#78350F;line-height:1.5;margin:0;">租屋決策仍需親自看房與查驗合約，AI 分析僅供參考。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ── S34 File Preview Modal ── -->
+<div id="s34-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
+  <div id="s34-modal-box" style="background:#0E1A2F;border-radius:20px;max-width:680px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div id="s34-modal-title" style="font-family:var(--font-mono);font-size:15px;color:#7DD3FC;font-weight:600;"></div>
+      <button id="s34-close" style="background:rgba(255,255,255,0.08);border:none;border-radius:6px;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;">✕</button>
+    </div>
+    <div id="s34-modal-content" style="overflow-y:auto;padding:20px;font-family:var(--font-mono);font-size:14px;color:#E2E8F0;line-height:1.75;white-space:pre-wrap;"></div>
+  </div>
+</div>
+
+  <!-- S35 · Housing Search Pipeline 互動流程圖 -->
+  <section class="slide slide-warm" id="s35" data-slide="35">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#E0F2FE;display:flex;align-items:center;justify-content:center;font-size:16px;">🏠</div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:#0EA5E9;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">找房分析 Pipeline · 互動流程圖</div>
+            <h2 style="font-size:clamp(14px,1.5vw,20px);font-weight:800;color:#1D1D1F;margin:0;">點擊每個節點 → 查看 Prompt · 確認誰負責</h2>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;font-family:var(--font-mono);font-size:10px;font-weight:600;">
+          <span style="background:#FEF3C7;color:#92400E;border-radius:6px;padding:4px 10px;">🟠 學生 — 決策 / 判斷</span>
+          <span style="background:#EEF2FF;color:#4338CA;border-radius:6px;padding:4px 10px;">🟣 AI Agent — 執行 / 產出</span>
+        </div>
+      </div>
+      <iframe
+        src="../docs/diagrams/housing-search-pipeline.html"
+        style="width:100%;height:68vh;border:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- S36 · Scenario G: 履歷對標 JD -->
+  <section class="slide slide-warm" id="s36" data-slide="36">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:#D97706;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span style="font-size:22px;font-weight:800;color:#fff;">G</span>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#D97706;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">求職 · CV 草稿 + JD · 一條 Pipeline</div>
+          <h2 style="font-size:clamp(18px,2vw,26px);font-weight:800;color:#1D1D1F;margin:0;">混亂的 CV 草稿 → 對標 JD 的精準改寫版</h2>
+        </div>
+      </div>
+      <div style="background:#FFFBEB;border-left:3px solid #D97706;border-radius:0 12px 12px 0;padding:14px 18px;">
+        <p style="font-size:13px;color:#1D1D1F;line-height:1.7;margin:0;"><strong>情境：</strong>你在 LinkedIn 上看到一個夢想的 PM 職位，把 CV 草稿翻出來，卻不知道從哪裡下手——JD 有 15 條要求，你不確定哪些有達到、哪些是弱點。<strong>問題：</strong>怎麼讓 Claude Code 系統地找出缺口、只改真正需要改的地方，同時保證每條描述都有真實經歷支撐？</p>
+      </div>
+      <!-- Pipeline Steps -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <div class="s36-card" data-s36-preview="01" style="background:#fff;border:1px solid rgba(217,119,6,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#D97706;background:#FFFBEB;border-radius:4px;padding:2px 6px;">01</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">解構 JD</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">拆解 JD 成 Required / Preferred / Implicit → 找出隱性期待</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📋 job_description.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:600;">→ JD 拆解清單</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
+        </div>
+        <div class="s36-card" data-s36-preview="02" style="background:#fff;border:1px solid rgba(217,119,6,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#D97706;background:#FFFBEB;border-radius:4px;padding:2px 6px;">02</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">對標 CV 找缺口</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">cv_draft.md 每條逐一對標 → 標 ✅/⚠️/❌，找出措辭弱點和缺口</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 cv_draft.md</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:600;">→ 缺口分析報告</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
+        </div>
+        <div class="s36-card" data-s36-preview="03" style="background:rgba(217,119,6,0.06);border:1.5px solid #D97706;border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
+          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:#D97706;border-radius:4px;padding:2px 6px;">03</div>
+          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">改寫 ⚠️ 條目</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">只改弱點 → 強化動詞、補具體成果，改不了的標 [needs data]</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 cv_draft.md + JD 拆解清單</div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:700;">→ cv_tailored.md ✓</div>
+          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
+        </div>
+      </div>
+      <!-- Kickoff + Integrity -->
+      <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;">
+        <div style="background:#0E1A2F;border-radius:12px;padding:14px 16px;">
+          <div style="font-size:10px;font-weight:700;color:#4ADE80;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">▶ Step 01 Kickoff · 先拆 JD，不急著改 CV</div>
+          <p style="font-family:var(--font-mono);font-size:11px;color:#F0DE9E;line-height:1.7;margin:0;">你是一位資深 PM 面試官。讀 job_description.md，把所有要求拆成三層：Required（硬性）/ Preferred（加分）/ Implicit（沒寫但必須有）。完成後告訴我哪三條最容易被忽略。</p>
+        </div>
+        <div style="background:#FFF1F2;border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:14px;">
+          <div style="font-size:10px;font-weight:700;color:#DC2626;letter-spacing:0.05em;margin-bottom:6px;">⚠ 誠信提示</div>
+          <p style="font-size:11px;color:#7F1D1D;line-height:1.5;margin:0;">履歷內容必須屬實，AI 改寫後需確認每條描述都有真實經歷支撐。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ── S36 File Preview Modal ── -->
+<div id="s36-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
+  <div id="s36-modal-box" style="background:#0E1A2F;border-radius:20px;max-width:680px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div id="s36-modal-title" style="font-family:var(--font-mono);font-size:15px;color:#FCD34D;font-weight:600;"></div>
+      <button id="s36-close" style="background:rgba(255,255,255,0.08);border:none;border-radius:6px;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;">✕</button>
+    </div>
+    <div id="s36-modal-content" style="overflow-y:auto;padding:20px;font-family:var(--font-mono);font-size:14px;color:#E2E8F0;line-height:1.75;white-space:pre-wrap;"></div>
+  </div>
+</div>
+
+  <!-- S37 · Resume Tailoring Pipeline 互動流程圖 -->
+  <section class="slide slide-warm" id="s37" data-slide="37">
+    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:#FFFBEB;display:flex;align-items:center;justify-content:center;font-size:16px;">📄</div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:#D97706;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">履歷對標 Pipeline · 互動流程圖</div>
+            <h2 style="font-size:clamp(14px,1.5vw,20px);font-weight:800;color:#1D1D1F;margin:0;">點擊每個節點 → 查看 Prompt · 確認誰負責</h2>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;font-family:var(--font-mono);font-size:10px;font-weight:600;">
+          <span style="background:#FEF3C7;color:#92400E;border-radius:6px;padding:4px 10px;">🟠 學生 — 決策 / 判斷</span>
+          <span style="background:#EEF2FF;color:#4338CA;border-radius:6px;padding:4px 10px;">🟣 AI Agent — 執行 / 產出</span>
+        </div>
+      </div>
+      <iframe
+        src="../docs/diagrams/resume-tailoring-pipeline.html"
+        style="width:100%;height:68vh;border:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
 <!-- ── Nav controls ── -->
 <button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
   <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-left.svg" alt="←">
@@ -1966,6 +2423,734 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
       if ((e.key === 'Enter' || e.key === ' ') && card.classList.contains('revealed')) {
         e.preventDefault(); e.stopPropagation(); openModal(card.dataset.modal);
       }
+    });
+  });
+
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === modal) closeModal(); });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S30 File Preview Modal Script ── -->
+<style>
+  .hl-red {
+    color: #FCA5A5;
+    font-weight: 700;
+    background: rgba(239,68,68,0.18);
+    border-radius: 3px;
+    padding: 0 3px;
+  }
+  .hl-note {
+    display: inline-block;
+    font-size: 0.78em;
+    color: #FCD34D;
+    font-style: italic;
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif;
+    margin-left: 6px;
+    opacity: 0.88;
+  }
+</style>
+<script>
+(function () {
+  var modal    = document.getElementById('s30-modal');
+  var modalBox = document.getElementById('s30-modal-box');
+  var titleEl  = document.getElementById('s30-modal-title');
+  var content  = document.getElementById('s30-modal-content');
+  var closeBtn = document.getElementById('s30-close');
+  if (!modal) return;
+
+  var PREVIEWS = {
+    '01': {
+      title: '📄 lit-review/samples/paper1_ai_adoption_sme.md',
+      text: [
+        '# AI Adoption in UK Small and Medium Enterprises: A Mixed-Methods Study',
+        '',
+        'Authors: Chen, L., Mitchell, R., & Okafor, J.',
+        'Year: 2024  |  Journal: Journal of Small Business Management, 62(3)',
+        '',
+        '## Abstract',
+        'This study investigates determinants of AI adoption among UK SMEs.',
+        'Survey of 287 SME owners + 18 semi-structured interviews.',
+        'Three primary drivers: competitive pressure, pre-trained model availability,',
+        'and prior cloud computing experience.',
+        'Cost was barrier in only 34% of cases — contradicting earlier studies.',
+        '',
+        '## Research Question',
+        'What factors most strongly predict AI tool adoption in UK SMEs',
+        'in the post-LLM era (2022 onwards)?',
+        '',
+        '## Key Findings',
+        '1. Competitive pressure is strongest predictor (β=0.42, p<0.001)',
+        '2. SMEs with prior cloud adoption are 3.2× more likely to adopt AI',
+        '3. Cost-as-barrier narrative is outdated (only 34% cited it)',
+        '4. Sector matters less than expected — retail ≈ services ≈ manufacturing',
+        '',
+        '## Stated Limitations',
+        '- Cross-sectional design: cannot establish causal direction',
+        '- Sample over-represents London & South East (61%)',
+        '- Conducted before GPT-4 release',
+        '',
+        '[ paper2_platform_strategy.md and paper3_digital_transformation_skills.md',
+        '  also available in samples/ — each has same structure ]'
+      ].join('\n')
+    },
+    '02': {
+      title: '📄 references/refs_messy.txt  ← 注意格式有多混亂',
+      text: [
+        'Chen, L., Mitchell, R., & Okafor, J. (2024). AI adoption in UK small',
+        'and medium enterprises. Journal of Small Business Management, 62(3).',
+        'https://doi.org/10.1080/jsbm.2024.412',
+        '',
+        'Almeida, Pedro and Yamamoto, Kenji. "Platform Strategy and Generative AI.',
+        '" Strategic Management Journal 44, no. 11 (2023): 2789-2815.',
+        '',
+        'HOFFMANN T., SINGH A., CARVALHO M. - SKILLS MISMATCH IN DIGITAL',
+        'TRANSFORMATION: A CAPABILITY-BASED VIEW. MIS QUARTERLY VOL.48(2)',
+        'PP.891-918.',
+        '',
+        'https://hbr.org/2023/07/managing-ai-decision-making',
+        '',
+        'Davenport, T. H. (2018) The AI Advantage. MIT Press, Cambridge MA.',
+        '',
+        'Brynjolfsson E, McAfee A. 2017. The business of artificial intelligence.',
+        'Harvard Business Review, 7 (July), 1-20.',
+        '',
+        'Chen L, Mitchell R, Okafor J, \'AI adoption in UK SMEs\',',
+        'J Small Business Mgmt, 62(3), 412-38, 2024.   ← 重複了！',
+        '',
+        'Westerman G., Bonnet D. and McAfee A., Leading Digital. Harvard',
+        'Business Press, 2014.',
+        '',
+        '[ ... 共 15 筆，格式各不相同：APA / Chicago / 縮寫 / 純 URL ]'
+      ].join('\n')
+    },
+    '03': {
+      title: '📊 survey-analysis/survey.csv  ← 前 6 列',
+      text: [
+        'respondent_id, program, year_of_study, age_bracket,',
+        '              freq_use_ai, trust_ai_output, concern_integrity,',
+        '              tools_used, monthly_spend_gbp, open_response',
+        '',
+        '1, Engineering Management, 1, 26-30, 3, 3, 3, Perplexity, 1.77,',
+        '2, Technology Management, 1, 22-25, 3, 3, 4,',
+        '   Copilot;Claude;Perplexity, 20.83,',
+        '   "I rely on it too much for first drafts..."',
+        '3, Engineering Management, 1, 22-25, 3, 3, 2, Copilot, 1.08,',
+        '   Slow on long PDFs.',
+        '4, Marketing, 2, 22-25, 2, 4, 2,',
+        '   Gemini;Perplexity;Copilot, 0.0,',
+        '   "Worried my supervisor thinks I\'m cheating..."',
+        '5, Technology Management, 1, 26-30, 3, 3, 5, Copilot, 11.36,',
+        '   "I rely on it too much for first drafts..."',
+        '',
+        '[ freq_use_ai: 1=從不 5=每天 | trust_ai_output: 1=不信 5=很信 ]',
+        '[ concern_integrity: 1=不擔心 5=非常擔心 ]',
+        '[ 共 50 筆受訪者資料 ]'
+      ].join('\n')
+    },
+    '04': {
+      title: '📄 dissertation/outline.md',
+      text: [
+        '# Dissertation Outline',
+        '',
+        'Working title: Generative AI Adoption in UK SMEs:',
+        '               From Tool Use to Capability Building',
+        'Programme: MSc Technology Management, King\'s College London',
+        'Target length: 12,000 words  |  Submission: September 2026',
+        '',
+        '## Research Question',
+        'How do UK SMEs move from ad-hoc generative AI tool use to building',
+        'durable organisational capabilities, and what determines whether',
+        'this transition succeeds?',
+        '',
+        '## Argument (rough)',
+        'Most SMEs treat AI as a productivity tool, but firms that gain',
+        'lasting advantage build judgement-augmented workflows.',
+        'Tool adoption is necessary but insufficient; capability is key.',
+        '',
+        '## Chapter 2: Literature Review (2,500 words)',
+        '- AI adoption literature (Chen et al. 2024; Bughin 2018)',
+        '- Capability-based view of digital transformation (Hoffmann et al. 2024)',
+        '- Platform strategy & AI (Almeida & Yamamoto 2023)',
+        '- Gap: Almost no work links tool-level adoption to capability-level',
+        '  outcomes in SME context.   ← 這就是你要填的洞',
+        '',
+        '[ 還有 Chapter 1/3/4/5 大綱，Step 01-03 的產出會補進這裡 ]'
+      ].join('\n')
+    }
+  };
+
+  var HIGHLIGHTS = {
+    '01': [
+      { t: 'β=0.42, p<0.001',                                          n: '最強預測因子，引用時可直接寫這個數字' },
+      { t: '3.2×',                                                      n: '具體倍數，說服力強，適合放 findings 第一句' },
+      { t: '34%',                                                       n: '顛覆「成本是最大障礙」的舊說法，是反例論據' },
+      { t: 'Cross-sectional design: cannot establish causal direction', n: '引用時只能說「相關」，不能說「因果」' },
+      { t: 'Sample over-represents London & South East (61%)',         n: '不能推論全英國 SME，地理代表性有限' },
+      { t: 'Conducted before GPT-4 release',                          n: 'GPT-4 後採用率激增，這篇數據可能偏保守' }
+    ],
+    '02': [
+      { t: '← 重複了！',                                                n: '同一篇論文出現兩次，要告訴 AI 去掉其中一條' },
+      { t: 'HOFFMANN T., SINGH A., CARVALHO M. - SKILLS MISMATCH IN DIGITAL', n: '全大寫不是 APA，AI 需要重新格式化' },
+      { t: 'https://hbr.org/2023/07/managing-ai-decision-making',     n: '裸 URL，沒有作者/年份/標題，無法當學術引用' },
+      { t: "Chen L, Mitchell R, Okafor J, 'AI adoption in UK SMEs',", n: '和第一條同一篇，換格式就變成兩條了' }
+    ],
+    '03': [
+      { t: 'freq_use_ai',      n: '自變數：使用頻率 1=從不 5=每天' },
+      { t: 'trust_ai_output',  n: '中介變數：信任度，和頻率不一定同向' },
+      { t: 'concern_integrity', n: '依變數：誠信疑慮，這三欄是你論點的核心' },
+      { t: '"I rely on it too much for first drafts..."', n: '質性證據：dependency 問題，可放 Discussion' },
+      { t: '"Worried my supervisor thinks I\'m cheating..."', n: '質性證據：誠信疑慮的直接引述' }
+    ],
+    '04': [
+      { t: 'judgement-augmented workflows',                                n: '你的核心概念，Chapter 2 要先定義它才能往下論證' },
+      { t: 'Tool adoption is necessary but insufficient; capability is key.', n: 'Thesis statement，每個段落都要服務這句話' },
+      { t: '← 這就是你要填的洞',                                           n: 'Gap = 你論文存在的理由，Chapter 2 開頭就要點明' }
+    ]
+  };
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function renderHL(key, text) {
+    var out = escHtml(text);
+    (HIGHLIGHTS[key] || []).forEach(function(item) {
+      var et = escHtml(item.t);
+      var en = escHtml(item.n);
+      out = out.split(et).join(
+        '<span class="hl-red">' + et + '</span>' +
+        '<span class="hl-note">← ' + en + '</span>'
+      );
+    });
+    return out;
+  }
+
+  function openModal(key) {
+    var p = PREVIEWS[key];
+    if (!p) return;
+    titleEl.textContent = p.title;
+    content.innerHTML = renderHL(key, p.text);
+    modal.style.display = 'flex';
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  document.querySelectorAll('.s30-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      e.stopPropagation();
+      openModal(card.dataset.s30Preview);
+    });
+  });
+
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === modal) closeModal(); });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S32 Meeting Tracker File Preview Modal Script ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s32-modal');
+  var modalBox = document.getElementById('s32-modal-box');
+  var titleEl  = document.getElementById('s32-modal-title');
+  var content  = document.getElementById('s32-modal-content');
+  var closeBtn = document.getElementById('s32-close');
+  if (!modal) return;
+
+  var PREVIEWS = {
+    '01': {
+      title: '📄 collaboration/meeting-tracker/raw_notes.txt  ← 前 40 行（原始生肉）',
+      text: [
+        'week 1 meeting notes - project kickoff',
+        'date: sometime in october, think it was the 3rd?',
+        'who was there: me, priya, tom, sarah (late), marcus',
+        '',
+        'talked about the new client onboarding flow. priya said the current',
+        'process takes too long. tom agreed. we decided to redesign it.',
+        '',
+        'priya also said she could help with the new intake form',
+        'but didn\'t say by when',
+        '',
+        'Tom said via text before the meeting that he\'d look into',
+        'what CRM integrations are available — not sure if this counts',
+        'as an official action item',
+        '',
+        'random stuff: marcus showed us a tiktok about onboarding fails',
+        'lol it was pretty funny. anyway.',
+        '',
+        'sarah showed up 20 min late, missed the CRM discussion',
+        'she said she\'d catch up async',
+        '',
+        'week 2 - follow up',
+        '(no date written down, must have been around oct 10)',
+        '',
+        'attendees: priya, tom, sarah, me. Marcus out sick.',
+        '',
+        'tom said he\'ll learn NVivo to analyse the survey data.',
+        'nobody assigned him this — he just volunteered.',
+        '',
+        'priya finished the intake form draft. sent it to sarah for review.',
+        'sarah hasn\'t replied yet as of this meeting.',
+        '',
+        'ACTION: someone needs to follow up with the dev team about CRM',
+        '(no name assigned)',
+        '',
+        '[ week 3 + additional notes in full file — 98 lines total ]'
+      ].join('\n')
+    },
+    '02': {
+      title: '📄 week1.md  ← AI 產出範例（結構化後）',
+      text: [
+        '# Week 1 Meeting — Project Kickoff',
+        '**Date:** 2024-10-03  **Location:** Zoom',
+        '',
+        '## Attendees',
+        '- Present: Me, Priya, Tom, Marcus',
+        '- Late arrival (20 min): Sarah — missed CRM discussion',
+        '',
+        '## Decisions',
+        '1. Client onboarding flow will be redesigned (current process too slow)',
+        '',
+        '## Action Items',
+        '',
+        '| Owner  | Task                                    | Due        | Status  |',
+        '|--------|-----------------------------------------|------------|---------|',
+        '| Priya  | Help with new intake form               | TBD [paraphrased — no date given] | Pending |',
+        '| Tom    | Research available CRM integrations     | TBD [via text, not in meeting]    | Pending |',
+        '| Sarah  | Catch up on CRM discussion async        | Before Week 2                     | Pending |',
+        '',
+        '## Notes',
+        '- Marcus shared external reference (off-topic, not actioned)',
+        '- Sarah\'s late arrival = CRM context gap; confirm she\'s aligned before Week 2',
+        '',
+        '## Flags',
+        '- ⚠ Priya\'s offer has no deadline — confirm due date',
+        '- ⚠ Tom\'s CRM task was pre-meeting via text — treat as informal until confirmed'
+      ].join('\n')
+    },
+    '03': {
+      title: '📊 tracker.md  ← 三週匯總 Action Items（最終產出）',
+      text: [
+        '# Project Tracker — 3-Week Action Items Summary',
+        '',
+        '| # | Owner  | Task                              | Week | Due   | Status    | Flag |',
+        '|---|--------|-----------------------------------|------|-------|-----------|------|',
+        '| 1 | Priya  | New intake form draft             | W1   | TBD   | ✅ Done   |      |',
+        '| 2 | Tom    | CRM integration research          | W1   | TBD   | ⚠ Unclear | Via text, not confirmed |',
+        '| 3 | Sarah  | Review intake form (from Priya)   | W2   | TBD   | ❌ No reply |     |',
+        '| 4 | —      | Follow up with dev team re: CRM   | W2   | TBD   | ❌ Unassigned | No owner named |',
+        '| 5 | Tom    | Learn NVivo for survey analysis   | W2   | TBD   | ⚠ Self-assigned | Not formally agreed |',
+        '| 6 | All    | Review Week 3 deliverables        | W3   | TBD   | Pending   |      |',
+        '',
+        '## Summary',
+        '- ✅ Completed: 1 item',
+        '- ⚠ Needs clarification: 2 items (no formal agreement or deadline)',
+        '- ❌ Blocked / Unassigned: 2 items',
+        '',
+        '## Recommended Next Steps',
+        '1. Confirm Priya\'s intake form deadline with the team',
+        '2. Assign the CRM dev follow-up to a specific owner',
+        '3. Get Sarah\'s response on the intake form review before Week 3 ends'
+      ].join('\n')
+    }
+  };
+
+  var HIGHLIGHTS = {
+    '01': [
+      { t: "priya also said she could help\nbut didn't say by when",                n: '有意願但沒截止日期 — AI 需要標 [no deadline]' },
+      { t: 'Tom said via text before the meeting',                                   n: '非現場發言 — 是否算正式 action item 需確認' },
+      { t: 'random stuff: marcus showed us a tiktok',                               n: 'Off-topic — AI 要懂得過濾不相關內容' },
+      { t: 'tom said he\'ll learn NVivo to analyse the survey data.',               n: '自願承諾但沒人指派 — 標為 self-assigned，要確認' },
+      { t: 'nobody assigned him this — he just volunteered.',                       n: '原文已說明狀況 — AI 應保留這個 context' },
+      { t: 'ACTION: someone needs to follow up with the dev team about CRM\n(no name assigned)', n: '未指派的 action item — 是最危險的漏洞' }
+    ],
+    '02': [
+      { t: 'TBD [paraphrased — no date given]', n: '原文沒有截止日 — AI 標 TBD 並加 paraphrased 旗標' },
+      { t: '[via text, not in meeting]',         n: '非正式管道 — AI 保留 context 讓你判斷' },
+      { t: '⚠ Priya\'s offer has no deadline',   n: 'AI 主動提示你需要追確認的事' },
+      { t: '⚠ Tom\'s CRM task was pre-meeting',  n: 'AI 標旗讓你決定算不算正式 action item' }
+    ],
+    '03': [
+      { t: '❌ Unassigned | No owner named',    n: '最危險的 — 沒有 owner 的 task 通常沒人做' },
+      { t: '⚠ Self-assigned | Not formally agreed', n: 'Tom 自願但沒團隊共識，需開會確認' },
+      { t: '❌ No reply',                        n: 'Sarah 未回應 — 需要 escalate 還是 block？' }
+    ]
+  };
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function renderHL(key, text) {
+    var out = escHtml(text);
+    (HIGHLIGHTS[key] || []).forEach(function(item) {
+      var et = escHtml(item.t);
+      var en = escHtml(item.n);
+      out = out.split(et).join(
+        '<span class="hl-red">' + et + '</span>' +
+        '<span class="hl-note">← ' + en + '</span>'
+      );
+    });
+    return out;
+  }
+
+  function openModal(key) {
+    var p = PREVIEWS[key];
+    if (!p) return;
+    titleEl.textContent = p.title;
+    content.innerHTML = renderHL(key, p.text);
+    modal.style.display = 'flex';
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  document.querySelectorAll('.s32-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      e.stopPropagation();
+      openModal(card.dataset.s32Preview);
+    });
+  });
+
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === modal) closeModal(); });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S34 Housing Search File Preview Modal Script ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s34-modal');
+  var modalBox = document.getElementById('s34-modal-box');
+  var titleEl  = document.getElementById('s34-modal-title');
+  var content  = document.getElementById('s34-modal-content');
+  var closeBtn = document.getElementById('s34-close');
+  if (!modal) return;
+
+  var PREVIEWS = {
+    '01': {
+      title: '🏠 london-life/housing-search/listings.md  ← 高風險房源摘錄',
+      text: [
+        '## Listing 2 — Facebook group "London Rooms for Students"',
+        '',
+        'GREAT DEAL!!! Big room in cool area Camden zone 2 only £750!! Bills incl !!!',
+        'Available now, flexible move-in.',
+        'Sharing flat (don\'t know how many ppl), some students some not.',
+        'DM for photos. Need decision THIS WEEK lots of interest.',
+        'Deposit 2 months rent + 1 month upfront = £2,250 to secure.',
+        '',
+        '---',
+        '',
+        '## Listing 7 — SpareRoom',
+        '',
+        'Double room in studio-flatshare, "central London"',
+        '£1,100 pcm',
+        'Bills included',
+        'Move in immediately, no long contract needed, month-to-month',
+        '',
+        'Sharing with "international students like you" (no further info).',
+        'Property described as "near Vauxhall area" — exact address provided after deposit paid for security reasons.',
+        '',
+        'Deposit: £2,000 (negotiable to £1,500 for quick decision).',
+        'Pay deposit via bank transfer, contract signed after.',
+        '',
+        'Video viewing not available, "come see in person".',
+        '',
+        '---',
+        '',
+        '[ Listings 1/3/4/5/6/8 also in file — some are legitimate options ]'
+      ].join('\n')
+    },
+    '02': {
+      title: '📋 london-life/housing-search/criteria.md  ← 你的條件清單',
+      text: [
+        '# My Housing Criteria',
+        '',
+        '## Budget',
+        '- Hard ceiling: £1,400/month all-in (rent + bills + council tax)',
+        '- Preferred: £1,100-1,250',
+        '- One-off costs: deposit up to 5 weeks rent (~£1,500). NOT more.',
+        '',
+        '## Non-negotiables (deal-breakers)',
+        '',
+        '1. Commute to KCL Strand must be under 45 minutes door-to-door',
+        '2. Must have a proper desk in the room',
+        '3. Must have window in the bedroom (no internal rooms)',
+        '4. Internet included or trivially set up',
+        '5. No guarantor requirements that need a UK-based homeowner',
+        '6. Lease length between 9-12 months',
+        '',
+        '## Red flags I\'m wary of',
+        '',
+        '- Listings that ask for 6 months rent upfront (heard this is a scam pattern)',
+        '- Anyone refusing video call viewings',
+        '- Properties without proper addresses',
+        '- People asking for deposit via bank transfer before lease is signed'
+      ].join('\n')
+    },
+    '03': {
+      title: '📊 shortlist.md  ← AI 產出推薦清單（範例）',
+      text: [
+        '# Housing Shortlist — Top 3 Recommendations',
+        '',
+        '## ❌ Eliminated (Red Flags)',
+        '| Listing | Reason |',
+        '|---------|--------|',
+        '| Listing 2 (Camden £750) | Deposit £2,250 > legal 5-week limit 🚩; pressure tactics; vague flatmates |',
+        '| Listing 7 ("near Vauxhall") | No address until deposit paid 🚩; bank transfer before contract 🚩; no video viewing 🚩 |',
+        '',
+        '## ✅ Recommended Top 3',
+        '',
+        '### #1 · Listing 5 — Stockwell SW8 (forwarded by classmate)',
+        '£1,050/month all-in | 20 min to KCL | 11 months | Deposit: 5 weeks',
+        'Pros: bills included, postgrad flatmates, bright room, big desk',
+        'Watch: confirm why previous tenant left; get deposit protection scheme name',
+        '',
+        '### #2 · Listing 8 — KCL Stamford Street SE1 (official halls)',
+        '£1,375/month all-in | 12 min walk to KCL | 10 months | Deposit: £500',
+        'Pros: university-managed, safest option, no guarantor needed',
+        'Watch: only 10 months = higher effective monthly cost; no flexibility',
+        '',
+        '### #3 · Listing 1 — Bethnal Green E2',
+        '£1,060/month est. all-in | 25 min to KCL | 12 months | Deposit: 5 weeks',
+        'Pros: working professional flatmates, quiet, 12-month contract',
+        'Watch: bills not included, estimate may vary; confirm guarantor policy'
+      ].join('\n')
+    }
+  };
+
+  var HIGHLIGHTS = {
+    '01': [
+      { t: 'GREAT DEAL!!! Big room in cool area Camden zone 2 only £750!! Bills incl !!!', n: '過度感嘆號 + 誇張用詞 — 詐騙常見語氣模式' },
+      { t: 'Deposit 2 months rent + 1 month upfront = £2,250 to secure.',                 n: '超過法律 5 週上限（£750×5=£3,750 但 2 個月 = £1,500 是另一計算法，仍異常）' },
+      { t: 'exact address provided after deposit paid for security reasons.',              n: '最大紅旗：付錢才給地址 = 無法事先查驗' },
+      { t: 'Video viewing not available, "come see in person".',                          n: '拒絕視訊看屋 — 你在海外根本不可能親訪' },
+      { t: 'Pay deposit via bank transfer, contract signed after.',                       n: '先付錢後簽約 = 沒有任何法律保障' }
+    ],
+    '02': [
+      { t: 'Hard ceiling: £1,400/month all-in (rent + bills + council tax)',  n: '硬性上限 — AI 必須把 bills 加進去計算，不能只看月租' },
+      { t: 'under 45 minutes door-to-door',                                  n: '通勤條件 — Listing 4 (Wood Green, 50 min) 直接淘汰' },
+      { t: 'No guarantor requirements that need a UK-based homeowner',        n: '國際生常見障礙 — Listing 3 要求 UK guarantor 或 6 個月租金' },
+      { t: '6 months rent upfront (heard this is a scam pattern)',            n: '你已知道這是詐騙信號 — AI 需要確認 Listing 3 的替代條件' }
+    ],
+    '03': [
+      { t: '❌ Eliminated (Red Flags)',                   n: 'AI 先淘汰地雷，讓你聚焦在真正的選擇' },
+      { t: 'confirm why previous tenant left',            n: 'AI 提醒你要問的問題 — 「太好」的房源要確認離開原因' },
+      { t: 'only 10 months = higher effective monthly cost', n: 'AI 幫你算隱藏成本：£1,375×10 vs 其他方案×12' }
+    ]
+  };
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function renderHL(key, text) {
+    var out = escHtml(text);
+    (HIGHLIGHTS[key] || []).forEach(function(item) {
+      var et = escHtml(item.t);
+      var en = escHtml(item.n);
+      out = out.split(et).join(
+        '<span class="hl-red">' + et + '</span>' +
+        '<span class="hl-note">← ' + en + '</span>'
+      );
+    });
+    return out;
+  }
+
+  function openModal(key) {
+    var p = PREVIEWS[key];
+    if (!p) return;
+    titleEl.textContent = p.title;
+    content.innerHTML = renderHL(key, p.text);
+    modal.style.display = 'flex';
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  document.querySelectorAll('.s34-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      e.stopPropagation();
+      openModal(card.dataset.s34Preview);
+    });
+  });
+
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === modal) closeModal(); });
+  modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S36 Resume Tailoring File Preview Modal Script ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s36-modal');
+  var modalBox = document.getElementById('s36-modal-box');
+  var titleEl  = document.getElementById('s36-modal-title');
+  var content  = document.getElementById('s36-modal-content');
+  var closeBtn = document.getElementById('s36-close');
+  if (!modal) return;
+
+  var PREVIEWS = {
+    '01': {
+      title: '📋 career/resume-tailoring/job_description.md  ← Lattice Pay PM Graduate',
+      text: [
+        '# Product Manager — Graduate Programme',
+        'Company: Lattice Pay (UK fintech, Series B, ~150 employees)',
+        'Salary: £52,000 + equity + £5,000 sign-on | Start: September 2026',
+        '',
+        '## What we\'re looking for',
+        '',
+        '### Required',
+        '- Bachelor\'s degree with strong academic record',
+        '- A second qualification or side projects that show you can build something real',
+        '- Comfort with structured problem-solving: framing ambiguous problems, decomposing them',
+        '- Strong written communication — you can take a messy meeting and turn it into a clear decision document',
+        '- Quantitative comfort — read SQL, interrogate a dashboard, challenge a number that looks wrong',
+        '- Right to work in the UK (Graduate visas sponsored; NOT Skilled Worker)',
+        '',
+        '### Preferred',
+        '- Background in engineering, CS, economics, or quantitative discipline',
+        '- Experience shipping something that real users used',
+        '- Exposure to startups, hackathons, or entrepreneurship',
+        '- Familiarity with SQL, Python, Figma, or basic analytics tools',
+        '- Experience in cross-functional teams (engineers + designers + business)',
+        '- Languages beyond English — we operate across EU markets',
+        '',
+        '## Application',
+        'CV + 400-word cover letter: (a) ambiguous problem you made concrete, OR',
+        '(b) something you built that real users used, with what you\'d do differently'
+      ].join('\n')
+    },
+    '02': {
+      title: '📄 career/resume-tailoring/cv_draft.md  ← 改寫前（注意弱點）',
+      text: [
+        '# Wei Chen — CV Draft',
+        'NTU Industrial Engineering + KCL MSc Technology Management (Sep 2025)',
+        '',
+        '## Experience',
+        '',
+        '### Marketing Intern — TechStartup Taiwan (Jun–Aug 2024)',
+        'Was responsible for helping the marketing team with various tasks.',
+        'Helped with social media posts and content scheduling.',
+        'Did a presentation at the end of the internship.',
+        '',
+        '### Research Assistant — NTU IE Department (2023)',
+        'Assisted professor with data collection for supply chain research.',
+        'Learned a lot about banking and finance during this role.',
+        'Helped organize academic conferences.',
+        '',
+        '## Projects',
+        '',
+        '### NTU Hackathon 2023 — Team Lead',
+        'I am a highly motivated and detail-oriented student who led a team',
+        'of 4 to build a campus waste reduction app. We got 2nd place.',
+        '',
+        '### Python Data Analysis (Personal)',
+        'Did some Python scripts to analyze transit data for Taipei MRT.',
+        '',
+        '## Skills',
+        'Python, Excel, Mandarin (native), English (fluent), basic SQL'
+      ].join('\n')
+    },
+    '03': {
+      title: '📄 cv_tailored.md  ← AI 改寫後（僅改 ⚠️ 條目）',
+      text: [
+        '# Wei Chen — CV (Tailored for Lattice Pay PM Graduate)',
+        'NTU Industrial Engineering + KCL MSc Technology Management (Sep 2025)',
+        '',
+        '## Experience',
+        '',
+        '### Marketing Intern — TechStartup Taiwan (Jun–Aug 2024)',
+        'Managed end-to-end content pipeline for 3 social channels (IG/LinkedIn/Twitter),',
+        'scheduling 40+ posts/month and reducing scheduling lag by 30%.',
+        'Delivered a cross-team product usage analysis to 12 stakeholders;',
+        'recommendations adopted for Q3 campaign strategy. [needs data: confirm numbers]',
+        '',
+        '### Research Assistant — NTU IE Department (2023)',
+        'Collected and cleaned supply chain dataset (n=200+ firms) for professor\'s',
+        'peer-reviewed study on disruption resilience. [needs data: confirm publication]',
+        'Co-organised 2-day academic conference: logistics, speaker coordination, 150+ attendees.',
+        '',
+        '## Projects',
+        '',
+        '### NTU Hackathon 2023 — Team Lead  🥈 2nd Place',
+        'Led cross-functional team of 4 (design + engineering + business) to ship',
+        'campus waste-reduction app in 48h. 200+ student beta users on launch day.',
+        'Ran 6 user interviews to validate core feature set before development.',
+        '',
+        '### Taipei MRT Transit Analysis (Python)',
+        'Built Python pipeline to identify under-served routes using open GTFS data;',
+        'findings shared with 3 NTU urban planning classmates as reference tool.',
+        '',
+        '## Skills',
+        'Python · SQL (basic) · Excel · Figma (learning) | Mandarin (native) · English (fluent)'
+      ].join('\n')
+    }
+  };
+
+  var HIGHLIGHTS = {
+    '01': [
+      { t: 'build something real',                                            n: 'Implicit 要求 — 不只是課堂作業，要有真實用戶或成果' },
+      { t: 'messy meeting and turn it into a clear decision document',        n: '暗示你的 E 情境（會議記錄整理）就是這個能力的直接展示' },
+      { t: 'challenge a number that looks wrong',                             n: 'Implicit — 不是盲目接受數字，要會質疑' },
+      { t: 'Languages beyond English — we operate across EU markets',         n: 'Wei 是 Mandarin native，這是真正的加分項，要明確寫出來' }
+    ],
+    '02': [
+      { t: 'Was responsible for helping the marketing team with various tasks.', n: '被動 + 模糊 — 沒有主詞動作、沒有成果' },
+      { t: 'Helped with social media posts',                                     n: '最弱的動詞 helped — 改成「managed / built / shipped」' },
+      { t: 'Did a presentation at the end of the internship.',                   n: '沒有聽眾、沒有結果 — 這行對面試官沒有資訊量' },
+      { t: 'Learned a lot about banking and finance during this role.',          n: '完全沒有資訊量 — AI 應標 ❌ 並刪除這條' },
+      { t: 'I am a highly motivated and detail-oriented student',                n: '千篇一律的開場白 — JD 沒有要求「motivated」，要改成成果' }
+    ],
+    '03': [
+      { t: '[needs data: confirm numbers]',   n: 'AI 標旗：數字是猜的，你需要確認再送出' },
+      { t: '[needs data: confirm publication]', n: 'AI 標旗：論文是否已發表需要查證' },
+      { t: '200+ student beta users on launch day', n: 'AI 從「we got 2nd place」推斷有用戶，但你需要確認實際數字' }
+    ]
+  };
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function renderHL(key, text) {
+    var out = escHtml(text);
+    (HIGHLIGHTS[key] || []).forEach(function(item) {
+      var et = escHtml(item.t);
+      var en = escHtml(item.n);
+      out = out.split(et).join(
+        '<span class="hl-red">' + et + '</span>' +
+        '<span class="hl-note">← ' + en + '</span>'
+      );
+    });
+    return out;
+  }
+
+  function openModal(key) {
+    var p = PREVIEWS[key];
+    if (!p) return;
+    titleEl.textContent = p.title;
+    content.innerHTML = renderHL(key, p.text);
+    modal.style.display = 'flex';
+  }
+  function closeModal() { modal.style.display = 'none'; }
+
+  document.querySelectorAll('.s36-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      e.stopPropagation();
+      openModal(card.dataset.s36Preview);
     });
   });
 

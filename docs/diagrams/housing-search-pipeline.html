@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>倫敦找房分析 · AI 輔助篩選工作流</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --role-a: #F97316;   /* 👤 學生 — orange */
+    --role-g: #6366F1;   /* 🤖 AI Agent Claude Code — indigo */
+    --mix:    #37474F;
+    --success: #16A34A;
+    --failure: #DC2626;
+    --done:    #F59E0B;
+    --kill:    #DC2626;
+    --highlight: #FF6B00;
+    --bg:         #F4F6FA;
+    --card:       #FFFFFF;
+    --text:       #1A202C;
+    --text-light: #4A5568;
+    --border:     #E2E8F0;
+    --output-color: #F9A825;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 36px 16px 80px;
+  }
+  .container { max-width: 1300px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 44px; }
+  header h1 { font-size: 1.75rem; margin-bottom: 8px; letter-spacing: -0.02em; }
+  header .subtitle { color: var(--text-light); font-size: 0.93rem; }
+  header .meta {
+    display: inline-flex; gap: 12px; margin-top: 12px;
+    background: #EEF2FF; border-radius: 8px; padding: 8px 18px;
+    font-size: 0.82rem; color: #4338CA;
+  }
+  header .meta strong { font-weight: 700; }
+
+  h2 {
+    font-size: 1.25rem; margin: 48px 0 12px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-desc {
+    color: var(--text-light); font-size: 0.9rem;
+    margin-bottom: 20px; max-width: 1100px; line-height: 1.65;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; padding: 5px 12px;
+    border-radius: 14px; background: var(--card);
+    border: 1px solid var(--border); color: var(--text-light);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-line { width: 28px; height: 3px; border-radius: 2px; background: var(--success); }
+  .legend-line.failure { height: 0; border-bottom: 2px dashed var(--failure); border-radius: 0; background: transparent; }
+
+  .hflow-scroll {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto; overflow-y: hidden;
+  }
+  .hflow-inner { position: relative; width: 1300px; height: 460px; }
+  .hflow-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hflow-svg .failure-arc { transition: opacity 0.18s, stroke-width 0.18s; }
+  .hflow-svg .failure-label { transition: opacity 0.18s; pointer-events: none; }
+  .hflow-nodes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .hflow-node {
+    position: absolute; width: 140px; height: 80px;
+    border-radius: 9px; padding: 10px 8px 8px;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    color: white; font-weight: 600; font-size: 0.82rem; line-height: 1.3;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12); user-select: none;
+  }
+  .hflow-node:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.22); z-index: 5; }
+  .hflow-node.selected { outline: 3px solid var(--highlight); outline-offset: 2px; z-index: 6; }
+  .hflow-node .num { position: absolute; top: 5px; left: 9px; font-size: 0.65rem; opacity: 0.85; font-weight: 700; }
+  .hflow-node .fail-badge {
+    position: absolute; bottom: 4px; right: 6px; font-size: 0.6rem;
+    background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 8px; font-weight: 600;
+  }
+  .hflow-node .name { padding: 0 2px; }
+  .hflow-node .role-badge {
+    position: absolute; top: 5px; right: 8px;
+    font-size: 0.65rem; opacity: 0.9;
+  }
+
+  .hflow-node.role-a { background: var(--role-a); }
+  .hflow-node.role-g { background: var(--role-g); }
+  .hflow-node.mix    { background: var(--mix); }
+  .hflow-node.done   {
+    background: var(--done); color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 4px rgba(245,158,11,0.18);
+  }
+
+  /* ── Detail panel ── */
+  .detail-below {
+    margin-top: 20px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .detail-empty { padding: 50px 20px; text-align: center; color: var(--text-light); }
+  .detail-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px; background: linear-gradient(135deg, #FAFBFC, #F0F4F8);
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--text); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+  }
+  .detail-num.role-a { background: var(--role-a); }
+  .detail-num.role-g { background: var(--role-g); }
+  .detail-num.mix    { background: var(--mix); }
+  .detail-header h3 { font-size: 1.05rem; }
+
+  .detail-3col { display: grid; grid-template-columns: 0.7fr 1.6fr 1.1fr; gap: 0; }
+  .dcol { padding: 16px 20px; border-right: 1px solid var(--border); }
+  .dcol:last-child { border-right: none; }
+  .dcol h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px; font-weight: 700; }
+  .dcol.what-col h4 { color: #059669; }
+  .dcol.output-col h4 { color: #B45309; }
+
+  .role-tag {
+    display: inline-block; font-size: 0.73rem; padding: 3px 10px;
+    border-radius: 10px; margin: 2px 4px 4px 0; font-weight: 600;
+    background: #E2E8F0; color: var(--text);
+  }
+  .role-tag.role-a-t { background: var(--role-a); color: white; }
+  .role-tag.role-g-t { background: var(--role-g); color: white; }
+
+  .subsection { margin-bottom: 12px; }
+  .subsection:last-child { margin-bottom: 0; }
+  .sublabel { font-size: 0.83rem; font-weight: 700; margin-bottom: 5px; padding-left: 10px; border-left: 3px solid var(--text-light); }
+  .sublabel.did      { border-left-color: #3B82F6; color: #1D4ED8; }
+  .sublabel.pain     { border-left-color: var(--failure); color: #991B1B; }
+  .sublabel.solution { border-left-color: #10B981; color: #065F46; }
+  .sublabel.happy    { border-left-color: var(--success); color: #166534; }
+  .sublabel.failure-out { border-left-color: var(--failure); color: #991B1B; }
+  .subcontent { font-size: 0.86rem; line-height: 1.65; padding-left: 13px; }
+  .subcontent ul, ul.subcontent { list-style: none; padding-left: 13px; }
+  .subcontent li, ul.subcontent li { padding: 3px 0 3px 14px; position: relative; }
+  .subcontent li::before, ul.subcontent li::before { content: '·'; position: absolute; left: 0; color: var(--text-light); font-weight: 700; }
+  .failure-list li { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 6px; padding: 7px 12px !important; margin: 5px 0; list-style: none; }
+  .failure-list li::before { display: none; }
+  .failure-list .goto { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 10px; font-weight: 600; font-size: 0.76rem; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .failure-list .goto:hover { background: #FCA5A5; color: white; }
+  .muted { color: var(--text-light); font-style: italic; }
+
+  /* ── Mermaid ── */
+  .role-diagram { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; overflow-x: auto; }
+  .role-diagram .mermaid { text-align: center; }
+
+  .insight { background: #FFF8E1; border-left: 4px solid var(--output-color); padding: 14px 18px; border-radius: 6px; margin-top: 20px; font-size: 0.9rem; line-height: 1.65; }
+  .insight strong { color: #BF360C; }
+  .insight ul { margin: 6px 0 0 18px; line-height: 1.7; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 0.82rem; }
+  footer code { background: var(--card); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.78rem; }
+
+  /* ── Prompt block ── */
+  .prompt-block {
+    border-top: 1px solid var(--border);
+    background: #0E1A2F;
+    padding: 16px 20px 18px;
+  }
+  .prompt-block-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .prompt-block-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: #4ADE80;
+  }
+  .prompt-copy-btn {
+    font-size: 0.73rem; padding: 4px 12px; border-radius: 6px;
+    background: rgba(255,255,255,0.08); color: #CBD5E1;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    font-family: inherit; transition: background 0.15s, color 0.15s;
+  }
+  .prompt-copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+  .prompt-copy-btn.copied { background: #16A34A; color: #fff; border-color: #16A34A; }
+  .prompt-text {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.83rem; color: #F0DE9E; line-height: 1.75;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🏠 倫敦找房分析 · AI 輔助篩選工作流</h1>
+    <p class="subtitle">KCL 國際新生 · 從 8 個混亂房源到有根據的 shortlist</p>
+    <div class="meta">
+      <span>輸入：<strong>listings.md + criteria.md</strong></span>
+      <span>|</span>
+      <span>產出：<strong>shortlist.md</strong></span>
+      <span>|</span>
+      <span>預計時間：<strong>25 min</strong></span>
+    </div>
+  </header>
+
+  <h2>🌳 Happy Path Pipeline</h2>
+  <p class="section-desc">
+    <strong style="color:var(--success)">綠色實線</strong> = 正常流程（左→右）；
+    <strong style="color:var(--failure)">紅色虛線弧</strong> = 失敗路徑（點擊節點時高亮）。
+    <br><strong>👉 點擊任意節點</strong>查看：由誰負責 / 做了什麼 / 輸出是什麼 / 失敗怎麼辦。
+  </p>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-line"></span>Happy Path</span>
+    <span class="legend-item"><span class="legend-line failure"></span>失敗路徑（點擊高亮）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-a)"></span>👤 學生 — 決策 / 判斷 / 人工操作（橘色）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-g)"></span>🤖 AI Agent（Claude Code）— 執行 / 產出</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--done)"></span>最終產出</span>
+  </div>
+
+  <div class="hflow-scroll">
+    <div class="hflow-inner" id="hflow-inner">
+      <svg class="hflow-svg" id="hflow-svg" viewBox="0 0 1300 460" preserveAspectRatio="xMinYMin meet"></svg>
+      <div class="hflow-nodes" id="hflow-nodes"></div>
+    </div>
+  </div>
+
+  <div class="detail-below" id="detail-panel">
+    <div class="detail-empty">👆 點擊上方任意節點查看詳細說明</div>
+  </div>
+
+  <h2>🔗 角色分工關係</h2>
+  <p class="section-desc">學生是「方向決策者 + 品質把關者」；AI 是「執行者 + 素材處理者」。兩者交替推進。</p>
+  <div class="role-diagram">
+    <div class="mermaid">
+flowchart LR
+    S(["👤 <b>學生</b><br/>條件確認 · 紅旗複查 · 決策"])
+    AI(["🤖 <b>Claude Code</b><br/>比較 · 標記 · 推薦"])
+    CR["📋 criteria.md"]
+    LI["🏠 listings.md"]
+    CT["📊 comparison_table"]
+    SL["📄 shortlist.md"]
+
+    CR --> S
+    S -->|"確認條件"| AI
+    LI --> AI
+    AI -->|"比較 8 房源"| CT
+    CT --> S
+    S -->|"複查紅旗"| AI
+    AI -->|"排名推薦"| SL
+    SL --> S
+    S -->|"決策"| SL
+
+    classDef student fill:#F97316,stroke:#C2410C,color:#fff,font-weight:bold;
+    classDef ai fill:#6366F1,stroke:#4338CA,color:#fff,font-weight:bold;
+    classDef artifact fill:#E0F2FE,stroke:#0EA5E9,color:#1A202C,font-weight:600;
+    classDef output fill:#F59E0B,stroke:#D97706,color:#1A202C,font-weight:bold;
+
+    class S student;
+    class AI ai;
+    class CR,LI,CT artifact;
+    class SL output;
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>關鍵洞察</strong>：AI 幫你節省了 1-2 小時逐一計算每個房源的費用和通勤，但有些判斷它天然不擅長：</p>
+    <ul>
+      <li><strong>詐騙辨識</strong>：Listing 2 和 7 有多個紅旗，AI 可能只標「有風險」而不明確說「不要碰」——這個判斷需要你</li>
+      <li><strong>直覺與數字之間</strong>：shortlist 的排名是根據你列的條件計算的，但你的「感覺」也是資訊——告訴 Claude 你的直覺，讓它分析</li>
+      <li><strong>法規的邊界</strong>：AI 知道 Tenant Fees Act，但不是律師——重要的法規問題還是要查官方來源</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Workshop: <code>exercises/london-life/housing-search/</code> · KCL Claude Code Workshop 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 80;
+  const GAP = 30;
+  const START_X = 30;
+  const MAIN_Y = 240;
+
+  const flowNodes = [
+    { id: 1,      name: "👤 啟動<br/>Claude Code",  color: "role-a" },
+    { id: 2,      name: "🤖 讀取<br/>租屋條件",      color: "role-g" },
+    { id: 3,      name: "🤖 比較<br/>8 個房源",       color: "role-g" },
+    { id: 4,      name: "👤 複查<br/>紅旗判斷",       color: "role-a" },
+    { id: 5,      name: "🤖 排名<br/>推薦",           color: "role-g" },
+    { id: 6,      name: "👤 決策<br/>預約看房",       color: "role-a" },
+    { id: "done", name: "✅ shortlist<br/>.md",      color: "done"   }
+  ];
+
+  const failurePaths = [
+    { from: 4, to: 3, label: "需要重新設定條件權重" },
+    { from: 6, to: 5, label: "排名邏輯不符期待" }
+  ];
+
+  function getNodeIndex(id) { return flowNodes.findIndex(n => String(n.id) === String(id)); }
+  function getX(id)         { return START_X + getNodeIndex(id) * (NODE_WIDTH + GAP); }
+  function getCenterX(id)   { return getX(id) + NODE_WIDTH / 2; }
+
+  function renderFlow() {
+    const svg = document.getElementById('hflow-svg');
+    const container = document.getElementById('hflow-nodes');
+
+    let svgHtml = `
+      <defs>
+        <marker id="arr-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#16A34A"/>
+        </marker>
+        <marker id="arr-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#DC2626"/>
+        </marker>
+      </defs>
+    `;
+
+    for (let i = 0; i < flowNodes.length - 1; i++) {
+      const sx = getX(flowNodes[i].id) + NODE_WIDTH;
+      const tx = getX(flowNodes[i+1].id);
+      svgHtml += `<line x1="${sx}" y1="${MAIN_Y}" x2="${tx - 4}" y2="${MAIN_Y}" stroke="#16A34A" stroke-width="3" marker-end="url(#arr-h)"/>`;
+    }
+
+    failurePaths.forEach((f, idx) => {
+      const sx = getCenterX(f.from);
+      const tx = getCenterX(f.to);
+      const span = Math.abs(getNodeIndex(f.from) - getNodeIndex(f.to));
+      const arcHeight = 28 + span * 18;
+      const sy = MAIN_Y - NODE_HEIGHT / 2;
+      const peakY = sy - arcHeight;
+      svgHtml += `<path d="M ${sx} ${sy} C ${sx} ${peakY}, ${tx} ${peakY}, ${tx} ${sy - 4}" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.28" fill="none" marker-end="url(#arr-f)" data-from="${f.from}" data-idx="${idx}" class="failure-arc"/>`;
+      const midX = (sx + tx) / 2;
+      svgHtml += `<text x="${midX}" y="${peakY - 5}" text-anchor="middle" font-size="10.5" fill="#7F1D1D" class="failure-label" data-from="${f.from}" data-idx="${idx}" font-weight="600" opacity="0">${f.label}</text>`;
+    });
+
+    svg.innerHTML = svgHtml;
+
+    let html = '';
+    flowNodes.forEach(n => {
+      const x = getX(n.id);
+      const failures = failurePaths.filter(f => f.from === n.id).length;
+      const num = typeof n.id === 'number' ? n.id : '';
+      html += `
+        <div class="hflow-node ${n.color}" data-id="${n.id}"
+             style="left:${x}px; top:${MAIN_Y - NODE_HEIGHT/2}px;"
+             onclick="onNodeClick('${n.id}')"
+             onmouseenter="onNodeHover('${n.id}', true)"
+             onmouseleave="onNodeHover('${n.id}', false)">
+          ${num ? `<div class="num">${num}</div>` : ''}
+          <div class="name">${n.name}</div>
+          ${failures > 0 ? `<div class="fail-badge">⚠ ${failures}</div>` : ''}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  const nodeData = {
+    "1": {
+      name: "啟動 Claude Code",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "cd exercises/london-life/housing-search/ && claude，先讓 Claude 讀 criteria.md 並複述你的需求，確認它理解所有條件（特別是 deal-breakers）再開始。",
+        pains: ["Claude 可能不了解 UK 租屋的特殊術語（TDS、AST 等）", "沒說明是國際學生，AI 的建議可能不適用"],
+        solutions: ["💡 在第一句 prompt 說明：『我是國際學生，沒有 UK guarantor，從海外搜尋』", "✅ 先讀 criteria.md，再讀 listings.md，不要一起丟"]
+      },
+      output: {
+        happy: "Claude 啟動，正確理解你的 deal-breakers → 進讀取條件（Step 2）",
+        failure: []
+      }
+    },
+    "2": {
+      name: "讀取租屋條件",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 criteria.md，列出所有 deal-breakers、預算上限、紅旗警示，並補充 AI 知道但 criteria.md 沒列的英國租屋陷阱。",
+        pains: ["AI 可能不區分 hard requirement 和 nice-to-have", "補充的陷阱可能不適用你的情況"],
+        solutions: ["🔧 prompt 裡強調：deal-breakers 是絕對不接受的，不是加分減分", "💡 讓 AI 列出補充陷阱後，你挑選哪些你要納入分析"]
+      },
+      output: {
+        happy: "完整的條件清單（含補充項）確認 → 進比較房源（Step 3）",
+        failure: []
+      },
+      prompt: `你是熟悉英國租屋法規的顧問。讀 london-life/housing-search/criteria.md。
+
+列出：
+1. Deal-breakers（絕對不接受的條件）：這些是我的硬性限制，不接受例外
+2. 預算上限（all-in，含帳單和 council tax）：£___/month
+3. 我已知道要注意的 red flags 有哪些？
+
+然後告訴我：你還知道哪些英國租屋常見的問題，是我沒列但國際學生應該注意的？列出 3-5 條，我來決定要不要納入分析。
+
+確認條件清單後，再開始讀 listings.md。`
+    },
+    "3": {
+      name: "比較 8 個房源",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 listings.md，建立比較表，標出每個房源的紅旗（🚩）和 deal-breaker 結果（✅/❌），all-in 月費計算包含帳單和 council tax。",
+        pains: ["Listing 2 和 7 是明顯詐騙，AI 可能只標一個紅旗而不強烈建議迴避", "all-in 月費計算容易漏掉 council tax 份額"],
+        solutions: ["🔧 prompt 裡明確列出每種紅旗的具體判斷規則", "💡 要求 AI 顯示計算過程：£X rent + £Y bills + £Z council tax = £W all-in"]
+      },
+      output: {
+        happy: "📊 比較表（含紅旗、deal-breaker 達標、all-in 費用計算）→ 學生複查（Step 4）",
+        failure: [
+          { condition: "條件權重需要調整 → 重新設定再比較", target: 3 }
+        ]
+      },
+      prompt: `你是熟悉英國租屋法規的顧問。讀 london-life/housing-search/listings.md + criteria.md。
+
+產出比較表（每個房源一行）：
+| # | 地點 | 月租 | 帳單 | All-in 月費 | 通勤 KCL | 押金（週數） | 合約長度 | 紅旗 | Deal-breakers 達標 |
+|---|------|------|------|------------|---------|-----------|---------|------|-----------------|
+
+計算 All-in 月費時請顯示：£房租 + £帳單估算 + £council tax 份額 = £總計
+
+紅旗判斷規則（每個條件獨立標示）：
+- 押金超過 5 週 = 🚩（UK Tenant Fees Act 2019 上限）
+- 要求簽約前用銀行轉帳付押金 = 🚩🚩（高風險詐騙）
+- 沒有提供完整地址 = 🚩
+- 拒絕視頻看房 = 🚩（重要：我從海外搜尋）
+- 施壓要求快速決定 = 🚩
+- 要求 6 個月租金 upfront = 🚩🚩
+- 押金「可協商」= 🚩（正規房東不會這樣說）
+
+Deal-breakers（✅/❌ 每個房源都要評估）：
+- 通勤 < 45 分鐘
+- 有書桌
+- 需要 UK guarantor（我沒有）
+- 合約長度 9-12 個月
+
+保留我在 listings.md 裡寫的 [個人筆記]，顯示在對應房源旁。`
+    },
+    "4": {
+      name: "複查紅旗判斷",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "仔細看 AI 標的紅旗，特別確認 Listing 2（社群媒體 £750 超便宜）和 Listing 7（地址保密）是否被明確建議迴避，確認 all-in 費用計算正確。",
+        pains: ["不熟悉 TDS 登記規定（押金保護制度）", "不確定 UK Tenant Fees Act 的押金上限"],
+        solutions: ["💡 問 Claude：『UK 的 5 週押金上限是哪條法規？違反後我有什麼權利？』", "✅ Listing 2 和 7 有多個紅旗，應直接淘汰不看"]
+      },
+      output: {
+        happy: "確認紅旗判斷正確，all-in 費用計算無誤 → 進排名（Step 5）",
+        failure: [
+          { condition: "需要重新設定條件 → 告訴 Claude 新的優先級再比較", target: 3 }
+        ]
+      }
+    },
+    "5": {
+      name: "排名推薦",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "根據比較表和條件，給出前三名推薦，每個說明優點、風險、看房要問的問題，產出 shortlist.md。",
+        pains: ["推薦理由太泛泛（『性價比高』不夠具體）", "排名順序和你的直覺不一樣"],
+        solutions: ["🔧 prompt 裡要求每條理由都要對應到 criteria.md 的具體條件", "💡 把你的直覺告訴 Claude：『我最在乎 X，那誰更合適？』讓它重新排列"]
+      },
+      output: {
+        happy: "📄 shortlist.md（前三名 + 理由 + 看房問題清單）→ 學生決策（Step 6）",
+        failure: [
+          { condition: "排名邏輯不清 → 重新說明優先級", target: 5 }
+        ]
+      },
+      prompt: `你是熟悉英國租屋法規的顧問。根據比較表，推薦前三名房源並產出 shortlist.md。
+
+對每個推薦選項，說明：
+1. 它達到的 deal-breakers（逐條 ✅）
+2. 主要優點（具體，對應到 criteria.md 的偏好條件）
+3. 主要風險（具體，不是「可能有問題」這種模糊說法）
+4. 看房時要確認的 2-3 個具體問題（例如：「書桌尺寸夠放雙螢幕嗎？」「洗衣機共用的話多久可以用到？」）
+
+也告訴我哪些房源是明確不推薦的，各一句話原因。
+
+最後提醒：哪些推薦選項我需要在聯繫前先做什麼準備（例如：準備什麼證件、詢問什麼備用問題）？
+
+輸出格式是 markdown，可以直接複製給房東/仲介看的那種。`
+    },
+    "6": {
+      name: "決策：預約看房",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "最終決定聯繫哪幾個房源（視頻 or 現場看房），確認 shortlist.md 的建議符合你的直覺，準備聯繫郵件草稿。",
+        pains: ["不確定是否要告訴房東自己是國際學生（可能被歧視）", "不知道視頻看房時要問什麼"],
+        solutions: ["💡 問 Claude：『幫我起草一封給 Listing 5 的詢問郵件，說明我是 KCL 學生』", "✅ 確保你聯繫的是有完整地址 + 接受視頻看房的房源"]
+      },
+      output: {
+        happy: "預約 2-3 個看房 → 完成（找到適合的就簽約）",
+        failure: [
+          { condition: "排名不符期待 → 重新說明優先順序", target: 5 }
+        ]
+      }
+    },
+    "done": {
+      name: "shortlist.md ✅ 完成",
+      colorClass: "mix",
+      who: [["👤 學生（成果）", "role-a-t"]],
+      what: {
+        did: "有根據的房源 shortlist：每個選項都通過了 deal-breaker 檢查、沒有紅旗、有具體的看房問題清單。",
+        pains: [],
+        solutions: []
+      },
+      output: {
+        happy: "✅ 準備好聯繫房東、預約視頻看房",
+        failure: []
+      }
+    }
+  };;
+
+  let selectedId = null;
+
+  window.onNodeClick = function(id) {
+    selectedId = String(id);
+    showDetail(selectedId);
+    highlightSelection();
+  };
+
+  window.onNodeHover = function(id, entering) {
+    if (selectedId === String(id)) return;
+    if (entering) highlightFailures(String(id), 0.9, 1);
+    else highlightSelection();
+  };
+
+  function highlightSelection() {
+    if (selectedId) {
+      highlightFailures(selectedId, 0.9, 1);
+    } else {
+      document.querySelectorAll('.failure-arc').forEach(a => { a.style.opacity = '0.28'; a.style.strokeWidth = ''; });
+      document.querySelectorAll('.failure-label').forEach(l => { l.style.opacity = '0'; });
+    }
+  }
+
+  function highlightFailures(id, arcOpacity, labelOpacity) {
+    document.querySelectorAll('.failure-arc').forEach(a => {
+      if (a.dataset.from === id) { a.style.opacity = arcOpacity; a.style.strokeWidth = '2.5'; }
+      else { a.style.opacity = '0.12'; a.style.strokeWidth = ''; }
+    });
+    document.querySelectorAll('.failure-label').forEach(l => {
+      l.style.opacity = l.dataset.from === id ? labelOpacity : '0';
+    });
+    document.querySelectorAll('.hflow-node').forEach(n => {
+      n.classList.toggle('selected', n.dataset.id === id);
+    });
+  }
+
+  function showDetail(id) {
+    const data = nodeData[id];
+    if (!data) return;
+
+    const who = data.who.map(([n, cls]) => `<span class="role-tag ${cls}">${n}</span>`).join(' ');
+    const pains = data.what.pains.length
+      ? data.what.pains.map(p => `<li>${p}</li>`).join('')
+      : '<li class="muted">—</li>';
+    const solutions = data.what.solutions.length
+      ? data.what.solutions.map(s => `<li>${s}</li>`).join('')
+      : '<li class="muted">—</li>';
+
+    let failureHtml;
+    if (data.output.failure.length === 0) {
+      failureHtml = '<div class="subcontent muted">（無失敗路徑）</div>';
+    } else {
+      failureHtml = `<ul class="failure-list">${
+        data.output.failure.map(f =>
+          `<li><strong>${f.condition}</strong> → <span class="goto" onclick="onNodeClick('${f.target}')">回到 Step ${f.target}</span></li>`
+        ).join('')
+      }</ul>`;
+    }
+
+    const numDisplay = id === 'done' ? '✅' : id;
+
+    let promptHtml = '';
+    if (data.prompt) {
+      const escapedPrompt = data.prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      promptHtml = `
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-label">▶ PROMPT · 複製貼入 Claude Code</span>
+            <button class="prompt-copy-btn" onclick="copyPrompt(this, \`${data.prompt.replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`)">複製</button>
+          </div>
+          <pre class="prompt-text">${escapedPrompt}</pre>
+        </div>`;
+    }
+
+    document.getElementById('detail-panel').innerHTML = `
+      <div class="detail-header">
+        <div class="detail-num ${data.colorClass}">${numDisplay}</div>
+        <h3>${data.name}</h3>
+      </div>
+      <div class="detail-3col">
+        <div class="dcol who-col">
+          <h4>WHO · 誰負責</h4>
+          <div>${who}</div>
+        </div>
+        <div class="dcol what-col">
+          <h4>WHAT · 做了什麼 · 痛點 · 解法</h4>
+          <div class="subsection">
+            <div class="sublabel did">📋 做了什麼</div>
+            <div class="subcontent">${data.what.did}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel pain">⚠️ 常見痛點</div>
+            <ul class="subcontent">${pains}</ul>
+          </div>
+          <div class="subsection">
+            <div class="sublabel solution">💡 解法 / 提示</div>
+            <ul class="subcontent">${solutions}</ul>
+          </div>
+        </div>
+        <div class="dcol output-col">
+          <h4>OUTPUT · 產出與去向</h4>
+          <div class="subsection">
+            <div class="sublabel happy">✅ 成功產出</div>
+            <div class="subcontent">${data.output.happy}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel failure-out">🔁 失敗路徑</div>
+            ${failureHtml}
+          </div>
+        </div>
+      </div>
+      ${promptHtml}
+    `;
+  }
+
+  window.copyPrompt = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已複製 ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      btn.textContent = '請手動複製';
+    });
+  };
+
+  renderFlow();
+  highlightSelection();
+  setTimeout(() => onNodeClick("1"), 120);
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 14 },
+    securityLevel: 'loose',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif'
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>履歷對標 JD · AI 輔助求職工作流</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --role-a: #F97316;   /* 👤 學生 — orange */
+    --role-g: #6366F1;   /* 🤖 AI Agent Claude Code — indigo */
+    --mix:    #37474F;
+    --success: #16A34A;
+    --failure: #DC2626;
+    --done:    #F59E0B;
+    --kill:    #DC2626;
+    --highlight: #FF6B00;
+    --bg:         #F4F6FA;
+    --card:       #FFFFFF;
+    --text:       #1A202C;
+    --text-light: #4A5568;
+    --border:     #E2E8F0;
+    --output-color: #F9A825;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 36px 16px 80px;
+  }
+  .container { max-width: 1300px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 44px; }
+  header h1 { font-size: 1.75rem; margin-bottom: 8px; letter-spacing: -0.02em; }
+  header .subtitle { color: var(--text-light); font-size: 0.93rem; }
+  header .meta {
+    display: inline-flex; gap: 12px; margin-top: 12px;
+    background: #EEF2FF; border-radius: 8px; padding: 8px 18px;
+    font-size: 0.82rem; color: #4338CA;
+  }
+  header .meta strong { font-weight: 700; }
+
+  h2 {
+    font-size: 1.25rem; margin: 48px 0 12px;
+    padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-desc {
+    color: var(--text-light); font-size: 0.9rem;
+    margin-bottom: 20px; max-width: 1100px; line-height: 1.65;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; padding: 5px 12px;
+    border-radius: 14px; background: var(--card);
+    border: 1px solid var(--border); color: var(--text-light);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-line { width: 28px; height: 3px; border-radius: 2px; background: var(--success); }
+  .legend-line.failure { height: 0; border-bottom: 2px dashed var(--failure); border-radius: 0; background: transparent; }
+
+  .hflow-scroll {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto; overflow-y: hidden;
+  }
+  .hflow-inner { position: relative; width: 1300px; height: 460px; }
+  .hflow-svg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .hflow-svg .failure-arc { transition: opacity 0.18s, stroke-width 0.18s; }
+  .hflow-svg .failure-label { transition: opacity 0.18s; pointer-events: none; }
+  .hflow-nodes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .hflow-node {
+    position: absolute; width: 140px; height: 80px;
+    border-radius: 9px; padding: 10px 8px 8px;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    color: white; font-weight: 600; font-size: 0.82rem; line-height: 1.3;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12); user-select: none;
+  }
+  .hflow-node:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.22); z-index: 5; }
+  .hflow-node.selected { outline: 3px solid var(--highlight); outline-offset: 2px; z-index: 6; }
+  .hflow-node .num { position: absolute; top: 5px; left: 9px; font-size: 0.65rem; opacity: 0.85; font-weight: 700; }
+  .hflow-node .fail-badge {
+    position: absolute; bottom: 4px; right: 6px; font-size: 0.6rem;
+    background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 8px; font-weight: 600;
+  }
+  .hflow-node .name { padding: 0 2px; }
+  .hflow-node .role-badge {
+    position: absolute; top: 5px; right: 8px;
+    font-size: 0.65rem; opacity: 0.9;
+  }
+
+  .hflow-node.role-a { background: var(--role-a); }
+  .hflow-node.role-g { background: var(--role-g); }
+  .hflow-node.mix    { background: var(--mix); }
+  .hflow-node.done   {
+    background: var(--done); color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 4px rgba(245,158,11,0.18);
+  }
+
+  /* ── Detail panel ── */
+  .detail-below {
+    margin-top: 20px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .detail-empty { padding: 50px 20px; text-align: center; color: var(--text-light); }
+  .detail-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px; background: linear-gradient(135deg, #FAFBFC, #F0F4F8);
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--text); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+  }
+  .detail-num.role-a { background: var(--role-a); }
+  .detail-num.role-g { background: var(--role-g); }
+  .detail-num.mix    { background: var(--mix); }
+  .detail-header h3 { font-size: 1.05rem; }
+
+  .detail-3col { display: grid; grid-template-columns: 0.7fr 1.6fr 1.1fr; gap: 0; }
+  .dcol { padding: 16px 20px; border-right: 1px solid var(--border); }
+  .dcol:last-child { border-right: none; }
+  .dcol h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px; font-weight: 700; }
+  .dcol.what-col h4 { color: #059669; }
+  .dcol.output-col h4 { color: #B45309; }
+
+  .role-tag {
+    display: inline-block; font-size: 0.73rem; padding: 3px 10px;
+    border-radius: 10px; margin: 2px 4px 4px 0; font-weight: 600;
+    background: #E2E8F0; color: var(--text);
+  }
+  .role-tag.role-a-t { background: var(--role-a); color: white; }
+  .role-tag.role-g-t { background: var(--role-g); color: white; }
+
+  .subsection { margin-bottom: 12px; }
+  .subsection:last-child { margin-bottom: 0; }
+  .sublabel { font-size: 0.83rem; font-weight: 700; margin-bottom: 5px; padding-left: 10px; border-left: 3px solid var(--text-light); }
+  .sublabel.did      { border-left-color: #3B82F6; color: #1D4ED8; }
+  .sublabel.pain     { border-left-color: var(--failure); color: #991B1B; }
+  .sublabel.solution { border-left-color: #10B981; color: #065F46; }
+  .sublabel.happy    { border-left-color: var(--success); color: #166534; }
+  .sublabel.failure-out { border-left-color: var(--failure); color: #991B1B; }
+  .subcontent { font-size: 0.86rem; line-height: 1.65; padding-left: 13px; }
+  .subcontent ul, ul.subcontent { list-style: none; padding-left: 13px; }
+  .subcontent li, ul.subcontent li { padding: 3px 0 3px 14px; position: relative; }
+  .subcontent li::before, ul.subcontent li::before { content: '·'; position: absolute; left: 0; color: var(--text-light); font-weight: 700; }
+  .failure-list li { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 6px; padding: 7px 12px !important; margin: 5px 0; list-style: none; }
+  .failure-list li::before { display: none; }
+  .failure-list .goto { background: #FEE2E2; color: #991B1B; padding: 2px 8px; border-radius: 10px; font-weight: 600; font-size: 0.76rem; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .failure-list .goto:hover { background: #FCA5A5; color: white; }
+  .muted { color: var(--text-light); font-style: italic; }
+
+  /* ── Mermaid ── */
+  .role-diagram { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; overflow-x: auto; }
+  .role-diagram .mermaid { text-align: center; }
+
+  .insight { background: #FFF8E1; border-left: 4px solid var(--output-color); padding: 14px 18px; border-radius: 6px; margin-top: 20px; font-size: 0.9rem; line-height: 1.65; }
+  .insight strong { color: #BF360C; }
+  .insight ul { margin: 6px 0 0 18px; line-height: 1.7; }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 0.82rem; }
+  footer code { background: var(--card); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.78rem; }
+
+  /* ── Prompt block ── */
+  .prompt-block {
+    border-top: 1px solid var(--border);
+    background: #0E1A2F;
+    padding: 16px 20px 18px;
+  }
+  .prompt-block-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .prompt-block-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: #4ADE80;
+  }
+  .prompt-copy-btn {
+    font-size: 0.73rem; padding: 4px 12px; border-radius: 6px;
+    background: rgba(255,255,255,0.08); color: #CBD5E1;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    font-family: inherit; transition: background 0.15s, color 0.15s;
+  }
+  .prompt-copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+  .prompt-copy-btn.copied { background: #16A34A; color: #fff; border-color: #16A34A; }
+  .prompt-text {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.83rem; color: #F0DE9E; line-height: 1.75;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📄 履歷對標 JD · AI 輔助求職工作流</h1>
+    <p class="subtitle">KCL 碩士生 → Lattice Pay PM 畢業生計畫 · 從草稿到對標版本</p>
+    <div class="meta">
+      <span>輸入：<strong>cv_draft.md + job_description.md</strong></span>
+      <span>|</span>
+      <span>產出：<strong>cv_tailored.md</strong></span>
+      <span>|</span>
+      <span>預計時間：<strong>30 min</strong></span>
+    </div>
+  </header>
+
+  <h2>🌳 Happy Path Pipeline</h2>
+  <p class="section-desc">
+    <strong style="color:var(--success)">綠色實線</strong> = 正常流程（左→右）；
+    <strong style="color:var(--failure)">紅色虛線弧</strong> = 失敗路徑（點擊節點時高亮）。
+    <br><strong>👉 點擊任意節點</strong>查看：由誰負責 / 做了什麼 / 輸出是什麼 / 失敗怎麼辦。
+  </p>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-line"></span>Happy Path</span>
+    <span class="legend-item"><span class="legend-line failure"></span>失敗路徑（點擊高亮）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-a)"></span>👤 學生 — 決策 / 判斷 / 人工操作（橘色）</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--role-g)"></span>🤖 AI Agent（Claude Code）— 執行 / 產出</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--done)"></span>最終產出</span>
+  </div>
+
+  <div class="hflow-scroll">
+    <div class="hflow-inner" id="hflow-inner">
+      <svg class="hflow-svg" id="hflow-svg" viewBox="0 0 1300 460" preserveAspectRatio="xMinYMin meet"></svg>
+      <div class="hflow-nodes" id="hflow-nodes"></div>
+    </div>
+  </div>
+
+  <div class="detail-below" id="detail-panel">
+    <div class="detail-empty">👆 點擊上方任意節點查看詳細說明</div>
+  </div>
+
+  <h2>🔗 角色分工關係</h2>
+  <p class="section-desc">學生是「方向決策者 + 品質把關者」；AI 是「執行者 + 素材處理者」。兩者交替推進。</p>
+  <div class="role-diagram">
+    <div class="mermaid">
+flowchart LR
+    S(["👤 <b>學生</b><br/>驗證 · 判斷 · 填數字"])
+    AI(["🤖 <b>Claude Code</b><br/>解構 · 對標 · 改寫"])
+    JD["📋 job_description.md"]
+    CV["📄 cv_draft.md"]
+    GA["📊 gap_analysis"]
+    CT["📝 cv_tailored.md"]
+
+    JD --> AI
+    CV --> AI
+    S -->|"啟動"| AI
+    AI -->|"解構 JD"| GA
+    GA --> S
+    S -->|"驗證缺口"| AI
+    AI -->|"改寫 ⚠️"| CT
+    CT --> S
+    S -->|"填入數字"| CT
+
+    classDef student fill:#F97316,stroke:#C2410C,color:#fff,font-weight:bold;
+    classDef ai fill:#6366F1,stroke:#4338CA,color:#fff,font-weight:bold;
+    classDef artifact fill:#FFFBEB,stroke:#D97706,color:#1A202C,font-weight:600;
+    classDef output fill:#F59E0B,stroke:#D97706,color:#1A202C,font-weight:bold;
+
+    class S student;
+    class AI ai;
+    class JD,CV,GA artifact;
+    class CT output;
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>關鍵洞察</strong>：AI 改寫履歷最大的風險不是「寫得不好」，而是「寫了沒有根據的事」。這條 pipeline 的設計就是為了防止這件事：</p>
+    <ul>
+      <li><strong>⚠️ 才改，❌ 不碰</strong>：有根據才能改，沒根據就如實標出——面試時被問到你答不上來比缺口更糟</li>
+      <li><strong>[數字待確認] 是保護你的機制</strong>：AI 標出不確定的數字，你用真實數據填入——改完的每一行你都要能在面試中說清楚</li>
+      <li><strong>最終責任在你</strong>：AI 不知道你的完整人生——它只能改寫你提供的資訊，沒寫在 CV 上的事它不知道，也不應該猜</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Workshop: <code>exercises/career/resume-tailoring/</code> · KCL Claude Code Workshop 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 80;
+  const GAP = 30;
+  const START_X = 30;
+  const MAIN_Y = 240;
+
+  const flowNodes = [
+    { id: 1,      name: "👤 啟動<br/>Claude Code",   color: "role-a" },
+    { id: 2,      name: "🤖 解構<br/>JD 要求",        color: "role-g" },
+    { id: 3,      name: "🤖 對標<br/>CV 缺口",         color: "role-g" },
+    { id: 4,      name: "👤 驗證<br/>缺口分析",        color: "role-a" },
+    { id: 5,      name: "🤖 改寫<br/>弱點段落",        color: "role-g" },
+    { id: 6,      name: "👤 填入<br/>真實數字",        color: "role-a" },
+    { id: "done", name: "✅ cv_tailored<br/>.md",    color: "done"   }
+  ];
+
+  const failurePaths = [
+    { from: 4, to: 3, label: "不同意評估，重新對標" },
+    { from: 5, to: 3, label: "❌ 缺口太多，換策略" },
+    { from: 6, to: 5, label: "數據不足，調整改寫方向" }
+  ];
+
+  function getNodeIndex(id) { return flowNodes.findIndex(n => String(n.id) === String(id)); }
+  function getX(id)         { return START_X + getNodeIndex(id) * (NODE_WIDTH + GAP); }
+  function getCenterX(id)   { return getX(id) + NODE_WIDTH / 2; }
+
+  function renderFlow() {
+    const svg = document.getElementById('hflow-svg');
+    const container = document.getElementById('hflow-nodes');
+
+    let svgHtml = `
+      <defs>
+        <marker id="arr-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#16A34A"/>
+        </marker>
+        <marker id="arr-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#DC2626"/>
+        </marker>
+      </defs>
+    `;
+
+    for (let i = 0; i < flowNodes.length - 1; i++) {
+      const sx = getX(flowNodes[i].id) + NODE_WIDTH;
+      const tx = getX(flowNodes[i+1].id);
+      svgHtml += `<line x1="${sx}" y1="${MAIN_Y}" x2="${tx - 4}" y2="${MAIN_Y}" stroke="#16A34A" stroke-width="3" marker-end="url(#arr-h)"/>`;
+    }
+
+    failurePaths.forEach((f, idx) => {
+      const sx = getCenterX(f.from);
+      const tx = getCenterX(f.to);
+      const span = Math.abs(getNodeIndex(f.from) - getNodeIndex(f.to));
+      const arcHeight = 28 + span * 18;
+      const sy = MAIN_Y - NODE_HEIGHT / 2;
+      const peakY = sy - arcHeight;
+      svgHtml += `<path d="M ${sx} ${sy} C ${sx} ${peakY}, ${tx} ${peakY}, ${tx} ${sy - 4}" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.28" fill="none" marker-end="url(#arr-f)" data-from="${f.from}" data-idx="${idx}" class="failure-arc"/>`;
+      const midX = (sx + tx) / 2;
+      svgHtml += `<text x="${midX}" y="${peakY - 5}" text-anchor="middle" font-size="10.5" fill="#7F1D1D" class="failure-label" data-from="${f.from}" data-idx="${idx}" font-weight="600" opacity="0">${f.label}</text>`;
+    });
+
+    svg.innerHTML = svgHtml;
+
+    let html = '';
+    flowNodes.forEach(n => {
+      const x = getX(n.id);
+      const failures = failurePaths.filter(f => f.from === n.id).length;
+      const num = typeof n.id === 'number' ? n.id : '';
+      html += `
+        <div class="hflow-node ${n.color}" data-id="${n.id}"
+             style="left:${x}px; top:${MAIN_Y - NODE_HEIGHT/2}px;"
+             onclick="onNodeClick('${n.id}')"
+             onmouseenter="onNodeHover('${n.id}', true)"
+             onmouseleave="onNodeHover('${n.id}', false)">
+          ${num ? `<div class="num">${num}</div>` : ''}
+          <div class="name">${n.name}</div>
+          ${failures > 0 ? `<div class="fail-badge">⚠ ${failures}</div>` : ''}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  const nodeData = {
+    "1": {
+      name: "啟動 Claude Code",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "cd exercises/career/resume-tailoring/ && claude，讓 Claude 先讀兩個檔案並分別說明它看到了什麼，確認它正確理解這是一個 PM 職位的履歷對標任務。",
+        pains: ["不確定要讓 Claude 一次讀兩個還是分開讀", "Claude 可能直接開始改而不先分析"],
+        solutions: ["💡 先讀 job_description.md，再讀 cv_draft.md，順序很重要（先有標準再比對）", "✅ 告訴 Claude：先描述你看到的，不要急著改任何東西"]
+      },
+      output: {
+        happy: "Claude 正確理解 JD 和 CV → 進解構 JD（Step 2）",
+        failure: []
+      }
+    },
+    "2": {
+      name: "解構 JD 要求",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 job_description.md，把所有要求分成 Required / Preferred / Implicit 三層，並點出面試官最看重的 3 個核心能力。",
+        pains: ["把 Preferred 誤當 Required（所有要求都說『必須』）", "漏掉 Implicit 期待（e.g. 能在模糊環境工作、數據導向思維）"],
+        solutions: ["🔧 prompt 裡要求明確區分三個層次，並特別問 Implicit 的部分", "💡 問 Claude：『這家公司說 small teams、ship fast——他們在找什麼類型的人？』"]
+      },
+      output: {
+        happy: "三層 JD 解構清單 + 前三核心能力 → 進對標（Step 3）",
+        failure: []
+      },
+      prompt: `你是資深 PM 面試官。讀 career/resume-tailoring/job_description.md。
+
+把所有 JD 要求解構成三個層次：
+
+**Required（明確必要——沒有就不進面試）**
+| 要求 | 描述 | 如何從履歷中找到它 |
+|------|------|-----------------|
+
+**Preferred（加分——有了更好，沒有也不一定淘汰）**
+| 要求 | 描述 | 加多少分 |
+|------|------|---------|
+
+**Implicit（未明說但面試官一定在看）**
+| 隱性期待 | 你是怎麼推斷出來的 |
+|---------|-----------------|
+
+最後告訴我：這個 JD 最看重的 3 個核心能力是什麼？（你的主觀判斷，一句話解釋為什麼）
+
+注意：這是 fintech 新創的 PM 職位，不要用傳統大公司 PM 的標準來評估。`
+    },
+    "3": {
+      name: "對標 CV 缺口",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "讀 cv_draft.md，對每條 JD 要求找 CV 對應，標 ✅（清楚有）/ ⚠️（有但表述太弱）/ ❌（完全沒有），特別指出「幫忙/參與」等空洞動詞。",
+        pains: ["沒抓出 Personal Statement 的問題（太泛泛）", "把『幫忙社媒發文』當作 ✅ 而不是 ⚠️"],
+        solutions: ["🔧 prompt 裡明確說：任何 '幫忙/參與/協助' 動詞一律標 ⚠️，不是 ✅", "💡 要求 AI 單獨評估 Personal Statement，因為它是第一個看到的"]
+      },
+      output: {
+        happy: "完整 ✅/⚠️/❌ 對標表 → 學生驗證（Step 4）",
+        failure: [
+          { condition: "不同意評估 → 告訴 Claude 你的真實經歷重新評估", target: 3 }
+        ]
+      },
+      prompt: `你是資深 PM 面試官。讀 career/resume-tailoring/cv_draft.md + job_description.md。
+
+對每條 JD 要求（Required + Preferred），在 CV 找對應：
+
+| JD 要求 | 層級 | CV 對應內容 | 評分 | 改進建議 |
+|---------|------|-----------|------|---------|
+
+評分標準：
+- ✅ = CV 有清楚的具體經歷，面試官能看到
+- ⚠️ = 有相關經歷但表述太弱（有「幫忙/參與/協助/learned」這些詞的一律 ⚠️）
+- ❌ = CV 完全沒有對應，且無法從現有經歷推導
+
+額外要求：
+1. Personal Statement 單獨評估——「highly motivated」「team player」這類詞面試官看膩了，直接標 ⚠️
+2. 有沒有任何 ❌ 可以用現有經歷的不同角度來補？如果有，說明怎麼切入
+3. 不可編造任何未在 CV 中提及的工作、數字或成就
+
+所有 ⚠️ 都要說明：原本寫什麼 → 弱在哪裡 → 你能怎麼改進（用 [數字待確認] 標記需要補充的資料）`
+    },
+    "4": {
+      name: "驗證缺口分析",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "看 AI 標的 ⚠️/❌，自己判斷哪些 ⚠️ 其實有真實數據可補、哪些 ❌ 可以用其他角度切入，決定 Step 5 要改哪些段落。",
+        pains: ["不確定某個經歷『算不算』對應某條要求", "看到太多 ❌ 覺得沒希望"],
+        solutions: ["💡 問 Claude：『我的 hackathon 經歷在 PM 的角度能說明什麼？』讓它幫你找角度", "✅ ❌ 不代表沒希望——問 Claude『如果我要填這個缺口，我現在能做什麼？』"]
+      },
+      output: {
+        happy: "決定改哪些 ⚠️，確認哪些 ❌ 真的沒辦法補 → 進改寫（Step 5）",
+        failure: [
+          { condition: "不同意 AI 的評估 → 提供更多背景重新對標", target: 3 }
+        ]
+      }
+    },
+    "5": {
+      name: "改寫弱點段落",
+      colorClass: "role-g",
+      who: [["🤖 Claude Code", "role-g-t"]],
+      what: {
+        did: "改寫所有 ⚠️ 段落：強動詞取代「幫忙/參與」、加入量化結果（或 [數字待確認] 標記）、改寫 Personal Statement 為聚焦 PM 的版本。",
+        pains: ["改寫後語氣不像自己", "對每個條目都加了很多不確定的數字"],
+        solutions: ["🔧 prompt 裡強調：保留原有事實，不得新增未提過的工作內容", "💡 先看改寫後的段落，把你覺得誇大的部分標出來，讓 Claude 調整"]
+      },
+      output: {
+        happy: "所有 ⚠️ 段落改寫完畢，[數字待確認] 清單列出 → 學生填入（Step 6）",
+        failure: [
+          { condition: "❌ 太多、改寫方向不對 → 重新對標再改", target: 3 }
+        ]
+      },
+      prompt: `你是資深 CV 編輯。根據上一步的對標分析，改寫 cv_draft.md 裡所有 ⚠️ 標記的段落。
+
+改寫原則：
+1. 用強動詞取代弱表述：
+   - 「幫忙」→「協調 / 執行 / 負責」
+   - 「參與」→「主導 / 貢獻 / 設計」
+   - 「learned about」→ 描述具體做了什麼
+2. 加入量化成果——如果不確定數字，用 [數字待確認：例如 X 人出席] 標記
+3. 用隱性 STAR 格式：情境暗示 → 行動描述 → 可測量結果
+4. 保留所有原有事實，不得新增未在 cv_draft.md 中提及的工作、項目或成就
+5. Personal Statement：改成 2-3 句聚焦於 PM 角色 + fintech 環境的版本
+
+對每個改寫段落，顯示：
+→ 原文：[原始句子]
+→ 改後：[改寫版本]
+→ 說明：為什麼這樣改
+
+改完後列出所有 [數字待確認] 清單，並對每個建議：可以從哪裡找到這個數字（成績單 / 作品集 / 問導師 / 問前雇主）。`
+    },
+    "6": {
+      name: "填入真實數字",
+      colorClass: "role-a",
+      who: [["👤 學生", "role-a-t"]],
+      what: {
+        did: "看所有 [數字待確認]，從記憶/成績單/作品集/詢問導師找到真實數字填入，確認每條描述都有真實經歷支撐。改完後整個 CV 不能有一句話是憑空捏造的。",
+        pains: ["某些數字真的記不清楚（e.g. hackathon 出席人數）", "改寫後的 Personal Statement 感覺太誇大"],
+        solutions: ["💡 記不住的數字先填『約 X』或保守估計——寧可偏低也不要誇大", "✅ Personal Statement 可以讓 Claude 出 3 個版本，選你最認同的那個再調整"]
+      },
+      output: {
+        happy: "所有 [數字待確認] 填入完畢，cv_tailored.md 每條都有真實根據 → 完成",
+        failure: [
+          { condition: "數據嚴重不足 → 調整改寫策略", target: 5 }
+        ]
+      }
+    },
+    "done": {
+      name: "cv_tailored.md ✅ 完成",
+      colorClass: "mix",
+      who: [["👤 學生（成果）", "role-a-t"]],
+      what: {
+        did: "對標 Lattice Pay PM 職位的履歷：每條描述有真實經歷支撐、沒有空洞形容詞、沒有編造數字。",
+        pains: [],
+        solutions: []
+      },
+      output: {
+        happy: "✅ cv_tailored.md 可以提交申請",
+        failure: []
+      }
+    }
+  };;
+
+  let selectedId = null;
+
+  window.onNodeClick = function(id) {
+    selectedId = String(id);
+    showDetail(selectedId);
+    highlightSelection();
+  };
+
+  window.onNodeHover = function(id, entering) {
+    if (selectedId === String(id)) return;
+    if (entering) highlightFailures(String(id), 0.9, 1);
+    else highlightSelection();
+  };
+
+  function highlightSelection() {
+    if (selectedId) {
+      highlightFailures(selectedId, 0.9, 1);
+    } else {
+      document.querySelectorAll('.failure-arc').forEach(a => { a.style.opacity = '0.28'; a.style.strokeWidth = ''; });
+      document.querySelectorAll('.failure-label').forEach(l => { l.style.opacity = '0'; });
+    }
+  }
+
+  function highlightFailures(id, arcOpacity, labelOpacity) {
+    document.querySelectorAll('.failure-arc').forEach(a => {
+      if (a.dataset.from === id) { a.style.opacity = arcOpacity; a.style.strokeWidth = '2.5'; }
+      else { a.style.opacity = '0.12'; a.style.strokeWidth = ''; }
+    });
+    document.querySelectorAll('.failure-label').forEach(l => {
+      l.style.opacity = l.dataset.from === id ? labelOpacity : '0';
+    });
+    document.querySelectorAll('.hflow-node').forEach(n => {
+      n.classList.toggle('selected', n.dataset.id === id);
+    });
+  }
+
+  function showDetail(id) {
+    const data = nodeData[id];
+    if (!data) return;
+
+    const who = data.who.map(([n, cls]) => `<span class="role-tag ${cls}">${n}</span>`).join(' ');
+    const pains = data.what.pains.length
+      ? data.what.pains.map(p => `<li>${p}</li>`).join('')
+      : '<li class="muted">—</li>';
+    const solutions = data.what.solutions.length
+      ? data.what.solutions.map(s => `<li>${s}</li>`).join('')
+      : '<li class="muted">—</li>';
+
+    let failureHtml;
+    if (data.output.failure.length === 0) {
+      failureHtml = '<div class="subcontent muted">（無失敗路徑）</div>';
+    } else {
+      failureHtml = `<ul class="failure-list">${
+        data.output.failure.map(f =>
+          `<li><strong>${f.condition}</strong> → <span class="goto" onclick="onNodeClick('${f.target}')">回到 Step ${f.target}</span></li>`
+        ).join('')
+      }</ul>`;
+    }
+
+    const numDisplay = id === 'done' ? '✅' : id;
+
+    let promptHtml = '';
+    if (data.prompt) {
+      const escapedPrompt = data.prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      promptHtml = `
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-label">▶ PROMPT · 複製貼入 Claude Code</span>
+            <button class="prompt-copy-btn" onclick="copyPrompt(this, \`${data.prompt.replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`)">複製</button>
+          </div>
+          <pre class="prompt-text">${escapedPrompt}</pre>
+        </div>`;
+    }
+
+    document.getElementById('detail-panel').innerHTML = `
+      <div class="detail-header">
+        <div class="detail-num ${data.colorClass}">${numDisplay}</div>
+        <h3>${data.name}</h3>
+      </div>
+      <div class="detail-3col">
+        <div class="dcol who-col">
+          <h4>WHO · 誰負責</h4>
+          <div>${who}</div>
+        </div>
+        <div class="dcol what-col">
+          <h4>WHAT · 做了什麼 · 痛點 · 解法</h4>
+          <div class="subsection">
+            <div class="sublabel did">📋 做了什麼</div>
+            <div class="subcontent">${data.what.did}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel pain">⚠️ 常見痛點</div>
+            <ul class="subcontent">${pains}</ul>
+          </div>
+          <div class="subsection">
+            <div class="sublabel solution">💡 解法 / 提示</div>
+            <ul class="subcontent">${solutions}</ul>
+          </div>
+        </div>
+        <div class="dcol output-col">
+          <h4>OUTPUT · 產出與去向</h4>
+          <div class="subsection">
+            <div class="sublabel happy">✅ 成功產出</div>
+            <div class="subcontent">${data.output.happy}</div>
+          </div>
+          <div class="subsection">
+            <div class="sublabel failure-out">🔁 失敗路徑</div>
+            ${failureHtml}
+          </div>
+        </div>
+      </div>
+      ${promptHtml}
+    `;
+  }
+
+  window.copyPrompt = function(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已複製 ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      btn.textContent = '請手動複製';
+    });
+  };
+
+  renderFlow();
+  highlightSelection();
+  setTimeout(() => onNodeClick("1"), 120);
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 14 },
+    securityLevel: 'loose',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif'
+  });
+</script>
+</body>
+</html>
