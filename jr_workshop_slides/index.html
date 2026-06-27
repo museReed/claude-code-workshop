@@ -853,25 +853,33 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     <div class="slide-body" style="max-width:860px;">
 
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">今天的安排</p>
-      <h2 class="slide-title" style="color:#18181B;" data-loc="s07.title">六小時<span class="accent"> 地圖</span></h2>
+      <h2 class="slide-title" style="color:#18181B;" data-loc="s07.title">三小時<span class="accent"> 地圖</span></h2>
 
       <!-- agenda rows -->
       <div style="margin-top:36px; display:flex; flex-direction:column; width:100%; border-top:1px solid rgba(24,24,27,0.10);">
 
+        <!-- Row 1 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row1">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">1</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">20 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">開場 + 概念導論</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">三個層級、Agent 三種介面、今天的三個承諾</span>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row2">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">2</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:#B8902E; white-space:nowrap;">40 min △</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">安裝與第一次對話</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">AI Agent 安裝 + Clone 素材 + 第一次 claude</span>
+        </div>
+
         <!-- Row 3 -->
         <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row3">
           <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">3</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:#B8902E; white-space:nowrap;">40–55 min △</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">安裝與第一次對話</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">Cursor 代勞安裝 + 面板 + GitHub + 第一次 claude</span>
-        </div>
-
-        <!-- Row 4 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row4">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">4</span>
           <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">25 min</span>
           <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">如何跟 AI 溝通，CCC 框架</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">三個字母，徹底擺脫模糊指令</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">三個字母 + Prompt 5 原則，徹底擺脫模糊指令</span>
         </div>
 
         <!-- Break -->
@@ -882,12 +890,20 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.30); text-align:right;">☕ 咖啡</span>
         </div>
 
+        <!-- Row 4 -->
+        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);" data-loc="s07.row4">
+          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">4</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">50 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">分組實作，挑一個你真的在乎的場景</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">找房 / 論文統整 / 履歷 — 完整循環：下指令 → 看輸出 → 判斷</span>
+        </div>
+
         <!-- Row 5 -->
         <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0;" data-loc="s07.row5">
           <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">5</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">50 min</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">分組實作，挑一個你真的在乎的場景</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">完整循環：下指令 → 看輸出 → 判斷</span>
+          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">15 min</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">各組分享 + 收尾</span>
+          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">一句話說你做了什麼 + Q&A</span>
         </div>
 
       </div>
