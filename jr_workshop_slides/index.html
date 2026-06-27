@@ -1226,6 +1226,204 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 
   </section>
 
+  <!-- ── S14: Chapter 3 Intro ── -->
+  <section class="slide slide-navy" id="s14" data-slide="14">
+    <div class="slide-body" style="max-width:860px;">
+      <p class="slide-eyebrow">第 3 章 · 40–55 min · 安裝</p>
+      <h2 class="slide-title">安裝與第一次對話，<span class="accent">讓 AI(Cursor) 安裝 AI(Claude Code)</span></h2>
+      <p class="r" style="font-size:clamp(15px,1.4vw,20px); color:rgba(255,255,255,0.72); line-height:1.75; margin-top:20px; max-width:720px;">
+        你手動的部分很少——裝一個 Cursor、註冊一個 GitHub。剩下讓 AI 讀
+        <code style="font-family:var(--font-mono);font-size:0.92em;background:rgba(184,144,46,0.15);padding:2px 8px;border-radius:5px;color:var(--gold);font-weight:600;">setup.md</code>
+        代勞：Node.js、Claude Code、API key、狀態列面板、GitHub repo。<br>
+        <strong style="color:#fff;">安裝本身就是第一堂課。</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── S15: Phase A — Install Cursor ── -->
+  <section class="slide slide-dark" id="s15" data-slide="15">
+    <div class="slide-body" style="max-width:860px; zoom:1.1;">
+      <!-- Phase badge -->
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:24px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">A</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">Install Cursor</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">5 min · 學員自己</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(26px,3vw,44px);">下載 Cursor + <span class="accent">註冊免費帳號</span></h2>
+      <div class="r" style="margin-top:20px; display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;">
+          <span style="color:var(--gold);font-weight:700;font-family:var(--font-mono);flex-shrink:0;">01</span>
+          <span style="color:rgba(255,255,255,0.8);">前往 <strong style="color:#fff;">cursor.com/downloads</strong> 下載對應作業系統版本</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;">
+          <span style="color:var(--gold);font-weight:700;font-family:var(--font-mono);flex-shrink:0;">02</span>
+          <span style="color:rgba(255,255,255,0.8);">安裝並登入（免費帳號即可）</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.25);border-radius:12px;">
+          <span style="color:var(--gold);font-weight:700;font-family:var(--font-mono);flex-shrink:0;">✓</span>
+          <span style="color:rgba(255,255,255,0.8);"><strong style="color:var(--gold-bright);">驗證：</strong>Cursor 介面打開，左下角看到登入狀態 = 成功</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S16: Phase B — AI installs the rest ── -->
+  <section class="slide slide-dark" id="s16" data-slide="16">
+    <div class="slide-body" style="max-width:900px; zoom:1.05;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">B</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">AI installs the rest</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">10–15 min · Cursor AI 代勞</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(24px,2.8vw,40px);">把 <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--gold);">setup.md</code> 餵給 Cursor AI，<span class="accent">讓它代勞</span></h2>
+      <div class="r" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;">AI 會依序安裝</p>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">📦 下載並安裝 Node.js</div>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">⚡ npm 安裝 Claude Code</div>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">🔑 引導去 console.anthropic.com 拿 API key</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;">你只需要</p>
+          <div style="padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;">每一步 AI 會問 <code style="color:var(--gold);background:rgba(184,144,46,0.15);padding:1px 6px;border-radius:4px;">Allow?</code><br>按 Allow，看著它做事就好</div>
+          <div style="padding:14px 16px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">
+            <strong style="color:#F59E0B;">講師救援：</strong>卡住的學員直接給備用 API key；Cursor 爆掉 → AirDrop 預設好的環境 zip。<strong style="color:#fff;">不要讓全班陪一個人等。</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S17: Phase C — Clone materials ── -->
+  <section class="slide slide-dark" id="s17" data-slide="17">
+    <div class="slide-body" style="max-width:860px; zoom:1.1;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:24px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">C</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">Clone materials</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">5 min · 學員手動</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(26px,3vw,44px);">Clone <span class="accent">workshop 素材</span></h2>
+      <div class="r" style="margin-top:22px;display:flex;flex-direction:column;gap:16px;">
+        <pre style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:18px 22px;font-family:var(--font-mono);font-size:15px;color:#A5F3FC;line-height:1.8;overflow-x:auto;">cd ~/Desktop
+git clone https://github.com/museReed/claude-code-workshop.git
+cd claude-code-workshop &amp;&amp; ls exercises/</pre>
+        <div style="padding:14px 18px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.25);border-radius:12px;font-size:15px;color:rgba(255,255,255,0.8);">
+          <strong style="color:var(--gold-bright);">驗證：</strong>看到 <code style="color:var(--gold);font-family:var(--font-mono);">academic / career / collaboration / london-life</code> 四個資料夾 = 成功
+        </div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.35);font-family:var(--font-mono);">失敗時備援：USB / AirDrop / GitHub ZIP 下載</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S18: Phase D — First conversation ── -->
+  <section class="slide slide-dark" id="s18" data-slide="18">
+    <div class="slide-body" style="max-width:860px; zoom:1.1;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:24px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">D</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">First conversation</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">5–8 min · 學員 + AI</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(26px,3vw,44px);">在 workshop 資料夾啟動 <code style="font-family:var(--font-mono);font-size:0.8em;color:var(--gold);">claude</code></h2>
+      <div class="r" style="margin-top:20px;display:flex;flex-direction:column;gap:14px;">
+        <div style="padding:12px 18px;background:rgba(184,144,46,0.08);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;">
+          <strong style="color:var(--gold-bright);">這個資料夾是什麼？</strong> 就是上一步 git clone 下來的 <code style="font-family:var(--font-mono);color:var(--gold);">claude-code-workshop</code> 資料夾。<br>要先 <code style="font-family:var(--font-mono);color:var(--gold);">cd</code> 進去再啟動 <code style="font-family:var(--font-mono);color:var(--gold);">claude</code>，它才看得到練習素材。
+        </div>
+        <pre style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:18px 22px;font-family:var(--font-mono);font-size:15px;color:#A5F3FC;line-height:1.8;">cd claude-code-workshop
+claude</pre>
+        <div style="padding:14px 18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;">
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:8px;">進去後輸入：</p>
+          <pre style="font-family:var(--font-mono);font-size:15px;color:#fff;background:none;padding:0;">你好，我現在在哪個資料夾？裡面有什麼東西？</pre>
+          <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:8px;">AI 會跑 pwd 和 ls 給你看，自己動手做事</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S19: Phase E — Status HUD ── -->
+  <section class="slide slide-dark" id="s19" data-slide="19">
+    <div class="slide-body" style="max-width:860px; zoom:1.1;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:24px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">E</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">Status HUD</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">5 min · 學員 + AI</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(26px,3vw,44px);">裝上<span class="accent">狀態列面板</span></h2>
+      <div class="r" style="margin-top:22px;display:flex;flex-direction:column;gap:16px;">
+        <pre style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:18px 22px;font-family:var(--font-mono);font-size:15px;color:#A5F3FC;line-height:1.8;">/plugin marketplace add jarrodwatts/claude-hud
+/plugin install claude-hud
+/claude-hud:setup</pre>
+        <div style="padding:14px 18px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.25);border-radius:12px;font-size:15px;color:rgba(255,255,255,0.8);">
+          <strong style="color:var(--gold-bright);">驗證：</strong>跑完後底部多了一條狀態列，不用重啟 = 成功
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S20: Phase F — GitHub + push ── -->
+  <section class="slide slide-dark" id="s20" data-slide="20">
+    <div class="slide-body" style="max-width:900px; zoom:1.05;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">F</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">GitHub + push</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">10 min · 學員 + AI</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(24px,2.8vw,40px);">註冊 GitHub，讓 Claude Code <span class="accent">自己建 repo、推上去</span></h2>
+      <div class="r" style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;">你做一件事</p>
+          <div style="padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6;">在瀏覽器註冊免費 GitHub 帳號<br><span style="color:rgba(255,255,255,0.4);font-size:13px;">這是唯一需要你動手的部分</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;">AI 幫你做剩下的</p>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">🔐 gh 登入</div>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">📁 gh repo create</div>
+          <div style="padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);">🚀 git push</div>
+        </div>
+      </div>
+      <div class="r" style="margin-top:14px;padding:14px 18px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.25);border-radius:12px;font-size:15px;color:rgba(255,255,255,0.8);">
+        <strong style="color:var(--gold-bright);">驗證：</strong>到你的 GitHub 看到新建的 repo 裡有檔案 = 成功
+      </div>
+    </div>
+  </section>
+
+  <!-- ── S21: Phase G — AHA Moment ── -->
+  <section class="slide slide-dark" id="s21" data-slide="21">
+    <div class="slide-body" style="max-width:860px; zoom:1.1;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:24px;">
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-bright));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:900;color:#050B17;flex-shrink:0;">G</div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:2px;">點題</p>
+          <p style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.25);">3 min · 講師</p>
+        </div>
+      </div>
+      <h2 class="slide-title" style="font-size:clamp(26px,3vw,44px);">你剛剛跟<span class="accent">兩個 AI</span> 互動過了</h2>
+      <div class="r" style="margin-top:20px;padding:20px 24px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.30);border-radius:14px;line-height:1.9;font-size:clamp(14px,1.3vw,18px);color:rgba(255,255,255,0.85);">
+        剛剛 Cursor 幫你裝環境，它是一個 <strong style="color:var(--gold-bright);">AI Agent</strong><br>
+        然後 Claude Code 幫你看資料夾，它也是一個 <strong style="color:var(--gold-bright);">AI Agent</strong><br>
+        你今天不是來「學一個工具」，你是來練習<strong style="color:#fff;">指揮 AI 幫你做事</strong>
+      </div>
+      <div class="r" style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;">Permission Model</p>
+        <div style="display:flex;gap:12px;">
+          <div style="flex:1;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;">Cursor 和 Claude Code 都會問 <code style="color:var(--gold);font-family:var(--font-mono);">Allow?</code>——AI 再聰明，<strong style="color:#fff;">人類始終在控制迴圈中</strong></div>
+          <div style="flex:1;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;">你按 Allow 才會跑，不按它就停。這是 AI Agent 跟 ChatGPT <strong style="color:#fff;">最大的差別之一</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- ── Nav controls ── -->
 <button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
   <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-left.svg" alt="←">
