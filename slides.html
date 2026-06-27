@@ -3185,6 +3185,116 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
 })();
 </script>
 
+<!-- ── 繁/简 Language Toggle ── -->
+<style>
+  #lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 9998;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 5px 11px;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+    user-select: none;
+  }
+  #lang-toggle:hover { background: rgba(255,255,255,0.22); }
+  #lang-toggle:disabled { opacity: 0.45; cursor: wait; }
+  body.slide-is-light #lang-toggle {
+    background: rgba(0,0,0,0.07);
+    border-color: rgba(0,0,0,0.14);
+    color: rgba(24,24,27,0.65);
+  }
+  body.slide-is-light #lang-toggle:hover { background: rgba(0,0,0,0.12); }
+</style>
+<button id="lang-toggle" title="切換繁/簡體">简</button>
+<script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js"></script>
+<script>
+(function () {
+  var btn = document.getElementById('lang-toggle');
+  var isSimplified = false;
+  var converter = null;
+  var origMap = new Map();   // node → original text
+  var convMap = new Map();   // node → converted text
+
+  function textNodes(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        var p = n.parentElement;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        var t = p.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE') return NodeFilter.FILTER_REJECT;
+        return n.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    var list = [];
+    var n;
+    while ((n = walker.nextNode())) list.push(n);
+    return list;
+  }
+
+  async function toSimplified() {
+    if (!converter) {
+      converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
+    }
+    var nodes = textNodes(document.body);
+    for (var i = 0; i < nodes.length; i++) {
+      var nd = nodes[i];
+      if (!origMap.has(nd)) origMap.set(nd, nd.textContent);
+      if (!convMap.has(nd)) convMap.set(nd, await converter(nd.textContent));
+      nd.textContent = convMap.get(nd);
+    }
+  }
+
+  function toTraditional() {
+    origMap.forEach(function (text, nd) {
+      try { nd.textContent = text; } catch (e) {}
+    });
+  }
+
+  btn.addEventListener('click', async function () {
+    btn.disabled = true;
+    isSimplified = !isSimplified;
+    if (isSimplified) {
+      await toSimplified();
+      btn.textContent = '繁';
+      document.documentElement.lang = 'zh-Hans';
+    } else {
+      toTraditional();
+      btn.textContent = '简';
+      document.documentElement.lang = 'zh-Hant';
+    }
+    btn.disabled = false;
+  });
+
+  // After any modal opens, re-apply simplified if active
+  document.addEventListener('click', function () {
+    if (!isSimplified) return;
+    // small delay so modal content renders first
+    setTimeout(async function () {
+      var nodes = textNodes(document.body);
+      var hasNew = false;
+      for (var i = 0; i < nodes.length; i++) {
+        var nd = nodes[i];
+        if (!convMap.has(nd)) {
+          if (!origMap.has(nd)) origMap.set(nd, nd.textContent);
+          convMap.set(nd, await converter(nd.textContent));
+          nd.textContent = convMap.get(nd);
+          hasNew = true;
+        }
+      }
+    }, 80);
+  }, true);
+})();
+</script>
+
 <!-- Debug overlay (dev only) -->
 <script src="assets/js/debug-overlay.js"></script>
 
