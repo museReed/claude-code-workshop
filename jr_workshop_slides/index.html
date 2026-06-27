@@ -1284,6 +1284,12 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         </div>
         <div>
           <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:14px;color:#1D1D1F;">Clone workshop 素材到桌面</h3>
+          <!-- git prerequisite -->
+          <div style="margin-bottom:14px;padding:14px 18px;background:#FAF8F3;border:1px solid rgba(184,144,46,0.22);border-radius:12px;font-size:14px;color:#424245;line-height:1.75;">
+            <strong style="color:#1D1D1F;">前提：需要安裝 git</strong><br>
+            <span style="display:inline-block;margin-top:4px;"><strong style="color:#1D1D1F;">macOS</strong>：通常預裝。若沒有，第一次執行 <code style="font-family:var(--font-mono);font-size:12px;background:#F5F5F7;padding:1px 5px;border-radius:4px;">git clone</code> 時系統會跳出 Xcode Command Line Tools 安裝提示（同意後等 5–10 分鐘）</span><br>
+            <span style="display:inline-block;margin-top:4px;"><strong style="color:#1D1D1F;">Windows</strong>：需先安裝 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener" style="color:#B8902E;text-decoration:none;font-weight:600;">Git for Windows ↗</a></span>
+          </div>
           <pre style="font-family:var(--font-mono);background:#0E1A2F;color:#F0DE9E;padding:16px 20px;border-radius:12px;font-size:13px;line-height:1.65;overflow-x:auto;margin:0 0 12px;">cd ~/Desktop
 git clone https://github.com/museReed/claude-code-workshop-jr-student.git
 cd claude-code-workshop-jr-student &amp;&amp; ls exercises/</pre>
