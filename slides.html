@@ -3681,6 +3681,316 @@ claude</pre>
     </div>
   </section>
 
+  <!-- ── Frontend-Design Skill ── -->
+
+  <!-- S60 · Frontend-Design: 痛點 Before/After -->
+  <section class="slide slide-dark" id="s60" data-slide="60">
+    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+
+      <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">花 3 小時寫 HTML/CSS，<span class="accent">還是模板臉</span></h2>
+
+      <!-- Pain 1: Template hell -->
+      <div class="r" style="margin-top:14px; width:100%;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❶ · 做出來的頁面跟免費模板長一樣</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              你：幫我做一個個人網站<br>
+              <span style="color:#F87171;">AI：好的！這是一個 Bootstrap 模板…</span><br>
+              <span style="color:#F87171;">（藍色按鈕 + 白色背景 + 千篇一律）</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（跟網路上免費下載的沒什麼差別）</span>
+            </div>
+          </div>
+          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              你：用 /frontend-design 幫我做個人品牌頁<br>
+              <span style="color:#F0DE9E;">AI：產出 6 種美學方向讓你選…</span><br>
+              <span style="color:#F0DE9E;">深色科技 / 極簡白 / 新擬態 / 玻璃擬態…</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（設計稿等級的頁面，不是套模板）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pain 2: Not responsive -->
+      <div class="r r-d1" style="margin-top:10px; width:100%;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❷ · 桌機看很好，手機打開就爆版</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              桌機版完成，丟到手機看：<br>
+              <span style="color:#F87171;">文字超出螢幕、按鈕重疊、圖片變形</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（又要花 2 小時修 media query）</span>
+            </div>
+          </div>
+          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              <span style="color:#F0DE9E;">AI 產出的頁面內建 RWD</span><br>
+              <span style="color:#F0DE9E;">桌機 / 平板 / 手機自動適應</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（單一 HTML 檔，不依賴外部框架）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goal box -->
+      <div class="r r-d1" style="margin-top:12px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:10px; padding:12px 16px;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">🎯 這個 Skill 的做法</div>
+        <div style="display:flex; gap:20px; font-size:12px; color:rgba(255,255,255,0.7);">
+          <div>❶ 你描述想要的感覺</div>
+          <div>❷ AI 生成 6 種美學候選</div>
+          <div>❸ 你選一個方向</div>
+          <div>❹ AI 產出完整 HTML + CSS</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S61 · Frontend-Design: 使用情境 -->
+  <section class="slide slide-dark" id="s61" data-slide="61">
+    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+
+      <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">什麼時候該用<span class="accent"> /frontend-design</span></h2>
+
+      <!-- Use cases grid -->
+      <div class="r" style="margin-top:18px; width:100%;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <!-- General -->
+          <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">📋 一般場景</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.8;">
+              ▸ 個人品牌頁 / 作品集<br>
+              ▸ 活動倒數頁 / 報名頁<br>
+              ▸ 產品 Landing Page<br>
+              ▸ 履歷網頁化
+            </div>
+          </div>
+          <!-- Coding -->
+          <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">💻 Coding 場景</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.8;">
+              ▸ Prototype 快速打樣<br>
+              ▸ Hackathon Demo Page<br>
+              ▸ Side Project 展示頁<br>
+              ▸ GitHub Pages 個人站
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trigger -->
+      <div class="r r-d1" style="margin-top:12px; width:100%; background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:10px; padding:12px 16px;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">⚡ 觸發方式</div>
+        <div style="font-family:var(--font-mono); font-size:13px; color:rgba(240,222,158,0.8); text-align:center; letter-spacing:0.05em;">
+          直接打 <span style="color:#F0DE9E; font-weight:700;">/frontend-design</span> 或描述「幫我做一個網頁」自動啟動
+        </div>
+      </div>
+
+      <!-- Suitable vs Not suitable -->
+      <div class="r r-d1" style="margin-top:12px; width:100%;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
+          <!-- Header -->
+          <div style="background:rgba(240,222,158,0.08); padding:10px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);">✓ 適合</div>
+          <div style="background:rgba(248,113,113,0.08); padding:10px 16px; font-weight:700; color:#F87171; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">✗ 不適合</div>
+          <!-- Row 1 -->
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">靜態展示頁（單一 HTML）</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">複雜 Web App（需後端/狀態管理）</div>
+          <!-- Row 2 -->
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">品牌形象頁、作品集</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">電商平台、後台管理系統</div>
+          <!-- Row 3 -->
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7);">快速驗證視覺方向</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-left:1px solid rgba(255,255,255,0.06);">需要持續維護的生產系統</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S62 · Frontend-Design: Claude Code vs Codex + 安裝 -->
+  <section class="slide slide-dark" id="s62" data-slide="62">
+    <div class="slide-body" style="max-width:960px; zoom:1.15;">
+
+      <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Claude Code vs Codex<span class="accent"> 差異</span></h2>
+
+      <!-- Comparison table -->
+      <div class="r" style="margin-top:24px; width:100%;">
+        <div style="display:grid; grid-template-columns:160px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
+          <!-- Header -->
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
+          <!-- Row 1: Type -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">官方 Plugin<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 裡啟用</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">無對標 Plugin<br><span style="font-size:9px; color:#F87171; font-family:var(--font-body);">※ 用 prompt 內嵌設計規格替代</span></div>
+          <!-- Row 2: Trigger -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發方式</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">直接在 prompt 描述需求<br><span style="font-size:9px; color:#F87171;">※ 無專屬指令，靠 prompt 驅動</span></div>
+          <!-- Row 3: Output -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">產出</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">6 種美學候選頁面<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">含 CSS custom properties</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">單一 HTML 檔<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">品質取決於 prompt 精確度</span></div>
+          <!-- Row 4: Install -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝方式</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/settings.json<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 加一行</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">不需安裝<br><span style="font-size:9px; color:#F87171;">※ 直接描述即可，無 plugin 系統</span></div>
+          <!-- Row 5: RWD -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">RWD 支援</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 內建 RWD<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">自動產出 media queries</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">需在 prompt 中要求<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">否則可能只有桌機版</span></div>
+        </div>
+      </div>
+
+      <!-- Install prompt -->
+      <div class="r r-d1" style="margin-top:16px; width:100%;">
+        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 20px; width:100%; box-sizing:border-box;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝 Prompt</div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(240,222,158,0.8); line-height:1.7;">
+            幫我在 .claude/settings.json 的 enabledPlugins 裡加入<br>
+            "frontend-design@claude-plugins-official"<br>
+            然後確認 plugin 可以用。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S63 · CV → Landing Page 工作流程 -->
+  <section class="slide slide-warm" id="s63" data-slide="63">
+    <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
+
+      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
+        <span style="width:6px; height:6px; border-radius:50%; background:#B8902E; flex-shrink:0;"></span>
+        <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:#B8902E; letter-spacing:0.06em; text-transform:uppercase;">實作 · Step by Step</span>
+      </div>
+
+      <h2 style="font-size:clamp(24px,3vw,40px); font-weight:800; color:#1D1D1F; margin:0;">CV 變成上線的 Landing Page，<span style="color:#B8902E;">4 步完成</span></h2>
+
+      <!-- 4-step flow -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; width:100%; box-sizing:border-box;">
+        <!-- Step 1 -->
+        <div style="background:#fff; border:1.5px solid rgba(184,144,46,0.25); border-radius:12px; padding:14px; position:relative; width:100%; box-sizing:border-box;">
+          <div style="position:absolute; top:10px; right:10px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#fff; background:#B8902E; border-radius:4px; padding:2px 8px;">01</div>
+          <div style="font-size:15px; font-weight:700; color:#1D1D1F; margin-bottom:6px; margin-right:28px;">準備素材</div>
+          <div style="font-size:12px; color:#555; line-height:1.6; margin-bottom:8px;">
+            讀 CV 檔案<br>
+            萃取核心資訊<br>
+            整理成大綱
+          </div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:#B8902E; font-weight:600;">→ Landing Page 內容大綱</div>
+        </div>
+        <!-- Step 2 -->
+        <div style="background:#fff; border:1.5px solid rgba(99,102,241,0.25); border-radius:12px; padding:14px; position:relative; width:100%; box-sizing:border-box;">
+          <div style="position:absolute; top:10px; right:10px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#fff; background:#6366F1; border-radius:4px; padding:2px 8px;">02</div>
+          <div style="font-size:15px; font-weight:700; color:#1D1D1F; margin-bottom:6px; margin-right:28px;">生成頁面</div>
+          <div style="font-size:12px; color:#555; line-height:1.6; margin-bottom:8px;">
+            用 <strong style="color:#6366F1;">/frontend-design</strong><br>
+            指定風格方向<br>
+            產出 index.html
+          </div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:#6366F1; font-weight:600;">→ 設計稿級 HTML 頁面</div>
+        </div>
+        <!-- Step 3 -->
+        <div style="background:#fff; border:1.5px solid rgba(5,150,105,0.25); border-radius:12px; padding:14px; position:relative; width:100%; box-sizing:border-box;">
+          <div style="position:absolute; top:10px; right:10px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#fff; background:#059669; border-radius:4px; padding:2px 8px;">03</div>
+          <div style="font-size:15px; font-weight:700; color:#1D1D1F; margin-bottom:6px; margin-right:28px;">預覽調整</div>
+          <div style="font-size:12px; color:#555; line-height:1.6; margin-bottom:8px;">
+            localhost 預覽<br>
+            告訴 AI 要改什麼<br>
+            反覆調到滿意
+          </div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:#059669; font-weight:600;">→ 你滿意的最終版</div>
+        </div>
+        <!-- Step 4 -->
+        <div style="background:rgba(184,144,46,0.04); border:1.5px solid rgba(184,144,46,0.3); border-radius:12px; padding:14px; position:relative; width:100%; box-sizing:border-box;">
+          <div style="position:absolute; top:10px; right:10px; font-family:var(--font-mono); font-size:11px; font-weight:700; color:#fff; background:#B8902E; border-radius:4px; padding:2px 8px;">04</div>
+          <div style="font-size:15px; font-weight:700; color:#1D1D1F; margin-bottom:6px; margin-right:28px;">發布上線</div>
+          <div style="font-size:12px; color:#555; line-height:1.6; margin-bottom:8px;">
+            推到 GitHub<br>
+            啟用 GitHub Pages<br>
+            拿到公開網址
+          </div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:#B8902E; font-weight:600;">→ 你的個人網站上線了</div>
+        </div>
+      </div>
+
+      <!-- Before → After impact -->
+      <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:center; width:100%; box-sizing:border-box;">
+        <div style="background:rgba(220,38,38,0.06); border:1.5px solid rgba(220,38,38,0.15); border-radius:10px; padding:12px 16px; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#DC2626; letter-spacing:0.06em; margin-bottom:4px;">BEFORE</div>
+          <div style="font-size:12px; color:#555; line-height:1.5;">一份散亂的 Word 履歷<br>vague verbs、沒有量化數字</div>
+        </div>
+        <div style="font-size:24px; color:#B8902E; font-weight:800;">→</div>
+        <div style="background:rgba(184,144,46,0.06); border:1.5px solid rgba(184,144,46,0.2); border-radius:10px; padding:12px 16px; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#B8902E; letter-spacing:0.06em; margin-bottom:4px;">AFTER</div>
+          <div style="font-size:12px; color:#555; line-height:1.5;">上線的個人品牌 Landing Page<br>有公開網址、可分享給面試官</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S64 · 動手做 — CV → Landing Page Prompt -->
+  <section class="slide slide-warm" id="s64" data-slide="64">
+    <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
+
+      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
+        <span style="width:6px; height:6px; border-radius:50%; background:#B8902E; flex-shrink:0;"></span>
+        <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:#B8902E; letter-spacing:0.06em; text-transform:uppercase;">實作 · 開始動手</span>
+      </div>
+
+      <h2 style="font-size:clamp(24px,3vw,40px); font-weight:800; color:#1D1D1F; margin:0;">貼進你的 AI Agent，<span style="color:#B8902E;">跟著做</span></h2>
+
+      <!-- Step 01: 準備素材 -->
+      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 01 · 準備素材 — 萃取 CV 核心資訊</div>
+        <p style="font-family:var(--font-mono); font-size:11px; color:#F0DE9E; line-height:1.7; margin:0;">讀 exercises/career/resume-tailoring/cv_draft.md，<br>萃取這份 CV 的核心資訊（姓名、學歷、經歷、技能、專案），<br>整理成一份 Landing Page 的內容大綱。</p>
+      </div>
+
+      <!-- Step 02: 生成 Landing Page -->
+      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#818CF8; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 02 · 生成頁面 — 用 /frontend-design 產出</div>
+        <p style="font-family:var(--font-mono); font-size:11px; color:#818CF8; line-height:1.7; margin:0;">用 /frontend-design 幫我建立一個個人品牌 Landing Page。<br><br>內容來源：剛才整理的 CV 大綱<br>風格方向：簡潔專業、深色主題、適合科技管理背景<br>頁面結構：Hero（姓名+一句話定位）→ About → Experience → Projects → Contact<br>要求：單一 HTML 檔、RWD、不依賴外部框架<br><br>產出到 index.html</p>
+      </div>
+
+      <!-- Step 03: 預覽 -->
+      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#4ADE80; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 03 · 預覽 — localhost 確認效果</div>
+        <p style="font-family:var(--font-mono); font-size:11px; color:#4ADE80; line-height:1.7; margin:0;">幫我啟動一個 local server 預覽 index.html。<br>看完後我會告訴你要調整什麼。</p>
+      </div>
+
+      <!-- Step 04: 發布 -->
+      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F97316; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 04 · 發布 — 推到 GitHub + 開啟 Pages</div>
+        <p style="font-family:var(--font-mono); font-size:11px; color:#F97316; line-height:1.7; margin:0;">幫我建立一個新的 GitHub repo 叫 wei-chen-portfolio，<br>把 index.html 推上去，然後用 GitHub Pages 發布。<br>完成後給我公開網址。</p>
+      </div>
+
+      <!-- Tips -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; box-sizing:border-box;">
+        <div style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.15); border-radius:10px; padding:12px 14px;">
+          <div style="font-size:11px; font-weight:700; color:#B8902E; margin-bottom:4px;">💡 Codex 用戶？</div>
+          <div style="font-size:11px; color:#555; line-height:1.5;">把 Step 02 的 prompt 改成直接描述設計需求（不用 /frontend-design），其他步驟一樣。記得在 prompt 裡加上「單一 HTML、RWD」。</div>
+        </div>
+        <div style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.15); border-radius:10px; padding:12px 14px;">
+          <div style="font-size:11px; font-weight:700; color:#B8902E; margin-bottom:4px;">🎯 Demo 亮點</div>
+          <div style="font-size:11px; color:#555; line-height:1.5;">CV 刻意寫得模糊（vague verbs、沒有量化）。看 AI 萃取時怎麼強化你的經歷描述 — 這就是 AI 的附加價值。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 <!-- ── Nav controls ── -->
 <button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
   <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/chevron-left.svg" alt="←">
