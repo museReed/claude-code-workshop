@@ -2606,7 +2606,7 @@ claude</pre>
 
   <!-- S44 · Structured Questions: 使用情境 + 觸發方式 + 適用場景 -->
   <section class="slide slide-dark" id="s44" data-slide="44">
-    <div class="slide-body" style="max-width:1000px; zoom:1.1;">
+    <div class="slide-body" style="max-width:1000px; zoom:1.375;">
 
       <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
       <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">怎麼用、什麼時候<span class="accent"> 啟動</span>？</h2>
@@ -2689,33 +2689,43 @@ claude</pre>
         </div>
       </div>
 
+
+    </div>
+  </section>
+
+  <!-- S45 · Structured Questions: 適用 vs 不適用場景 -->
+  <section class="slide slide-dark" id="s45" data-slide="45">
+    <div class="slide-body" style="max-width:960px; zoom:1.15;">
+
+      <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">什麼時候該用、<span class="accent">什麼時候不用</span>？</h2>
+
       <!-- Scenario table -->
-      <div class="r r-d1" style="margin-top:14px; width:100%;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:rgba(240,222,158,0.6); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">▼ 適用 vs 不適用場景</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
+      <div class="r" style="margin-top:24px; width:100%;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:14px;">
           <!-- Header -->
-          <div style="background:rgba(74,222,128,0.08); padding:10px 16px; font-weight:700; color:#4ADE80; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);">✓ 適合啟動</div>
-          <div style="background:rgba(248,113,113,0.08); padding:10px 16px; font-weight:700; color:#F87171; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">✗ 不需要啟動</div>
+          <div style="background:rgba(74,222,128,0.08); padding:14px 20px; font-weight:700; color:#4ADE80; font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);">✓ 適合啟動</div>
+          <div style="background:rgba(248,113,113,0.08); padding:14px 20px; font-weight:700; color:#F87171; font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">✗ 不需要啟動</div>
           <!-- Row 1 -->
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">模糊的起點（「想做 X 但不知從哪開始」）</div>
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">你已經很清楚要什麼（「幫我寫一封信」）</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">模糊的起點（「想做 X 但不知從哪開始」）</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">你已經很清楚要什麼（「幫我寫一封信」）</div>
           <!-- Row 2 -->
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">多條路可以走，各有優缺點</div>
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">只有一個正確答案（「台北今天幾度」）</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">多條路可以走，各有優缺點</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">只有一個正確答案（「台北今天幾度」）</div>
           <!-- Row 3 -->
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">AI 回了一大段，你不知道從哪看起</div>
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">簡單的是非題、翻譯、計算</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">AI 回了一大段，你不知道從哪看起</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">簡單的是非題、翻譯、計算</div>
           <!-- Row 4 -->
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.7);">Debug 時有多個可能的原因要排序</div>
-          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-left:1px solid rgba(255,255,255,0.06);">你指示明確，AI 照做就好</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.7);">Debug 時有多個可能的原因要排序</div>
+          <div style="padding:12px 20px; color:rgba(255,255,255,0.5); border-left:1px solid rgba(255,255,255,0.06);">你指示明確，AI 照做就好</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- S45 · Structured Questions: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s45" data-slide="45">
+  <!-- S46 · Structured Questions: Claude Code vs Codex -->
+  <section class="slide slide-dark" id="s46" data-slide="46">
     <div class="slide-body" style="max-width:960px; zoom:1.15;">
 
       <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
@@ -2757,7 +2767,7 @@ claude</pre>
   <!-- ── Auto-Rename Skill ── -->
 
   <!-- S46 · Auto-Rename: 痛點 + Before/After -->
-  <section class="slide slide-dark" id="s46" data-slide="46">
+  <section class="slide slide-dark" id="s47" data-slide="47">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
       <p class="slide-eyebrow">Skill ❷ · Auto-Rename</p>
@@ -2827,7 +2837,7 @@ claude</pre>
   </section>
 
   <!-- S47 · Auto-Rename: 使用情境 + 觸發方式 + 適用場景 -->
-  <section class="slide slide-dark" id="s47" data-slide="47">
+  <section class="slide slide-dark" id="s48" data-slide="48">
     <div class="slide-body" style="max-width:1000px; zoom:1.1;">
 
       <p class="slide-eyebrow">Skill ❷ · Auto-Rename</p>
@@ -2901,7 +2911,7 @@ claude</pre>
   </section>
 
   <!-- S48 · Auto-Rename: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s48" data-slide="48">
+  <section class="slide slide-dark" id="s49" data-slide="49">
     <div class="slide-body" style="max-width:960px; zoom:1.15;">
 
       <p class="slide-eyebrow">Skill ❷ · Auto-Rename</p>
@@ -2943,7 +2953,7 @@ claude</pre>
   <!-- ── Handoff Skill ── -->
 
   <!-- S49 · Handoff: 痛點 ❶❷ Before/After -->
-  <section class="slide slide-dark" id="s49" data-slide="49">
+  <section class="slide slide-dark" id="s50" data-slide="50">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
       <p class="slide-eyebrow">Skill ❸ · Handoff</p>
@@ -3013,7 +3023,7 @@ claude</pre>
   </section>
 
   <!-- S50 · Handoff: 使用情境 + 觸發方式 + 適用場景 -->
-  <section class="slide slide-dark" id="s50" data-slide="50">
+  <section class="slide slide-dark" id="s51" data-slide="51">
     <div class="slide-body" style="max-width:1000px; zoom:1.1;">
 
       <p class="slide-eyebrow">Skill ❸ · Handoff</p>
@@ -3095,7 +3105,7 @@ claude</pre>
   </section>
 
   <!-- S51 · Handoff: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s51" data-slide="51">
+  <section class="slide slide-dark" id="s52" data-slide="52">
     <div class="slide-body" style="max-width:960px; zoom:1.15;">
 
       <p class="slide-eyebrow">Skill ❸ · Handoff</p>
@@ -3137,7 +3147,7 @@ claude</pre>
   <!-- ── Skill Creator ── -->
 
   <!-- S52 · Skill Creator: 痛點 + Before/After -->
-  <section class="slide slide-dark" id="s52" data-slide="52">
+  <section class="slide slide-dark" id="s53" data-slide="53">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
       <p class="slide-eyebrow">官方工具 · Skill Creator</p>
@@ -3207,7 +3217,7 @@ claude</pre>
   </section>
 
   <!-- S53 · Skill Creator: 四大模式 + 使用情境 -->
-  <section class="slide slide-dark" id="s53" data-slide="53">
+  <section class="slide slide-dark" id="s54" data-slide="54">
     <div class="slide-body" style="max-width:1000px; zoom:1.1;">
 
       <p class="slide-eyebrow">官方工具 · Skill Creator</p>
@@ -3273,7 +3283,7 @@ claude</pre>
   </section>
 
   <!-- S54 · Skill Creator: Claude Code vs Codex + 安裝方式 -->
-  <section class="slide slide-dark" id="s54" data-slide="54">
+  <section class="slide slide-dark" id="s55" data-slide="55">
     <div class="slide-body" style="max-width:960px; zoom:1.15;">
 
       <p class="slide-eyebrow">官方工具 · Skill Creator</p>
@@ -3326,7 +3336,7 @@ claude</pre>
   <!-- ── Hands-on: Build academic_chapter_draft Skill ── -->
 
   <!-- S55 · 痛點：為什麼需要這個 Skill -->
-  <section class="slide slide-warm" id="s55" data-slide="55">
+  <section class="slide slide-warm" id="s56" data-slide="56">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3412,7 +3422,7 @@ claude</pre>
   </div>
 
   <!-- S56 · 流程：Structured Questions + Skill Creator 怎麼搭配 -->
-  <section class="slide slide-warm" id="s56" data-slide="56">
+  <section class="slide slide-warm" id="s57" data-slide="57">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3502,7 +3512,7 @@ claude</pre>
   </section>
 
   <!-- S57 · 動手做：Prompt + 操作指引 -->
-  <section class="slide slide-warm" id="s57" data-slide="57">
+  <section class="slide slide-warm" id="s58" data-slide="58">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3552,7 +3562,7 @@ claude</pre>
   </section>
 
   <!-- S58 · Pipeline 產出展示 -->
-  <section class="slide slide-warm" id="s58" data-slide="58">
+  <section class="slide slide-warm" id="s59" data-slide="59">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3633,7 +3643,7 @@ claude</pre>
   </div>
 
   <!-- S59 · 安裝 Skill + 跑 Pipeline -->
-  <section class="slide slide-warm" id="s59" data-slide="59">
+  <section class="slide slide-warm" id="s60" data-slide="60">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3684,7 +3694,7 @@ claude</pre>
   <!-- ── Frontend-Design Skill ── -->
 
   <!-- S60 · Frontend-Design: 痛點 Before/After -->
-  <section class="slide slide-dark" id="s60" data-slide="60">
+  <section class="slide slide-dark" id="s61" data-slide="61">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
       <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
@@ -3753,7 +3763,7 @@ claude</pre>
   </section>
 
   <!-- S61 · Frontend-Design: 使用情境 -->
-  <section class="slide slide-dark" id="s61" data-slide="61">
+  <section class="slide slide-dark" id="s62" data-slide="62">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
       <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
@@ -3815,7 +3825,7 @@ claude</pre>
   </section>
 
   <!-- S62 · Frontend-Design: Claude Code vs Codex + 安裝 -->
-  <section class="slide slide-dark" id="s62" data-slide="62">
+  <section class="slide slide-dark" id="s63" data-slide="63">
     <div class="slide-body" style="max-width:960px; zoom:1.15;">
 
       <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
@@ -3867,7 +3877,7 @@ claude</pre>
   </section>
 
   <!-- S63 · CV → Landing Page 工作流程 -->
-  <section class="slide slide-warm" id="s63" data-slide="63">
+  <section class="slide slide-warm" id="s64" data-slide="64">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
@@ -3942,7 +3952,7 @@ claude</pre>
   </section>
 
   <!-- S64 · 動手做 — CV → Landing Page Prompt -->
-  <section class="slide slide-warm" id="s64" data-slide="64">
+  <section class="slide slide-warm" id="s65" data-slide="65">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
