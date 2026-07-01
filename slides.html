@@ -3841,34 +3841,40 @@ claude</pre>
           <!-- Row 1: Type -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">官方 Plugin<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 裡啟用</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">無對標 Plugin<br><span style="font-size:9px; color:#F87171; font-family:var(--font-body);">※ 用 prompt 內嵌設計規格替代</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Vercel 開放 Skill（同一個）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">vercel-labs/agent-skills 跨平台通用</span></div>
           <!-- Row 2: Trigger -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發方式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">直接在 prompt 描述需求<br><span style="font-size:9px; color:#F87171;">※ 無專屬指令，靠 prompt 驅動</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">安裝後指令相同</span></div>
           <!-- Row 3: Output -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">產出</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">6 種美學候選頁面<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">含 CSS custom properties</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">單一 HTML 檔<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">品質取決於 prompt 精確度</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同上（同一個 Skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">產出品質一致</span></div>
           <!-- Row 4: Install -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝方式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/settings.json<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 加一行</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">不需安裝<br><span style="font-size:9px; color:#F87171;">※ 直接描述即可，無 plugin 系統</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">npx skills add<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">vercel-labs/agent-skills -a codex</span></div>
           <!-- Row 5: RWD -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">RWD 支援</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 內建 RWD<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">自動產出 media queries</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">需在 prompt 中要求<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">否則可能只有桌機版</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 同上（同一個 Skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">自動產出 media queries</span></div>
         </div>
       </div>
 
-      <!-- Install prompt -->
-      <div class="r r-d1" style="margin-top:16px; width:100%;">
-        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 20px; width:100%; box-sizing:border-box;">
-          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝 Prompt</div>
+      <!-- Install prompts -->
+      <div class="r r-d1" style="margin-top:16px; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝</div>
           <div style="font-family:var(--font-mono); font-size:11px; color:rgba(240,222,158,0.8); line-height:1.7;">
-            幫我在 .claude/settings.json 的 enabledPlugins 裡加入<br>
-            "frontend-design@claude-plugins-official"<br>
-            然後確認 plugin 可以用。
+            幫我在 .claude/settings.json 的<br>enabledPlugins 裡加入<br>
+            "frontend-design@claude-plugins-official"
+          </div>
+        </div>
+        <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#fff; letter-spacing:0.06em; margin-bottom:8px;">▶ Codex CLI 安裝</div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.7;">
+            npx skills add<br>vercel-labs/agent-skills<br>
+            --skill frontend-design -a codex
           </div>
         </div>
       </div>
@@ -3974,10 +3980,17 @@ claude</pre>
         <p style="font-family:var(--font-mono); font-size:11px; color:#818CF8; line-height:1.7; margin:0;">用 /frontend-design 幫我建立一個個人品牌 Landing Page。<br><br>內容來源：剛才整理的 CV 大綱<br>風格方向：簡潔專業、深色主題、適合科技管理背景<br>頁面結構：Hero（姓名+一句話定位）→ About → Experience → Projects → Contact<br>要求：單一 HTML 檔、RWD、不依賴外部框架<br><br>產出到 index.html</p>
       </div>
 
-      <!-- Step 03: 預覽 -->
+      <!-- Step 03: 預覽 + Snipaste -->
       <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
         <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#4ADE80; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 03 · 預覽 — localhost 確認效果</div>
         <p style="font-family:var(--font-mono); font-size:11px; color:#4ADE80; line-height:1.7; margin:0;">幫我啟動一個 local server 預覽 index.html。<br>看完後我會告訴你要調整什麼。</p>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:10px;">
+          <a href="https://www.snipaste.com/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; background:rgba(74,222,128,0.15); border:1px solid rgba(74,222,128,0.3); border-radius:8px; padding:6px 14px; text-decoration:none; cursor:pointer; transition:background 0.15s;" onmouseenter="this.style.background='rgba(74,222,128,0.25)'" onmouseleave="this.style.background='rgba(74,222,128,0.15)'">
+            <span style="font-size:14px;">📸</span>
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#4ADE80;">下載 Snipaste</span>
+          </a>
+          <span style="font-size:10px; color:rgba(255,255,255,0.4); line-height:1.4;">免費截圖工具 — 截下畫面直接貼給 AI Agent，讓它看著圖修 UI</span>
+        </div>
       </div>
 
       <!-- Step 04: 發布 -->
@@ -3986,20 +3999,106 @@ claude</pre>
         <p style="font-family:var(--font-mono); font-size:11px; color:#F97316; line-height:1.7; margin:0;">幫我建立一個新的 GitHub repo 叫 wei-chen-portfolio，<br>把 index.html 推上去，然後用 GitHub Pages 發布。<br>完成後給我公開網址。</p>
       </div>
 
-      <!-- Tips -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; box-sizing:border-box;">
-        <div style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.15); border-radius:10px; padding:12px 14px;">
-          <div style="font-size:11px; font-weight:700; color:#B8902E; margin-bottom:4px;">💡 Codex 用戶？</div>
-          <div style="font-size:11px; color:#555; line-height:1.5;">把 Step 02 的 prompt 改成直接描述設計需求（不用 /frontend-design），其他步驟一樣。記得在 prompt 裡加上「單一 HTML、RWD」。</div>
-        </div>
-        <div style="background:rgba(184,144,46,0.08); border:1px solid rgba(184,144,46,0.15); border-radius:10px; padding:12px 14px;">
-          <div style="font-size:11px; font-weight:700; color:#B8902E; margin-bottom:4px;">🎯 Demo 亮點</div>
-          <div style="font-size:11px; color:#555; line-height:1.5;">CV 刻意寫得模糊（vague verbs、沒有量化）。看 AI 萃取時怎麼強化你的經歷描述 — 這就是 AI 的附加價值。</div>
-        </div>
+      <!-- CV Preview Button -->
+      <div style="text-align:center; width:100%; box-sizing:border-box;">
+        <button id="s65-cv-btn" style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border:1.5px solid rgba(184,144,46,0.3); border-radius:10px; padding:10px 24px; cursor:pointer; transition:background 0.15s,transform 0.15s;" onmouseenter="this.style.background='rgba(184,144,46,0.2)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='rgba(184,144,46,0.12)';this.style.transform=''">
+          <span style="font-size:16px;">📄</span>
+          <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:#B8902E;">查看 Wei Chen 的 CV 素材</span>
+          <span style="font-size:10px; color:#999;">↗</span>
+        </button>
       </div>
 
     </div>
   </section>
+
+  <!-- S65 CV Preview Modal -->
+  <div id="s65-cv-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#0E1A2F;border-radius:20px;max-width:780px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+        <div style="font-family:var(--font-mono);font-size:15px;color:#F0DE9E;font-weight:600;">📄 cv_draft.md — Wei Chen</div>
+        <button id="s65-cv-close" style="background:rgba(255,255,255,0.08);border:none;border-radius:6px;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;">✕</button>
+      </div>
+      <div style="overflow-y:auto;padding:20px;font-family:var(--font-mono);font-size:12px;color:#E2E8F0;line-height:1.75;white-space:pre-wrap;">Wei Chen — CV (draft, last edited 2024)
+
+📧 wei.chen@kcl.ac.uk · 📱 +44 7XXX XXX XXX · 🔗 linkedin.com/in/weichen-tm
+🌍 London, UK · Open to relocation
+
+────────────────────────────────────
+
+Personal Statement
+
+I am a highly motivated and detail-oriented student passionate about technology and business. I am responsible for delivering high-quality work and I am a team player who enjoys collaborating with people from different backgrounds. I am looking for an exciting graduate opportunity where I can grow and contribute to a forward-thinking organisation.
+
+────────────────────────────────────
+
+Education
+
+King's College London | MSc Technology Management | Sept 2025 – present
+  • Expected completion: September 2026
+  • Current modules: Strategic Management of Technology, Innovation &amp; Entrepreneurship, Digital Transformation
+  • Working on dissertation about AI adoption in SMEs
+
+National Taiwan University | BSc Industrial Engineering | 2019 – 2023
+  • GPA: 3.8 / 4.0
+  • Final year project: built a small inventory tracking web app for a campus shop
+  • Took electives in business analytics and Python
+
+────────────────────────────────────
+
+Experience
+
+Marketing Intern — Cathay Bank Taipei | Summer 2023 (3 months)
+  • Was responsible for helping the marketing team
+  • Helped with social media posts
+  • Did a presentation at the end of the internship
+  • Learned a lot about banking
+
+Student Volunteer Co-ordinator — NTU Engineering Department | 2022 – 2023
+  • Helped organise events for the engineering society
+  • Was in charge of communications with members
+  • Managed budget for events
+  • Organised the annual tech showcase which had over 200 attendees
+
+Part-time Research Assistant — NTU Lab of Industrial Systems | 2021 – 2022
+  • Helped a PhD student with data collection
+  • Did some data analysis using Python (pandas)
+  • Wrote up summary for weekly meetings
+  • The research was about supply chain optimisation
+
+────────────────────────────────────
+
+Projects
+
+Inventory Tracking Web App (final year project, 2023)
+  • Built a simple web app for a campus convenience shop to track stock
+  • Used Python (Flask) for backend and React for frontend
+  • Owner said it saved them time
+  • Got an A grade
+
+Hackathon: Smart Campus Challenge (Spring 2022)
+  • Worked in a team of 4
+  • Built a prototype mobile app for finding empty study rooms
+  • Came in top 5 out of about 30 teams
+  • I focused on UX design and user research
+
+────────────────────────────────────
+
+Skills
+
+  • Languages: English (fluent), Mandarin (native), some Japanese
+  • Technical: Python, SQL, basic React, Excel, PowerPoint, Figma
+  • Soft skills: communication, teamwork, problem-solving, time management
+
+────────────────────────────────────
+
+Interests
+
+  • Reading (especially business and technology books)
+  • Hiking and travel
+  • Volunteer tutoring for high school students
+  • Photography</div>
+    </div>
+  </div>
 
 <!-- ── Nav controls ── -->
 <button class="nav-arrow prev" id="btn-prev" aria-label="上一頁">
@@ -5094,6 +5193,29 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── S65 CV Preview Modal Script ── -->
+<script>
+(function () {
+  var modal    = document.getElementById('s65-cv-modal');
+  var closeBtn = document.getElementById('s65-cv-close');
+  var openBtn  = document.getElementById('s65-cv-btn');
+  if (!modal || !openBtn) return;
+
+  openBtn.addEventListener('click', function () {
+    modal.style.display = 'flex';
+  });
+  closeBtn.addEventListener('click', function () {
+    modal.style.display = 'none';
+  });
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') modal.style.display = 'none';
   });
 })();
 </script>
