@@ -2308,7 +2308,10 @@ claude</pre>
           <!-- Row 2: Output style -->
           <div style="padding:10px 14px; color:rgba(255,255,255,0.8); font-weight:600;">輸出風格</div>
           <div style="padding:10px 14px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">output-style.md</div>
-          <div style="padding:10px 14px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">config.toml</div>
+          <div style="padding:10px 14px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">AGENTS.md 內<br><span style="font-size:9px; color:rgba(255,255,255,0.4); font-family:var(--font-body);">config.toml 只是強化設定</span></div>
+        </div>
+        <div style="margin-top:8px; font-size:11px; color:rgba(240,222,158,0.7); background:rgba(240,222,158,0.08); padding:8px 14px; border-radius:8px;">
+          💡 規則檔在 <strong style="color:#F0DE9E;">session 啟動時載入一次</strong>，之後全程放在 AI 腦中——中途改了規則檔，要<strong style="color:#F0DE9E;">開新 session</strong> 才會生效
         </div>
       </div>
 
@@ -2396,7 +2399,7 @@ claude</pre>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">只在這個專案</div>
         </div>
         <div style="margin-top:10px; font-size:11px; color:rgba(240,222,158,0.7); background:rgba(240,222,158,0.08); padding:8px 14px; border-radius:8px;">
-          💡 若 user-level 與 project-level 的規則檔矛盾，<strong style="color:#F0DE9E;">project-level 的規則會覆蓋 user-level</strong> — 因為它更具體（離工作目錄更近）
+          💡 <strong style="color:#F0DE9E;">兩份都會被載入</strong>；若規則互相矛盾，<strong style="color:#F0DE9E;">project-level 優先</strong> — 因為它更具體（離工作目錄更近），不是整份取代 user-level
         </div>
       </div>
 
@@ -2416,7 +2419,7 @@ claude</pre>
       <!-- Life analogy -->
       <div class="r" style="margin-top:16px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:12px; padding:14px 18px;">
         <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.7;">
-          🌰 想像你常去的咖啡店——你不用每次說「中杯、冰的、燕麥奶、少糖、多冰」，只要說<strong style="color:#F0DE9E;">「老樣子」</strong>，店員就知道怎麼做。Skill 就是你跟 AI 之間的「老樣子」。
+          🌰 Skill 像一本<strong style="color:#F0DE9E;">食譜</strong>——把你打磨過的流程寫成固定步驟，下次遇到同類任務直接照著做。AI 開場只讀每本食譜的<strong style="color:#F0DE9E;">書名＋一句簡介</strong>，被觸發時才翻開全文——所以裝太多 skill 的問題是「挑錯書」的機率變高，不是塞爆 context。
         </div>
       </div>
 
@@ -2527,7 +2530,7 @@ claude</pre>
 三個都裝完後，列出已安裝的 skill 清單讓我確認。</pre>
           </div>
 
-          <p style="font-size:15px;color:#424245;line-height:1.65;margin-top:14px;"><strong style="color:#1D1D1F;">驗證：</strong>AI 回報三個 skill 都裝到 <code style="font-family:var(--font-mono);font-size:13px;background:#F5F5F7;padding:2px 7px;border-radius:4px;">~/.claude/commands/</code> = 成功</p>
+          <p style="font-size:15px;color:#424245;line-height:1.65;margin-top:14px;"><strong style="color:#1D1D1F;">驗證：</strong>AI 回報三個 skill 都裝到 <code style="font-family:var(--font-mono);font-size:13px;background:#F5F5F7;padding:2px 7px;border-radius:4px;">.claude/skills/</code> = 成功</p>
         </div>
         <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px;white-space:nowrap;">
           <div style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:6px 12px;border-radius:100px;">5 min</div>
@@ -2810,8 +2813,8 @@ claude</pre>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">/plan mode 下為互動式 UI<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">其他 mode 降級為純文字</span></div>
           <!-- Row 3: Install path -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude/commands/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/skills/</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
           <!-- Row 4: Auto trigger -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 偵測到選擇自動啟動</div>
@@ -2890,7 +2893,7 @@ claude</pre>
         <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">🎯 這個 Skill 的做法</div>
         <div style="display:flex; gap:20px; font-size:12px; color:rgba(255,255,255,0.7);">
           <div>🏷️ <strong style="color:#F0DE9E;">Emoji + 描述</strong> — 自動產生如「🏗️ voice profile pipeline」</div>
-          <div>🤖 <strong style="color:#F0DE9E;">自動觸發</strong> — 對話到第 5 次工具呼叫時自動命名</div>
+          <div>🤖 <strong style="color:#F0DE9E;">自動觸發</strong> — 第 5 次工具呼叫時由附帶 hook 觸發（機率性，沒觸發就手動）</div>
           <div>✏️ <strong style="color:#F0DE9E;">手動也行</strong> — 隨時說「改名」或 /auto-rename</div>
         </div>
       </div>
@@ -2934,7 +2937,7 @@ claude</pre>
           <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 16px; text-align:center;">
             <div style="font-size:20px; margin-bottom:6px;">⚡</div>
             <div style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#F0DE9E; margin-bottom:4px;">自動觸發</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.5); line-height:1.5;">第 5 次工具呼叫後<br>自動產生名稱</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); line-height:1.5;">第 5 次工具呼叫後自動產生名稱<br>（hook 提供，偶爾不觸發 → 手動）</div>
           </div>
           <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; text-align:center;">
             <div style="font-size:20px; margin-bottom:6px;">💬</div>
@@ -2989,7 +2992,7 @@ claude</pre>
           <!-- Row 1: Command -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發指令</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/auto-rename</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$auto-rename<br><span style="font-size:9px; color:#F87171; font-family:var(--font-body);">※ 需透過 mycodex wrapper 啟動才支援</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$auto-rename<br><span style="font-size:9px; color:#F87171; font-family:var(--font-body);">※ 產生名稱原生可用；自動改 tab 名需 mycodex wrapper</span></div>
           <!-- Row 2: Auto trigger -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 第 5 次工具呼叫後自動命名</div>
@@ -3000,8 +3003,8 @@ claude</pre>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">SQLite 資料庫<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">~/.codex/threads.db</span></div>
           <!-- Row 4: Install path -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude/commands/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/skills/</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
           <!-- Row 5: Naming format -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">命名格式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">{emoji} {描述} ≤ 40 字元<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">8 組 emoji mapping</span></div>
@@ -3142,6 +3145,9 @@ claude</pre>
             <div style="font-size:11px; color:rgba(255,255,255,0.5); line-height:1.5;">輸入 /handoff<br>隨時產出交接文件</div>
           </div>
         </div>
+        <div style="margin-top:10px; font-size:11px; color:rgba(240,222,158,0.7); background:rgba(240,222,158,0.08); padding:8px 14px; border-radius:8px;">
+          💡 心法：Context 到 70%，<strong style="color:#F0DE9E;">能交接就不壓縮</strong>——/compact 壓縮會失真，是趕時間時的次選
+        </div>
       </div>
 
       <!-- Scenario table -->
@@ -3183,7 +3189,7 @@ claude</pre>
           <!-- Row 1: Command -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發指令</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/handoff</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$handoff<br><span style="font-size:9px; color:#F87171; font-family:var(--font-body);">※ 需透過 mycodex wrapper 啟動才支援</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$handoff</div>
           <!-- Row 2: Auto trigger -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ Context 70% 時主動產出</div>
@@ -3194,8 +3200,8 @@ claude</pre>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">docs/handoff/{date}-{topic}.md</div>
           <!-- Row 4: Install path -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude/commands/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/skills/</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
           <!-- Row 5: Resume method -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">續接方式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">「讀 docs/handoff/… 繼續」<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">一句話恢復完整 context</span></div>
@@ -3431,7 +3437,7 @@ claude</pre>
           <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
           <!-- Row 1: Install -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝指令</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">/install-skill https://github.com/anthropics/skills/tree/main/skills/skill-creator</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">叫 AI 從 anthropics/skills 安裝<br><span style="font-size:9px; color:rgba(240,222,158,0.5); font-family:var(--font-body);">見下方安裝 Prompt</span></div>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 內建 system skill<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">無需安裝，直接可用</span></div>
           <!-- Row 2: Invoke -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">使用指令</div>
@@ -3443,7 +3449,7 @@ claude</pre>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Create · Improve<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">Eval/Benchmark 需手動設定</span></div>
           <!-- Row 4: Output -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">產出位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude/commands/{name}.md</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude/skills/{name}/SKILL.md</div>
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/skills/{name}/SKILL.md</div>
           <!-- Row 5: Eval viewer -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">Eval 報告</div>
@@ -3457,7 +3463,7 @@ claude</pre>
         <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">📋 安裝 Prompt — 貼進 AI 對話即可</div>
         <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.8; background:#050B17; border-radius:8px; padding:12px 14px;">
           <div style="margin-bottom:6px; color:rgba(240,222,158,0.6); font-size:9px;">── Claude Code ──</div>
-          <div style="color:#F0DE9E;">/install-skill https://github.com/anthropics/skills/tree/main/skills/skill-creator</div>
+          <div style="color:#F0DE9E;">把 https://github.com/anthropics/skills/tree/main/skills/skill-creator 裝到我的 ~/.claude/skills/，裝完列出已安裝的 skills 讓我確認。</div>
           <div style="margin-top:10px; margin-bottom:6px; color:rgba(255,255,255,0.4); font-size:9px;">── Codex CLI ──</div>
           <div style="color:rgba(255,255,255,0.8);">內建 system skill，直接輸入 <span style="color:#fff; font-weight:700;">$skill-creator</span> 即可使用，無需安裝</div>
         </div>
@@ -3974,7 +3980,7 @@ claude</pre>
           <!-- Row 1: Type -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">官方 Plugin<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 裡啟用</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Vercel 開放 Skill（同一個）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">vercel-labs/agent-skills 跨平台通用</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Anthropic 官方 Skill（同源）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">anthropics/skills，用 Vercel 的 npx skills 工具安裝</span></div>
           <!-- Row 2: Trigger -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發方式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design</div>
@@ -3982,15 +3988,15 @@ claude</pre>
           <!-- Row 3: Output -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">產出</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">6 種美學候選頁面<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">含 CSS custom properties</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同上（同一個 Skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">產出品質一致</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同上（同源 skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">plugin 與 skill 版行為可能略異</span></div>
           <!-- Row 4: Install -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝方式</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/settings.json<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 加一行</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">npx skills add<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">vercel-labs/agent-skills -a codex</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">npx skills add<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">anthropics/skills --skill frontend-design -a codex</span></div>
           <!-- Row 5: RWD -->
           <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">RWD 支援</div>
           <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 內建 RWD<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">自動產出 media queries</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 同上（同一個 Skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">自動產出 media queries</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 同上（同源 skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">自動產出 media queries</span></div>
         </div>
       </div>
 
@@ -4006,7 +4012,7 @@ claude</pre>
         <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
           <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#fff; letter-spacing:0.06em; margin-bottom:8px;">▶ Codex CLI 安裝</div>
           <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.7;">
-            npx skills add<br>vercel-labs/agent-skills<br>
+            npx skills add anthropics/skills<br>
             --skill frontend-design -a codex
           </div>
         </div>
@@ -4198,6 +4204,7 @@ claude</pre>
       <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
         <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F97316; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 04 · 發布 — 推到 GitHub + 開啟 Pages</div>
         <p style="font-family:var(--font-mono); font-size:11px; color:#F97316; line-height:1.7; margin:0;">幫我建立一個新的 GitHub repo 叫 wei-chen-portfolio，<br>把 index.html 推上去，然後用 GitHub Pages 發布。<br>完成後給我公開網址。</p>
+        <div style="margin-top:8px; font-size:10px; color:#FCA5A5; line-height:1.5;">⚠️ Pages 網站<strong>永遠是公開的</strong>——repo 可以設 private（免費帳號的 private repo 開不了 Pages），但網址任何人都能看。電話、地址等不想公開的資訊不要放上去。</div>
       </div>
 
       <!-- CV Preview Button -->
@@ -4380,8 +4387,8 @@ Interests
 
       <!-- CTA -->
       <div style="margin-top:16px; text-align:center;">
-        <div style="font-size:16px; font-weight:800; color:#fff; margin-bottom:6px;">用老闆的思維使用 AI Agent</div>
-        <div style="font-size:12px; color:rgba(255,255,255,0.4);">你不需要會寫程式 — 你需要會「指揮」和「判斷」</div>
+        <div style="font-size:16px; font-weight:800; color:#fff; margin-bottom:6px;">學會用慣老闆的思維叫 AI Agent 做事</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.4);">你就會把 AI Agent 用好</div>
       </div>
 
     </div>
