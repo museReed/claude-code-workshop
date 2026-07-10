@@ -15,7 +15,7 @@ window.SETUP_STEPS = [
       { label: "① 下載並登入", lang: "text", code: "https://antigravity.google", note: "選你的作業系統下載 → 安裝 → 開啟 → 用 Google 帳號登入（免費、免信用卡）。看到編輯器 + 右側 AI 助手面板 = 成功。" },
       { label: "② 下載教材資料夾", lang: "bash", code: `cd ~/Desktop
 git clone https://github.com/museReed/claude-code-workshop-jr-student.git
-cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把上課教材下載到桌面。請先確認 git 可以使用，然後從 https://github.com/museReed/claude-code-workshop-jr-student.git 下載教材到我的 ~/Desktop。完成後請進入 claude-code-workshop-jr-student 資料夾，列出 exercises/ 內容，確認教材已經下載成功。過程中請用繁體中文說明每一步；如果遇到錯誤，請先停下來告訴我原因與下一步。", note: "這段指令會把 GitHub 上的教材資料夾下載到桌面。最後看到練習資料夾名稱，就代表教材已經到手。" },
+cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把上課教材下載到桌面。請先確認 git 可以使用，然後從 https://github.com/museReed/claude-code-workshop-jr-student.git 下載教材到我的 ~/Desktop。完成後請進入 claude-code-workshop-jr-student 資料夾，列出 exercises/ 內容，確認教材已經下載成功。過程中請說明每一步；開始前請先主動問我要用什麼語言說明，不要預設使用繁體中文。如果遇到錯誤，請先停下來告訴我原因與下一步。", note: "這段指令會把 GitHub 上的教材資料夾下載到桌面。最後看到練習資料夾名稱，就代表教材已經到手。" },
       { label: "Windows 附註", lang: "text", code: "開 PowerShell（Windows 的文字指令視窗，不是一般設定頁）；如果電腦還不能下載教材，先安裝 Git for Windows（連結見課程頁）。", note: null, collapsible: true },
       { label: "macOS 附註", lang: "text", code: "第一次下載教材時，macOS 可能會跳出一個工具安裝視窗。按同意，等 5–10 分鐘，再回來繼續。", note: null, collapsible: true }
     ],
