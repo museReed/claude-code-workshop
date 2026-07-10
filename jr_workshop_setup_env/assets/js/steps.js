@@ -59,16 +59,18 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
     title: "第一次對話",
     badge: null,
     mac_win: "macOS 為主",
-    goal: "親手跟 Claude Code 講第一句話，確認它看得到你的教材資料夾。",
-    intro: "換 Claude Code 登場。先進到教材資料夾，再打開 Claude Code；這樣它才知道今天要看哪一份教材。",
+    goal: "親手跟 Claude Code/ Codex 講第一句話，確認它看得到你的教材資料夾。",
+    intro: "換 CLI AI Agent 登場。先進到教材資料夾，再打開你使用的 CLI AI Agent（Claude Code 或 Codex）；這樣它才知道今天要看哪一份教材。",
     analogy: "它不是只靠你貼文字回答，而是真的會看你打開的資料夾。這就是這類 AI 助手跟一般聊天網頁最大的不同。",
     kind: "steps",
     commands: [
-      { label: "進到教材資料夾並打開 Claude Code", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
-claude`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Claude Code。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Claude Code 裡貼第一句話。", note: null },
-      { label: "第一句話（貼進 Claude Code）", lang: "prompt", code: "你好，我現在在哪個資料夾？裡面有什麼東西？", note: null }
+      { label: "Claude Code 版本 · 進到教材資料夾並打開", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
+claude`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Claude Code。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Claude Code 裡貼第一句話。", note: "如果你用 Claude Code，貼這一組。" },
+      { label: "Codex 版本 · 進到教材資料夾並打開", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
+codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Codex。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Codex 裡貼第一句話。", note: "如果你用 Codex，貼這一組。" },
+      { label: "第一句話（貼進 CLI AI Agent）", lang: "prompt", code: "你好，我現在在哪個資料夾？裡面有什麼東西？", note: "Claude Code 或 Codex 都貼同一句。" }
     ],
-    checklist: ["Claude Code 成功打開", "它能說出教材資料夾裡有哪些東西"]
+    checklist: ["Claude Code/ Codex 成功打開", "它能說出教材資料夾裡有哪些東西"]
   },
   {
     id: "status-panel",
