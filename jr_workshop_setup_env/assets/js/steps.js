@@ -106,7 +106,7 @@ claude`, agentPrompt: "請幫我新開一個 Claude Code session。請先確認�
     kind: "steps",
     commands: [
       { label: "① 註冊帳號", lang: "text", code: "https://github.com/signup", note: "填 email、設密碼、選一個好記的英文 username（它會出現在你的作品網址裡）。已有帳號就跳過。" },
-      { label: "② 交給 Claude Code", lang: "text", code: "回到 Claude Code，說「請依照 github-setup.md 幫我設定 GitHub」。接著它會顯示一組一次性代碼，並打開瀏覽器；你把代碼貼上、按授權，剩下交給 AI。", note: null },
+      { label: "② 交給 Claude Code", lang: "prompt", code: "請依照 agent-setup/github-setup.md 幫我設定 GitHub", note: "貼上後，Claude Code 會顯示一組一次性代碼，並打開瀏覽器；你把代碼貼上、按授權，剩下交給 AI。" },
       { label: "GitHub 授權成功畫面", lang: "image", code: "看到 Authentication complete、Configured git protocol、Logged in as ... 這類訊息，就代表 GitHub 已經授權成功，可以回到 Claude Code 繼續。", image: "assets/shots/github-auth-success.png", alt: "GitHub CLI 授權成功的 terminal 畫面" },
       { label: "③ 驗證", lang: "bash", code: "gh repo view --web", agentPrompt: "請幫我確認 GitHub 設定是否成功。請先確認目前在正確的 workshop 資料夾或成果資料夾，然後使用 GitHub CLI 打開目前 repo 的 GitHub 頁面。打開後請告訴我應該看到哪些檔案，才能判斷成果已經成功放到雲端。", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
     ],
