@@ -75,7 +75,7 @@ codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-
   {
     id: "status-panel",
     num: "05",
-    title: "裝狀態列面板",
+    title: "裝狀態列面板 (Claude Code only)",
     badge: "Claude Code 專屬・選配",
     mac_win: "macOS 為主",
     goal: "（僅 Claude Code）在畫面底部加一條狀態列，讓你看得懂 AI 目前用量。",
