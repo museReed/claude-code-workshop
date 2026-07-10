@@ -65,10 +65,10 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
     kind: "steps",
     commands: [
       { label: "Claude Code 版本 · 進到教材資料夾並打開", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
-claude`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Claude Code。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Claude Code 裡貼第一句話。", note: "如果你用 Claude Code，貼這一組。" },
+claude`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Claude Code。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Claude Code 裡貼第一句話。", note: "如果你用 Claude Code，貼這一組。", notePlacement: "before" },
       { label: "Codex 版本 · 進到教材資料夾並打開", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
-codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Codex。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Codex 裡貼第一句話。", note: "如果你用 Codex，貼這一組。" },
-      { label: "第一句話（貼進 CLI AI Agent）", lang: "prompt", code: "你好，我現在在哪個資料夾？裡面有什麼東西？", note: "Claude Code 或 Codex 都貼同一句。" }
+codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Codex。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Codex 裡貼第一句話。", note: "如果你用 Codex，貼這一組。", notePlacement: "before" },
+      { label: "第一句話（貼進 CLI AI Agent）", lang: "prompt", code: "你好，我現在在哪個資料夾？裡面有什麼東西？", note: "Claude Code 或 Codex 都貼同一句。", notePlacement: "before" }
     ],
     checklist: ["Claude Code/ Codex 成功打開", "它能說出教材資料夾裡有哪些東西"]
   },

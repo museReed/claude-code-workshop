@@ -412,8 +412,12 @@
       return renderStepBlock(command,index,canToggle,collapsed);
     }
     const hasAgentPrompt = Boolean(command.agentPrompt);
+    const note = command.note ? `<div class="cmd-note">${esc(command.note)}</div>` : '';
+    const noteBefore = command.notePlacement === 'before' ? note : '';
+    const noteAfter = command.notePlacement === 'before' ? '' : note;
     return `
       <div class="cmd-wrap cmd-lang--${esc(lang)} ${collapsed}" data-cmd-index="${index}" data-active-mode="terminal">
+        ${noteBefore}
         <div class="ds-term">
           <div class="ds-term-chrome cmd-chrome" data-toggle-cmd="${canToggle ? '1' : '0'}">
             <div class="cmd-chrome-main">
@@ -427,7 +431,7 @@
           </div>
           ${hasAgentPrompt ? renderCommandPanes(command, lang) : `<pre class="ds-term-body cmd-code"><code>${renderCommandCode(command.code, lang)}</code></pre>`}
         </div>
-        ${command.note ? `<div class="cmd-note">${esc(command.note)}</div>` : ''}
+        ${noteAfter}
       </div>`;
   }
 
