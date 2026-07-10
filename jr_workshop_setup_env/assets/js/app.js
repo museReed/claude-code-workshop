@@ -488,15 +488,31 @@
       let out = '';
       let last = 0;
       for (const match of line.matchAll(pattern)) {
-        out += esc(line.slice(last, match.index));
+        out += renderInstructionInline(line.slice(last, match.index));
         out += `<a href="${esc(match[0])}" target="_blank" rel="noreferrer">${esc(match[0])}</a>`;
         last = match.index + match[0].length;
       }
-      out += esc(line.slice(last));
+      out += renderInstructionInline(line.slice(last));
       return out;
     }).join('<br>');
   }
 
+  function renderInstructionInline(text){
+    const tokenPattern = /(`[^`]+`|@[\w./-]+|\/[\w./:-]+|[\w.-]+(?:\/[\w.@-]+)+\/?|[\w.-]+\.(?:md|json|js|html|css|py|txt|yml|yaml|sh|png|svg|csv|xlsx|docx|pptx)|claude-code-workshop-jr-student|my-claude-workshop|exercises\/)/g;
+    let out = '';
+    let last = 0;
+    const source = String(text ?? '');
+    for (const match of source.matchAll(tokenPattern)) {
+      out += esc(source.slice(last, match.index));
+      const token = match[0];
+      const raw = token.startsWith('`') && token.endsWith('`') ? token.slice(1, -1) : token;
+      const cls = raw.startsWith('@') || raw.startsWith('/') ? 'inline-command' : 'inline-file';
+      out += `<code class="${cls}">${esc(raw)}</code>`;
+      last = match.index + token.length;
+    }
+    out += esc(source.slice(last));
+    return out;
+  }
 
   function renderCommandKind(lang){
     if (lang === 'slash') return '<span class="cmd-kind">貼進 Claude Code</span>';
