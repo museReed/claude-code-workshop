@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antigravity 環境建置教學</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <nav class="ds-nav app-nav" aria-label="主導覽">
+    <div class="ds-container nav-inner">
+      <a class="brand" href="#/">Antigravity 環境建置</a>
+      <div class="nav-actions">
+        <a class="nav-tab" href="#/" data-nav-route="home">教學步驟</a>
+        <a class="nav-tab" href="#/reading/onboarding" data-nav-route="reading">學員閱讀資料</a>
+        <button class="ds-btn ds-btn-ghost ds-btn-sm nav-control" id="resetProgress" type="button">重設進度</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="progress-wrap" aria-label="完成進度">
+    <div class="ds-container progress-inner">
+      <div class="progress-copy"><span id="progressText">0 / 6 完成</span></div>
+      <div class="ds-pbar" id="pbar">
+        <div class="ds-pbar-fill" id="fill"></div>
+        <div class="ds-duck dance" id="duck">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <g class="ds-legs">
+              <line class="ds-leg"  x1="11" y1="26" x2="11" y2="34" stroke="#E08A2B" stroke-width="2.4" stroke-linecap="round"/>
+              <line class="ds-leg2" x1="17" y1="26" x2="17" y2="34" stroke="#E08A2B" stroke-width="2.4" stroke-linecap="round"/>
+            </g>
+            <g class="ds-bodyg">
+              <ellipse cx="16" cy="20" rx="12" ry="9" fill="#F2C14E"/>
+              <circle cx="25" cy="12" r="7" fill="#F2C14E"/>
+              <path d="M31 11 l7 2 -7 3 z" fill="var(--color-accent)"/>
+              <circle class="ds-eye-open" cx="26" cy="11" r="1.5" fill="#2D2B28"/>
+              <path class="ds-eye-closed" d="M24.5 11 q1.5 1.6 3 0" stroke="#2D2B28" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="app" class="app-shell" tabindex="-1"></main>
+
+  <script src="assets/js/steps.js"></script>
+  <script src="assets/js/materials.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
