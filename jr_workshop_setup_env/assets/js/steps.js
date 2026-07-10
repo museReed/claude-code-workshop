@@ -38,7 +38,7 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
     id: "install-agent",
     num: "03",
     title: "Antigravity 初始環境安裝",
-    badge: "Claude Code 為主",
+    badge: null,
     mac_win: "macOS 為主",
     goal: "讓 Antigravity 幫你把主要 AI 工具裝好。你的角色從「自己動手」變成「看著 AI 做、確認每一步」。",
     intro: "<code>setup.md</code> 是一份給 AI 看的安裝說明書。你把它交給 Antigravity，它會照著幫你準備電腦；你只要看清楚它要做什麼，再按允許。",
