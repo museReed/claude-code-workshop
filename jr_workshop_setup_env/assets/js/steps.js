@@ -65,7 +65,7 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
     kind: "steps",
     commands: [
       { label: "進到教材資料夾並打開 Claude Code", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
-claude`, note: null },
+claude`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-workshop-jr-student 教材資料夾，然後啟動 Claude Code。開始前請先確認這個資料夾存在；如果找不到，請停下來告訴我可能原因。啟動成功後，請提醒我接下來要在 Claude Code 裡貼第一句話。", note: null },
       { label: "第一句話（貼進 Claude Code）", lang: "prompt", code: "你好，我現在在哪個資料夾？裡面有什麼東西？", note: null }
     ],
     checklist: ["Claude Code 成功打開", "它能說出教材資料夾裡有哪些東西"]
@@ -100,7 +100,7 @@ claude`, note: null },
     commands: [
       { label: "① 註冊帳號", lang: "text", code: "https://github.com/signup", note: "填 email、設密碼、選一個好記的英文 username（它會出現在你的作品網址裡）。已有帳號就跳過。" },
       { label: "② 交給 Claude Code", lang: "text", code: "回到 Claude Code，說「請依照 github-setup.md 幫我設定 GitHub」。接著它會顯示一組一次性代碼，並打開瀏覽器；你把代碼貼上、按授權，剩下交給 AI。", note: null },
-      { label: "③ 驗證", lang: "bash", code: "gh repo view --web", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
+      { label: "③ 驗證", lang: "bash", code: "gh repo view --web", agentPrompt: "請幫我確認 GitHub 設定是否成功。請先確認目前在正確的 workshop 資料夾或成果資料夾，然後使用 GitHub CLI 打開目前 repo 的 GitHub 頁面。打開後請告訴我應該看到哪些檔案，才能判斷成果已經成功放到雲端。", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
     ],
     checklist: ["看到登入成功訊息", "GitHub 出現新的雲端資料夾，而且裡面有檔案"]
   }
