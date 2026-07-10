@@ -411,6 +411,7 @@
       if (isHintCommand(command)) return renderHintBlock(command,index,canToggle,collapsed);
       return renderStepBlock(command,index,canToggle,collapsed);
     }
+    if (lang === 'image') return renderImageBlock(command,index,canToggle,collapsed);
     const hasAgentPrompt = Boolean(command.agentPrompt);
     const note = command.note ? `<div class="cmd-note">${esc(command.note)}</div>` : '';
     const noteBefore = command.notePlacement === 'before' ? note : '';
@@ -449,6 +450,28 @@
           </div>
           <div class="step-content">
             <div class="ds-step-body">${renderStepText(command.code)}</div>
+            ${command.note ? `<div class="ds-step-note">${renderStepText(command.note)}</div>` : ''}
+          </div>
+        </div>
+      </div>`;
+  }
+
+
+  function renderImageBlock(command,index,canToggle,collapsed){
+    return `
+      <div class="cmd-wrap cmd-lang--image ${collapsed}" data-cmd-index="${index}">
+        <div class="ds-step-block step-image-card">
+          <div class="ds-step-block-head step-block-head" data-toggle-cmd="${canToggle ? '1' : '0'}">
+            <div class="step-title-group">
+              <span class="ds-step-num">${index + 1}</span>
+              <h3 class="ds-step-title">
+                <button class="step-title-button ${canToggle ? 'can-toggle' : ''}" type="button" ${canToggle ? '' : 'tabindex="-1"'}>${esc(stripStepPrefix(command.label || '完成畫面'))}</button>
+              </h3>
+            </div>
+          </div>
+          <div class="step-content">
+            ${command.code ? `<div class="ds-step-body">${renderStepText(command.code)}</div>` : ''}
+            ${command.image ? `<img class="step-image" src="${esc(command.image)}" alt="${esc(command.alt || command.label || '完成畫面')}">` : ''}
             ${command.note ? `<div class="ds-step-note">${renderStepText(command.note)}</div>` : ''}
           </div>
         </div>

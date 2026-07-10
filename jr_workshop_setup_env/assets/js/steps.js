@@ -83,9 +83,13 @@ codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-
     analogy: null,
     kind: "steps",
     commands: [
-      { label: "第 1 行 · 加入面板來源", lang: "slash", code: "/plugin marketplace add jarrodwatts/claude-hud", note: null },
-      { label: "第 2 行 · 安裝面板", lang: "slash", code: "/plugin install claude-hud", note: null },
-      { label: "第 3 行 · 打開面板", lang: "slash", code: "/claude-hud:setup", note: "跑完後，畫面底部會出現狀態列，不用重新打開 Claude Code。" }
+      { label: "準備 · 重開 Claude Code session", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
+claude`, agentPrompt: "請幫我先結束目前的 Claude Code session，回到 terminal 後進入 ~/Desktop/claude-code-workshop-jr-student，並重新啟動 Claude Code。開始前請確認目前是在 Claude Code 還是一般 terminal；如果還在 Claude Code 裡，請先提醒我輸入 /exit 關掉目前 session。", note: "如果你還在 Claude Code 裡，先輸入 /exit 關掉目前 session；回到 terminal 後貼這一組。", notePlacement: "before" },
+      { label: "Step 1 · 加入面板來源", lang: "slash", code: "/plugin marketplace add jarrodwatts/claude-hud", note: null },
+      { label: "Step 2 · 安裝面板", lang: "slash", code: "/plugin install claude-hud", note: null },
+      { label: "Step 3 · 打開面板", lang: "slash", code: "/claude-hud:setup", note: null },
+      { label: "Step 4 · 勾選 HUD 選項", lang: "text", code: "之後會跳出 Enable any optional HUD features? 選項。建議四個都勾選：\n1. Tools activity\n2. Agents & Todos\n3. Session info\n4. Session name\n最後停在 Submit 按 Enter。", note: null },
+      { label: "完成畫面", lang: "image", code: "看到底部狀態列顯示 model、context usage、usage 與工具活動，就代表 claude-hud 已成功安裝並開啟。", image: "assets/shots/claude-hud-success.png", alt: "Claude HUD 安裝完成後的底部狀態列畫面" }
     ],
     checklist: ["畫面底部出現狀態列（目前使用的 AI、剩餘記憶空間、用量）"]
   },

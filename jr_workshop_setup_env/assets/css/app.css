@@ -78,6 +78,8 @@ button,input,textarea{font:inherit}
 .step-title-button.can-toggle{cursor:pointer}
 .step-hint{margin:0}
 .step-hint-head{margin-bottom:var(--space-2)}
+.step-image-card{display:grid;gap:var(--space-3)}
+.step-image{display:block;width:100%;max-width:820px;border-radius:var(--r-md);border:1px solid var(--color-border-soft);box-shadow:var(--shadow-md);background:var(--term-bg);margin-top:var(--space-3)}
 .term-prompt{color:var(--term-prompt)}
 .term-folder{color:var(--term-folder)}
 .term-ok{color:var(--term-ok)}
