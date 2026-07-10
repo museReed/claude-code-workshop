@@ -79,16 +79,17 @@ codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-
     badge: "Claude Code 專屬・選配",
     mac_win: "macOS 為主",
     goal: "（僅 Claude Code）在畫面底部加一條狀態列，讓你看得懂 AI 目前用量。",
-    intro: "這一步是 <b>Claude Code 專屬</b>，用 Codex 的同學可以跳過。你只要把下面三行設定，一行一行貼進 Claude Code 的輸入框；不要貼到電腦的一般文字指令視窗。",
+    intro: "這一步是 <b>Claude Code 專屬</b>，用 Codex 的同學可以跳過。先在目前 Claude Code session 貼前兩個設定；安裝完成後關閉目前 session，再新開一個 session 輸入 <code>claude</code>，最後打開面板。",
     analogy: null,
     kind: "steps",
     commands: [
-      { label: "準備 · 重開 Claude Code session", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
-claude`, agentPrompt: "請幫我先結束目前的 Claude Code session，回到 terminal 後進入 ~/Desktop/claude-code-workshop-jr-student，並重新啟動 Claude Code。開始前請確認目前是在 Claude Code 還是一般 terminal；如果還在 Claude Code 裡，請先提醒我輸入 /exit 關掉目前 session。", note: "如果你還在 Claude Code 裡，先輸入 /exit 關掉目前 session；回到 terminal 後貼這一組。", notePlacement: "before" },
       { label: "Step 1 · 加入面板來源", lang: "slash", code: "/plugin marketplace add jarrodwatts/claude-hud", note: null },
       { label: "Step 2 · 安裝面板", lang: "slash", code: "/plugin install claude-hud", note: null },
-      { label: "Step 3 · 打開面板", lang: "slash", code: "/claude-hud:setup", note: null },
-      { label: "Step 4 · 勾選 HUD 選項", lang: "text", code: "之後會跳出 Enable any optional HUD features? 選項。建議四個都勾選：\n1. Tools activity\n2. Agents & Todos\n3. Session info\n4. Session name\n最後停在 Submit 按 Enter。", note: null },
+      { label: "Step 3 · 關閉目前 session", lang: "slash", code: "/exit", note: "安裝完成後，先關閉目前這個 Claude Code session 面板，回到一般 terminal。", notePlacement: "before" },
+      { label: "Step 4 · 新開 session 並輸入 claude", lang: "bash", code: `cd ~/Desktop/claude-code-workshop-jr-student
+claude`, agentPrompt: "請幫我新開一個 Claude Code session。請先確認我已回到一般 terminal，然後進入 ~/Desktop/claude-code-workshop-jr-student 並輸入 claude。啟動後請提醒我貼下一步 /claude-hud:setup。", note: "新開一個 session 面板後，貼這一組並輸入 claude。", notePlacement: "before" },
+      { label: "Step 5 · 打開面板", lang: "slash", code: "/claude-hud:setup", note: null },
+      { label: "Step 6 · 勾選 HUD 選項", lang: "text", code: "之後會跳出 Enable any optional HUD features? 選項。建議四個都勾選：\n1. Tools activity\n2. Agents & Todos\n3. Session info\n4. Session name\n最後停在 Submit 按 Enter。", note: null },
       { label: "完成畫面", lang: "image", code: "看到底部狀態列顯示 model、context usage、usage 與工具活動，就代表 claude-hud 已成功安裝並開啟。", image: "assets/shots/claude-hud-success.png", alt: "Claude HUD 安裝完成後的底部狀態列畫面" }
     ],
     checklist: ["畫面底部出現狀態列（目前使用的 AI、剩餘記憶空間、用量）"]
