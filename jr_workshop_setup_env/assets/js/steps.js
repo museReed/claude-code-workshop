@@ -51,7 +51,7 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
       { label: "③ 監工 AI 四個動作", lang: "text", code: "AI 會依序：問你使用哪個帳號 → 檢查電腦缺什麼 → 幫你安裝需要的工具 → 帶你登入。每次看到 Allow，先看清楚它要做什麼，再按允許。", note: null },
       { label: "Codex 使用者看這裡", lang: "bash", code: "如果你是用 ChatGPT Plus，就回答「Codex」。AI 會改裝 OpenAI 的工具，其餘流程一樣：檢查、安裝、登入。", note: null, collapsible: true }
     ],
-    checklist: ["AI 已檢查電腦狀態", "Claude Code（或 Codex）已安裝完成", "登入成功、看到歡迎訊息"]
+    checklist: ["Claude Code（或 Codex）已安裝完成"]
   },
   {
     id: "first-chat",
