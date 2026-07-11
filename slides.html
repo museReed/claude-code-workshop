@@ -3206,6 +3206,189 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+  <!-- ── Playwright MCP（工具，排在 Frontend-Design 前）── -->
+
+  <!-- PW1 · Playwright MCP: 痛點 Before/After -->
+  <section class="slide slide-dark" id="s-pw1">
+    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+
+      <p class="slide-eyebrow">MCP · Playwright — 讓 AI 長眼睛</p>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">AI 做網頁，卻看不到畫面</h2>
+
+      <!-- Pain 1 -->
+      <div class="r" style="margin-top:14px; width:100%;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❶ · AI 改完看不到結果，你得一直截圖回貼</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              你：這顆按鈕位置不對<br>
+              <span style="color:#F87171;">AI：我改改看（看不到畫面，盲改）</span><br>
+              <span style="color:#F87171;">你：（再截圖貼給它看）…</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（一來一回好幾輪還沒對）</span>
+            </div>
+          </div>
+          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              <span style="color:#F0DE9E;">裝了 Playwright MCP</span><br>
+              <span style="color:#F0DE9E;">AI 自己開瀏覽器看畫面</span><br>
+              <span style="color:#F0DE9E;">「按鈕跑到第二行了」自己修</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（不用你截圖，它親眼看）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pain 2 -->
+      <div class="r r-d1" style="margin-top:10px; width:100%;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❷ · AI 說「已加 RWD」，手機打開還是爆版</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              AI：已加上響應式設計 ✅<br>
+              <span style="color:#F87171;">實際手機打開：文字爆版、按鈕重疊</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（它根本沒看到手機的樣子）</span>
+            </div>
+          </div>
+          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
+            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
+              <span style="color:#F0DE9E;">AI 用 Playwright 切成手機尺寸截圖</span><br>
+              <span style="color:#F0DE9E;">親眼確認排版再交付</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（桌機 / 手機各截一張自我檢查）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goal box -->
+      <div class="r r-d1" style="margin-top:12px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:10px; padding:12px 16px;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">🎯 Playwright MCP 讓 AI 能做的事</div>
+        <div style="display:flex; gap:20px; font-size:12px; color:rgba(255,255,255,0.7);">
+          <div>❶ 開真的瀏覽器</div>
+          <div>❷ 讀頁面 + 截圖</div>
+          <div>❸ 發現問題</div>
+          <div>❹ 自己修再驗證</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PW2 · Playwright MCP: 能做什麼 / 使用時機 -->
+  <section class="slide slide-dark" id="s-pw2">
+    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+
+      <p class="slide-eyebrow">MCP · Playwright — 讓 AI 長眼睛</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Playwright MCP 能做什麼</h2>
+
+      <!-- Use cases grid -->
+      <div class="r" style="margin-top:18px; width:100%;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">📋 一般場景</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.8;">
+              ▸ 打開網頁、截圖給你看<br>
+              ▸ 自動填表單、點按鈕<br>
+              ▸ 抓頁面文字 / 表格資料<br>
+              ▸ 檢查連結、流程走一遍
+            </div>
+          </div>
+          <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px;">
+            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">💻 Coding 場景</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.8;">
+              ▸ 網頁做完自我驗證畫面<br>
+              ▸ RWD 各尺寸截圖比對<br>
+              ▸ E2E 測試（自動點到底）<br>
+              ▸ 抓 console error 回報
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trigger -->
+      <div class="r r-d1" style="margin-top:12px; width:100%; background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:10px; padding:12px 16px;">
+        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">⚡ 使用方式</div>
+        <div style="font-family:var(--font-mono); font-size:13px; color:rgba(240,222,158,0.8); text-align:center; letter-spacing:0.05em;">
+          裝好後直接說「<span style="color:#F0DE9E; font-weight:700;">打開這個網頁截圖給我看</span>」，AI 自動用 Playwright
+        </div>
+      </div>
+
+      <!-- Suitable vs Not suitable -->
+      <div class="r r-d1" style="margin-top:12px; width:100%;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
+          <div style="background:rgba(240,222,158,0.08); padding:10px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);">✓ 適合</div>
+          <div style="background:rgba(248,113,113,0.08); padding:10px 16px; font-weight:700; color:#F87171; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">✗ 不適合</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">要 AI 看到 / 操作真實網頁</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">純文字任務、不用開瀏覽器</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7); border-bottom:1px solid rgba(255,255,255,0.06);">網頁做完自我檢查、截圖</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">大規模爬蟲 scraping（另有工具）</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.7);">E2E 測試、表單流程驗證</div>
+          <div style="padding:8px 16px; color:rgba(255,255,255,0.5); border-left:1px solid rgba(255,255,255,0.06);">需登入且有 2FA 的複雜流程</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PW3 · Playwright MCP: Claude Code vs Codex + 安裝 -->
+  <section class="slide slide-dark" id="s-pw3">
+    <div class="slide-body" style="max-width:960px; zoom:1.15;">
+
+      <p class="slide-eyebrow">MCP · Playwright — 讓 AI 長眼睛</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">安裝 Playwright MCP</h2>
+
+      <!-- Comparison table -->
+      <div class="r" style="margin-top:24px; width:100%;">
+        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
+          <!-- Header -->
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
+          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
+          <!-- Row 1: Type -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">MCP server<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">Microsoft @playwright/mcp</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同一個 MCP（同源）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">跨工具通用</span></div>
+          <!-- Row 2: Install -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝指令</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">claude mcp add playwright<br>npx @playwright/mcp@latest</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">codex mcp add playwright --<br>npx @playwright/mcp@latest</div>
+          <!-- Row 3: Config -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">設定檔</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude.json</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/config.toml<br><span style="font-size:9px; color:rgba(255,255,255,0.4);">[mcp_servers.playwright]</span></div>
+          <!-- Row 4: Prereq -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">前置需求</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Node 20+</div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Node 18+<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">同樣走 npx</span></div>
+          <!-- Row 5: Verify -->
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">驗證</div>
+          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">開 session 打 <span style="font-family:var(--font-mono);">/mcp</span><br><span style="font-size:10px; color:rgba(240,222,158,0.5);">看到 playwright 已連線</span></div>
+          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">同上 <span style="font-family:var(--font-mono);">/mcp</span><br><span style="font-size:10px; color:rgba(255,255,255,0.4);">約 24 個瀏覽器工具</span></div>
+        </div>
+      </div>
+
+      <!-- Install prompts -->
+      <div class="r r-d1" style="margin-top:16px; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝</div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(240,222,158,0.8); line-height:1.7;">
+            claude mcp add playwright<br>npx @playwright/mcp@latest
+          </div>
+        </div>
+        <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
+          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#fff; letter-spacing:0.06em; margin-bottom:8px;">▶ Codex CLI 安裝</div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.7;">
+            codex mcp add playwright --<br>npx @playwright/mcp@latest
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ── Frontend-Design Skill ── -->
 
   <!-- S60 · Frontend-Design: 痛點 Before/After -->
