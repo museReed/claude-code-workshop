@@ -633,8 +633,8 @@
     return (nodes || []).map(node => {
       if (node.folder) {
         return `<div class="tree-node" data-depth="${depth || 0}">
-          <div class="ds-tree-row tree-row folder" data-folder-path="${esc(node.path)}"><span class="ds-tree-caret open">▶</span><span>📁</span><span class="ds-mono">${esc(node.name)}</span></div>
-          <div class="ds-tree-children">${renderTree(node.children || [], (depth || 0) + 1)}</div>
+          <div class="ds-tree-row tree-row folder" data-folder-path="${esc(node.path)}"><span class="ds-tree-caret">▶</span><span>📁</span><span class="ds-mono">${esc(node.name)}</span></div>
+          <div class="ds-tree-children" hidden>${renderTree(node.children || [], (depth || 0) + 1)}</div>
         </div>`;
       }
       return `<div class="ds-tree-row tree-row file ${node.path === activeMaterialPath ? 'active' : ''}" data-file-path="${esc(node.path)}"><span class="ds-tree-caret"></span><span>📄</span><span class="ds-mono">${esc(node.name)}</span></div>`;
@@ -876,8 +876,8 @@
         const caret = row.querySelector('.ds-tree-caret');
         const children = row.parentElement.querySelector(':scope > .ds-tree-children');
         if (!children) return;
-        const open = children.style.display !== 'none';
-        children.style.display = open ? 'none' : 'block';
+        const open = !children.hidden;
+        children.hidden = open;
         caret.classList.toggle('open', !open);
       });
     });
