@@ -12,7 +12,7 @@ window.SETUP_STEPS = [
     analogy: "Antigravity 看起來像一個寫作工作區，旁邊有一位會幫你操作電腦的 AI 助手。今天它的角色是「幫大家準備電腦的人」。",
     kind: "steps",
     commands: [
-      { label: "① 下載並登入", lang: "text", code: "https://antigravity.google", note: "選你的作業系統下載 → 安裝 → 開啟 → 用 Google 帳號登入（免費、免信用卡）。看到編輯器 + 右側 AI 助手面板 = 成功。" },
+      { label: "① 下載並登入", lang: "text", code: "Antigravity IDE", href: "https://antigravity.google/download?_gl=1*1hx65ac*_up*MQ..*_ga*NTI1Mzk4MzkzLjE3ODM3NjAxNDE.*_ga_47V54ZJ3EV*czE3ODM3NjAxNDEkbzEkZzAkdDE3ODM3NjAxNDEkajYwJGwwJGgw", note: "選你的作業系統下載 → 安裝 → 開啟 → 用 Google 帳號登入（免費、免信用卡）。看到編輯器 + 右側 AI 助手面板 = 成功。" },
       { label: "② 下載教材資料夾", lang: "bash", code: `cd ~/Desktop
 git clone https://github.com/museReed/claude-code-workshop-jr-student.git
 cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把上課教材下載到桌面。請先確認 git 可以使用，然後從 https://github.com/museReed/claude-code-workshop-jr-student.git 下載教材到我的 ~/Desktop。完成後請進入 claude-code-workshop-jr-student 資料夾，列出 exercises/ 內容，確認教材已經下載成功。過程中請說明每一步；開始前請先主動問我要用什麼語言說明，不要預設使用繁體中文。如果遇到錯誤，請先停下來告訴我原因與下一步。", note: "這段指令會把 GitHub 上的教材資料夾下載到桌面。最後看到練習資料夾名稱，就代表教材已經到手。" },

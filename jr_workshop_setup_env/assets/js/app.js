@@ -438,13 +438,20 @@
             </div>
           </div>
           <div class="step-content">
-            <div class="ds-step-body">${renderStepText(command.code)}</div>
+            <div class="ds-step-body">${renderStepBody(command)}</div>
             ${command.note ? `<div class="ds-step-note">${renderStepText(command.note)}</div>` : ''}
           </div>
         </div>
       </div>`;
   }
 
+
+  function renderStepBody(command){
+    if (command.href) {
+      return `<a href="${esc(command.href)}" target="_blank" rel="noreferrer">${renderStepText(command.code)}</a>`;
+    }
+    return renderStepText(command.code);
+  }
 
   function renderImageBlock(command,index,canToggle,collapsed){
     return `
