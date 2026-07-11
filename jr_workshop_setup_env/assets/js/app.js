@@ -840,6 +840,11 @@
         const item = button.closest('.faq-item');
         if (!item) return;
         const open = !item.classList.contains('is-open');
+        document.querySelectorAll('.faq-item.is-open').forEach(openItem => {
+          if (openItem === item) return;
+          openItem.classList.remove('is-open');
+          openItem.querySelector('[data-faq-toggle]')?.setAttribute('aria-expanded', 'false');
+        });
         item.classList.toggle('is-open', open);
         button.setAttribute('aria-expanded', String(open));
       });
