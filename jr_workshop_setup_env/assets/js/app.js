@@ -10,7 +10,7 @@
   let duckTimer = null;
   let activeMaterialPath = materials.files['README.md'] ? 'README.md' : Object.keys(materials.files || {})[0];
   const readingDocs = [
-    { id: 'onboarding', title: '課前準備與操作小抄', path: '學生閱讀資料/onboarding.md' },
+    { id: 'onboarding', title: '環境安裝 trouble shooting', path: '學生閱讀資料/onboarding.md' },
     { id: 'faq', title: '課後 FAQ', path: '學生閱讀資料/faq.md' }
   ];
 
@@ -130,10 +130,13 @@
     const body = activeDoc.id === 'faq' ? renderFaqDoc(content) : renderOnboardingDoc(content);
     app.innerHTML = `
       <div class="ds-container reading-layout">
+        <nav class="reading-breadcrumb" aria-label="麵包屑">
+          <a href="#/item/explore-materials">素材瀏覽器</a>
+          <span>/</span>
+          <span>${esc(activeDoc.title)}</span>
+        </nav>
         <section class="hero reading-hero">
-          <span class="ds-pill ds-pill-accent">學員本人讀</span>
           <h1>學員閱讀資料</h1>
-          <p>把課前準備與 FAQ 拆成可操作的卡片；該勾選的用 checklist，該複製的用 terminal，該查找的用 FAQ。</p>
         </section>
         <nav class="reading-tabs" aria-label="學員閱讀資料分類">
           ${readingDocs.map(doc => `<a class="reading-tab ${doc.id === activeDoc.id ? 'current' : ''}" href="#/reading/${encodeURIComponent(doc.id)}">${esc(doc.title)}</a>`).join('')}
@@ -144,21 +147,11 @@
   }
 
   function renderOnboardingDoc(content){
-    const title = firstHeading(content) || '課前準備 + 新手操作小抄';
-    const intro = collectLeadingBlockquote(content);
     const checklist = sectionBetween(content, '## 一、課前 30 分鐘 checklist', '## 二、操作小抄');
     const shortcuts = sectionBetween(content, '## 二、操作小抄', '## 三、卡關自救三步');
     const rescue = sectionFrom(content, '## 三、卡關自救三步');
     return `
       <article class="reading-stack">
-        <section class="ds-card reading-card reading-intro-card">
-          <div class="reading-card-head">
-            <span class="ds-pill">學生閱讀資料/onboarding.md</span>
-            <a class="ds-btn ds-btn-ghost ds-btn-sm" href="#/item/explore-materials">回素材瀏覽器</a>
-          </div>
-          <h1 class="reading-title">${esc(title)}</h1>
-          ${intro ? `<div class="ds-callout reading-lede"><strong>先知道</strong>${renderReaderInlineBlocks(intro)}</div>` : ''}
-        </section>
         ${renderOnboardingChecklist(checklist)}
         ${renderShortcutCards(shortcuts)}
         ${renderRescueFlow(rescue)}
@@ -240,10 +233,6 @@
     return `
       <article class="reading-stack">
         <section class="ds-card reading-card reading-intro-card">
-          <div class="reading-card-head">
-            <span class="ds-pill">學生閱讀資料/faq.md</span>
-            <a class="ds-btn ds-btn-ghost ds-btn-sm" href="#/item/explore-materials">回素材瀏覽器</a>
-          </div>
           <h1 class="reading-title">${esc(title)}</h1>
           ${intro ? `<div class="ds-callout reading-lede"><strong>使用方式</strong>${renderReaderInlineBlocks(intro)}</div>` : ''}
         </section>
