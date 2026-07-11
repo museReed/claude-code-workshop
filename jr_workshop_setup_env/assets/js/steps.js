@@ -88,7 +88,7 @@ codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-
       { label: "GitHub 授權成功畫面", lang: "image", code: "看到 Authentication complete、Configured git protocol、Logged in as ... 這類訊息，就代表 GitHub 已經授權成功，可以回到 Claude Code 繼續。", image: "assets/shots/github-auth-success.png", alt: "GitHub CLI 授權成功的 terminal 畫面" },
       { label: "③ 驗證", lang: "bash", code: "gh repo view --web", agentPrompt: "請幫我確認 GitHub 設定是否成功。請先確認目前在正確的 workshop 資料夾或成果資料夾，然後使用 GitHub CLI 打開目前 repo 的 GitHub 頁面。打開後請告訴我應該看到哪些檔案，才能判斷成果已經成功放到雲端。", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
     ],
-    checklist: ["看到登入成功訊息", "GitHub 出現新的雲端資料夾，而且裡面有檔案"]
+    checklist: ["GitHub 出現新的雲端資料夾，而且裡面有檔案"]
   },
   {
     id: "status-panel",
