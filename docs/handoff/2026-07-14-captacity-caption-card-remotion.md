@@ -55,3 +55,17 @@ cd /Volumes/Muse_AI_Core/video_dub_output/00
 - 底片 `final_tempo_...plain.mp4` 是 60fps，overlay 30fps，ffmpeg overlay 依秒對齊 OK。
 - CODEX_SNAPSHOT_GLOBS 逗號多 glob 只吃第一個（工具限制），review 時另一檔直接讀新檔。
 - Caption chunk 之間有時間空隙會 render null（字幕短暫消失），連續語音無妨。
+
+## 追加進度（session 後段）
+
+- **01 影片完成**：8 張卡從逐字稿新編（Antigravity / Review-driven / 必須勾選(warning) / 安全性(quote) / 兩種 Yes / Markdown 預覽等），已產出靜音版 `video_dub_output/01/final_with_cards_remotion_muted.mp4`。⚠️ 只做結構驗證（檔在 + 音軌=0），**未逐幀視覺確認**——抽 t=131s(warning紅)、t=205s(quote紫) 確認。
+- 01 用 1920x1080（00 是 1736x1080）；`cards-data.json` 加了 `duration` 欄位、Root.tsx `DURATION` 改成資料驅動。
+- **互動 flowchart**：`remotion-cards/flow.html`（codex + frontend-skill 產，自包含，節點可展開），涵蓋整條 flow。
+- **注意：`cards-data.json` 現在是 01 的內容**（覆寫了 00 的）。要重跑 00 需還原 00 版資料（8 卡見上表 / git 無、可從 00 cards.json 重建）。
+
+## 🔴 下一步第一優先：字幕 vs 畫面動作 時間軸錯位（用戶回報）
+
+- **現象**：燒在影片上的字幕跟螢幕上的操作對不上（用戶用 `字幕 vs 畫面動作` 明確指認，非「卡 vs 字幕」也非潤飾問題）。
+- **已排除**：draft.srt / polished.srt / render_plain srt 三條**首尾時間戳完全相同**（0–3.92s 起、6:50.7–6:52.64 止）→ 潤飾步驟沒動時間軸。卡片騎在字幕時間軸，非根因。
+- **懷疑點**：`pipeline.py` 的 tempo / paragraph-anchor 調速步驟（產出 `final_tempo_paragraph_anchor_subtitle_plain.mp4`）——把段落調速對齊配音時，字幕或畫面其一沒同步位移。
+- **下一步**：讀 `pipeline.py` 找 tempo/anchor 邏輯，比對「調速後的畫面時間軸」與「字幕 srt 時間軸」是否同源；先在 01 抓一個明顯錯位的時間點量偏移量。字幕修對後，卡片時間軸要一起重算 + 重渲染。
