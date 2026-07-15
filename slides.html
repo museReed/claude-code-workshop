@@ -2096,147 +2096,185 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
        第六章 · 進階觀念：讓 AI 更聽話
        ══════════════════════════════════════════════════════════ -->
 
-  <!-- AGENDA2 · 下半場地圖 -->
-  <section class="slide slide-warm" id="s68" data-slide="38">
-    <div class="slide-body" style="max-width:860px;">
+  <!-- S68 · CLAUDE.md / AGENTS.md 與 Output style 定義 -->
+  <section class="slide slide-dark" id="s68" data-slide="38">
+    <div class="slide-body" style="max-width:1040px; zoom:1.04;">
 
-      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">下半場的安排</p>
-      <h2 class="slide-title" style="color:#18181B;">下半場地圖</h2>
+      <p class="slide-eyebrow">第六章 · 規則檔基礎</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,56px);">先認識兩份設定檔</h2>
+      <p class="slide-lede" style="margin-top:8px; font-size:clamp(15px,1.35vw,19px); max-width:900px;">
+        它們不是每次都要重寫的 prompt，而是讓 AI Agent 在 session 一開始自動帶入的長期設定。
+      </p>
 
-      <!-- agenda rows -->
-      <div style="margin-top:36px; display:flex; flex-direction:column; width:100%; border-top:1px solid rgba(24,24,27,0.10);">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; width:100%; align-items:stretch;">
+        <div class="r" style="background:#050B17; border:1px solid rgba(125,180,255,0.26); border-radius:18px; padding:20px; display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+            <div style="width:42px; height:42px; border-radius:13px; background:rgba(125,180,255,0.12); display:flex; align-items:center; justify-content:center;">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#9CC4FF" stroke-width="1.8"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4M9 11h6M9 15h6"/></svg>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:#9CC4FF; letter-spacing:0.08em;">背景與規則 (Context & rules)</div>
+              <div style="font-size:19px; color:#fff; font-weight:850; margin-top:3px;">CLAUDE.md (AGENTS.md)</div>
+            </div>
+          </div>
 
-        <!-- Row 1 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">1</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">20 min</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">規則檔 + Skill 觀念</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">CLAUDE.md · User/Project Level · Skill 是什麼</span>
+          <div style="background:rgba(125,180,255,0.07); border-radius:11px; padding:11px 13px; color:#fff; font-size:13px; font-weight:750; line-height:1.5;">
+            定義：告訴 AI Agent「這個專案是什麼、工作時要遵守什麼」。
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px; color:rgba(255,255,255,0.7); font-size:12px; line-height:1.45;">
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#9CC4FF;">專案背景</strong><span>名稱、目標、使用者、重要名詞</span></div>
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#9CC4FF;">工作規則</strong><span>允許與禁止、命名慣例、完成標準</span></div>
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#9CC4FF;">適用範圍</strong><span>Project 或 folder level 的長期 context</span></div>
+          </div>
+
+          <div style="margin-top:auto; padding-top:16px; font-family:var(--font-mono); font-size:10px; color:rgba(156,196,255,0.65);">Claude Code → CLAUDE.md · Codex → AGENTS.md</div>
         </div>
 
-        <!-- Row 2 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">2</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">40 min</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B; white-space:nowrap;">Skill 介紹 + 情境實作</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">Questions · Rename · Handoff · Creator · Frontend-Design</span>
-        </div>
+        <div class="r r-d1" style="background:#050B17; border:1px solid rgba(240,222,158,0.26); border-radius:18px; padding:20px; display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+            <div style="width:42px; height:42px; border-radius:13px; background:rgba(240,222,158,0.12); display:flex; align-items:center; justify-content:center;">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="M12 3v18M3 12h18"/><path d="M7 7h10v10H7z"/></svg>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:#F0DE9E; letter-spacing:0.08em;">回答方式 (Output style)</div>
+              <div style="font-size:19px; color:#fff; font-weight:850; margin-top:3px;">output-style.md (config.toml)</div>
+            </div>
+          </div>
 
-        <!-- Break -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:14px 0; border-bottom:1px solid rgba(24,24,27,0.10); background:rgba(184,144,46,0.06); margin:0 -20px; padding-left:20px; padding-right:20px;">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.12);">—</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.30); white-space:nowrap;">10 min</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:500; color:rgba(24,24,27,0.45);">中場</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.30); text-align:right;">☕ 咖啡</span>
-        </div>
+          <div style="background:rgba(240,222,158,0.07); border-radius:11px; padding:11px 13px; color:#fff; font-size:13px; font-weight:750; line-height:1.5;">
+            定義：告訴 AI Agent「回答要怎麼寫、用什麼格式呈現」。
+          </div>
 
-        <!-- Row 3 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">3</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:#B8902E; white-space:nowrap;">50 min △</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">Skill 打造 + 求職 Pipeline</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">Skill Creator 實作 · cv_jd_tailor · 跑完整求職 pipeline</span>
-        </div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px; color:rgba(255,255,255,0.7); font-size:12px; line-height:1.45;">
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#F0DE9E;">語言</strong><span>繁體中文、English，或雙語格式</span></div>
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#F0DE9E;">結構</strong><span>先講結論、表格、bullet points</span></div>
+            <div style="display:grid; grid-template-columns:92px 1fr; gap:10px;"><strong style="color:#F0DE9E;">語氣</strong><span>簡短白話、正式、適合初學者</span></div>
+          </div>
 
-        <!-- Row 4 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid rgba(24,24,27,0.10);">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">4</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:#B8902E; white-space:nowrap;">40 min △</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">CV → 個人 Landing Page → 上線</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">Frontend-Design · localhost 預覽 · GitHub Pages 發布</span>
+          <div style="margin-top:auto; padding-top:16px; font-family:var(--font-mono); font-size:10px; color:rgba(240,222,158,0.62);">Claude Code → output-style.md · Codex → config.toml</div>
         </div>
-
-        <!-- Row 5 -->
-        <div class="r" style="display:grid; grid-template-columns:36px 110px 1fr auto; align-items:center; gap:20px; padding:18px 0;">
-          <span style="font-family:var(--font-sans); font-size:22px; font-weight:900; color:rgba(24,24,27,0.18);">5</span>
-          <span style="font-family:var(--font-mono); font-size:13px; color:rgba(24,24,27,0.38); white-space:nowrap;">20 min</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(14px,1.3vw,18px); font-weight:700; color:#18181B;">回顧 + Q&A</span>
-          <span style="font-family:var(--font-sans); font-size:clamp(11px,0.9vw,13px); color:rgba(24,24,27,0.45); text-align:right; white-space:nowrap;">六小時帶走了什麼 · 老闆思維 · 開放提問</span>
-        </div>
-
       </div>
+
+      <div class="r r-d2" style="margin-top:14px; width:100%; display:grid; grid-template-columns:1fr auto 1fr auto; gap:12px; align-items:center; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px 16px; box-sizing:border-box;">
+        <span style="font-size:12px; color:#9CC4FF; font-weight:800;">CLAUDE.md / AGENTS.md = 回答要依據什麼</span>
+        <span style="color:rgba(255,255,255,0.28);">＋</span>
+        <span style="font-size:12px; color:#F0DE9E; font-weight:800;">Output style / config.toml = 回答要怎麼呈現</span>
+        <span style="font-size:11px; color:rgba(255,255,255,0.5); white-space:nowrap;">下一頁看差異 →</span>
+      </div>
+
     </div>
   </section>
 
-  <!-- S38 · 規則檔：讓 AI 照你的方式做事 -->
+  <!-- S38 · CLAUDE.md × Output style：長期背景與通用表達 -->
   <section class="slide slide-dark" id="s38" data-slide="39">
-    <div class="slide-body" style="max-width:1000px; zoom:1.1;">
+    <div class="slide-body" style="max-width:1120px; zoom:1.04;">
 
-      <p class="slide-eyebrow">第六章 · 進階觀念</p>
-      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">規則檔的用途</h2>
-      <p class="slide-lede" style="margin-top:8px; font-size:clamp(15px,1.4vw,20px);">
-        沒有規則檔，AI 每次都從零開始猜你要什麼。有了規則檔，它一開工就知道你的風格、規矩、底線。
+      <p class="slide-eyebrow">第六章 · CLAUDE.md × Output style</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">兩份設定，分工不同</h2>
+      <p class="slide-lede" style="margin-top:6px; font-size:clamp(15px,1.4vw,20px);">
+        同一個問題，AI Agent 有沒有長期背景與輸出規則，結果會差很多。
       </p>
 
-      <!-- Before / After visual diagram -->
-      <div class="r" style="display:grid; grid-template-columns:1fr 80px 1fr; gap:16px; margin-top:20px; width:100%; align-items:stretch;">
-        <div style="background:#050B17; border:1px solid rgba(248,113,113,0.22); border-radius:18px; padding:18px 20px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:42px;height:42px;border-radius:14px;background:rgba(248,113,113,0.12);display:flex;align-items:center;justify-content:center;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="1.8"><path d="M4 4l16 16M20 4 4 20"/></svg>
-            </div>
-            <div>
-              <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:#F87171; letter-spacing:0.08em; text-transform:uppercase;">沒有規則檔</div>
-              <div style="font-size:15px;color:#fff;font-weight:800;margin-top:2px;">AI 自己猜風格</div>
-            </div>
+      <div class="r" style="margin-top:13px; width:100%; display:grid; grid-template-columns:150px 1fr; align-items:center; gap:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:11px 16px; box-sizing:border-box;">
+        <span style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:#F0DE9E; letter-spacing:0.08em; white-space:nowrap;">使用者輸入 (User input)</span>
+        <span style="font-size:14px; color:#fff; font-weight:700;">把這份會議記錄整理成給主管看的摘要</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:0.74fr 2.26fr; gap:12px; margin-top:11px; width:100%; align-items:stretch;">
+        <div class="r r-d1" style="background:rgba(246,183,183,0.045); border:1px solid rgba(246,183,183,0.2); border-radius:16px; padding:15px; display:flex; flex-direction:column;">
+          <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#F6B7B7; letter-spacing:0.08em;">沒有規則檔 (Without context files)</div>
+          <div style="margin-top:12px; padding:12px; background:rgba(255,255,255,0.035); border-radius:10px; color:rgba(255,255,255,0.64); font-size:11px; line-height:1.65;">
+            這次會議討論了付款、登入和團隊安排。部分工作已完成，另有項目需要跟進。建議持續確認進度，避免影響時程。
           </div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-            <div style="background:rgba(248,113,113,0.10);border:1px solid rgba(248,113,113,0.16);border-radius:14px;padding:14px;text-align:center;">
-              <div style="font-size:28px;font-weight:900;color:#F87171;line-height:1;">2000</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.62);margin-top:7px;">字長篇大論</div>
-            </div>
-            <div style="background:rgba(248,113,113,0.10);border:1px solid rgba(248,113,113,0.16);border-radius:14px;padding:14px;text-align:center;">
-              <div style="font-size:27px;font-weight:900;color:#F87171;line-height:1;">多</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.62);margin-top:7px;">emoji 與裝飾</div>
-            </div>
-            <div style="background:rgba(248,113,113,0.10);border:1px solid rgba(248,113,113,0.16);border-radius:14px;padding:14px;text-align:center;">
-              <div style="font-size:27px;font-weight:900;color:#F87171;line-height:1;">難</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.62);margin-top:7px;">術語太多</div>
-            </div>
-            <div style="background:rgba(248,113,113,0.10);border:1px solid rgba(248,113,113,0.16);border-radius:14px;padding:14px;text-align:center;">
-              <div style="font-size:27px;font-weight:900;color:#F87171;line-height:1;">重來</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.62);margin-top:7px;">每次都要提醒</div>
-            </div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:14px;">
+            <span style="padding:5px 7px; border-radius:999px; background:rgba(246,183,183,0.09); color:rgba(246,183,183,0.78); font-size:9px;">專案名稱模糊</span>
+            <span style="padding:5px 7px; border-radius:999px; background:rgba(246,183,183,0.09); color:rgba(246,183,183,0.78); font-size:9px;">status 不一致</span>
+            <span style="padding:5px 7px; border-radius:999px; background:rgba(246,183,183,0.09); color:rgba(246,183,183,0.78); font-size:9px;">格式不固定</span>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-          <div style="width:54px;height:54px;border-radius:18px;background:rgba(240,222,158,0.12);border:1px solid rgba(240,222,158,0.20);display:flex;align-items:center;justify-content:center;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="M7 4h10v16H7z"/><path d="M9.5 8h5M9.5 12h5M9.5 16h3"/></svg>
+
+        <div class="r r-d2" style="background:#050B17; border:1px solid rgba(125,180,255,0.24); border-radius:16px; padding:12px; display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:center; gap:8px; margin:0 2px 9px;">
+            <span style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#9CC4FF; letter-spacing:0.08em;">有規則檔 (With context files)</span>
+            <span style="height:1px; flex:1; background:rgba(125,180,255,0.15);"></span>
+            <span style="font-size:10px; color:rgba(255,255,255,0.5);">輸入 → AI Agent 結合設定 → 主管摘要</span>
           </div>
-          <div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:#F0DE9E;text-align:center;line-height:1.4;">OUTPUT<br>STYLE</div>
-          <div style="font-size:26px;color:#F0DE9E;line-height:1;">→</div>
-        </div>
-        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.24); border-radius:18px; padding:18px 20px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:42px;height:42px;border-radius:14px;background:rgba(240,222,158,0.12);display:flex;align-items:center;justify-content:center;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="m5 13 4 4L19 7"/></svg>
+
+          <div style="display:grid; grid-template-columns:1.2fr 34px 1fr; gap:8px; align-items:stretch; flex:1;">
+            <div style="border:1px solid rgba(125,180,255,0.2); border-radius:12px; padding:12px; display:flex; flex-direction:column;">
+              <div style="display:flex; align-items:center; gap:9px; margin-bottom:9px;">
+                <div style="width:34px; height:34px; border-radius:11px; background:rgba(125,180,255,0.11); display:flex; align-items:center; justify-content:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9CC4FF" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg>
+                </div>
+                <div>
+                  <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#9CC4FF; letter-spacing:0.08em;">AI AGENT</div>
+                  <div style="font-size:13px; color:#fff; font-weight:800; margin-top:2px;">讀取並結合兩份設定</div>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:1;">
+                <div style="background:rgba(125,180,255,0.055); border-radius:10px; padding:10px;">
+                  <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#9CC4FF;">CLAUDE.md (AGENTS.md)</div>
+                  <div style="font-size:11px; color:#fff; font-weight:800; margin:5px 0 7px;">提供 AI Agent 長期工作背景</div>
+                  <div style="display:flex; flex-direction:column; gap:6px; color:rgba(255,255,255,0.67); font-size:9.5px; line-height:1.4;">
+                    <div style="display:flex; gap:6px;"><span style="color:#9CC4FF;">●</span><span>這個專案名稱叫做 AI Workshop Go Go Go 😃</span></div>
+                    <div style="display:flex; gap:6px;"><span style="color:#9CC4FF;">●</span><span>專案裡的 tasks 有多種 status：已正式上線、測試延後、待確認</span></div>
+                    <div style="display:flex; gap:6px;"><span style="color:#9CC4FF;">●</span><span>不補充原始資料沒有的資訊</span></div>
+                  </div>
+                </div>
+
+                <div style="background:rgba(240,222,158,0.055); border-radius:10px; padding:10px;">
+                  <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#F0DE9E;">outputstyle.md (config.toml)</div>
+                  <div style="font-size:11px; color:#fff; font-weight:800; margin:5px 0 7px;">統一回答方式</div>
+                  <div style="display:flex; flex-direction:column; gap:6px; color:rgba(255,255,255,0.67); font-size:9.5px; line-height:1.4;">
+                    <div style="display:flex; gap:6px;"><span style="color:#F0DE9E;">●</span><span>項目使用繁體中文 (English)</span></div>
+                    <div style="display:flex; gap:6px;"><span style="color:#F0DE9E;">●</span><span>第一行先給結論</span></div>
+                    <div style="display:flex; gap:6px;"><span style="color:#F0DE9E;">●</span><span>簡短白話，並列資訊用表格</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase;">有規則檔</div>
-              <div style="font-size:15px;color:#fff;font-weight:800;margin-top:2px;">AI 自動套用你的風格</div>
+
+            <div style="display:flex; align-items:center; justify-content:center;">
+              <svg width="32" height="24" viewBox="0 0 34 24" fill="none" aria-hidden="true">
+                <path d="M2 12h27M22 5l7 7-7 7" stroke="#F0DE9E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div style="background:rgba(240,222,158,0.07); border:1px solid rgba(240,222,158,0.22); border-radius:12px; padding:11px; display:flex; flex-direction:column;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;">
+                <div>
+                  <div style="font-family:var(--font-mono); font-size:8.5px; font-weight:800; color:rgba(240,222,158,0.62); letter-spacing:0.08em;">主管摘要 (Executive summary)</div>
+                  <div style="font-size:11px; color:#fff; font-weight:800; margin-top:3px;">AI Workshop Go Go Go 😃 專案週報</div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5"/></svg>
+              </div>
+              <div style="display:grid; grid-template-columns:1.3fr 1fr; border:1px solid rgba(255,255,255,0.1); border-radius:8px; overflow:hidden; font-size:8.5px; line-height:1.25;">
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.46); background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08);">項目 (Item)</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.46); background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.08);">狀態 (Status)</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74); border-bottom:1px solid rgba(255,255,255,0.07);">課程頁面 (Course page)</div>
+                <div style="padding:4px 6px; color:#F0DE9E; border-bottom:1px solid rgba(255,255,255,0.07); border-left:1px solid rgba(255,255,255,0.07);">已正式上線</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74); border-bottom:1px solid rgba(255,255,255,0.07);">登入功能 (Login feature)</div>
+                <div style="padding:4px 6px; color:#F6B7B7; border-bottom:1px solid rgba(255,255,255,0.07); border-left:1px solid rgba(255,255,255,0.07);">測試延後</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74); border-bottom:1px solid rgba(255,255,255,0.07);">講義內容 (Workshop materials)</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.58); border-bottom:1px solid rgba(255,255,255,0.07); border-left:1px solid rgba(255,255,255,0.07);">待確認</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74); border-bottom:1px solid rgba(255,255,255,0.07);">報名流程 (Registration flow)</div>
+                <div style="padding:4px 6px; color:#F0DE9E; border-bottom:1px solid rgba(255,255,255,0.07); border-left:1px solid rgba(255,255,255,0.07);">已正式上線</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74); border-bottom:1px solid rgba(255,255,255,0.07);">場地設備 (Venue setup)</div>
+                <div style="padding:4px 6px; color:#F6B7B7; border-bottom:1px solid rgba(255,255,255,0.07); border-left:1px solid rgba(255,255,255,0.07);">測試延後</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.74);">修正負責人 (Fix owner)</div>
+                <div style="padding:4px 6px; color:rgba(255,255,255,0.58); border-left:1px solid rgba(255,255,255,0.07);">待確認</div>
+              </div>
             </div>
           </div>
-          <div style="background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.16);border-radius:14px;padding:16px;">
-            <div style="font-size:14px;color:#fff;font-weight:800;margin-bottom:10px;">三週共 9 次會議，關鍵行動如下：</div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:rgba(255,255,255,0.76);font-size:13px;"><span style="width:8px;height:8px;border-radius:50%;background:#F0DE9E;"></span>Week 1：完成 X</div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:rgba(255,255,255,0.76);font-size:13px;"><span style="width:8px;height:8px;border-radius:50%;background:#F0DE9E;"></span>Week 2：啟動 Y</div>
-            <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.76);font-size:13px;"><span style="width:8px;height:8px;border-radius:50%;background:#F0DE9E;"></span>待確認：負責人</div>
-          </div>
-          <div style="font-size:11px; color:rgba(240,222,158,0.55); margin-top:10px;">結論先行、簡潔、白話——每次都自動套用</div>
         </div>
       </div>
 
-      <!-- Output Style highlight -->
-      <div class="r r-d1" style="margin-top:14px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:12px; padding:16px 20px;">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-          <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/palette.svg" style="width:20px;height:20px;filter:invert(1) sepia(0.4);opacity:0.8;">
-          <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em;">OUTPUT-STYLE.MD — 控制 AI 的回覆風格</span>
-        </div>
-        <div style="font-size:12px; color:rgba(255,255,255,0.65); line-height:1.7;">
-          結論先行 · 重點用 bullet · 比較用表格 · 不用 emoji · 術語先翻白話再解釋 · 回答中等長度不灌水
-        </div>
+      <div class="r r-d3" style="margin-top:10px; width:100%; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.035); border-left:3px solid rgba(255,255,255,0.20); border-radius:0 10px 10px 0; padding:9px 13px; box-sizing:border-box;">
+        <span style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:rgba(255,255,255,0.42); letter-spacing:0.08em; white-space:nowrap;">和 Skill 的差別</span>
+        <span style="font-size:10.5px; color:rgba(255,255,255,0.64);">如果是在描述「先擷取 → 再分類 → 最後檢查」的任務步驟，才是 Skill。</span>
       </div>
-
 
     </div>
   </section>
@@ -2364,7 +2402,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
       <!-- Life analogy -->
       <div class="r" style="margin-top:16px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:12px; padding:14px 18px;">
         <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.7;">
-          🌰 Skill 像一本<strong style="color:#F0DE9E;">食譜</strong>——把你打磨過的流程寫成固定步驟，下次遇到同類任務直接照著做。AI 開場只讀每本食譜的<strong style="color:#F0DE9E;">書名＋一句簡介</strong>，被觸發時才翻開全文——所以裝太多 skill 的問題是「挑錯書」的機率變高，不是塞爆 context。
+          🌰 Skill 像一本<strong style="color:#F0DE9E;">食譜</strong>——把你打磨過的流程寫成固定步驟，下次遇到同類任務直接照著做。<br>session 一開始只讀每本食譜的<strong style="color:#F0DE9E;">書名＋一句簡介</strong>，被觸發時才翻開全文——所以裝太多 skill 的問題是「挑錯書」的機率變高，不是塞爆 context。
         </div>
       </div>
 
@@ -2457,39 +2495,42 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
       <h2 class="slide-title" style="color:#18181B;">連上 GitHub 工作流</h2>
       <p class="slide-lede" style="margin-top:8px;color:#555;max-width:880px;">GitHub 可以先想成「工程師的 Instagram」：不是放自拍，而是放作品、版本紀錄和可以分享給別人看的成果。</p>
       <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1.1fr;gap:24px;width:100%;align-items:stretch;">
-        <div class="r" style="background:#0E1A2F;border-radius:22px;padding:18px 20px;color:#fff;display:flex;flex-direction:column;justify-content:center;">
+        <div class="r" style="background:#0E1A2F;border-radius:22px;padding:20px;color:#fff;display:flex;flex-direction:column;align-self:start;">
           <div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Today workflow · 15–20 min</div>
-          <p style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.70);margin:0 0 12px;">把作品從本機資料夾，變成 GitHub 上可保存、可分享的版本。</p>
+          <p style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.70);margin:0 0 16px;">把作品從本機資料夾，變成 GitHub 上可保存、可分享的版本。</p>
 
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:9px 12px;">
-              <div style="width:34px;height:34px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;font-weight:900;color:#F0DE9E;">01</div>
-              <div><strong style="font-size:15px;color:#fff;">repo</strong><p style="margin:2px 0 0;color:rgba(255,255,255,0.64);font-size:12px;line-height:1.3;">建立作品資料夾</p></div>
-              <div style="color:rgba(240,222,158,0.55);font-size:18px;">↓</div>
+          <div style="display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;gap:5px;align-items:stretch;">
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:11px 10px;min-width:0;">
+              <div style="width:30px;height:30px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:900;color:#F0DE9E;margin-bottom:9px;">01</div>
+              <strong style="font-size:15px;color:#fff;">repo</strong>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.64);font-size:10.5px;line-height:1.35;">建立作品資料夾</p>
             </div>
-            <div style="display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:9px 12px;">
-              <div style="width:34px;height:34px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;font-weight:900;color:#F0DE9E;">02</div>
-              <div><strong style="font-size:15px;color:#fff;">commit</strong><p style="margin:2px 0 0;color:rgba(255,255,255,0.64);font-size:12px;line-height:1.3;">做一次可回頭的存檔</p></div>
-              <div style="color:rgba(240,222,158,0.55);font-size:18px;">↓</div>
+            <div style="display:flex;align-items:center;justify-content:center;color:rgba(240,222,158,0.65);font-size:18px;">→</div>
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:11px 10px;min-width:0;">
+              <div style="width:30px;height:30px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:900;color:#F0DE9E;margin-bottom:9px;">02</div>
+              <strong style="font-size:15px;color:#fff;">commit</strong>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.64);font-size:10.5px;line-height:1.35;">做一次可回頭的存檔</p>
             </div>
-            <div style="display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:9px 12px;">
-              <div style="width:34px;height:34px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;font-weight:900;color:#F0DE9E;">03</div>
-              <div><strong style="font-size:15px;color:#fff;">push</strong><p style="margin:2px 0 0;color:rgba(255,255,255,0.64);font-size:12px;line-height:1.3;">把本機成果送上 GitHub</p></div>
-              <div style="color:rgba(240,222,158,0.55);font-size:18px;">↓</div>
+            <div style="display:flex;align-items:center;justify-content:center;color:rgba(240,222,158,0.65);font-size:18px;">→</div>
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:11px 10px;min-width:0;">
+              <div style="width:30px;height:30px;border-radius:50%;background:rgba(240,222,158,0.16);border:1px solid rgba(240,222,158,0.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:900;color:#F0DE9E;margin-bottom:9px;">03</div>
+              <strong style="font-size:15px;color:#fff;">push</strong>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.64);font-size:10.5px;line-height:1.35;">把成果送上 GitHub</p>
             </div>
-            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;background:rgba(46,125,91,0.18);border:1px solid rgba(74,222,128,0.26);border-radius:14px;padding:9px 12px;">
-              <div style="width:34px;height:34px;border-radius:50%;background:rgba(74,222,128,0.14);border:1px solid rgba(74,222,128,0.30);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;font-weight:900;color:#86EFAC;">✓</div>
-              <div><strong style="font-size:15px;color:#fff;">驗收</strong><p style="margin:2px 0 0;color:rgba(255,255,255,0.70);font-size:12px;line-height:1.3;">瀏覽器看到 repo 裡有檔案</p></div>
+            <div style="display:flex;align-items:center;justify-content:center;color:rgba(240,222,158,0.65);font-size:18px;">→</div>
+            <div style="background:rgba(46,125,91,0.18);border:1px solid rgba(74,222,128,0.26);border-radius:14px;padding:11px 10px;min-width:0;">
+              <div style="width:30px;height:30px;border-radius:50%;background:rgba(74,222,128,0.14);border:1px solid rgba(74,222,128,0.30);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:900;color:#86EFAC;margin-bottom:9px;">✓</div>
+              <strong style="font-size:15px;color:#fff;">驗收</strong>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.70);font-size:10.5px;line-height:1.35;">repo 裡看得到檔案</p>
             </div>
           </div>
-
-          <div style="margin-top:10px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.18);border-radius:12px;padding:9px 10px;color:#F0DE9E;font-size:11px;line-height:1.4;">檢查點：repo 名稱、公開/私有、是否誤放個資或 secrets。</div>
         </div>
         <div class="r" style="display:flex;flex-direction:column;justify-content:center;gap:12px;">
           <div style="background:rgba(14,26,47,0.06);border:1px solid rgba(14,26,47,0.08);border-radius:16px;padding:12px 14px;">
             <div style="font-family:var(--font-mono);font-size:10px;font-weight:900;color:#B8902E;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Public portfolio</div>
             <p style="font-size:13px;line-height:1.45;color:#555;margin:0;">大家可以搜尋、收藏、追蹤你的 repo；非工程背景也能用它展示作品與學習紀錄。</p>
           </div>
+          <div style="background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.20);border-radius:12px;padding:9px 12px;color:#6F5717;font-size:11px;line-height:1.4;">檢查點：repo 名稱、公開/私有、是否誤放個資或 secrets。</div>
           <img src="assets/github-skills-search-results.png" alt="GitHub 熱門 repositories 搜尋結果截圖" onclick="var lb=document.getElementById('s20-github-lightbox');lb.style.display='flex';" title="點擊放大" style="width:100%;max-height:450px;object-fit:contain;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,0.18);cursor:zoom-in;">
         </div>
       </div>
@@ -2592,18 +2633,18 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：幫我規劃三天東京行程<br>
-              <span style="color:#F87171;">AI：Day 1：淺草寺→晴空塔→秋葉原…</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（沒問你預算、住哪、有沒有帶小孩）</span>
+              你：幫我規劃新品上市 marketing campaign<br>
+              <span style="color:#F87171;">AI：先發 Instagram、找 KOL、再投廣告…</span><br>
+              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（沒問 target audience、budget、KPI）</span>
             </div>
           </div>
           <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：幫我規劃三天東京行程（大概知道想去哪幾區），用 /structured-questions 向我確認行程安排前你需要的細節<br>
-              <span style="color:#F0DE9E;">AI：要幫你排之前，先確認幾個會影響行程的事：</span><br>
-              <span style="color:#F0DE9E;">☐ 預算：省錢 / 中等 / 不設限？</span><br>
-              <span style="color:#F0DE9E;">☐ 同行：一個人 / 情侶 / 帶小孩？</span>
+              你：幫我規劃新品上市 marketing campaign（已有產品定位與 launch date），用 /structured-questions 向我確認規劃前需要的細節<br>
+              <span style="color:#F0DE9E;">AI：開始規劃前，先確認幾個會影響 campaign 的事：</span><br>
+              <span style="color:#F0DE9E;">☐ 目標：brand awareness / leads / sales？</span><br>
+              <span style="color:#F0DE9E;">☐ 對象：學生 / young professionals / B2B？</span>
             </div>
           </div>
         </div>
@@ -2626,8 +2667,8 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：我的網站速度很慢，怎麼辦？<br>
-              <span style="color:#F87171;">AI：你應該用 CDN 加速…（寫了 2000 字）</span><br>
+              你：我的 IG 最近觸及很低，怎麼辦？<br>
+              <span style="color:#F87171;">AI：你應該每天發 Reels…（直接排了一個月）</span><br>
               <span style="color:rgba(255,255,255,0.3); font-size:9px;">（直接挑了一個方案，你不知道還有別的）</span>
             </div>
           </div>
@@ -2635,9 +2676,9 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
               <span style="color:#F0DE9E;">AI：有三個方向，我推薦 B：</span><br>
-              <span style="color:#F0DE9E;">A. CDN — 快但要花錢</span><br>
-              <span style="color:#F0DE9E;">B. 圖片壓縮 — 免費且效果最大 ⭐</span><br>
-              <span style="color:#F0DE9E;">C. 程式碼優化 — 需要技術能力</span>
+              <span style="color:#F0DE9E;">A. 增加 Reels — 觸及快但製作成本高</span><br>
+              <span style="color:#F0DE9E;">B. 優化內容主題 — 成本低、先找有效題材 ⭐</span><br>
+              <span style="color:#F0DE9E;">C. 投放廣告 — 見效快但需要 budget</span>
             </div>
           </div>
         </div>
@@ -2650,8 +2691,8 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              AI 想釐清需求，但一次丟出：<br>
-              <span style="color:#F87171;">「你的目標是什麼？預算多少？時間呢？技術棧有偏好嗎？要支援多語言嗎？部署在哪？…」</span><br>
+              AI 想釐清社群經營需求，但一次丟出：<br>
+              <span style="color:#F87171;">「目標是什麼？經營哪個平台？target audience？每週發幾篇？內容主題？語氣？budget？KPI？…」</span><br>
               <span style="color:rgba(255,255,255,0.3); font-size:9px;">（12 個問題塞在一段文字裡，你不知道從哪答起）</span>
             </div>
           </div>
@@ -2659,9 +2700,9 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
             <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
               <span style="color:#F0DE9E;">AI：我需要確認 3 件事：</span><br>
-              <span style="color:#F0DE9E;">☐ 預算：[省錢] [中等] [不設限]</span><br>
-              <span style="color:#F0DE9E;">☐ 規模：[MVP] [正式產品]</span><br>
-              <span style="color:#F0DE9E;">☐ 時程：[1 週] [1 月] [3 月]</span><br>
+              <span style="color:#F0DE9E;">☐ 目標：[品牌曝光] [互動] [名單]</span><br>
+              <span style="color:#F0DE9E;">☐ 平台：[IG] [LinkedIn] [TikTok]</span><br>
+              <span style="color:#F0DE9E;">☐ 節奏：[每週 3 篇] [每日] [campaign 制]</span><br>
               <span style="color:rgba(255,255,255,0.3); font-size:9px;">（結構化選項，點選就好，不用打字）</span>
             </div>
           </div>
