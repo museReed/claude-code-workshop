@@ -3357,11 +3357,14 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
       <h2 style="font-size:clamp(24px,3vw,40px);font-weight:800;color:#1D1D1F;margin:0;">貼上 Prompt，建立 CV-JD Tailoring Skill</h2>
       <div style="background:#0E1A2F;border-radius:16px;padding:22px;width:100%;box-sizing:border-box;">
         <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;margin-bottom:10px;">Create prompt</div>
-        <p style="font-family:var(--font-mono);font-size:13px;color:#F0DE9E;line-height:1.75;margin:0;">我想做一個叫 <strong>cv_jd_tailor</strong> 的 skill。它的功能是：讀取一份 CV 和一份目標 JD，自動完成：Step 1 拆解 JD 要求；Step 2 對照 CV 找 gap；Step 3 只改有證據支撐的 bullet；Step 4 產出 tailored_cv.md 與 proof_checklist.md。請用 structured-questions 先問我必要細節，並確保 skill 永遠不要編造不存在的經歷。</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;">
-        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:16px;"><strong>測試素材</strong><p style="margin:6px 0 0;color:#555;">cv_draft.md + job_description.md</p></div>
-        <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:16px;"><strong>不滿意時</strong><p style="margin:6px 0 0;color:#555;">用 Improve 模式要求它改輸出格式或檢查規則。</p></div>
+        <div style="font-family:var(--font-mono);font-size:13px;color:#F0DE9E;line-height:1.7;">我想做一個叫 <strong>cv_jd_tailor</strong> 的 skill。它的功能是：讀取一份 CV 和一份目標 JD，自動完成：</div>
+        <ul style="list-style:none;margin:12px 0;padding:0;display:grid;gap:6px;font-family:var(--font-mono);font-size:13px;line-height:1.55;color:#F0DE9E;">
+          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 1</strong>拆解 JD 要求</li>
+          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 2</strong>對照 CV 找 gap</li>
+          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 3</strong>只改有證據支撐的 bullet</li>
+          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 4</strong>產出 tailored_cv.md 與 proof_checklist.md</li>
+        </ul>
+        <div style="font-family:var(--font-mono);font-size:13px;color:#F0DE9E;line-height:1.7;">請用 structured-questions 先問我必要細節，並確保 skill 永遠不要編造不存在的經歷。</div>
       </div>
     </div>
   </section>
