@@ -2586,7 +2586,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         </div>
 
         <!-- Unofficial -->
-        <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:18px 20px;">
+        <button type="button" aria-haspopup="dialog" aria-controls="s40-community-skill-modal" aria-label="查看 GitHub 上的社群 Skill 搜尋結果" onclick="var m=document.getElementById('s40-community-skill-modal');m.style.display='flex';m.querySelector('[data-close]').focus();" onmouseenter="this.style.borderColor='rgba(240,222,158,0.48)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'" style="appearance:none;width:100%;background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:18px 20px;color:inherit;font:inherit;text-align:left;cursor:zoom-in;transition:transform 180ms ease,border-color 180ms ease;">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
             <img src="https://cdn.jsdelivr.net/npm/lucide-static/icons/users.svg" style="width:20px;height:20px;filter:invert(1);opacity:0.8;">
             <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:#fff; letter-spacing:0.06em;">社群 / 自建 Skill</span>
@@ -2599,7 +2599,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
             <code style="font-family:var(--font-mono); font-size:11px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:6px 12px; color:rgba(255,255,255,0.75); display:block;">GitHub → 看 ⭐ 數量、先讀原始碼</code>
           </div>
           <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-top:10px;">原則：不熟的 skill 先看再裝</div>
-        </div>
+        </button>
       </div>
 
       <!-- Security warning -->
@@ -2615,6 +2615,12 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         </div>
       </div>
 
+    </div>
+    <div id="s40-community-skill-modal" role="dialog" aria-modal="true" aria-label="GitHub 社群 Skill 搜尋結果" tabindex="-1" onclick="this.style.display='none'" onkeydown="if(event.key==='Escape'){this.style.display='none'}" style="display:none;position:fixed;inset:0;z-index:6000;background:rgba(5,11,23,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:44px;cursor:zoom-out;">
+      <div onclick="event.stopPropagation()" style="position:relative;max-width:92vw;max-height:88vh;">
+        <button type="button" data-close onclick="document.getElementById('s40-community-skill-modal').style.display='none'" aria-label="關閉" style="position:absolute;right:-18px;top:-18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.24);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;cursor:pointer;">×</button>
+        <img src="assets/github-skill-search-popup.png" alt="GitHub 社群 Skill 的搜尋結果，顯示 repository 星號數與最近更新時間" style="display:block;max-width:92vw;max-height:88vh;object-fit:contain;border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,0.55);border:1px solid rgba(240,222,158,0.22);">
+      </div>
     </div>
   </section>
 
