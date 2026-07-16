@@ -2336,6 +2336,61 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+  <!-- Output style · 回答規格 -->
+  <section class="slide slide-dark" id="s38-output-style" data-slide="39c">
+    <div class="slide-body" style="max-width:1040px;zoom:1.06;">
+      <p class="slide-eyebrow">第六章 · Output style</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,56px);">Output style 是 AI 的回答規格</h2>
+      <p class="slide-lede" style="margin-top:8px;font-size:clamp(15px,1.4vw,20px);">它不改變 AI 知道什麼，只決定答案怎麼呈現。</p>
+      <div class="r" style="display:grid;grid-template-columns:0.9fr 80px 1.45fr;gap:18px;align-items:stretch;margin-top:24px;">
+        <div style="padding:25px 23px;border-radius:18px;background:#050B17;border:1px solid rgba(125,180,255,0.25);display:flex;flex-direction:column;justify-content:center;">
+          <div style="font-size:12px;color:#9CC4FF;font-weight:800;letter-spacing:0.05em;">AI 已經知道</div>
+          <div style="font-size:23px;line-height:1.35;color:#fff;font-weight:850;margin-top:9px;">專案背景<br>任務內容<br>工作規則</div>
+          <div style="font-size:12px;line-height:1.65;color:rgba(255,255,255,0.58);margin-top:16px;">這些由 CLAUDE.md 或 AGENTS.md 提供。</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;font-size:34px;color:#F0DE9E;">→</div>
+        <div style="padding:23px 24px;border-radius:18px;background:rgba(240,222,158,0.07);border:1px solid rgba(240,222,158,0.28);">
+          <div style="font-size:13px;color:#F0DE9E;font-weight:800;letter-spacing:0.05em;">Output style 決定</div>
+          <div style="display:grid;grid-template-columns:112px 1fr;gap:14px 18px;margin-top:19px;font-size:15px;line-height:1.45;">
+            <strong style="color:#F0DE9E;">語言</strong><span style="color:rgba(255,255,255,0.76);">繁體中文、English，或雙語</span>
+            <strong style="color:#F0DE9E;">結構</strong><span style="color:rgba(255,255,255,0.76);">先講結論、用表格、固定段落</span>
+            <strong style="color:#F0DE9E;">語氣</strong><span style="color:rgba(255,255,255,0.76);">簡短白話、正式、適合初學者</span>
+            <strong style="color:#F0DE9E;">長度</strong><span style="color:rgba(255,255,255,0.76);">一頁摘要、三點重點，或完整報告</span>
+          </div>
+          <div style="margin-top:23px;padding:12px 14px;border-radius:10px;background:rgba(240,222,158,0.1);font-size:13px;line-height:1.55;color:#fff;"><strong style="color:#F0DE9E;">一句話：</strong>讓每次回答都像同一個團隊成員寫的。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="s38-output-example" data-slide="39d">
+    <div class="slide-body" style="max-width:1060px;zoom:1.02;">
+      <p class="slide-eyebrow">第六章 · Output style</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,56px);">範例：讓 AI 用你要的格式回答</h2>
+      <p class="slide-lede" style="margin-top:8px;font-size:clamp(15px,1.4vw,20px);">同一份會議記錄，加上回答規格後，輸出就能直接交付。</p>
+      <div class="r" style="display:grid;grid-template-columns:1fr 1.08fr;gap:18px;margin-top:22px;align-items:stretch;">
+        <div style="padding:20px 22px;border-radius:16px;background:#050B17;border:1px solid rgba(240,222,158,0.26);font-family:var(--font-mono);font-size:12px;line-height:1.7;color:rgba(255,255,255,0.75);">
+          <div style="color:#F0DE9E;font-weight:800;"># output-style.md</div>
+          <div style="margin-top:12px;"><span style="color:#9CC4FF;">語言：</span>繁體中文</div>
+          <div><span style="color:#9CC4FF;">順序：</span>先講結論，再列重點</div>
+          <div><span style="color:#9CC4FF;">結構：</span>決策 / 進度 / 待辦</div>
+          <div><span style="color:#9CC4FF;">語氣：</span>給主管看的簡短摘要</div>
+          <div><span style="color:#9CC4FF;">格式：</span>每段不超過兩句</div>
+          <div style="margin-top:21px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);font-family:var(--font-body);font-size:13px;line-height:1.55;color:rgba(255,255,255,0.58);">任務：把今天的產品會議記錄整理成摘要。</div>
+        </div>
+        <div style="padding:20px 22px;border-radius:16px;background:rgba(240,222,158,0.07);border:1px solid rgba(240,222,158,0.28);">
+          <div style="font-size:12px;color:#F0DE9E;font-weight:800;letter-spacing:0.05em;">AI 的輸出</div>
+          <div style="font-size:19px;color:#fff;font-weight:850;margin-top:13px;">結論：登入重設功能延後一週上線</div>
+          <div style="display:grid;gap:12px;margin-top:18px;font-size:13px;line-height:1.58;color:rgba(255,255,255,0.73);">
+            <div><strong style="color:#F0DE9E;">決策</strong><br>本週優先完成付款流程修正，登入重設改至下週發布。</div>
+            <div><strong style="color:#F0DE9E;">進度</strong><br>付款流程已完成 80%，等待法務確認新的退款文字。</div>
+            <div><strong style="color:#F0DE9E;">待辦</strong><br>產品團隊週三前確認文案；工程團隊完成測試後回報結果。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- S39 · 規則檔：不同 Agent 對照與安裝 -->
   <section class="slide slide-dark" id="s38b" data-slide="40">
     <div class="slide-body" style="max-width:1000px; zoom:1.1;">
