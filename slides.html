@@ -47,6 +47,11 @@ html, body {
   pointer-events: auto;
 }
 
+/* Retained source-only slides must never participate in the deck layout. */
+.slide-legacy {
+  display: none !important;
+}
+
 /* ── Slide types ── */
 .slide-dark  { background: var(--navy-deep); color: #fff; }
 .slide-navy  { background: var(--navy);      color: #fff; }
