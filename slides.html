@@ -2490,37 +2490,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
-  <section class="slide slide-dark" id="s40a" data-slide="42a">
-    <div class="slide-body" style="max-width:980px; zoom:1.06;">
-      <p class="slide-eyebrow">複製貼上給 AI Agent</p>
-      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">安全搜尋 Skill Prompt</h2>
-      <p class="slide-lede" style="margin-top:8px; font-size:clamp(15px,1.4vw,20px); max-width:760px;">請學生直接貼給 AI 的內容。整段複製，不要只複製其中一句。</p>
-
-      <div class="r" style="margin-top:24px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:18px; overflow:hidden; box-shadow:0 22px 50px rgba(0,0,0,0.24);">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
-          </div>
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Copy this prompt</div>
-        </div>
-        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:22px 26px; border-radius:0; font-size:14px; line-height:1.72; overflow-x:auto; margin:0; white-space:pre-wrap;">幫我在 GitHub 搜尋跟「___（主題）」相關的 Claude Code skill。
-優先找 ⭐ 星數 > 1000 的熱門專案；
-如果這個主題沒有千星級的，退而求其次找 ⭐ > 100 且近 3 個月有更新的。
-找到後先讀完 skill 的原始碼，檢查有沒有可疑行為
-（例如：讀取 .env / 密鑰檔案、把內容傳到外部 URL、
-要求忽略安全規則的指令）。
-安全的話列出前 3 個推薦，附上連結、星數和功能說明；
-有疑慮的標 ⚠ 並說明原因，讓我自己決定。</pre>
-      </div>
-
-      <div class="r r-d1" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.14);border-radius:14px;padding:14px 18px;color:rgba(255,255,255,0.72);font-size:13px;line-height:1.55;">
-        <span style="width:28px;height:28px;border-radius:50%;background:rgba(240,222,158,0.14);display:inline-flex;align-items:center;justify-content:center;color:#F0DE9E;font-weight:900;flex-shrink:0;">!</span>
-        <span>把「___（主題）」換成你想找的 skill 類型，例如：履歷、簡報、研究整理。</span>
-      </div>
-    </div>
-  </section>
   <section class="slide slide-warm" id="s20" data-slide="20">
     <div class="slide-body" style="max-width:1120px;">
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">把作品放到雲端，讓它可保存、可分享、可發布</p>
@@ -2573,8 +2542,242 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+  <section class="slide slide-dark" id="s40a" data-slide="42a">
+    <div class="slide-body" style="max-width:980px; zoom:1.06;">
+      <p class="slide-eyebrow">複製貼上給 AI Agent</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">安全搜尋 Skill Prompt</h2>
+      <p class="slide-lede" style="margin-top:8px; font-size:clamp(15px,1.4vw,20px); max-width:760px;">請學生直接貼給 AI 的內容。整段複製，不要只複製其中一句。</p>
+
+      <div class="r" style="margin-top:24px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:18px; overflow:hidden; box-shadow:0 22px 50px rgba(0,0,0,0.24);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Copy this prompt</div>
+        </div>
+        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:22px 26px; border-radius:0; font-size:14px; line-height:1.72; overflow-x:auto; margin:0; white-space:pre-wrap;">幫我在 GitHub 搜尋跟「___（主題）」相關的 Claude Code skill。
+優先找 ⭐ 星數 > 1000 的熱門專案；
+如果這個主題沒有千星級的，退而求其次找 ⭐ > 100 且近 3 個月有更新的。
+找到後先讀完 skill 的原始碼，檢查有沒有可疑行為
+（例如：讀取 .env / 密鑰檔案、把內容傳到外部 URL、
+要求忽略安全規則的指令）。
+安全的話列出前 3 個推薦，附上連結、星數和功能說明；
+有疑慮的標 ⚠ 並說明原因，讓我自己決定。</pre>
+      </div>
+
+      <div class="r r-d1" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.14);border-radius:14px;padding:14px 18px;color:rgba(255,255,255,0.72);font-size:13px;line-height:1.55;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(240,222,158,0.14);display:inline-flex;align-items:center;justify-content:center;color:#F0DE9E;font-weight:900;flex-shrink:0;">!</span>
+        <span>把「___（主題）」換成你想找的 skill 類型，例如：履歷、簡報、研究整理。</span>
+      </div>
+    </div>
+  </section>
+
 
   <!-- S41 · 安裝 Workshop Skills -->
+  <!-- ══════════ Agent 權限模式教學（5 頁） ══════════ -->
+
+  <!-- P1 · 觀念頁：讓 AI 自動執行 -->
+  <section class="slide slide-dark" id="s-perm1" data-slide="26a">
+    <div class="slide-body" style="max-width:1040px;">
+      <p class="slide-eyebrow">進階 · 讓 Agent 自己動手</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">讓 AI 不用每次都問你</h2>
+      <p class="slide-lede" style="margin-top:10px;color:rgba(255,255,255,0.72);max-width:840px;">預設每個動作都要你按一次「同意」。上手後，可以「授權」AI 在安全範圍內自動執行，你只看結果——快很多，但要先分清楚哪些能放手。</p>
+
+      <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;">
+        <div style="background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:16px;padding:18px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#86EFAC;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">全手動</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0;">每一步都問你。<strong style="color:#fff;">最安全</strong>，但一直被打斷。</p>
+        </div>
+        <div style="background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:16px;padding:18px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">半自動 ★</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.82);margin:0;">安全的事自動做，<strong style="color:#fff;">危險的事才停下來問</strong>。今天的甜蜜點。</p>
+        </div>
+        <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.22);border-radius:16px;padding:18px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F87171;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">全自動</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0;">什麼都不問。<strong style="color:#fff;">最快也最危險</strong>，留給拋棄式環境。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:18px;display:flex;gap:14px;width:100%;">
+        <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:5px;">🎚 模式（總開關）</div>
+          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0;">一鍵決定 AI 整體有多放手：只讀 → 自動改檔 → 全自動。</p>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:5px;">✅ 白名單（細部授權）</div>
+          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0;">告訴 AI「這幾個指令我永遠信任，別再問」。跟模式搭配用。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- P2 · Claude Code 權限模式 -->
+  <section class="slide slide-dark" id="s-perm2" data-slide="26b">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow">Claude Code · 權限模式</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">Claude Code 有幾種放手程度</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:860px;">按 <strong style="color:#F0DE9E;font-family:var(--font-mono);">Shift + Tab</strong> 循環切換。左下角會顯示現在是哪個模式。</p>
+
+      <div style="margin-top:22px;width:100%;display:flex;flex-direction:column;gap:9px;">
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;padding:0 18px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>模式</div><div>自動做</div><div>還是會問你</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-size:15px;">Manual</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);">⏸ 預設</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">只自動讀檔</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">每個修改、每個指令都問</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(74,222,128,0.10);border:1px solid rgba(74,222,128,0.34);border-radius:12px;padding:14px 18px;align-items:center;box-shadow:0 8px 24px rgba(74,222,128,0.08);">
+          <div><strong style="color:#fff;font-size:15px;">Accept Edits</strong> <span style="color:#86EFAC;font-size:12px;font-weight:800;">★ 推薦</span><br><span style="font-family:var(--font-mono);font-size:10px;color:#86EFAC;">⏵⏵ accept edits on</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.45;">自動改檔案（不再一直打斷）</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.45;">跑指令、危險操作仍會停下來問</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-size:15px;">Plan</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">只讀不改，先給你一份計畫</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">真的要動手前先問</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.20);border-radius:12px;padding:14px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-size:15px;">Bypass</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:#F87171;">危險 · 進階</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">全部自動，什麼都不問</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">幾乎不問——只給拋棄式環境用</div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(74,222,128,0.18);display:inline-flex;align-items:center;justify-content:center;color:#86EFAC;font-weight:900;flex-shrink:0;">✓</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">建議同學開 <strong style="color:#fff;">Accept Edits</strong>：改檔不打斷你的節奏，跑指令和危險操作還是會停下來讓你把關。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- P3 · Codex 權限模式 -->
+  <section class="slide slide-dark" id="s-perm3" data-slide="26c">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow">Codex · 權限模式</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">Codex 對應的三種模式</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:860px;">在 Codex 裡打 <strong style="color:#F0DE9E;font-family:var(--font-mono);">/approvals</strong> 切換。名字不同，觀念一模一樣。</p>
+
+      <div style="margin-top:22px;width:100%;display:flex;flex-direction:column;gap:9px;">
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;padding:0 18px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>模式</div><div>自動做</div><div>還是會問你</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-size:15px;">Read Only</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.4);">/approvals readonly</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">只讀檔、只聊、只給計畫</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">改檔、跑指令都問</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(74,222,128,0.10);border:1px solid rgba(74,222,128,0.34);border-radius:12px;padding:14px 18px;align-items:center;box-shadow:0 8px 24px rgba(74,222,128,0.08);">
+          <div><strong style="color:#fff;font-size:15px;">Auto</strong> <span style="color:#86EFAC;font-size:12px;font-weight:800;">★ 推薦</span><br><span style="font-family:var(--font-mono);font-size:10px;color:#86EFAC;">/approvals auto · 預設</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.45;">工作資料夾內自動改檔＋跑指令</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.45;">要連網、跨出資料夾才問</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr;gap:12px;background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.20);border-radius:12px;padding:14px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-size:15px;">Full Access</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:#F87171;">危險 · 進階</span></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">全自動，含連網</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;">幾乎不問——只給 Docker／拋棄式環境</div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(74,222,128,0.18);display:inline-flex;align-items:center;justify-content:center;color:#86EFAC;font-weight:900;flex-shrink:0;">✓</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">用 <strong style="color:#fff;">Auto</strong>——它就是對標 Claude 的 Accept Edits（甚至更放手一點：連工作區內的指令都直接跑，只有連網／跨出資料夾才問）。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- P4 · Skill：常用指令加白名單 -->
+  <section class="slide slide-warm" id="s-perm4" data-slide="26d">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">複製貼上給 AI Agent</p>
+      <h2 class="slide-title" style="color:#18181B;">一鍵把常用指令加白名單</h2>
+      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:880px;">白名單 = 「這些指令我永遠信任，別再問」。一條條手動加很煩——直接叫 AI 讀你最近的指令紀錄，挑出最常用又安全的，自己寫進設定。可以做成一個 skill。</p>
+
+      <div class="r" style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;align-items:stretch;">
+
+        <div style="background:#0E1A2F;border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(14,26,47,0.20);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#86EFAC;letter-spacing:0.06em;">▶ Claude Code</div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.45);">→ settings.json</div>
+          </div>
+          <pre style="font-family:var(--font-mono);background:#050B17;color:#F0DE9E;padding:18px 20px;font-size:12px;line-height:1.68;overflow-x:auto;margin:0;white-space:pre-wrap;flex:1;">讀我最近的 shell 指令紀錄，統計最常
+用的前 10 個。挑出安全的（git / ls /
+npm 這類），排除危險的（rm -rf、
+curl | bash、會刪檔或連外的）。
+用 `Bash(指令:*)` 格式，加到
+~/.claude/settings.json 的
+permissions.allow。
+加完列出清單讓我逐條確認。</pre>
+        </div>
+
+        <div style="background:#0E1A2F;border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(14,26,47,0.20);display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#86EFAC;letter-spacing:0.06em;">▶ Codex</div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.45);">→ config.toml</div>
+          </div>
+          <pre style="font-family:var(--font-mono);background:#050B17;color:#F0DE9E;padding:18px 20px;font-size:12px;line-height:1.68;overflow-x:auto;margin:0;white-space:pre-wrap;flex:1;">看我最近的指令紀錄，列出最常用又
+安全的幾個。Codex 沒有逐條白名單
+檔，所以改幫我切到 Auto 模式：在
+~/.codex/config.toml 設
+approval_policy = "on-request"
+sandbox_mode  = "workspace-write"
+這樣工作區內的常用指令就自動跑，
+只有連網／跨出資料夾才問我。</pre>
+        </div>
+      </div>
+
+      <div class="r r-d1" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(184,144,46,0.08);border:1px solid rgba(184,144,46,0.20);border-radius:14px;padding:13px 18px;color:#6F5717;font-size:12.5px;line-height:1.5;">
+        <span style="width:26px;height:26px;border-radius:50%;background:rgba(184,144,46,0.16);display:inline-flex;align-items:center;justify-content:center;color:#B8902E;font-weight:900;flex-shrink:0;">!</span>
+        <span>兩邊差在：Claude Code 是「逐條指令」加信任；Codex 沒有這個檔，改用「模式」一次放行工作區。危險指令兩邊都不要加。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- P5 · 複合指令為什麼還會問 -->
+  <section class="slide slide-warm" id="s-perm5" data-slide="26e">
+    <div class="slide-body" style="max-width:1060px;">
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">白名單的常見雷</p>
+      <h2 class="slide-title" style="color:#18181B;">加了白名單，為什麼還是問我？</h2>
+      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:860px;">現象：你明明把 <code style="font-family:var(--font-mono);background:rgba(14,26,47,0.06);padding:1px 6px;border-radius:5px;">git status</code> 加了白名單，AI 一跑 <code style="font-family:var(--font-mono);background:rgba(14,26,47,0.06);padding:1px 6px;border-radius:5px;">git status &amp;&amp; npm test</code> 又跳出來問。</p>
+
+      <div style="margin-top:18px;background:#FFFBEB;border-left:3px solid #D97706;border-radius:0 12px 12px 0;padding:14px 18px;">
+        <p style="font-size:13.5px;color:#1D1D1F;line-height:1.65;margin:0;"><strong>原因（一句話）：</strong>AI 會把 <code style="font-family:var(--font-mono);">&amp;&amp;</code>、<code style="font-family:var(--font-mono);">|</code>、<code style="font-family:var(--font-mono);">;</code> 這種「一行串多個指令」拆開逐一檢查——只要其中<strong>任何一個</strong>沒在白名單，整串就停下來問你。<code style="font-family:var(--font-mono);">npm test</code> 沒加，所以就算 <code style="font-family:var(--font-mono);">git status</code> 是信任的，還是被卡住。</p>
+      </div>
+
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;">
+        <div style="background:#fff;border:1px solid rgba(46,125,91,0.28);border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(14,26,47,0.05);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#2E7D5B;margin-bottom:8px;">解法 ① ★ 最推薦</div>
+          <div style="font-size:14px;font-weight:800;color:#1D1D1F;margin-bottom:5px;">拆成一條一條跑</div>
+          <p style="font-size:12px;color:#666;line-height:1.5;margin:0;">「一條指令做一件事」，不要串 <code style="font-family:var(--font-mono);">&amp;&amp;</code>。每條都能對上白名單，最穩。</p>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(184,144,46,0.22);border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(14,26,47,0.05);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#B8902E;margin-bottom:8px;">解法 ②</div>
+          <div style="font-size:14px;font-weight:800;color:#1D1D1F;margin-bottom:5px;">把每個子指令都加</div>
+          <p style="font-size:12px;color:#666;line-height:1.5;margin:0;">串裡用到的每一個都放進白名單，例如再加 <code style="font-family:var(--font-mono);">Bash(npm test:*)</code>。</p>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(184,144,46,0.22);border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(14,26,47,0.05);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#B8902E;margin-bottom:8px;">解法 ③</div>
+          <div style="font-size:14px;font-weight:800;color:#1D1D1F;margin-bottom:5px;">用更寬的規則</div>
+          <p style="font-size:12px;color:#666;line-height:1.5;margin:0;">整組放行，如 <code style="font-family:var(--font-mono);">Bash(git *)</code>、<code style="font-family:var(--font-mono);">Bash(npm *)</code>。方便但信任範圍變大。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(46,125,91,0.08);border:1px solid rgba(46,125,91,0.20);border-radius:14px;padding:13px 18px;color:#1D5B42;font-size:13px;line-height:1.55;">
+        <span style="width:26px;height:26px;border-radius:50%;background:rgba(46,125,91,0.16);display:inline-flex;align-items:center;justify-content:center;color:#2E7D5B;font-weight:900;flex-shrink:0;">✓</span>
+        <span>優先選 ① ——就是我們一直在講的「一條指令一件事」，白名單命中率最高，也最容易看懂 AI 每一步在做什麼。</span>
+      </div>
+    </div>
+  </section>
+
   <section class="slide slide-warm" id="s41" data-slide="43">
     <div class="slide-body" style="max-width:1080px;">
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">複製貼上給 AI Agent</p>
@@ -4008,7 +4211,6 @@ const btnNext = document.getElementById('btn-next');
 let current = 0;
 
 
-
 function fitSlideToViewport(slide) {
   const body = slide.querySelector('.slide-body');
   if (!body) return;
@@ -4329,7 +4531,6 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   });
 })();
 </script>
-
 
 
 
