@@ -2499,10 +2499,20 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           </div>
           <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Copy this prompt</div>
         </div>
-        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:24px 28px; border-radius:0; font-size:16px; line-height:1.85; overflow-x:auto; margin:0; white-space:pre-wrap;">從 https://github.com/museReed/jr_ai_agent_configs 把規則檔抓下來，
-讀 README.md 了解有哪些檔案，然後根據你是哪種 AI Agent
-（Claude Code 或 Codex CLI）把對應的規則檔裝到正確的位置。
-裝完後告訴我你裝了什麼、裝到哪裡。</pre>
+        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:22px 26px; border-radius:0; font-size:12.5px; line-height:1.58; overflow-x:auto; margin:0; white-space:pre-wrap;">把 https://github.com/museReed/jr_ai_agent_configs.git clone 到當前資料夾。
+
+先用結構化選項問我三件事，等我回答再繼續：
+1. 安裝 Claude Code／Codex CLI／兩者？
+2. 安裝 Project Level／User Level？先解釋差異，建議新手從 Project Level 開始。
+3. 使用繁體中文／簡體中文／英文？
+
+依語言讀 jr_ai_agent_configs/install/zh-TW.md、zh-CN.md 或 en.md，完整照引導安裝。
+修改任何既有設定前先建立時間戳備份，不要覆蓋原內容；每完成一項就回報裝了什麼與路徑。
+Claude Code 要包含 CLAUDE.md、Output Style、Shell hook、starter allowlist；
+Codex 要包含 AGENTS.md、config.toml，並說明 Shell 不串接只有軟規則、沒有硬擋 hook。
+
+安裝後先提醒我開一個新的 AI session，再依文件帶我完成回覆格式、Shell 不串接與白名單驗證；
+全部通過後，列出已安裝項目、層級、路徑與備份檔案。</pre>
       </div>
 
       <div class="r r-d1" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.14);border-radius:14px;padding:14px 18px;color:rgba(255,255,255,0.72);font-size:13px;line-height:1.55;">
@@ -2987,15 +2997,24 @@ sandbox_mode  = "workspace-write"
             </div>
             <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Copy this prompt</div>
           </div>
-          <pre style="font-family:var(--font-mono);background:#050B17;color:#F0DE9E;padding:20px 24px;border-radius:0;font-size:13px;line-height:1.7;overflow-x:auto;margin:0;white-space:pre-wrap;flex:1;">把 https://github.com/museReed/jr_ai_agent_skills.git 抓到當前資料夾，
-然後讀 jr_ai_agent_skills/README.md，了解這個 repo 的結構。
-依照 README 的安裝指引，幫我把以下三個 skill 安裝到 user level：
-1. structured-questions
-2. auto-rename
-3. handoff
-安裝語言選繁體中文、簡體中文或英文（問我要哪個）。
-每安裝完一個，告訴我裝了什麼、裝到哪個路徑。
-三個都裝完後，列出已安裝的 skill 清單讓我確認。</pre>
+          <pre style="font-family:var(--font-mono);background:#050B17;color:#F0DE9E;padding:18px 22px;border-radius:0;font-size:10.5px;line-height:1.48;overflow-x:auto;margin:0;white-space:pre-wrap;flex:1;">把 https://github.com/museReed/jr_ai_agent_skills.git clone 到當前資料夾。
+
+先問我安裝語言要「繁體中文 / 簡體中文 / 英文」哪一個，等我回答再繼續。
+
+然後讀對應語言的安裝入口文件（繁中＝jr_ai_agent_skills/zh-Hant/auto-rename-install.md，
+簡中＝zh-Hans/auto-rename-install.md，英文＝en/auto-rename-install.md），
+依它的「單一安裝流程」進行——這個流程會用 installer/install.sh 一次把三個核心 skill
+（auto-rename、handoff、structured-questions）安裝到 user level，不用分開一個個裝。
+
+過程中：
+- 先偵測我有哪些 CLI（Claude Code / Codex），必要時讓我選 Claude／Codex／兩者。
+- 確認我目前的 terminal / IDE（Cursor / VS Code / 原生等），需要的選項先問我確認再動手。
+- 每裝完一個 skill 或 hook，告訴我裝了什麼、裝到哪個路徑。
+
+安裝完成後先停下來，提醒我開一個「新的 terminal + 新的 AI session」（skill 要新 session 才載入），
+再依 jr_ai_agent_skills/installer/VERIFICATION.md 帶我跑驗證。
+
+最後列出已安裝的 skill 清單（含路徑）讓我確認。</pre>
         </div>
       </div>
 
@@ -3984,64 +4003,6 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- S62 · Frontend-Design: Claude Code vs Codex + 安裝 -->
-  <section class="slide slide-dark" id="s63" data-slide="66">
-    <div class="slide-body" style="max-width:960px; zoom:1.15;">
-
-      <p class="slide-eyebrow">Skill ❺ · Frontend-Design</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Frontend-Design 工具差異</h2>
-
-      <!-- Comparison table -->
-      <div class="r" style="margin-top:24px; width:100%;">
-        <div style="display:grid; grid-template-columns:160px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
-          <!-- Header -->
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
-          <!-- Row 1: Type -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">官方 Plugin<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 裡啟用</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Anthropic 官方 Skill（同源）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">anthropics/skills，用 Vercel 的 npx skills 工具安裝</span></div>
-          <!-- Row 2: Trigger -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發方式</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/frontend-design<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">安裝後指令相同</span></div>
-          <!-- Row 3: Output -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">產出</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">6 種美學候選頁面<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">含 CSS custom properties</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同上（同源 skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">plugin 與 skill 版行為可能略異</span></div>
-          <!-- Row 4: Install -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝方式</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/settings.json<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">enabledPlugins 加一行</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">npx skills add<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">anthropics/skills --skill frontend-design -a codex</span></div>
-          <!-- Row 5: RWD -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">RWD 支援</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 內建 RWD<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">自動產出 media queries</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">✓ 同上（同源 skill）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">自動產出 media queries</span></div>
-        </div>
-      </div>
-
-      <!-- Install prompts -->
-      <div class="r r-d1" style="margin-top:16px; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
-          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝</div>
-          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(240,222,158,0.8); line-height:1.7;">
-            幫我在 .claude/settings.json 的<br>enabledPlugins 裡加入<br>
-            "frontend-design@claude-plugins-official"
-          </div>
-        </div>
-        <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
-          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#fff; letter-spacing:0.06em; margin-bottom:8px;">▶ Codex CLI 安裝</div>
-          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.7;">
-            npx skills add anthropics/skills<br>
-            --skill frontend-design -a codex
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- S63 · CV → Landing Page 工作流程 -->
   <section class="slide slide-warm" id="s64" data-slide="67">
     <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
@@ -4119,7 +4080,7 @@ sandbox_mode  = "workspace-write"
 
   <!-- S64 · 動手做 — CV → Landing Page Prompt -->
   <section class="slide slide-warm" id="s65" data-slide="69">
-    <div class="slide-body" style="max-width:1020px; display:flex; flex-direction:column; gap:14px;">
+    <div class="slide-body" style="max-width:1080px; display:flex; flex-direction:column; gap:12px;">
 
       <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border-radius:100px; padding:6px 16px; width:fit-content;">
         <span style="width:6px; height:6px; border-radius:50%; background:#B8902E; flex-shrink:0;"></span>
@@ -4128,45 +4089,84 @@ sandbox_mode  = "workspace-write"
 
       <h2 style="font-size:clamp(24px,3vw,40px); font-weight:800; color:#1D1D1F; margin:0;">開始生成網站</h2>
 
-      <!-- Step 01: 準備素材 -->
-      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 01 · 準備素材 — 萃取 CV 核心資訊</div>
-        <p style="font-family:var(--font-mono); font-size:11px; color:#F0DE9E; line-height:1.7; margin:0;">讀 exercises/career/resume-tailoring/cv_draft.md，<br>萃取這份 CV 的核心資訊（姓名、學歷、經歷、技能、專案），<br>整理成一份 Landing Page 的內容大綱。</p>
-      </div>
-
-      <!-- Step 02: 生成 Landing Page -->
-      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#818CF8; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 02 · 生成頁面 — 用 /frontend-design 產出</div>
-        <p style="font-family:var(--font-mono); font-size:11px; color:#818CF8; line-height:1.7; margin:0;">用 /frontend-design 幫我建立一個個人品牌 Landing Page。<br><br>內容來源：剛才整理的 CV 大綱<br>風格方向：簡潔專業、深色主題、適合科技管理背景<br>頁面結構：Hero（姓名+一句話定位）→ About → Experience → Projects → Contact<br>要求：單一 HTML 檔、RWD、不依賴外部框架<br><br>產出到 index.html</p>
-      </div>
-
-      <!-- Step 03: 預覽 + Snipaste -->
-      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#4ADE80; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 03 · 預覽 — localhost 確認效果</div>
-        <p style="font-family:var(--font-mono); font-size:11px; color:#4ADE80; line-height:1.7; margin:0;">幫我啟動一個 local server 預覽 index.html。<br>看完後我會告訴你要調整什麼。</p>
-        <div style="margin-top:10px; display:flex; align-items:center; gap:10px;">
-          <a href="https://www.snipaste.com/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; background:rgba(74,222,128,0.15); border:1px solid rgba(74,222,128,0.3); border-radius:8px; padding:6px 14px; text-decoration:none; cursor:pointer; transition:background 0.15s;" onmouseenter="this.style.background='rgba(74,222,128,0.25)'" onmouseleave="this.style.background='rgba(74,222,128,0.15)'">
-            <span style="font-size:14px;">📸</span>
-            <span style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#4ADE80;">下載 Snipaste</span>
-          </a>
-          <span style="font-size:10px; color:rgba(255,255,255,0.4); line-height:1.4;">免費截圖工具 — 截下畫面直接貼給 AI Agent，讓它看著圖修 UI</span>
+      <!-- Horizontal workflow -->
+      <div class="r" style="display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr; gap:8px; align-items:center; width:100%;">
+        <div style="background:#fff; border:1.5px solid rgba(184,144,46,0.24); border-radius:12px; padding:11px 12px; box-shadow:0 8px 18px rgba(14,26,47,0.05); min-width:0;">
+          <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#B8902E; letter-spacing:0.08em;">01 · SOURCE</div>
+          <div style="font-size:13px; font-weight:750; color:#1D1D1F; margin-top:3px;">萃取 CV 素材</div>
+        </div>
+        <div style="font-size:20px; color:#B8902E; font-weight:800;">→</div>
+        <div style="background:#fff; border:1.5px solid rgba(99,102,241,0.22); border-radius:12px; padding:11px 12px; box-shadow:0 8px 18px rgba(14,26,47,0.05); min-width:0;">
+          <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#6366F1; letter-spacing:0.08em;">02 · BUILD</div>
+          <div style="font-size:13px; font-weight:750; color:#1D1D1F; margin-top:3px;">生成 Landing Page</div>
+        </div>
+        <div style="font-size:20px; color:#B8902E; font-weight:800;">→</div>
+        <div style="background:#fff; border:1.5px solid rgba(5,150,105,0.22); border-radius:12px; padding:11px 12px; box-shadow:0 8px 18px rgba(14,26,47,0.05); min-width:0;">
+          <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#059669; letter-spacing:0.08em;">03 · REVIEW</div>
+          <div style="font-size:13px; font-weight:750; color:#1D1D1F; margin-top:3px;">localhost 預覽</div>
+        </div>
+        <div style="font-size:20px; color:#B8902E; font-weight:800;">→</div>
+        <div style="background:#fff; border:1.5px solid rgba(249,115,22,0.22); border-radius:12px; padding:11px 12px; box-shadow:0 8px 18px rgba(14,26,47,0.05); min-width:0;">
+          <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#EA580C; letter-spacing:0.08em;">04 · SHIP</div>
+          <div style="font-size:13px; font-weight:750; color:#1D1D1F; margin-top:3px;">GitHub Pages 上線</div>
         </div>
       </div>
 
-      <!-- Step 04: 發布 -->
-      <div style="background:#0E1A2F; border-radius:12px; padding:14px 16px; width:100%; box-sizing:border-box;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F97316; letter-spacing:0.06em; margin-bottom:6px;">▶ Step 04 · 發布 — 推到 GitHub + 開啟 Pages</div>
-        <p style="font-family:var(--font-mono); font-size:11px; color:#F97316; line-height:1.7; margin:0;">幫我建立一個新的 GitHub repo 叫 wei-chen-portfolio，<br>把 index.html 推上去，然後用 GitHub Pages 發布。<br>完成後給我公開網址。</p>
-        <div style="margin-top:8px; font-size:10px; color:#FCA5A5; line-height:1.5;">⚠️ Pages 網站<strong>永遠是公開的</strong>——repo 可以設 private（免費帳號的 private repo 開不了 Pages），但網址任何人都能看。電話、地址等不想公開的資訊不要放上去。</div>
+      <!-- Copyable prompts -->
+      <div class="r r-d1" style="display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:10px; width:100%;">
+        <div style="background:#0E1A2F; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 12px 24px rgba(14,26,47,0.12); min-width:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#F0DE9E; letter-spacing:0.06em;">STEP 01 · 準備素材</div>
+          </div>
+          <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:12px 14px; font-size:10.5px; line-height:1.55; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">讀 exercises/career/resume-tailoring/cv_draft.md，
+萃取姓名、學歷、經歷、技能與專案，
+整理成 Landing Page 的內容大綱。</pre>
+        </div>
+
+        <div style="background:#0E1A2F; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 12px 24px rgba(14,26,47,0.12); min-width:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#A5B4FC; letter-spacing:0.06em;">STEP 02 · 生成頁面</div>
+          </div>
+          <pre style="font-family:var(--font-mono); background:#050B17; color:#A5B4FC; padding:12px 14px; font-size:10px; line-height:1.5; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">用 /frontend-design 建立個人品牌 Landing Page。
+內容：剛才整理的 CV 大綱
+風格：簡潔專業、深色主題、科技管理背景
+結構：Hero → About → Experience → Projects → Contact
+要求：單一 HTML、RWD、不依賴外部框架
+產出到 index.html。</pre>
+        </div>
+
+        <div style="background:#0E1A2F; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 12px 24px rgba(14,26,47,0.12); min-width:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#86EFAC; letter-spacing:0.06em;">STEP 03 · 預覽調整</div>
+          </div>
+          <pre style="font-family:var(--font-mono); background:#050B17; color:#86EFAC; padding:12px 14px; font-size:10.5px; line-height:1.55; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">幫我啟動 local server 預覽 index.html。
+看完後我會用 Snipaste 截圖，
+再告訴你要調整什麼。</pre>
+        </div>
+
+        <div style="background:#0E1A2F; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 12px 24px rgba(14,26,47,0.12); min-width:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#FDBA74; letter-spacing:0.06em;">STEP 04 · 發布上線</div>
+          </div>
+          <pre style="font-family:var(--font-mono); background:#050B17; color:#FDBA74; padding:12px 14px; font-size:10.5px; line-height:1.55; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">建立 GitHub repo：wei-chen-portfolio，
+推送 index.html 並啟用 GitHub Pages。
+完成後給我公開網址。</pre>
+        </div>
       </div>
 
-      <!-- CV Preview Button -->
-      <div style="text-align:center; width:100%; box-sizing:border-box;">
-        <button id="s65-cv-btn" style="display:inline-flex; align-items:center; gap:8px; background:rgba(184,144,46,0.12); border:1.5px solid rgba(184,144,46,0.3); border-radius:10px; padding:10px 24px; cursor:pointer; transition:background 0.15s,transform 0.15s;" onmouseenter="this.style.background='rgba(184,144,46,0.2)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='rgba(184,144,46,0.12)';this.style.transform=''">
-          <span style="font-size:16px;">📄</span>
-          <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:#B8902E;">查看 Wei Chen 的 CV 素材</span>
-          <span style="font-size:10px; color:#999;">↗</span>
-        </button>
+      <!-- Utilities and safety note -->
+      <div class="r r-d2" style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="s65-cv-btn" style="display:inline-flex; align-items:center; gap:7px; background:rgba(184,144,46,0.10); border:1.5px solid rgba(184,144,46,0.28); border-radius:9px; padding:8px 14px; cursor:pointer;" onmouseenter="this.style.background='rgba(184,144,46,0.18)'" onmouseleave="this.style.background='rgba(184,144,46,0.10)'">
+            <span style="font-size:13px;">📄</span>
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:750; color:#B8902E;">查看 CV 素材</span>
+          </button>
+          <a href="https://www.snipaste.com/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:7px; background:rgba(5,150,105,0.08); border:1px solid rgba(5,150,105,0.2); border-radius:9px; padding:8px 14px; text-decoration:none;">
+            <span style="font-size:13px;">📸</span>
+            <span style="font-family:var(--font-mono); font-size:10px; font-weight:750; color:#059669;">下載 Snipaste</span>
+          </a>
+        </div>
+        <div style="font-size:9.5px; color:#B91C1C; line-height:1.45; text-align:right; max-width:470px;">⚠️ GitHub Pages 網站永遠公開。電話、地址等不想公開的資訊不要放上去。</div>
       </div>
 
     </div>
@@ -5247,6 +5247,104 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') modal.style.display = 'none';
+  });
+})();
+</script>
+
+<!-- ── Copy buttons for every code block ── -->
+<style>
+  .code-block-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: auto;
+  }
+  .code-copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 82px;
+    justify-content: center;
+    padding: 6px 10px;
+    border: 1px solid rgba(240,222,158,0.36);
+    border-radius: 8px;
+    background: rgba(240,222,158,0.10);
+    color: #F0DE9E;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.16s, border-color 0.16s, color 0.16s;
+  }
+  .code-copy-button:hover {
+    background: rgba(240,222,158,0.20);
+    border-color: rgba(240,222,158,0.62);
+  }
+  .code-copy-button:focus-visible {
+    outline: 2px solid #F0DE9E;
+    outline-offset: 2px;
+  }
+  .code-copy-button.is-copied {
+    background: rgba(34,197,94,0.18);
+    border-color: rgba(134,239,172,0.58);
+    color: #86EFAC;
+  }
+</style>
+<script>
+(function () {
+  function fallbackCopy(text) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+
+  document.querySelectorAll('pre').forEach(function (pre, index) {
+    var toolbar = pre.previousElementSibling;
+    if (!toolbar || toolbar.tagName !== 'DIV') return;
+
+    var trailing = toolbar.lastElementChild;
+    var actions = document.createElement('div');
+    actions.className = 'code-block-actions';
+
+    if (trailing && !/copy this prompt/i.test(trailing.textContent.trim()) && toolbar.children.length > 1) {
+      actions.appendChild(trailing);
+    } else if (trailing && /copy this prompt/i.test(trailing.textContent.trim())) {
+      trailing.remove();
+    }
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'code-copy-button';
+    button.dataset.copyCode = String(index);
+    button.setAttribute('aria-label', 'Copy code block content');
+    button.textContent = 'Copy';
+    button.addEventListener('click', async function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var text = pre.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        fallbackCopy(text);
+      }
+      button.textContent = 'Copied ✅';
+      button.classList.add('is-copied');
+      window.setTimeout(function () {
+        button.textContent = 'Copy';
+        button.classList.remove('is-copied');
+      }, 1600);
+    });
+
+    actions.appendChild(button);
+    toolbar.appendChild(actions);
   });
 })();
 </script>
