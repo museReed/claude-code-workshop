@@ -2303,7 +2303,38 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
   </section>
 
   <!-- S38 · CLAUDE.md：AI 的長期工作說明書 -->
-  <section class="slide slide-dark" id="s38-claude-scope" data-slide="39b"><div class="slide-body" style="max-width:1040px;zoom:1.08;"><p class="slide-eyebrow">第六章 · CLAUDE.md</p><h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">規則要像公司組織一樣分層</h2><p class="slide-lede" style="margin-top:8px;font-size:clamp(15px,1.4vw,20px);">全域規則管共識，資料夾規則管專業情境。</p><div class="r" style="display:grid;grid-template-columns:1.55fr 0.85fr;gap:18px;margin-top:21px;align-items:stretch;"><div style="background:#050B17;border:1px solid rgba(125,180,255,0.22);border-radius:18px;padding:20px 24px;font-family:var(--font-mono);font-size:15px;line-height:1.72;color:rgba(255,255,255,0.74);"><div><span style="color:#9CC4FF;">~/.claude/</span><br>└── <strong style="color:#F0DE9E;">CLAUDE.md</strong> <span style="color:rgba(255,255,255,0.43);">個人或團隊共通原則</span></div><div style="height:1px;background:rgba(255,255,255,0.08);margin:12px 0;"></div><div><span style="color:#9CC4FF;">專案根目錄/</span><br>└── <strong style="color:#F0DE9E;">CLAUDE.md</strong> <span style="color:rgba(255,255,255,0.43);">專案背景、技術架構、共同流程</span></div><div style="height:1px;background:rgba(255,255,255,0.08);margin:12px 0;"></div><div><span style="color:#9CC4FF;">frontend/</span><br>└── <strong style="color:#F0DE9E;">CLAUDE.md</strong> <span style="color:rgba(255,255,255,0.43);">元件規範、設計系統、前端測試</span></div><div style="height:1px;background:rgba(255,255,255,0.08);margin:12px 0;"></div><div><span style="color:#9CC4FF;">backend/</span><br>└── <strong style="color:#F0DE9E;">CLAUDE.md</strong> <span style="color:rgba(255,255,255,0.43);">API、資料庫與安全要求</span></div></div><div style="border:1px solid rgba(240,222,158,0.24);border-radius:18px;padding:22px;background:rgba(240,222,158,0.06);display:flex;flex-direction:column;justify-content:center;"><div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;">AI 的工作方式</div><div style="font-size:22px;line-height:1.43;font-weight:800;color:#fff;margin-top:12px;">同時帶著<br>公司共識與<br>部門專業規則</div><div style="font-size:12px;line-height:1.65;color:rgba(255,255,255,0.58);margin-top:14px;">進入不同資料夾時，AI 會依情境讀取更精準的規範。</div></div></div></div></section>
+  <section class="slide slide-dark" id="s38-claude-scope" data-slide="39b">
+    <div class="slide-body" style="max-width:1080px;zoom:1.02;">
+      <p class="slide-eyebrow">第六章 · CLAUDE.md</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,56px);">類似公司組織架構</h2>
+      <p class="slide-lede" style="margin-top:8px;font-size:clamp(15px,1.4vw,20px);">每個資料夾都能放一份對該團隊最有用的工作說明。</p>
+      <div class="r" style="margin-top:22px;padding:28px 34px 30px;background:#F7F7F5;border-radius:10px;color:#262626;box-shadow:0 10px 36px rgba(0,0,0,0.18);">
+        <div style="font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;">類似公司組織架構</div>
+        <div style="font-family:var(--font-mono);font-size:clamp(12px,1.25vw,17px);line-height:1.5;color:#262626;">
+          <div>│</div>
+          <div>├── <strong>~/.claude/</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;└── <strong>CLAUDE.md</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 公司的規章制度 / 章程 / 文化</div>
+          <div style="height:15px;"></div>
+          <div>├── <strong>Development/</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;└── <strong>CLAUDE.md</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 開發部門的技術架構 / 代碼風格 / 協作方式</div>
+          <div style="height:15px;"></div>
+          <div>├── <strong>Marketing/</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;└── <strong>CLAUDE.md</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 品牌調性 / 受眾群體</div>
+          <div style="height:15px;"></div>
+          <div>├── <strong>Product/</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;└── <strong>CLAUDE.md</strong></div>
+          <div>│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 產品規格 / 定位 / 競爭格局</div>
+          <div style="height:15px;"></div>
+          <div>└── <strong>Operations/</strong></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <strong>CLAUDE.md</strong></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 營運流程 / 客戶回應 / 服務標準</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- S39 · 規則檔：不同 Agent 對照與安裝 -->
   <section class="slide slide-dark" id="s38b" data-slide="40">
