@@ -1,0 +1,52 @@
+/* ===== gallery chrome ===== */
+*{box-sizing:border-box;margin:0}
+body{background:var(--color-bg);color:var(--color-text-strong);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:40px 32px 100px}
+h1{font-size:var(--fs-5xl);line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.sub{color:var(--color-text-muted);font-size:var(--fs-md);margin-top:8px}
+h2{font-size:var(--fs-2xl);font-weight:600;margin:40px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--color-border)}
+h2 .new{font-size:var(--fs-xs);font-weight:600;color:var(--color-accent-hover);background:var(--color-accent-bg);border:1px solid var(--color-accent-soft);padding:2px 8px;border-radius:var(--r-pill);vertical-align:middle;margin-left:8px}
+h2 .cls{font-size:var(--fs-xs);font-weight:500;color:var(--color-text-faint);font-family:var(--font-mono);margin-left:8px;vertical-align:middle}
+h3{font-size:var(--fs-sm);text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-faint);margin:24px 0 10px}
+.ramp{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px}
+.step{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--color-border-soft)}
+.step .c{height:56px}
+.step .l{padding:5px 7px;font-family:var(--font-mono);font-size:11px;background:var(--color-bg-elevated)}
+.step .l b{display:block;color:var(--color-text-strong)}
+.step .l span{color:var(--color-text-muted);text-transform:uppercase}
+.type-row{display:flex;align-items:baseline;gap:16px;padding:8px 0;border-bottom:1px dashed var(--color-border-soft)}
+.type-row .tag{font-family:var(--font-mono);font-size:11px;color:var(--color-accent);min-width:80px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.demogrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.demogrid{grid-template-columns:1fr}}
+/* tabs */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-top:24px;border-bottom:1px solid var(--color-border);position:sticky;top:0;background:var(--color-bg);padding-top:10px;z-index:5}
+.tab{appearance:none;border:none;background:transparent;font-family:inherit;font-size:var(--fs-base);font-weight:600;color:var(--color-text-muted);padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab:hover{color:var(--color-text-strong)}
+.tab.active{color:var(--color-accent);border-bottom-color:var(--color-accent)}
+.tab:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-radius:var(--r-sm)}
+.panel{display:none}
+.panel.active{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* color usage guide */
+.use-guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.use-card{border:1px solid var(--color-border-soft);border-radius:var(--r-md);padding:14px;background:var(--color-bg-elevated)}
+.use-card .sw{height:10px;border-radius:var(--r-pill);margin-bottom:10px}
+.use-card b{display:block;font-size:var(--fs-sm);color:var(--color-text-strong);margin-bottom:4px}
+.use-card p{font-size:var(--fs-xs);color:var(--color-text-muted);line-height:1.55}
+.use-card code{font-family:var(--font-mono);font-size:11px;color:var(--color-accent-hover)}
+/* ══════ 動態變體（同一元件的第二種狀態，與靜態版並排展示）══════ */
+/* 變體標籤：每個變體上方的一行說明 */
+.vlabel{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-faint)}
+.vlabel .dot{width:6px;height:6px;border-radius:50%;background:var(--color-border);flex:0 0 auto}
+.vlabel--live .dot{background:var(--color-accent)}
+.vreplay{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--color-text-muted);background:transparent;border:1px solid var(--color-border-soft);border-radius:var(--r-pill);padding:2px 10px;cursor:pointer}
+.vreplay:hover{color:var(--color-accent-hover);border-color:var(--color-accent-soft)}
+.vreplay:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.vstack{display:flex;flex-direction:column;gap:var(--space-3)}
+/* 重播時先關掉 transition，讓元件瞬間跳回起始狀態，再重新播一次 */
+.is-resetting,.is-resetting *,.is-resetting *::before{transition:none!important}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}

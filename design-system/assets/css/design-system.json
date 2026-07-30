@@ -1,0 +1,67 @@
+{
+  "$meta": {
+    "name": "claude2code design system",
+    "source": "claude2code.com (map + lesson + progress bar/mascot)",
+    "structure": "兩層：primitive(原始色階) → semantic(語意 token)。建站時用 semantic，改色只改 primitive。",
+    "scaleNote": "每色 6 階，1=最亮 6=最暗，第 4 階為品牌原色"
+  },
+  "primitive": {
+    "orange":  { "1": "#FDEADD", "2": "#FBCBAB", "3": "#F8A167", "4": "#F4731C", "5": "#C15B16", "6": "#914411" },
+    "teal":    { "1": "#E0F8F8", "2": "#B2EDED", "3": "#74DEDE", "4": "#30CECE", "5": "#26A5A5", "6": "#1E7F7F" },
+    "amber":   { "1": "#F9F2E3", "2": "#EFDFB9", "3": "#E2C581", "4": "#D4A843", "5": "#AA8736", "6": "#836829" },
+    "red":     { "1": "#FCE6E4", "2": "#F6C2BC", "3": "#F09186", "4": "#E85B4A", "5": "#BA493B", "6": "#8F382E" },
+    "neutral": { "1": "#FBF8F2", "2": "#F0ECE4", "3": "#E1D9C9", "4": "#C9BFA9", "5": "#8A8275", "6": "#2D2B28" }
+  },
+  "semantic": {
+    "color": {
+      "bg":            "neutral.2",
+      "bg-elevated":   "neutral.1",
+      "bg-inset":      "neutral.3",
+      "border":        "neutral.4",
+      "border-soft":   "neutral.3",
+      "text-strong":   "neutral.6",
+      "text":          "#3D3A36",
+      "text-muted":    "#6B655A",
+      "text-faint":    "neutral.5",
+      "accent":        "orange.4",
+      "accent-hover":  "orange.5",
+      "accent-soft":   "orange.3",
+      "accent-bg":     "orange.1",
+      "success":       "teal.4",
+      "success-text":  "teal.6",
+      "success-bg":    "teal.1",
+      "warn":          "amber.4",
+      "danger":        "red.4",
+      "danger-bg":     "red.1"
+    },
+    "terminal": {
+      "bg": "#1F1B16", "bg-2": "#2A241D", "ink": "#F0ECE4", "ink-dim": "#B3A99B",
+      "prompt": "#E8A06A", "ok": "#30CECE", "err": "#E89080", "folder": "#7FB8E0"
+    }
+  },
+  "font": {
+    "sans":  "\"Noto Sans TC\", \"PingFang TC\", system-ui, -apple-system, sans-serif",
+    "serif": "\"Noto Serif TC\", \"Songti TC\", Georgia, serif",
+    "mono":  "\"JetBrains Mono\", ui-monospace, \"SF Mono\", Menlo, monospace"
+  },
+  "fontSize": {
+    "xs": "12px", "sm": "13px", "base": "15px", "md": "16px", "lg": "18px",
+    "xl": "20px", "2xl": "22px", "3xl": "26px", "4xl": "32px", "5xl": "40px"
+  },
+  "lineHeight": { "tight": 1.1, "snug": 1.25, "normal": 1.5, "relaxed": 1.6, "loose": 1.7 },
+  "fontWeight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
+  "space": { "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "24px", "6": "32px", "7": "48px", "8": "64px" },
+  "radius": { "sm": "6px", "md": "10px", "lg": "16px", "xl": "22px", "pill": "999px" },
+  "shadow": {
+    "sm": "0 1px 2px rgba(45,43,40,.06), 0 1px 1px rgba(45,43,40,.04)",
+    "md": "0 4px 14px rgba(45,43,40,.08), 0 1px 2px rgba(45,43,40,.04)",
+    "lg": "0 18px 40px rgba(45,43,40,.12), 0 2px 6px rgba(45,43,40,.05)"
+  },
+  "layout": { "container": "1200px", "containerNarrow": "880px", "gutter": "32px" },
+  "components": [
+    "button (primary / dark / ghost / sm)", "card / card-flat", "pill (default / accent / success)",
+    "nav (sticky, blur)", "callout (analogy box)", "keyPoints list", "fileTree (interactive)",
+    "quiz (option states + explain)", "sidebar item", "section header pill",
+    "progress bar", "walking-duck mascot", "terminal window"
+  ]
+}

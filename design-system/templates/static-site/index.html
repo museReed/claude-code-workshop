@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design System Starter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <nav class="ds-nav app-nav">
+    <div class="ds-container nav-inner">
+      <a class="brand" href="#">Design System Starter</a>
+      <div class="nav-actions">
+        <button class="ds-btn ds-btn-ghost ds-btn-sm" type="button">次要按鈕</button>
+        <button class="ds-btn ds-btn-primary ds-btn-sm" type="button">主要按鈕</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-shell">
+    <section class="ds-container hero">
+      <span class="ds-pill ds-pill-accent">Starter</span>
+      <h1>使用 claude2code design-system 建站</h1>
+      <p>這是一個最小模板：頁面 layout 寫在 app.css，元件、配色、字體、字級都來自 design-system.css。</p>
+    </section>
+
+    <section class="ds-container card-grid" aria-label="範例卡片">
+      <article class="ds-card item-card">
+        <span class="ds-pill">01</span>
+        <h2>卡片元件</h2>
+        <p>使用 gallery 的 <code>ds-card</code> 與 <code>ds-pill</code>。</p>
+      </article>
+      <article class="ds-card item-card">
+        <span class="ds-pill ds-pill-success">完成</span>
+        <h2>狀態標籤</h2>
+        <p>成功狀態使用 <code>ds-pill-success</code>。</p>
+      </article>
+    </section>
+
+    <section class="ds-container section-block">
+      <h2>終端機主題</h2>
+      <div class="ds-term">
+        <div class="ds-term-chrome"><span class="ds-term-dot dot-danger"></span><span class="ds-term-dot dot-warn"></span><span class="ds-term-dot dot-success"></span></div>
+        <div class="ds-term-body"><span class="term-prompt">➜</span> <span class="term-folder">~/project</span> claude "幫我建 landing page"</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
