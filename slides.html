@@ -2780,14 +2780,19 @@ Codex 要包含 AGENTS.md、config.toml，並說明 Shell 不串接只有軟規�
       </div>
 
       <div class="r" style="margin-top:18px;display:flex;gap:14px;width:100%;">
-        <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px;">
-          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:5px;">🎚 模式（總開關）</div>
-          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0;">一鍵決定 AI 整體有多放手：只讀 → 自動改檔 → 全自動。</p>
+        <div style="flex:1;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:14px;padding:16px 18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:5px;">🎚 模式（總開關）★ 今天用這個</div>
+          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.78);margin:0;">一鍵決定 AI 整體有多放手：只讀 → 自動改檔 → 全自動。<strong style="color:#fff;">由模型自己判斷這個指令有沒有風險</strong>——Claude 與 Codex 現在都鼓勵一般使用者這樣用。</p>
         </div>
         <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px;">
-          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:5px;">✅ 白名單（細部授權）</div>
-          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0;">告訴 AI「這幾個指令我永遠信任，別再問」。跟模式搭配用。</p>
+          <div style="font-size:14px;font-weight:800;color:rgba(255,255,255,0.75);margin-bottom:5px;">✅ 白名單（細部授權）· 進階</div>
+          <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.68);margin:0;">逐條點名「這幾個指令我永遠信任」。<strong style="color:#fff;">比模式更嚴、也更囉唆</strong>；等你在真的專案上動手時才需要這一層。</p>
         </div>
+      </div>
+
+      <div class="r" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(74,222,128,0.18);display:inline-flex;align-items:center;justify-content:center;color:#86EFAC;font-weight:900;flex-shrink:0;">✓</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">安裝嚮導已經幫你把 <strong style="color:#fff;">accept edits 的白名單</strong>建好裝進去了——所以今天你不用自己加，<strong style="color:#fff;">一般時候直接用模式（Auto）就好</strong>。</span>
       </div>
     </div>
   </section>
@@ -2881,6 +2886,11 @@ Codex 要包含 AGENTS.md、config.toml，並說明 Shell 不串接只有軟規�
       <h2 class="slide-title" style="color:#18181B;">一鍵把常用指令加白名單</h2>
       <p class="slide-lede" style="margin-top:8px;color:#555;max-width:880px;">白名單 = 「這些指令我永遠信任，別再問」。一條條手動加很煩——直接叫 AI 讀你最近的指令紀錄，挑出最常用又安全的，自己寫進設定。可以做成一個 skill。</p>
 
+      <div style="margin-top:14px;display:flex;align-items:center;gap:12px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:14px;padding:13px 18px;max-width:880px;">
+        <span style="font-size:18px;flex-shrink:0;">📌</span>
+        <span style="font-size:13.5px;line-height:1.6;color:#78350F;">今天<strong>不用做這一頁</strong>——安裝嚮導已經把 accept edits 的白名單裝好了。這頁是給你知道「以後自己要加的時候怎麼加」。一般用途直接用 Auto 模式就夠，白名單是等你在真的專案上動手才需要的那一層。</span>
+      </div>
+
       <div class="r" style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;align-items:stretch;">
 
         <div style="background:#0E1A2F;border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(14,26,47,0.20);display:flex;flex-direction:column;">
@@ -2962,6 +2972,108 @@ sandbox_mode  = "workspace-write"
       <div class="r" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(46,125,91,0.08);border:1px solid rgba(46,125,91,0.20);border-radius:14px;padding:13px 18px;color:#1D5B42;font-size:13px;line-height:1.55;">
         <span style="width:26px;height:26px;border-radius:50%;background:rgba(46,125,91,0.16);display:inline-flex;align-items:center;justify-content:center;color:#2E7D5B;font-weight:900;flex-shrink:0;">✓</span>
         <span>優先選 ① ——就是我們一直在講的「一條指令一件事」，白名單命中率最高，也最容易看懂 AI 每一步在做什麼。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       新增（2026-08-16）· 每天真的會用到的指令
+       ══════════════════════════════════════════════════════════ -->
+
+  <section class="slide slide-dark" id="s-cmd1">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow">每天會用到 · Claude Code</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">不用背，記得「有這回事」就好</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:860px;">用到再回來查。這幾個是每天都會碰到的。</p>
+
+      <div style="margin-top:22px;width:100%;display:flex;flex-direction:column;gap:9px;">
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;padding:0 18px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>指令</div><div>做什麼</div><div>什麼時候用</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/clear</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">清掉這次對話的上下文</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">換一個題目做，但不想關掉視窗</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/context</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">看目前上下文用掉多少</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">覺得它開始忘記前面講過的事</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/rewind</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">回到前面某一步的狀態</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">它改壞了，想退回去</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/resume</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">接回之前那個 session</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">昨天做到一半，今天繼續</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.8fr 1.3fr 1.5fr;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-family:var(--font-mono);font-size:14px;">Esc</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);">當場打斷它</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.82);">看到它走錯方向，<strong style="color:#fff;">不要等它做完</strong></div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(74,222,128,0.18);display:inline-flex;align-items:center;justify-content:center;color:#86EFAC;font-weight:900;flex-shrink:0;">✓</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);"><strong style="color:#fff;">打斷它比讓它做完再修便宜</strong>。走錯方向的時候按 Esc，不要客氣。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="s-cmd2">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow">每天會用到 · Codex</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">Codex 的對應指令</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:860px;">名字不同，做的事一樣。</p>
+
+      <div style="margin-top:22px;width:100%;display:flex;flex-direction:column;gap:9px;">
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;padding:0 18px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>指令</div><div>做什麼</div><div>什麼時候用</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/new</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">開一個新對話</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">換題目（對應 Claude 的 /clear）</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/model</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">換模型與推理強度</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">簡單的事想跑快一點</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#fff;font-family:var(--font-mono);font-size:14px;">/approvals</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);">改它要不要每次問你</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.82);">就是剛才那頁的權限模式</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/status</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">看目前設定與用量</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">想知道還剩多少額度</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.5fr;gap:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px 18px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">$skill-name</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);">直接叫某一支 skill</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.62);">已經知道要用哪支，不想讓它自己猜</div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(248,113,113,0.18);display:inline-flex;align-items:center;justify-content:center;color:#F87171;font-weight:900;flex-shrink:0;">!</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">「清掉上下文」<strong style="color:#fff;">不是重開機</strong>——它會忘掉剛才講好的規則，該重講的要重講一次。</span>
       </div>
     </div>
   </section>
@@ -3415,6 +3527,76 @@ sandbox_mode  = "workspace-write"
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       新增（2026-08-16）· Obsidian 筆記庫
+       接在 Handoff 後面：兩者都是「把上下文留在檔案裡」，
+       而後面每一段（求職、skill、網站）都有東西可以寫進去。
+       ══════════════════════════════════════════════════════════ -->
+
+  <section class="slide slide-dark" id="s-obs1">
+    <div class="slide-body" style="max-width:1040px;">
+      <p class="slide-eyebrow">筆記 · Obsidian</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">把它做過的事留下來</h2>
+      <p class="slide-lede" style="margin-top:10px;color:rgba(255,255,255,0.72);max-width:840px;">筆記不是給 AI 看的，是給<strong style="color:#fff;">三個月後的你</strong>看的。Handoff 解決「明天接得回今天」，筆記庫解決「三個月後還記得為什麼」。</p>
+
+      <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">就是一個資料夾的 Markdown</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">沒有專有格式，AI 讀得懂也寫得動，換工具也帶得走。</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">AI 可以直接編輯</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">叫它「把剛才查到的寫成一則筆記」，它就真的寫進那個資料夾。</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">用 GitHub 同步</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">換一台機器接得回來，而且改了什麼看得到。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:18px;display:flex;align-items:center;gap:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(74,222,128,0.18);display:inline-flex;align-items:center;justify-content:center;color:#86EFAC;font-weight:900;flex-shrink:0;">✓</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">筆記庫在 <strong style="color:#fff;font-family:var(--font-mono);">~/jr-workshop-vault</strong>——安裝嚮導已經幫你建好、也接上 GitHub 了，這裡不用自己 clone。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-warm" id="s-obs2">
+    <div class="slide-body" style="max-width:1080px;">
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">一天實際會怎麼用</p>
+      <h2 class="slide-title" style="color:#18181B;">四個動作，講完就會用</h2>
+      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:860px;">不用學 Obsidian 的功能，用講的叫 AI 做就好。</p>
+
+      <div class="r" style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;">
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">01 · 查完東西</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0 0 8px;font-weight:700;">「把剛才那段整理成一則筆記放進筆記庫」</p>
+          <p style="font-size:13px;line-height:1.55;color:#666;margin:0;">要求它給：標題、三個要點、一段你自己的話。</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">02 · 自己看一眼</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0 0 8px;font-weight:700;">打開 Obsidian 讀那則筆記</p>
+          <p style="font-size:13px;line-height:1.55;color:#666;margin:0;">AI 寫的東西<strong>你要認得出對錯</strong>——這一步不能跳。</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">03 · 推上去</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0 0 8px;font-weight:700;">「把筆記推上去」</p>
+          <p style="font-size:13px;line-height:1.55;color:#666;margin:0;">vault-sync 這支 skill 會處理 commit 與 push。</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">04 · 換一台機器</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0 0 8px;font-weight:700;">「先抓最新的」</p>
+          <p style="font-size:13px;line-height:1.55;color:#666;margin:0;">它會把遠端的拉下來，你接著寫。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:14px;padding:13px 18px;">
+        <span style="font-size:18px;flex-shrink:0;">📝</span>
+        <span style="font-size:13.5px;line-height:1.6;color:#78350F;">接下來每一段做完，都會叫你<strong>寫一則筆記</strong>：求職的缺口報告、你做的那支 skill、網站的網址與風格方向。今天結束時你的筆記庫裡會有東西，不是空的。</span>
+      </div>
     </div>
   </section>
 
@@ -4261,6 +4443,108 @@ Interests
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════════
+       新增（2026-08-16）· Remote Control
+       ⚠️ 兩邊都叫 remote-control，但接上去的東西不一樣（2026-08 查證）：
+       Claude 接「正在跑的那個 session」，Codex 是「另開一個專屬遠端的 session」。
+       學生拿 Codex 想接管剛才那個會找不到——那是這一段最重要的一頁。
+       ══════════════════════════════════════════════════════════ -->
+
+  <section class="slide slide-dark" id="s-remote1">
+    <div class="slide-body" style="max-width:1040px;">
+      <p class="slide-eyebrow">進階 · Remote Control</p>
+      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">人不在電腦前，也能繼續</h2>
+      <p class="slide-lede" style="margin-top:10px;color:rgba(255,255,255,0.72);max-width:840px;">電腦繼續做事，手機只是一個窗口。</p>
+
+      <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">跑的還是你的電腦</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">檔案、專案設定、MCP 都在原本那台。手機沒有跑任何東西。</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">手機做的是「回話」</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">看進度、回答它的問題、按批准——不是重新下指令從頭來。</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
+          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">不用開對外的埠</div>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">是你的電腦主動連出去，不是外面連進來。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:18px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:14px;padding:14px 18px;">
+        <span style="font-size:18px;flex-shrink:0;">📱</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">最適合的場合：<strong style="color:#fff;">剛才那種要跑好幾分鐘的任務</strong>——交代完就可以走開，用手機看它跑完。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="s-remote2">
+    <div class="slide-body" style="max-width:1120px;">
+      <p class="slide-eyebrow">⚠️ 這一頁是重點</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">兩邊不是同一件事</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:880px;">指令幾乎一樣，但<strong style="color:#F0DE9E;">接上去的東西不一樣</strong>。拿 Codex 想接管剛才終端裡那個 session，會找不到。</p>
+
+      <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;">
+        <div style="background:rgba(217,119,87,0.10);border:1px solid rgba(217,119,87,0.34);border-radius:18px;padding:22px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#E8A06A;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Claude Code</div>
+          <div style="font-family:var(--font-mono);font-size:14px;color:#fff;background:rgba(0,0,0,0.30);border-radius:10px;padding:10px 14px;margin-bottom:14px;">claude remote-control</div>
+          <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.75;color:rgba(255,255,255,0.80);">
+            <li>接上<strong style="color:#fff;">正在跑的那個 session</strong></li>
+            <li>用 claude.ai/code 或 Claude App</li>
+            <li>掃 QR，或開它給的 session 網址</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:22px;">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:rgba(255,255,255,0.75);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Codex</div>
+          <div style="font-family:var(--font-mono);font-size:14px;color:#fff;background:rgba(0,0,0,0.30);border-radius:10px;padding:10px 14px;margin-bottom:14px;">codex remote-control</div>
+          <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.75;color:rgba(255,255,255,0.80);">
+            <li>需要 CLI 0.130 以上</li>
+            <li><strong style="color:#fff;">另開一個專屬遠端的 session</strong></li>
+            <li>用 ChatGPT App 的 Remote，選裝置</li>
+            <li>接不了你已經在終端跑的那個</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.22);border-radius:14px;padding:14px 18px;">
+        <span style="width:28px;height:28px;border-radius:50%;background:rgba(248,113,113,0.18);display:inline-flex;align-items:center;justify-content:center;color:#F87171;font-weight:900;flex-shrink:0;">!</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);"><strong style="color:#fff;">電腦睡著就斷了</strong>——要嘛設不睡眠、要嘛接電源。還有：手機上按的「同意」跟坐在電腦前按的是同一件事，別在通勤時隨手按。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-warm" id="s-remote3">
+    <div class="slide-body" style="max-width:1080px;">
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">現場做一次 · Claude Code</p>
+      <h2 class="slide-title" style="color:#18181B;">實際接一次給你看</h2>
+      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:860px;">Codex 流程一樣，差別是從 ChatGPT App 選裝置，而且是新開一個 session。</p>
+
+      <div class="r" style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;">
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">01 · 在電腦上開</div>
+          <div style="font-family:var(--font-mono);font-size:14px;color:#18181B;background:#F5F5F4;border-radius:8px;padding:9px 12px;">claude remote-control</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">02 · 拿手機掃 QR</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">按空白鍵可以切換 QR 顯示。</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">03 · 接上之後</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">電腦那邊照樣在跑，手機看得到<strong>同一段輸出</strong>。</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">04 · 回答它的問題</div>
+          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">要批准的動作，在手機上按同意就好。</p>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(46,125,91,0.08);border:1px solid rgba(46,125,91,0.20);border-radius:14px;padding:13px 18px;">
+        <span style="width:26px;height:26px;border-radius:50%;background:rgba(46,125,91,0.16);display:inline-flex;align-items:center;justify-content:center;color:#2E7D5B;font-weight:900;flex-shrink:0;">▶</span>
+        <span style="font-size:13.5px;line-height:1.6;color:#1D5B42;"><strong>練習：</strong>叫它做一件要跑幾分鐘的事 → 開 remote control、手機接上 → 闔上筆電（不要關機）→ 在手機上追加一句要求，看電腦那邊有沒有照做。</span>
+      </div>
+    </div>
+  </section>
+
   <!-- SHOWCASE · Frontend-Design 成品展示 -->
   <section class="slide slide-dark" id="s69" data-slide="70">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
@@ -4319,6 +4603,22 @@ Interests
           <div style="font-size:24px; margin-bottom:8px;">🚀</div>
           <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">從零到上線</div>
           <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">CV → Landing Page → GitHub Pages<br>一個下午就有自己的網站</div>
+        </div>
+        <!-- Skill 4 · 2026-08-16 新增的三段 -->
+        <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:16px;">
+          <div style="font-size:24px; margin-bottom:8px;">⌨️</div>
+          <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">每天會用到的指令</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">/clear · /context · /rewind · /resume<br>走錯方向就按 Esc 打斷它</div>
+        </div>
+        <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:16px;">
+          <div style="font-size:24px; margin-bottom:8px;">📱</div>
+          <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">人不在也能繼續</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">Remote Control · 手機當窗口<br>Claude 接原 session，Codex 另開一個</div>
+        </div>
+        <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:16px;">
+          <div style="font-size:24px; margin-bottom:8px;">🗂</div>
+          <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">把做過的事留下來</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">Obsidian 筆記庫 + GitHub 同步<br>用講的取代打字（Typeless）</div>
         </div>
       </div>
 
