@@ -3320,6 +3320,52 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
+  <!-- S-OBS3 · Obsidian 現場示範：AI 產檔案，你在 Obsidian 改 -->
+  <section class="slide slide-dark" id="s-obs3">
+    <div class="slide-body" style="max-width:1180px;">
+      <p class="slide-eyebrow">現場示範 · Obsidian</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,50px);">實際跑一次：從對話變成一份筆記</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.72);max-width:900px;">情境：剛才問完 Claude「權限模式差在哪」，現在把結論留成檔案。</p>
+
+      <div class="r" style="margin-top:22px;display:grid;grid-template-columns:1.45fr 1fr;gap:18px;width:100%;align-items:stretch;">
+        <div style="background:#050B17;border:1px solid rgba(240,222,158,0.24);border-radius:18px;overflow:hidden;box-shadow:0 18px 46px rgba(5,11,23,0.24);display:flex;flex-direction:column;">
+          <div style="height:40px;background:#111A2B;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;">
+            <span style="display:flex;gap:7px;"><i style="width:10px;height:10px;border-radius:50%;background:#EF6351;display:block;"></i><i style="width:10px;height:10px;border-radius:50%;background:#F2B84B;display:block;"></i><i style="width:10px;height:10px;border-radius:50%;background:#57C785;display:block;"></i></span>
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.1em;text-transform:uppercase;">貼進 Claude Code</span>
+          </div>
+<pre style="margin:0;padding:16px 20px;color:#F0DE9E;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;white-space:pre-wrap;overflow-x:auto;flex:1;">把我們剛才討論的「Claude Code 權限模式」整理成一份筆記，
+存到 ~/jr-workshop-vault/notes/claude-permission-modes.md。
+
+用這個格式：
+# Claude Code 權限模式
+## 一句話結論
+## 四個模式怎麼選
+用 table 列出：模式 / 自動做 / 還是會問你
+## 我自己的話
+先留一行空白，我等一下自己補
+
+只做這件事，寫完告訴我檔案路徑就好。</pre>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">貼完會看到什麼</div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:14px 16px;">
+            <div style="font-size:13.5px;font-weight:800;color:#F0DE9E;margin-bottom:4px;">01　資料夾多一個檔</div>
+            <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">Claude 回報路徑，<span style="font-family:var(--font-mono);">notes/</span> 裡真的出現那個 .md。</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:14px 16px;">
+            <div style="font-size:13.5px;font-weight:800;color:#F0DE9E;margin-bottom:4px;">02　Obsidian 打開就是排版好的</div>
+            <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">標題、表格都渲染好，不用看 Markdown 語法。</p>
+          </div>
+          <div style="background:rgba(74,222,128,0.10);border:1px solid rgba(74,222,128,0.28);border-radius:14px;padding:14px 16px;">
+            <div style="font-size:13.5px;font-weight:800;color:#86EFAC;margin-bottom:4px;">03　在「我自己的話」直接打字</div>
+            <p style="font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.78);margin:0;">點下去就能編輯——AI 產檔案、你管檔案，這一步就是重點。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- ── 活動素材（2026-08-16 新增）─────────────────────────────────
      一鍵下載今天要用的兩份檔案，並且當場看得到裡面長什麼樣。
      左邊是 design system 的互動樹（點資料夾展開、點檔案看內容），
