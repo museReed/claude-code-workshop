@@ -30,6 +30,11 @@ html, body {
 }
 
 /* Individual slide */
+/* ⚠️ 換頁時**不能兩張同時半透明**。
+   每一張投影片都有自己的背景色（深色／暖色），兩張一起淡入淡出的話，
+   那 0.3 秒裡上一頁的字會透過來疊在這一頁上——投影出去像重影（Reed 截到）。
+   解法：離場的那張用 visibility 直接收掉（visibility 沒有補間），
+   只有進場的那張在深色底上淡入，而且靠 z-index 壓在上面。 */
 .slide {
   position: absolute;
   inset: 0;
@@ -37,6 +42,8 @@ html, body {
   align-items: center;
   justify-content: center;
   opacity: 0;
+  visibility: hidden;
+  z-index: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   overflow: hidden;
@@ -44,6 +51,8 @@ html, body {
 
 .slide.active {
   opacity: 1;
+  visibility: visible;
+  z-index: 1;
   pointer-events: auto;
 }
 
