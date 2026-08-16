@@ -1980,27 +1980,27 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">環境安裝</p>
       <h2 class="slide-title" style="color:#18181B;">貼這一行，其他交給嚮導</h2>
 
-      <div style="margin-top:16px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:16px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.20);">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
-          <div style="display:flex;align-items:center;gap:9px;">
-            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+      <div style="margin-top:16px; width:100%; background:#1F1B16; border-radius:12px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.28);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#2A241D;">
+          <div style="display:flex;align-items:center;gap:7px;">
+            <div style="width:11px;height:11px;border-radius:50%;background:#E85B4A;"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#D4A843;"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#30CECE;"></div>
           </div>
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">macOS · 終端機</div>
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#B3A99B;letter-spacing:0.08em;text-transform:uppercase;">macOS · Terminal</div>
         </div>
-        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:18px 22px; font-size:13px; line-height:1.6; overflow-x:auto; margin:0; white-space:pre-wrap;">curl -fsSL https://musereed.github.io/jr-setup-ui/setup.sh | bash</pre>
+        <pre class="term-type" style="font-family:var(--font-mono); background:#1F1B16; color:#F0ECE4; padding:18px 22px; font-size:13px; line-height:1.7; overflow-x:auto; margin:0; white-space:pre-wrap;"><span style="color:#E8A06A;">➜  </span><span class="term-body">curl -fsSL https://musereed.github.io/jr-setup-ui/setup.sh | bash</span></pre>
       </div>
-      <div style="margin-top:16px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:16px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.20);">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
-          <div style="display:flex;align-items:center;gap:9px;">
-            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+      <div style="margin-top:16px; width:100%; background:#1F1B16; border-radius:12px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.28);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#2A241D;">
+          <div style="display:flex;align-items:center;gap:7px;">
+            <div style="width:11px;height:11px;border-radius:50%;background:#E85B4A;"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#D4A843;"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#30CECE;"></div>
           </div>
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Windows · PowerShell</div>
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#B3A99B;letter-spacing:0.08em;text-transform:uppercase;">Windows · Terminal</div>
         </div>
-        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:18px 22px; font-size:13px; line-height:1.6; overflow-x:auto; margin:0; white-space:pre-wrap;">irm https://raw.githubusercontent.com/museReed/jr-setup-ui/main/docs/setup.ps1 | iex</pre>
+        <pre class="term-type" style="font-family:var(--font-mono); background:#1F1B16; color:#F0ECE4; padding:18px 22px; font-size:13px; line-height:1.7; overflow-x:auto; margin:0; white-space:pre-wrap;"><span style="color:#E8A06A;">➜  </span><span class="term-body">irm https://raw.githubusercontent.com/museReed/jr-setup-ui/main/docs/setup.ps1 | iex</span></pre>
       </div>
 
       <div class="r" style="margin-top:18px;width:100%;border-radius:16px;overflow:hidden;border:1px solid rgba(24,24,27,0.10);box-shadow:0 18px 44px rgba(14,26,47,0.14);">
@@ -5139,6 +5139,51 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
   });
+})();
+</script>
+
+<!-- ── 安裝指令的打字動畫（s13a）── -->
+<script>
+(function () {
+  var blocks = [].slice.call(document.querySelectorAll('.term-type'));
+  if (!blocks.length) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  blocks.forEach(function (pre) {
+    var body = pre.querySelector('.term-body');
+    var full = body.textContent;
+    var timer = null;
+
+    function finish() {
+      if (timer) { clearInterval(timer); timer = null; }
+      body.textContent = full;
+    }
+
+    function play() {
+      if (reduced) { finish(); return; }
+      finish();
+      body.textContent = '';
+      var i = 0;
+      timer = setInterval(function () {
+        body.textContent = full.slice(0, ++i);
+        if (i >= full.length) { clearInterval(timer); timer = null; }
+      }, 18);
+    }
+
+    // 按 Copy 或點到框裡，先把整行補完再說——不能讓人複製到半截指令。
+    pre.parentElement.addEventListener('click', finish, true);
+
+    pre.__playType = play;
+  });
+
+  // 切到這一頁時重播一次。deck 換頁是加 .active，沒有事件可聽，用 observer 盯。
+  var slide = document.getElementById('s13a');
+  new MutationObserver(function () {
+    if (!slide.classList.contains('active')) return;
+    blocks.forEach(function (pre) { pre.__playType(); });
+  }).observe(slide, { attributes: true, attributeFilter: ['class'] });
+
+  if (slide.classList.contains('active')) blocks.forEach(function (pre) { pre.__playType(); });
 })();
 </script>
 
