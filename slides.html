@@ -4281,9 +4281,10 @@ sandbox_mode  = "workspace-write"
           <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.08);">
             <div style="font-family:var(--font-mono); font-size:9px; font-weight:800; color:#86EFAC; letter-spacing:0.06em;">STEP 03 · 預覽調整</div>
           </div>
-          <pre style="font-family:var(--font-mono); background:#050B17; color:#86EFAC; padding:12px 14px; font-size:10.5px; line-height:1.55; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">幫我啟動 local server 預覽 index.html。
-我會用 Claude / ChatGPT 桌面版的 debug 工具
-圈出要改的地方，再把清單貼給你修。</pre>
+          <pre style="font-family:var(--font-mono); background:#050B17; color:#86EFAC; padding:12px 14px; font-size:10.5px; line-height:1.55; overflow-x:auto; margin:0; white-space:pre-wrap; flex:1;">幫我啟動 local server 預覽 index.html，
+然後在這個桌面 App 裡開一個 browser 打開那個網址。
+我會用瀏覽器右上角的圈選工具點我要改的地方，
+再打字告訴你改成什麼。</pre>
         </div>
 
         <div style="background:#0E1A2F; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 12px 24px rgba(14,26,47,0.12); min-width:0;">
@@ -4314,63 +4315,6 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- S65b · 下載桌面版與手機版 App -->
-  <section class="slide slide-warm" id="s65b">
-    <div class="slide-body" style="max-width:1060px;display:flex;flex-direction:column;gap:14px;">
-      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">動手前 · 先把 App 裝好</p>
-      <h2 style="font-size:clamp(24px,3vw,40px);font-weight:800;color:#1D1D1F;margin:0;">下載桌面版與手機版 App</h2>
-      <p style="font-size:clamp(13px,1.3vw,17px);line-height:1.55;color:#555;margin:0;max-width:900px;">桌面版才有圈選畫面的 debug 工具；手機版拿出手機掃下面的 QR 就能裝。</p>
-
-      <div class="r" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;margin-top:6px;">
-        <div style="background:#fff;border:1.5px solid rgba(184,144,46,0.28);border-radius:18px;padding:20px;box-shadow:0 10px 24px rgba(14,26,47,0.05);">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:14px;">
-            <span style="font-size:19px;font-weight:800;color:#1D1D1F;">Claude</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#B8902E;">claude.ai/download</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-            <a href="https://claude.ai/download" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://claude.ai/download" alt="桌面版 QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(184,144,46,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">桌面版</span>
-            </a>
-            <a href="https://apps.apple.com/app/claude/id6473753684" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://apps.apple.com/app/claude/id6473753684" alt="iPhone QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(184,144,46,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">iPhone</span>
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://play.google.com/store/apps/details?id=com.anthropic.claude" alt="Android QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(184,144,46,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">Android</span>
-            </a>
-          </div>
-        </div>
-
-        <div style="background:#fff;border:1.5px solid rgba(5,150,105,0.28);border-radius:18px;padding:20px;box-shadow:0 10px 24px rgba(14,26,47,0.05);">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:14px;">
-            <span style="font-size:19px;font-weight:800;color:#1D1D1F;">ChatGPT</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#059669;">openai.com/chatgpt/download</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-            <a href="https://openai.com/chatgpt/download/" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://openai.com/chatgpt/download/" alt="桌面版 QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(5,150,105,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">桌面版</span>
-            </a>
-            <a href="https://apps.apple.com/app/chatgpt/id6448311069" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://apps.apple.com/app/chatgpt/id6448311069" alt="iPhone QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(5,150,105,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">iPhone</span>
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.openai.chatgpt" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=FFFFFF&color=0E1A2F&margin=6&data=https://play.google.com/store/apps/details?id=com.openai.chatgpt" alt="Android QR" style="width:104px;height:104px;border-radius:10px;border:1.5px solid rgba(5,150,105,0.35);background:#fff;">
-              <span style="font-size:12px;font-weight:700;color:#1D1D1F;">Android</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="r r-d1" style="display:flex;align-items:center;gap:12px;background:rgba(14,26,47,0.05);border:1px solid rgba(14,26,47,0.08);border-radius:14px;padding:13px 18px;">
-        <span style="font-size:16px;flex-shrink:0;">💡</span>
-        <span style="font-size:13.5px;line-height:1.55;color:#555;">兩個都裝也可以——等一下改網站時，你會用其中一個的 debug 工具圈出想改的地方。</span>
-      </div>
-    </div>
-  </section>
 
   <!-- S64 · 下載 App Modal -->
   <div id="s64-app-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:5000;align-items:center;justify-content:center;padding:40px;">
