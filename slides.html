@@ -2017,7 +2017,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
   <section class="slide slide-dark" id="s13d">
     <div class="slide-body" style="max-width:1240px;">
       <p class="slide-eyebrow">Claude Code · 每天會用到</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">常用指令，現在就各按一次</h2>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">常用指令，現在就可以試試</h2>
 
       <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:8px;">
         <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;padding:0 16px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
@@ -2059,6 +2059,69 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
           <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">被問到煩，想讓它自動改檔</div>
           <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">連按幾次，看左下角在 Manual / Accept Edits / Plan / Auto Mode 之間循環</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ── Codex 常用指令（2026-08-16 新增）───────────────────────────
+     跟前一頁同一個結構：名字不同、做的事一樣。
+     ⚠️ skill 的叫法是 $ 不是 /——這是兩邊最容易打錯的一個。 -->
+  <section class="slide slide-dark" id="s13e">
+    <div class="slide-body" style="max-width:1240px;">
+      <p class="slide-eyebrow">Codex · 每天會用到</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">Codex 這邊怎麼打</h2>
+
+      <div style="margin-top:18px;width:100%;display:flex;flex-direction:column;gap:7px;">
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;padding:0 16px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>指令</div><div>做什麼</div><div>什麼時候用</div><div>現場測試</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">codex</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">在終端機啟動 Codex</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">每次要開始做事的第一步</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打開 Terminal / Ghostty → 打 codex → 看到它的畫面就成功了</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/new</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">開一個新對話</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">換一個題目做（對應 Claude 的 /clear）</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">先問它「我剛才問了什麼」→ 打 /new → 再問一次，它答不出來</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/model</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">換模型與推理強度</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">簡單的事想跑快一點；難的事想讓它想久一點</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打 /model 挑一個，再打 /status 確認換過來了</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Esc</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">當場打斷它正在做的事</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">看到它走錯方向，不用等它做完</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">叫它「從 1 數到 100，每個數字一行」，數到一半按 Esc</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/approvals</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">改它要不要每次問你</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">被問到煩，或反過來想看緊一點</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">切到 Auto，再叫它改一個檔——這次它不會問就直接改</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">$skill-name</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">直接叫某一支裝好的 skill</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">已經知道要用哪支，不想讓它自己猜</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打 $auto-rename，看這個 session 的名稱有沒有變成 emoji + 描述</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:11px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/status</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">看目前設定與用量</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">想知道現在是哪個模型、還剩多少額度</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打 /status，對照剛才 /model 與 /approvals 改的有沒有生效</div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:14px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:14px;padding:12px 18px;">
+        <span style="font-family:var(--font-mono);font-size:16px;font-weight:900;color:#F0DE9E;flex-shrink:0;">$</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">兩邊最容易打錯的一個：<strong style="color:#fff;">Codex 叫 skill 用 <span style="font-family:var(--font-mono);">$</span>，Claude Code 用 <span style="font-family:var(--font-mono);">/</span></strong>。</span>
       </div>
     </div>
   </section>
