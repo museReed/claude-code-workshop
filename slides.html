@@ -4949,19 +4949,21 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
       '<div class="modal-section"><p>打開網頁或手機 App 就能用，不需要安裝任何額外工具。操作方式和你習慣的 SaaS 一樣——點選、上傳、輸入，AI 幫你在介面內完成任務。</p></div>' +
       '<div class="modal-section"><h4>代表產品</h4>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
-        badge('Claude Cowork') + badge('ChatGPT Projects') +
+        goldBadge('Claude Desktop') + goldBadge('Claude Mobile App') +
+        goldBadge('ChatGPT Desktop') + goldBadge('ChatGPT Mobile App') +
       '</div></div>' +
-      '<div class="modal-section"><h4>適合誰</h4><p>不想碰終端機、只需要在熟悉的介面完成工作的使用者。</p></div>',
+      '<div class="modal-section">' + '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">' + '<span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:#86EFAC;background:rgba(74,222,128,0.14);border-radius:6px;padding:3px 10px;flex-shrink:0;">優點</span>' + '<span style="font-size:14px;line-height:1.6;color:#86EFAC;">只需要在熟悉的介面完成工作</span>' + '</div>' + '<div style="display:flex;gap:10px;align-items:flex-start;">' + '<span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:#FCA5A5;background:rgba(248,113,113,0.14);border-radius:6px;padding:3px 10px;flex-shrink:0;">缺點</span>' + '<span style="font-size:14px;line-height:1.6;color:#FCA5A5;">不靈活，且 UI 改版頻率高，每次都要學習新的操作介面</span>' + '</div></div>',
 
     cli:
       '<p class="modal-eyebrow" style="color:var(--gold);">CLI Based AI Agent</p>' +
-      '<h3 class="modal-title" style="color:var(--gold-bright);">用駭客任務的文字指令讓 AI 進資料夾做事</h3>' +
-      '<div class="modal-section"><p>像駭客任務一樣輸入指令，AI 直接操作你本機的資料夾、檔案、執行程式。沒有圖形介面，但威力最強——可以處理整個專案。</p></div>' +
+      '<h3 class="modal-title" style="color:var(--gold-bright);">用輸入指令的方式控制 AI</h3>' +
+      '<div class="modal-section"><p>用打字輸入指令，AI 直接操作你本機的資料夾、檔案、執行程式。沒有圖形介面，但威力最強——可以處理整個專案。</p></div>' +
       '<div class="modal-section"><h4>代表產品</h4>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">' +
         goldBadge('Claude Code') + goldBadge('Codex') +
       '</div></div>' +
-      '<div class="modal-section"><h4>今天學的就是這個</h4><p>Claude Code 是 CLI Agent 的代表——打開終端機、輸入 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,80,80,0.15);padding:1px 8px;border-radius:4px;color:#FF6B6B;font-weight:700;">claude</code>，就開始指揮 AI。</p></div>',
+      '<div class="modal-section">' + '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">' + '<span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:#86EFAC;background:rgba(74,222,128,0.14);border-radius:6px;padding:3px 10px;flex-shrink:0;">優點</span>' + '<span style="font-size:14px;line-height:1.6;color:#86EFAC;">最為強大、靈活，學會後也可輕鬆上手 GUI 版本的 AI Agent；UI 改版頻率低，不用一直學新的操作介面</span>' + '</div>' + '<div style="display:flex;gap:10px;align-items:flex-start;">' + '<span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:#FCA5A5;background:rgba(248,113,113,0.14);border-radius:6px;padding:3px 10px;flex-shrink:0;">缺點</span>' + '<span style="font-size:14px;line-height:1.6;color:#FCA5A5;">CLI 的操作方式與過往滑鼠點擊 UI 的方式不同，有學習門檻</span>' + '</div></div>' +
+      '<div class="modal-section"><h4>今天學的就是這個</h4><p>打開終端機、輸入 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,80,80,0.15);padding:1px 8px;border-radius:4px;color:#FF6B6B;font-weight:700;">claude</code> 或 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,80,80,0.15);padding:1px 8px;border-radius:4px;color:#FF6B6B;font-weight:700;">codex</code>，就開始指揮 AI。</p></div>',
 
     ide:
       '<p class="modal-eyebrow">AI Agent IDE</p>' +
