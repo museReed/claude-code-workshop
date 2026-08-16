@@ -4006,61 +4006,6 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- PW3 · Playwright MCP: Claude Code vs Codex + 安裝 -->
-  <section class="slide slide-dark" id="s-pw3">
-    <div class="slide-body" style="max-width:960px; zoom:1.15;">
-
-      <p class="slide-eyebrow">MCP · Playwright — 讓 AI 長眼睛</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">安裝 Playwright MCP</h2>
-
-      <!-- Comparison table -->
-      <div class="r" style="margin-top:24px; width:100%;">
-        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
-          <!-- Header -->
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
-          <!-- Row 1: Type -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">類型</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">MCP server<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">Microsoft @playwright/mcp</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同一個 MCP（同源）<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">跨工具通用</span></div>
-          <!-- Row 2: Install -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝指令</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">claude mcp add playwright<br>npx @playwright/mcp@latest</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:10px;">codex mcp add playwright --<br>npx @playwright/mcp@latest</div>
-          <!-- Row 3: Config -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">設定檔</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.claude.json</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">~/.codex/config.toml<br><span style="font-size:9px; color:rgba(255,255,255,0.4);">[mcp_servers.playwright]</span></div>
-          <!-- Row 4: Prereq -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">前置需求</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Node 20+</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">Node 18+<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">同樣走 npx</span></div>
-          <!-- Row 5: Verify -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">驗證</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">開 session 打 <span style="font-family:var(--font-mono);">/mcp</span><br><span style="font-size:10px; color:rgba(240,222,158,0.5);">看到 playwright 已連線</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">同上 <span style="font-family:var(--font-mono);">/mcp</span><br><span style="font-size:10px; color:rgba(255,255,255,0.4);">約 24 個瀏覽器工具</span></div>
-        </div>
-      </div>
-
-      <!-- Install prompts -->
-      <div class="r r-d1" style="margin-top:16px; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
-          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">▶ Claude Code 安裝</div>
-          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(240,222,158,0.8); line-height:1.7;">
-            claude mcp add playwright<br>npx @playwright/mcp@latest
-          </div>
-        </div>
-        <div style="background:#050B17; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; box-sizing:border-box;">
-          <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#fff; letter-spacing:0.06em; margin-bottom:8px;">▶ Codex CLI 安裝</div>
-          <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.7); line-height:1.7;">
-            codex mcp add playwright --<br>npx @playwright/mcp@latest
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
 
   <!-- ── Frontend-Design Skill ── -->
 
