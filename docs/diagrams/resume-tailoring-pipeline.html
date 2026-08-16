@@ -404,21 +404,18 @@ flowchart LR
         happy: "三層 JD 解構清單 + 前三核心能力 → 進對標（Step 3）",
         failure: []
       },
-      prompt: `你是資深 PM 面試官。讀 career/resume-tailoring/job_description.md。
+      prompt: `你是資深 PM 面試官。讀 job_description.md。
 
 把所有 JD 要求解構成三個層次：
 
-**Required（明確必要——沒有就不進面試）**
+Required（明確必要——沒有就不進面試）
 | 要求 | 描述 | 如何從履歷中找到它 |
-|------|------|-----------------|
 
-**Preferred（加分——有了更好，沒有也不一定淘汰）**
+Preferred（加分——有了更好，沒有也不一定淘汰）
 | 要求 | 描述 | 加多少分 |
-|------|------|---------|
 
-**Implicit（未明說但面試官一定在看）**
+Implicit（未明說但面試官一定在看）
 | 隱性期待 | 你是怎麼推斷出來的 |
-|---------|-----------------|
 
 最後告訴我：這個 JD 最看重的 3 個核心能力是什麼？（你的主觀判斷，一句話解釋為什麼）
 
@@ -439,12 +436,11 @@ flowchart LR
           { condition: "不同意評估 → 告訴 Claude 你的真實經歷重新評估", target: 3 }
         ]
       },
-      prompt: `你是資深 PM 面試官。讀 career/resume-tailoring/cv_draft.md + job_description.md。
+      prompt: `你是資深 PM 面試官。讀 cv_draft.md + job_description.md。
 
 對每條 JD 要求（Required + Preferred），在 CV 找對應：
 
 | JD 要求 | 層級 | CV 對應內容 | 評分 | 改進建議 |
-|---------|------|-----------|------|---------|
 
 評分標準：
 - ✅ = CV 有清楚的具體經歷，面試官能看到
