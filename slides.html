@@ -3818,16 +3818,29 @@ sandbox_mode  = "workspace-write"
     <div class="slide-body" style="max-width:1060px;display:flex;flex-direction:column;gap:14px;">
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">實作 · 開始動手</p>
       <h2 style="font-size:clamp(24px,3vw,40px);font-weight:800;color:#1D1D1F;margin:0;">貼上 Prompt，建立 CV-JD Tailoring Skill</h2>
-      <div style="background:#0E1A2F;border-radius:16px;padding:22px;width:100%;box-sizing:border-box;">
-        <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;margin-bottom:10px;">Create prompt</div>
-        <div style="font-family:var(--font-mono);font-size:13px;color:#F0DE9E;line-height:1.7;">我想做一個叫 <strong>cv_jd_tailor</strong> 的 skill。它的功能是：讀取一份 CV 和一份目標 JD，自動完成：</div>
-        <ul style="list-style:none;margin:12px 0;padding:0;display:grid;gap:6px;font-family:var(--font-mono);font-size:13px;line-height:1.55;color:#F0DE9E;">
-          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 1</strong>拆解 JD 要求</li>
-          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 2</strong>對照 CV 找 gap</li>
-          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 3</strong>只改有證據支撐的 bullet</li>
-          <li><strong style="display:inline-block;width:72px;color:#9CC4FF;">Step 4</strong>產出 tailored_cv.md 與 proof_checklist.md</li>
-        </ul>
-        <div style="font-family:var(--font-mono);font-size:13px;color:#F0DE9E;line-height:1.7;">請用 structured-questions 先問我必要細節，並確保 skill 永遠不要編造不存在的經歷。</div>
+      <div style="background:#050B17;border:1px solid rgba(240,222,158,0.24);border-radius:18px;width:100%;box-sizing:border-box;overflow:hidden;box-shadow:0 18px 46px rgba(5,11,23,0.24);">
+        <div style="height:40px;background:#111A2B;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;padding:0 16px;">
+          <span style="display:flex;gap:7px;"><i style="width:10px;height:10px;border-radius:50%;background:#EF6351;display:block;"></i><i style="width:10px;height:10px;border-radius:50%;background:#F2B84B;display:block;"></i><i style="width:10px;height:10px;border-radius:50%;background:#57C785;display:block;"></i></span>
+          <span style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.1em;text-transform:uppercase;">貼進 Claude Code</span>
+        </div>
+<pre style="margin:0;padding:14px 20px;color:#F0DE9E;font-family:var(--font-mono);font-size:11px;line-height:1.5;white-space:pre-wrap;overflow-x:auto;">/skill-creator
+
+我要做一個叫 cv-jd-tailor 的 skill，以後每次投履歷都用它。
+它要讀我的 cv_draft.md 和 job_description.md，照這四步做：
+
+1. 拆 JD：把要求分成三層——Required（沒有就不進面試）、
+   Preferred（加分）、Implicit（沒明說但面試官在看），
+   每層用 table 列出：要求 / 描述 / 履歷要怎麼呈現。
+2. 對照 CV：每條要求標一個記號——✅ 有具體經歷、⚠️ 有但寫太弱、
+   ❌ 完全沒有。出現「幫忙 / 參與 / 協助」這種詞的一律算 ⚠️。
+3. 改寫：只改真實經歷撐得住的 bullet，改成「動作 + 數字 + 結果」；
+   沒有數字的地方寫 [數字待確認]，不要自己補。
+4. 產出四個檔：requirement_matrix.md、cv_gap_report.md、
+   tailored_cv.md、proof_checklist.md。
+
+最重要的一條：不可以編造任何我 CV 裡沒有的工作、數字或成就。
+
+開始前先把不清楚的地方問我，等我回答完再動手。</pre>
       </div>
     </div>
   </section>
