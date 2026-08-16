@@ -1976,20 +1976,38 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 
 <!-- ── S13a: 打開已安裝好的 Agent 環境 ─────────────────────────── -->
   <section class="slide slide-warm" id="s13a" data-slide="14">
-    <div class="slide-body" style="max-width:1120px;">
-      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">從看懂介面到準備動手</p>
-      <h2 class="slide-title" style="color:#18181B;">打開已安裝好的 Agent 環境</h2>
-      <p class="slide-lede" style="color:#555;max-width:820px;">確認大家能正確開啟可以貼 prompt、批准操作、看修改結果的位置。</p>
-      <a class="r" href="https://musereed.github.io/jr_workshop_setup_env/#/item/github-push" target="_blank" rel="noopener" style="margin-top:18px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:#0E1A2F;color:#F0DE9E;border:1px solid rgba(184,144,46,0.28);border-radius:999px;padding:12px 18px;font-size:14px;font-weight:800;box-shadow:0 12px 28px rgba(14,26,47,0.12);">
-        <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Setup guide</span>
-        <span>環境安裝網站：GitHub Push</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-      <div class="r" style="margin-top:18px;display:block;">
-        <div style="position:relative;border-radius:18px;overflow:hidden;background:#111;min-height:430px;box-shadow:0 18px 48px rgba(14,26,47,0.18);">
-          <img src="assets/antigravity-agent-environment.png" alt="Antigravity IDE Agent 環境畫面" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <div class="slide-body" style="max-width:1080px;">
+      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">環境安裝</p>
+      <h2 class="slide-title" style="color:#18181B;">貼這一行，其他交給嚮導</h2>
+
+      <div style="margin-top:16px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:16px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.20);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">macOS · 終端機</div>
         </div>
+        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:18px 22px; font-size:13px; line-height:1.6; overflow-x:auto; margin:0; white-space:pre-wrap;">curl -fsSL https://musereed.github.io/jr-setup-ui/setup.sh | bash</pre>
       </div>
+      <div style="margin-top:16px; width:100%; background:rgba(14,26,47,0.92); border:1px solid rgba(240,222,158,0.18); border-radius:16px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,0.20);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#22C55E;"></div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.08em;text-transform:uppercase;">Windows · PowerShell</div>
+        </div>
+        <pre style="font-family:var(--font-mono); background:#050B17; color:#F0DE9E; padding:18px 22px; font-size:13px; line-height:1.6; overflow-x:auto; margin:0; white-space:pre-wrap;">irm https://raw.githubusercontent.com/museReed/jr-setup-ui/main/docs/setup.ps1 | iex</pre>
+      </div>
+
+      <div class="r" style="margin-top:18px;width:100%;border-radius:16px;overflow:hidden;border:1px solid rgba(24,24,27,0.10);box-shadow:0 18px 44px rgba(14,26,47,0.14);">
+        <img src="assets/jr-setup-ui-wizard.png" alt="jr-setup-ui 安裝嚮導畫面：五段進度、目前這張卡、右邊終端機輸出" style="width:100%;display:block;">
+      </div>
+
+      <p class="r" style="margin-top:12px;font-size:14px;line-height:1.6;color:#666;">跑完會自己開這個網頁——接下來都在上面按按鈕，它會一列一列查、缺什麼裝什麼。</p>
     </div>
   </section>
 
