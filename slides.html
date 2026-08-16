@@ -2138,6 +2138,45 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+<!-- ── 活動素材（2026-08-16 新增）─────────────────────────────────
+     一鍵下載今天要用的兩份檔案，並且當場看得到裡面長什麼樣。
+     左邊是 design system 的互動樹（點資料夾展開、點檔案看內容），
+     右邊把 .md 渲染出來——學生先看過素材，等一下交辦時才知道自己在講什麼。 -->
+  <section class="slide slide-dark" id="s22a">
+    <div class="slide-body" style="max-width:1240px;">
+      <p class="slide-eyebrow">今天的練習素材</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">先把素材拿下來</h2>
+
+      <a href="assets/resume-tailoring-materials.zip" download
+         style="margin-top:16px;display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:#F0DE9E;color:#0E1A2F;border-radius:999px;padding:14px 24px;font-size:15px;font-weight:800;box-shadow:0 14px 32px rgba(240,222,158,0.18);">
+        <span style="font-size:18px;">↓</span>
+        <span>下載活動素材（resume-tailoring.zip）</span>
+      </a>
+      <p style="margin-top:8px;font-size:13px;color:rgba(255,255,255,0.55);">解開之後是一個 <span style="font-family:var(--font-mono);color:#F0DE9E;">resume-tailoring/</span> 資料夾，裡面兩份檔案。</p>
+
+      <div style="margin-top:18px;display:grid;grid-template-columns:0.85fr 1.4fr;gap:18px;width:100%;align-items:start;">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px;">
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;">點檔案看內容</div>
+          <div id="mat-tree" style="font-family:var(--font-mono);font-size:13.5px;line-height:2;color:rgba(255,255,255,0.85);">
+            <div style="cursor:pointer;" data-folder>
+              <span data-caret style="display:inline-block;width:14px;color:#F0DE9E;">▾</span>📁 resume-tailoring
+            </div>
+            <div data-children style="padding-left:22px;overflow:hidden;">
+              <div class="mat-file" data-file="cv_draft.md" style="cursor:pointer;padding:2px 8px;border-radius:6px;">📄 cv_draft.md</div>
+              <div class="mat-file" data-file="job_description.md" style="cursor:pointer;padding:2px 8px;border-radius:6px;">📄 job_description.md</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#FBF8F2;border-radius:14px;padding:20px 24px;color:#2D2B28;max-height:46vh;overflow-y:auto;box-shadow:0 14px 36px rgba(0,0,0,0.30);">
+          <div id="mat-preview" style="font-size:13.5px;line-height:1.75;">
+            <p style="color:#8A8A8A;margin:0;">← 點左邊任一個檔案，這裡會顯示它的內容。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- ── S20: 連上 GitHub 工作流 ─────────────────────────────────── -->
 
 <!-- ── S21: 你已經在指揮 Agent ───────────────────────────────── -->
@@ -2147,7 +2186,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     <div class="slide-body" style="max-width:860px;">
       <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">第 4 章 · 25 min · Prompt 技巧</p>
       <h2 class="slide-title" style="color:#18181B;">如何讓 AI 做對事</h2>
-      <p class="slide-lede" style="color:#555;max-width:720px;">大部分「AI 不行」其實是「我說的不夠清楚」。接下來只用一個主線場景：求職 CV + JD 對標。</p>
+      <p class="slide-lede" style="color:#555;max-width:720px;">大部分「AI 不行」其實是「我說的不夠清楚」。接下來只用一個場景練：把你的履歷，照著一份 JD 改一次。</p>
       <div class="r" style="margin-top:34px;display:grid;grid-template-columns:0.9fr 1.25fr;gap:22px;align-items:stretch;">
         <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:24px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;min-height:250px;">
           <div>
@@ -5265,6 +5304,74 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── 活動素材：檔案樹 + Markdown 預覽（s22a）── -->
+<script>
+(function () {
+  var tree = document.getElementById('mat-tree');
+  if (!tree) return;
+  var preview = document.getElementById('mat-preview');
+  var FILES = {"cv_draft.md": "# Wei Chen — CV (draft, last edited 2024)\n\n📧 wei.chen@kcl.ac.uk · 📱 +44 7XXX XXX XXX · 🔗 linkedin.com/in/weichen-tm\n🌍 London, UK · Open to relocation\n\n---\n\n## Personal Statement\n\nI am a highly motivated and detail-oriented student passionate about technology and business. I am responsible for delivering high-quality work and I am a team player who enjoys collaborating with people from different backgrounds. I am looking for an exciting graduate opportunity where I can grow and contribute to a forward-thinking organisation.\n\n---\n\n## Education\n\n**King's College London** | MSc Technology Management | Sept 2025 – present\n- Expected completion: September 2026\n- Current modules: Strategic Management of Technology, Innovation & Entrepreneurship, Digital Transformation\n- Working on dissertation about AI adoption in SMEs\n\n**National Taiwan University** | BSc Industrial Engineering | 2019 – 2023\n- GPA: 3.8 / 4.0\n- Final year project: built a small inventory tracking web app for a campus shop\n- Took electives in business analytics and Python\n\n---\n\n## Experience\n\n**Marketing Intern** — Cathay Bank Taipei | Summer 2023 (3 months)\n- Was responsible for helping the marketing team\n- Helped with social media posts\n- Did a presentation at the end of the internship\n- Learned a lot about banking\n\n**Student Volunteer Co-ordinator** — NTU Engineering Department | 2022 – 2023\n- Helped organise events for the engineering society\n- Was in charge of communications with members\n- Managed budget for events\n- Organised the annual tech showcase which had over 200 attendees\n\n**Part-time Research Assistant** — NTU Lab of Industrial Systems | 2021 – 2022 (1 year)\n- Helped a PhD student with data collection\n- Did some data analysis using Python (pandas)\n- Wrote up summary for weekly meetings\n- The research was about supply chain optimisation\n\n---\n\n## Projects\n\n**Inventory Tracking Web App** (final year project, 2023)\n- Built a simple web app for a campus convenience shop to track stock\n- Used Python (Flask) for backend and React for frontend\n- Owner said it saved them time\n- Got an A grade\n\n**Hackathon: Smart Campus Challenge** (Spring 2022)\n- Worked in a team of 4\n- Built a prototype mobile app for finding empty study rooms\n- Came in top 5 out of about 30 teams\n- I focused on UX design and user research\n\n---\n\n## Skills\n\n- Languages: English (fluent), Mandarin (native), some Japanese\n- Technical: Python, SQL, basic React, Excel, PowerPoint, Figma\n- Soft skills: communication, teamwork, problem-solving, time management\n- Coursework: project management, statistics, business strategy\n\n---\n\n## Interests\n\n- Reading (especially business and technology books — currently reading \"Power and Prediction\")\n- Hiking and travel\n- Volunteer tutoring for high school students\n- Photography\n", "job_description.md": "# Product Manager — Graduate Programme\n\n**Company:** Lattice Pay (fictional UK fintech, Series B, ~150 employees)\n**Location:** London (hybrid, 3 days in office)\n**Start:** September 2026\n**Salary:** £52,000 + equity + £5,000 sign-on\n**Application closes:** Rolling, with first review end of July\n\n---\n\n## About Lattice Pay\n\nWe're a London-based fintech building the payments infrastructure for the next generation of marketplace and platform businesses. We process £2bn+ in transactions annually for 800+ business customers across the UK and EU. We're backed by leading European VCs and growing fast — 3× in the last 18 months.\n\nOur culture: small teams, ship fast, no political games, lots of ownership early.\n\n---\n\n## The Role\n\nOur **Graduate Product Manager Programme** is a 24-month rotational track designed for people who want to learn product management at speed in a high-growth fintech. You'll rotate across three teams (8 months each):\n\n1. **Core payments** — the engine that powers transactions\n2. **Merchant tools** — dashboards and APIs our customers use\n3. **Risk & compliance** — fraud detection, KYC, regulatory reporting\n\nYou'll work alongside senior PMs, engineers, designers, and customers. By the end of the programme, you'll have shipped multiple features end-to-end and be ready for a Product Manager role.\n\n---\n\n## What we're looking for\n\n### Required\n\n- Bachelor's degree (any discipline) with strong academic record\n- A second qualification, work experience, or extensive side projects that show you can **build something real** — not just write about it\n- Comfort with **structured problem-solving**: framing ambiguous problems, decomposing them, prioritising\n- **Strong written communication** — you can take a messy meeting and turn it into a clear decision document\n- **Quantitative comfort** — you don't need to be an engineer, but you must be able to read a SQL query, interrogate a dashboard, and challenge a number that looks wrong\n- Genuine curiosity about how businesses work — fintech specifically is a plus but not required\n- The right to work in the UK (we sponsor Graduate visas; we cannot sponsor full Skilled Worker visas for this role)\n\n### Preferred\n\n- Background in engineering, computer science, economics, business, or related quantitative discipline\n- Experience shipping something — a project, a side-business, a non-profit, an internal tool — that real users used\n- Exposure to startups, hackathons, or entrepreneurship\n- Familiarity with at least one of: SQL, Python, Figma, basic analytics tools\n- Experience working in cross-functional teams (engineers + designers + business)\n- Languages beyond English — we operate across multiple EU markets\n\n### What success looks like in year 1\n\n- By month 3, you've shipped your first small feature end-to-end\n- By month 6, you're running your own discovery interviews with customers\n- By month 12, you've led a substantial project that closed a measurable gap (revenue, retention, or risk)\n\n---\n\n## Application\n\nSend CV + a 400-word cover letter explaining one of:\n\n(a) A time you took an ambiguous problem and made it concrete, OR\n(b) Something you built that real users used, with what you'd do differently now\n\nWe don't ask for grades transcripts. We don't do generic competency tests. We do one 45-minute case study followed by a panel.\n\nWe're an equal opportunity employer and especially encourage candidates from backgrounds under-represented in fintech.\n"};
+
+  // 夠用就好的 Markdown 渲染：標題、粗體、清單、行內 code、分隔線。
+  // 不做完整規格——多一種語法就多一種在投影幕上才發現沒生效的東西。
+  function esc(t) {
+    return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function inline(t) {
+    return esc(t)
+      .replace(/`([^`]+)`/g, '<code style="font-family:var(--font-mono);font-size:12.5px;background:#E1D9C9;padding:1px 5px;border-radius:4px;">$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  }
+  function render(md) {
+    var out = [], list = [];
+    function flush() {
+      if (!list.length) return;
+      out.push('<ul style="margin:6px 0 10px;padding-left:20px;list-style:disc;">' + list.join('') + '</ul>');
+      list = [];
+    }
+    md.split('\n').forEach(function (line) {
+      var t = line.trim();
+      if (!t) { flush(); return; }
+      if (/^─{3,}$|^-{3,}$/.test(t)) { flush(); out.push('<hr style="border:none;border-top:1px solid #E1D9C9;margin:12px 0;">'); return; }
+      var h = t.match(/^(#{1,4})\s+(.*)$/);
+      if (h) {
+        flush();
+        var size = [20, 17, 15, 14][h[1].length - 1];
+        out.push('<div style="font-size:' + size + 'px;font-weight:800;color:#1D1D1F;margin:14px 0 6px;">' + inline(h[2]) + '</div>');
+        return;
+      }
+      if (/^[-*•]\s+/.test(t)) { list.push('<li>' + inline(t.replace(/^[-*•]\s+/, '')) + '</li>'); return; }
+      flush();
+      out.push('<p style="margin:0 0 8px;">' + inline(t) + '</p>');
+    });
+    flush();
+    return out.join('');
+  }
+
+  var folder = tree.querySelector('[data-folder]');
+  var children = tree.querySelector('[data-children]');
+  var caret = tree.querySelector('[data-caret]');
+  folder.addEventListener('click', function () {
+    var open = children.style.display !== 'none';
+    children.style.display = open ? 'none' : 'block';
+    caret.textContent = open ? '▸' : '▾';
+  });
+
+  tree.querySelectorAll('.mat-file').forEach(function (item) {
+    item.addEventListener('click', function () {
+      tree.querySelectorAll('.mat-file').forEach(function (other) {
+        other.style.background = '';
+        other.style.color = 'rgba(255,255,255,0.85)';
+      });
+      item.style.background = 'rgba(240,222,158,0.18)';
+      item.style.color = '#F0DE9E';
+      preview.innerHTML = render(FILES[item.dataset.file] || '');
+      preview.parentElement.scrollTop = 0;
+    });
   });
 })();
 </script>
