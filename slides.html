@@ -1878,7 +1878,68 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         </div>
         <div style="background:rgba(184,144,46,0.10);border:1px solid rgba(184,144,46,0.30);border-radius:14px;padding:14px 16px;">
           <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#F0DE9E;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;">右 · Obsidian</div>
-          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0;">筆記庫接住產出：規則、決定、踩過的坑，都留成你自己讀得懂的 Markdown。</p>
+          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0;">筆記庫接住產出：規則、決定、踩過的坑，都留成你自己讀得懂的 <button class="md-open" type="button" style="font-family:inherit;font-size:13px;font-weight:800;color:#0E1A2F;background:#F0DE9E;border:none;border-radius:6px;padding:1px 8px;cursor:pointer;">Markdown ⓘ</button>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Markdown 說明彈窗：左邊是你打的字，右邊是它顯示出來的樣子。
+         兩邊並排是重點——學生一眼就懂「原來這就叫語法」，不用先聽定義。 -->
+    <div id="md-modal"
+         style="display:none; position:absolute; inset:0; z-index:60; background:rgba(5,11,23,0.86); backdrop-filter:blur(10px); align-items:center; justify-content:center; padding:24px;">
+      <div style="position:relative; background:#0E1A2F; border:1px solid rgba(255,255,255,0.14); border-radius:20px; padding:32px 36px; width:min(1000px,92vw); max-height:86vh; overflow-y:auto;">
+        <button id="md-close"
+                style="position:absolute; top:16px; right:18px; background:rgba(255,255,255,0.08); border:none; border-radius:8px; color:rgba(255,255,255,0.55); font-size:18px; width:32px; height:32px; cursor:pointer; line-height:1;">×</button>
+
+        <p class="modal-eyebrow" style="color:var(--gold);">Markdown</p>
+        <h3 class="modal-title" style="color:var(--gold-bright);">用幾個符號，把純文字變成有排版的文件</h3>
+        <div class="modal-section">
+          <p>就是<strong>純文字</strong>加上幾個約定好的符號：井字號代表標題、星號代表粗體、減號代表清單。存檔是 <code style="font-family:var(--font-mono);font-size:13px;background:rgba(255,255,255,0.08);padding:1px 7px;border-radius:4px;color:#F0DE9E;">.md</code>，用記事本打得開，換任何工具都帶得走。</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;align-items:start;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">你打的字</div>
+            <div style="background:#1F1B16;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,0.35);">
+              <div style="background:#2A241D;padding:10px 14px;display:flex;gap:7px;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E85B4A;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#D4A843;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#30CECE;"></span>
+              </div>
+              <!-- ⚠️ pre 要自己包一層：deck 的 Copy 腳本會把「pre 的前一個 div」
+                   當成工具列，並把它的最後一個子元素搬到 Copy 鍵旁邊——
+                   直接放的話，終端機的第三顆燈會被搬走。 -->
+              <div>
+              <pre style="margin:0;padding:16px;font-family:var(--font-mono);font-size:13px;line-height:1.75;color:#F0ECE4;white-space:pre-wrap;"># 今天學到的事
+
+**重點**：Esc 可以打斷它。
+
+- 走錯方向就按 Esc
+- 清掉上下文要重講規則
+
+用 `claude` 開始一段對話。</pre>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Obsidian 顯示出來的樣子</div>
+            <div style="background:#FBF8F2;border-radius:12px;padding:18px 20px;color:#2D2B28;box-shadow:0 12px 32px rgba(0,0,0,0.35);">
+              <div style="font-size:22px;font-weight:800;margin-bottom:10px;color:#1D1D1F;">今天學到的事</div>
+              <p style="font-size:14px;line-height:1.7;margin:0 0 10px;"><strong>重點</strong>：Esc 可以打斷它。</p>
+              <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;line-height:1.7;list-style:disc;">
+                <li>走錯方向就按 Esc</li>
+                <li>清掉上下文要重講規則</li>
+              </ul>
+              <p style="font-size:14px;line-height:1.7;margin:0;">用 <code style="font-family:var(--font-mono);font-size:13px;background:#E1D9C9;padding:1px 6px;border-radius:4px;">claude</code> 開始一段對話。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section" style="margin-top:18px;">
+          <h4>為什麼在 AI 時代特別重要</h4>
+          <p style="margin-bottom:6px;">AI 讀得懂也寫得動——叫它「把這段寫成筆記」，它產出的就是這種格式，你不用再排版一次。</p>
+          <p style="margin-bottom:6px;">標題與清單本身就是結構，AI 抓重點時知道哪句是標題、哪幾條是並列的。</p>
+          <p>純文字檔存得久、換工具帶得走，十年後打開還是這幾個字。</p>
         </div>
       </div>
     </div>
@@ -5030,6 +5091,31 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
   modalBox.addEventListener('click', function (e) { e.stopPropagation(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+})();
+</script>
+
+<!-- ── Markdown 說明彈窗（s13b）── -->
+<script>
+(function () {
+  var mdModal = document.getElementById('md-modal');
+  if (!mdModal) return;
+  var mdClose = document.getElementById('md-close');
+  var mdBox = mdModal.firstElementChild;
+
+  function open(e) { e.stopPropagation(); mdModal.style.display = 'flex'; }
+  function close() { mdModal.style.display = 'none'; }
+
+  // ⚠️ 不看 .revealed：這顆是句子裡的一個詞，不是要依序揭露的區塊，
+  // 講到那一句就該點得開。
+  document.querySelectorAll('.md-open').forEach(function (btn) {
+    btn.addEventListener('click', open);
+  });
+  mdClose.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+  mdModal.addEventListener('click', function (e) { e.stopPropagation(); if (e.target === mdModal) close(); });
+  mdBox.addEventListener('click', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && mdModal.style.display === 'flex') close();
   });
 })();
 </script>
