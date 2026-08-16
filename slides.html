@@ -2331,62 +2331,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
-<!-- S36 · Scenario G: 履歷對標 JD -->
-  <section class="slide slide-warm" id="s36" data-slide="36">
-    <div class="slide-body" style="max-width:1100px;display:flex;flex-direction:column;gap:14px;">
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div style="width:52px;height:52px;border-radius:50%;background:#D97706;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <span style="font-size:22px;font-weight:800;color:#fff;">G</span>
-        </div>
-        <div>
-          <div style="font-family:var(--font-mono);font-size:10px;font-weight:700;color:#D97706;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">求職 · CV 草稿 + JD · 一條 Pipeline</div>
-          <h2 style="font-size:clamp(18px,2vw,26px);font-weight:800;color:#1D1D1F;margin:0;">求職履歷工作流</h2>
-        </div>
-      </div>
-      <div style="background:#FFFBEB;border-left:3px solid #D97706;border-radius:0 12px 12px 0;padding:14px 18px;">
-        <p style="font-size:13px;color:#1D1D1F;line-height:1.7;margin:0;"><strong>情境：</strong>你在 LinkedIn 上看到一個夢想的 PM 職位，把 CV 草稿翻出來，卻不知道從哪裡下手——JD 有 15 條要求，你不確定哪些有達到、哪些是弱點。<strong>問題：</strong>怎麼讓 Claude Code 系統地找出缺口、只改真正需要改的地方，同時保證每條描述都有真實經歷支撐？</p>
-      </div>
-      <!-- Pipeline Steps -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-        <div class="s36-card" data-s36-preview="01" style="background:#fff;border:1px solid rgba(217,119,6,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
-          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#D97706;background:#FFFBEB;border-radius:4px;padding:2px 6px;">01</div>
-          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">解構 JD</div>
-          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">拆解 JD 成 Required / Preferred / Implicit → 找出隱性期待</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📋 job_description.md</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:600;">→ JD 拆解清單</div>
-          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
-        </div>
-        <div class="s36-card" data-s36-preview="02" style="background:#fff;border:1px solid rgba(217,119,6,0.25);border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.18)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
-          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#D97706;background:#FFFBEB;border-radius:4px;padding:2px 6px;">02</div>
-          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">對標 CV 找缺口</div>
-          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">cv_draft.md 每條逐一對標 → 標 ✅/⚠️/❌，找出措辭弱點和缺口</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 cv_draft.md</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:600;">→ 缺口分析報告</div>
-          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
-        </div>
-        <div class="s36-card" data-s36-preview="03" style="background:rgba(217,119,6,0.06);border:1.5px solid #D97706;border-radius:12px;padding:12px;position:relative;cursor:pointer;transition:box-shadow 0.15s,transform 0.15s;" onmouseenter="this.style.boxShadow='0 4px 16px rgba(217,119,6,0.25)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='';this.style.transform=''">
-          <div style="position:absolute;top:10px;right:10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:#D97706;border-radius:4px;padding:2px 6px;">03</div>
-          <div style="font-size:15px;font-weight:700;color:#1D1D1F;margin-bottom:4px;margin-right:28px;">改寫 ⚠️ 條目</div>
-          <div style="font-size:13px;color:#666;line-height:1.5;margin-bottom:8px;">只改弱點 → 強化動詞、補具體成果，改不了的標 [needs data]</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#555;margin-bottom:3px;">📄 cv_draft.md + JD 拆解清單</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:#D97706;font-weight:700;">→ cv_tailored.md ✓</div>
-          <div style="position:absolute;bottom:8px;right:10px;font-size:11px;color:#FCD34D;">點擊預覽 ↗</div>
-        </div>
-      </div>
-      <!-- Kickoff + Integrity -->
-      <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;">
-        <div style="background:#0E1A2F;border-radius:12px;padding:14px 16px;">
-          <div style="font-size:10px;font-weight:700;color:#4ADE80;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">▶ Step 01 Kickoff · 先拆 JD，不急著改 CV</div>
-          <p style="font-family:var(--font-mono);font-size:11px;color:#F0DE9E;line-height:1.7;margin:0;">你是一位資深 PM 面試官。讀 job_description.md，把所有要求拆成三層：Required（硬性）/ Preferred（加分）/ Implicit（沒寫但必須有）。完成後告訴我哪三條最容易被忽略。</p>
-        </div>
-        <div style="background:#FFF1F2;border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:14px;">
-          <div style="font-size:10px;font-weight:700;color:#DC2626;letter-spacing:0.05em;margin-bottom:6px;">⚠ 誠信提示</div>
-          <p style="font-size:11px;color:#7F1D1D;line-height:1.5;margin:0;">履歷內容必須屬實，AI 改寫後需確認每條描述都有真實經歷支撐。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
 <!-- ── S36 File Preview Modal ── -->
 <div id="s36-modal" style="display:none;position:fixed;inset:0;background:rgba(10,12,20,0.75);z-index:9000;align-items:center;justify-content:center;padding:24px;">
   <div id="s36-modal-box" style="background:#0E1A2F;border-radius:20px;max-width:680px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
@@ -2425,23 +2369,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
   <!-- ══════════════════════════════════════════════════════════
        第六章 · 進階觀念：讓 AI 更聽話
        ══════════════════════════════════════════════════════════ -->
-
-  <!-- 下半場地圖 -->
-  <section class="slide slide-warm" id="s68-agenda" data-slide="38">
-    <div class="slide-body" style="max-width:940px;">
-      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">下半場的安排</p>
-      <h2 class="slide-title" style="color:#18181B;">下半場地圖</h2>
-      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:760px;">從規則檔到把自己的作品發布上線，接下來把 AI 協作流程跑完。</p>
-      <div class="r" style="margin-top:26px;display:flex;flex-direction:column;width:100%;border-top:1px solid rgba(24,24,27,0.10);">
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(24,24,27,0.10);"><strong style="font-size:24px;color:rgba(24,24,27,0.22);">1</strong><span style="font-family:var(--font-mono);font-size:12px;color:rgba(24,24,27,0.42);">20 min</span><strong style="font-size:16px;color:#18181B;">規則檔 + Skill 觀念</strong><span style="font-size:12px;color:rgba(24,24,27,0.5);">CLAUDE.md · Output style · User / Project level</span></div>
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(24,24,27,0.10);"><strong style="font-size:24px;color:rgba(24,24,27,0.22);">2</strong><span style="font-family:var(--font-mono);font-size:12px;color:rgba(24,24,27,0.42);">40 min</span><strong style="font-size:16px;color:#18181B;">Skill 介紹 + 情境實作</strong><span style="font-size:12px;color:rgba(24,24,27,0.5);">Questions · Rename · Handoff · Creator</span></div>
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:13px 16px;margin:0 -16px;border-bottom:1px solid rgba(24,24,27,0.10);background:rgba(184,144,46,0.07);"><strong style="font-size:21px;color:rgba(24,24,27,0.18);">—</strong><span style="font-family:var(--font-mono);font-size:12px;color:rgba(24,24,27,0.42);">10 min</span><span style="font-size:15px;color:rgba(24,24,27,0.56);">中場</span><span style="font-size:12px;color:rgba(24,24,27,0.42);">☕ 咖啡</span></div>
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(24,24,27,0.10);"><strong style="font-size:24px;color:rgba(24,24,27,0.22);">3</strong><span style="font-family:var(--font-mono);font-size:12px;color:#B8902E;">50 min △</span><strong style="font-size:16px;color:#18181B;">Skill 打造 + 求職 Pipeline</strong><span style="font-size:12px;color:rgba(24,24,27,0.5);">cv_jd_tailor · 完整求職 workflow</span></div>
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(24,24,27,0.10);"><strong style="font-size:24px;color:rgba(24,24,27,0.22);">4</strong><span style="font-family:var(--font-mono);font-size:12px;color:#B8902E;">40 min △</span><strong style="font-size:16px;color:#18181B;">CV → 個人 Landing Page → 上線</strong><span style="font-size:12px;color:rgba(24,24,27,0.5);">Frontend design · localhost · GitHub Pages</span></div>
-        <div style="display:grid;grid-template-columns:42px 92px 1fr auto;gap:18px;align-items:center;padding:17px 0;"><strong style="font-size:24px;color:rgba(24,24,27,0.22);">5</strong><span style="font-family:var(--font-mono);font-size:12px;color:rgba(24,24,27,0.42);">20 min</span><strong style="font-size:16px;color:#18181B;">回顧 + Q&A</strong><span style="font-size:12px;color:rgba(24,24,27,0.5);">帶走自己的 AI 工作方式</span></div>
-      </div>
-    </div>
-  </section>
 
   <!-- S68 · CLAUDE.md / AGENTS.md 與 Output style 定義 -->
   <section class="slide slide-dark" id="s68" data-slide="38">
