@@ -3334,46 +3334,6 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- S46 · Structured Questions: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s46" data-slide="48">
-    <div class="slide-body" style="max-width:960px; zoom:1.15;">
-
-      <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Structured Questions 工具差異</h2>
-
-      <!-- Comparison table -->
-      <div class="r" style="margin-top:24px; width:100%;">
-        <div style="display:grid; grid-template-columns:160px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
-          <!-- Header -->
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
-          <!-- Row 1: Command -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發指令</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/structured-questions</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$structured-questions</div>
-          <!-- Row 2: UI -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">選項呈現</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">互動式 UI（可點選）</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">/plan mode 下為互動式 UI<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">其他 mode 降級為純文字</span></div>
-          <!-- Row 3: Install path -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
-          <!-- Row 4: Auto trigger -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 偵測到選擇自動啟動</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 同上</div>
-          <!-- Row 5: Special -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">特殊功能</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">AskUserQuestion 工具<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">點選式 + 可附註</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">Plan Mode 內建支援<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">非 Plan Mode 降級為文字</span></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- ── Auto-Rename Skill ── -->
 
   <!-- S46 · Auto-Rename: 痛點 + Before/After -->
@@ -3446,46 +3406,6 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- S48 · Auto-Rename: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s49" data-slide="51">
-    <div class="slide-body" style="max-width:960px; zoom:1.15;">
-
-      <p class="slide-eyebrow">Skill ❷ · Auto-Rename</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Auto-Rename 工具差異</h2>
-
-      <!-- Comparison table -->
-      <div class="r" style="margin-top:24px; width:100%;">
-        <div style="display:grid; grid-template-columns:160px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
-          <!-- Header -->
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
-          <!-- Row 1: Command -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發指令</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/auto-rename</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$auto-rename</div>
-          <!-- Row 2: Auto trigger -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ 第 5 次工具呼叫後自動命名</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">同上</div>
-          <!-- Row 3: Storage -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">儲存方式</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">檔案制<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">~/.claude/session-names/{id}.txt</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">SQLite 資料庫<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">~/.codex/threads.db</span></div>
-          <!-- Row 4: Install path -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
-          <!-- Row 5: Naming format -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">命名格式</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">{emoji} {描述} ≤ 40 字元<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">8 組 emoji mapping</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">同上<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">共用相同 emoji 定義</span></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- ── Handoff Skill ── -->
 
   <!-- S49 · Handoff: 痛點 ❶❷ Before/After -->
@@ -3552,46 +3472,6 @@ sandbox_mode  = "workspace-write"
           <div>📄 <strong style="color:#F0DE9E;">結構化交接</strong> — 自動記錄已完成、進行中、下一步</div>
           <div>⚠️ <strong style="color:#F0DE9E;">主動預警</strong> — 70% context 時提醒，不會突然斷掉</div>
           <div>🔗 <strong style="color:#F0DE9E;">一句話續接</strong> — 新 session 讀交接文件就能繼續</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- S51 · Handoff: Claude Code vs Codex -->
-  <section class="slide slide-dark" id="s52" data-slide="54">
-    <div class="slide-body" style="max-width:960px; zoom:1.15;">
-
-      <p class="slide-eyebrow">Skill ❸ · Handoff</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.8vw,52px);">Handoff 工具差異</h2>
-
-      <!-- Comparison table -->
-      <div class="r" style="margin-top:24px; width:100%;">
-        <div style="display:grid; grid-template-columns:160px 1fr 1fr; gap:0; width:100%; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; font-size:12px;">
-          <!-- Header -->
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:rgba(255,255,255,0.5); font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#F0DE9E; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Claude Code</div>
-          <div style="background:rgba(255,255,255,0.06); padding:12px 16px; font-weight:700; color:#fff; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-align:center; border-bottom:1px solid rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.06);">Codex CLI</div>
-          <!-- Row 1: Command -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">觸發指令</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">/handoff</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">$handoff</div>
-          <!-- Row 2: Auto trigger -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">自動觸發</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ Context 70% 時主動觸發並產出文件</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06);">✓ Context 70% 時主動觸發並產出文件</div>
-          <!-- Row 3: Output path -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">輸出位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">docs/handoff/{date}-{topic}.md</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">docs/handoff/{date}-{topic}.md</div>
-          <!-- Row 4: Install path -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">安裝位置</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.claude/skills/{skill-name}/</div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-bottom:1px solid rgba(255,255,255,0.06); border-left:1px solid rgba(255,255,255,0.06); font-family:var(--font-mono); font-size:11px;">.codex/skills/{skill-name}/</div>
-          <!-- Row 5: Resume method -->
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); font-weight:600;">續接方式</div>
-          <div style="padding:10px 16px; color:rgba(240,222,158,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">「讀 docs/handoff/… 繼續」<br><span style="font-size:10px; color:rgba(240,222,158,0.5);">一句話恢復完整 context</span></div>
-          <div style="padding:10px 16px; color:rgba(255,255,255,0.8); text-align:center; border-left:1px solid rgba(255,255,255,0.06);">同上<br><span style="font-size:10px; color:rgba(255,255,255,0.4);">交接格式完全相同</span></div>
         </div>
       </div>
 
