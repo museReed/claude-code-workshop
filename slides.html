@@ -2011,6 +2011,59 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+<!-- ── Claude Code 常用指令（2026-08-16 新增）─────────────────────
+     每一列多一欄「現場測試」：學生自己按一次才記得住，
+     光看表格下課就忘了。 -->
+  <section class="slide slide-dark" id="s13d">
+    <div class="slide-body" style="max-width:1240px;">
+      <p class="slide-eyebrow">Claude Code · 每天會用到</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">常用指令，現在就各按一次</h2>
+      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:900px;">最右邊那欄照著做——按過一次才會變成你的。</p>
+
+      <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;padding:0 16px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>指令</div><div>做什麼</div><div>什麼時候用</div><div>現場測試</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/clear</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">清掉這次對話的上下文</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">換一個題目做，但不想關掉視窗</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">先問它「我剛才問了什麼」→ 打 /clear → 再問一次，它答不出來</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/model</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">換模型與推理強度</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">簡單的事想跑快一點；難的事想讓它想久一點</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打 /model 挑一個，換完看輸入框旁邊的模型名稱有沒有變</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Esc</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">當場打斷它正在做的事</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">看到它走錯方向，不用等它做完</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">叫它「從 1 數到 100，每個數字一行」，數到一半按 Esc，它會停在那裡</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Esc Esc</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">叫出前面的訊息，挑一則跳回去重講</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">三步前就講錯了，不想從頭開始</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">連按兩下 Esc，選前面某一則訊息，改一句話再送出</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">/skill-name</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">直接叫某一支裝好的 skill</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">已經知道要用哪支，不想讓它自己猜</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">打 /auto-rename，看這個 session 的名稱有沒有變成 emoji + 描述</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Shift + Tab</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">循環切換放手程度</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">被問到煩，想讓它自動改檔</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">連按幾次，看左下角在 Manual / Accept Edits / Plan 之間循環</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- ── S20: 連上 GitHub 工作流 ─────────────────────────────────── -->
 
 <!-- ── S21: 你已經在指揮 Agent ───────────────────────────────── -->
