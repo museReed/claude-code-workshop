@@ -2579,6 +2579,53 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+  <!-- S39 · User Level vs Project Level -->
+  <section class="slide slide-dark" id="s39" data-slide="41">
+    <div class="slide-body" style="max-width:960px; zoom:1.12;">
+
+      <p class="slide-eyebrow">第六章 · 進階觀念</p>
+      <h2 class="slide-title" style="font-size:clamp(32px,4.5vw,64px);">設定分兩層</h2>
+      <p class="slide-lede" style="margin-top:10px; font-size:clamp(16px,1.5vw,22px);">
+        只要記住：一個跟著「你」走，一個跟著「專案」走。
+      </p>
+
+      <div class="r" style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px; width:100%;">
+        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.18); border-radius:20px; padding:28px; min-height:270px;">
+          <div style="width:58px;height:58px;border-radius:18px;background:rgba(240,222,158,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+            <svg width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div style="font-family:var(--font-mono); font-size:12px; font-weight:800; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">User Level</div>
+          <h3 style="font-size:26px;color:#fff;margin:0 0 14px;">跟著你這個人</h3>
+          <div style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;margin-bottom:16px;">~/.claude/</div>
+          <ul style="font-size:15px;color:rgba(255,255,255,0.76);line-height:1.75;padding-left:1.1em;margin:0;">
+            <li>所有專案都會套用</li>
+            <li>適合個人偏好、語氣、工作習慣</li>
+            <li>只在你的電腦上生效</li>
+          </ul>
+        </div>
+
+        <div style="background:#1F2C45; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:28px; min-height:270px;">
+          <div style="width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+            <svg width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7V5a2 2 0 0 1 2-2h4l2 2h4"/></svg>
+          </div>
+          <div style="font-family:var(--font-mono); font-size:12px; font-weight:800; color:#fff; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">Project Level</div>
+          <h3 style="font-size:26px;color:#fff;margin:0 0 14px;">跟著這個專案</h3>
+          <div style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.58);background:rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;margin-bottom:16px;">專案資料夾/.claude/</div>
+          <ul style="font-size:15px;color:rgba(255,255,255,0.76);line-height:1.75;padding-left:1.1em;margin:0;">
+            <li>只在這個專案內生效</li>
+            <li>適合團隊規範、專案規則</li>
+            <li>可以跟 repo 一起共享</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="r r-d1" style="margin-top:18px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.14);border-radius:14px;padding:14px 18px;color:rgba(255,255,255,0.75);font-size:14px;line-height:1.6;">
+        <strong style="color:#F0DE9E;">選擇原則：</strong>個人習慣放 User Level；專案或團隊規則放 Project Level。兩邊衝突時，Project Level 優先。
+      </div>
+
+    </div>
+  </section>
+
   <!-- S38 · CLAUDE.md：AI 的長期工作說明書 -->
   <section class="slide slide-dark" id="s38-claude-scope" data-slide="39b">
     <div class="slide-body" style="max-width:1280px;zoom:1.02;">
@@ -2720,53 +2767,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         <div style="margin-top:8px; font-size:11px; color:rgba(240,222,158,0.7); background:rgba(240,222,158,0.08); padding:8px 14px; border-radius:8px;">
           💡 規則檔在 <strong style="color:#F0DE9E;">session 啟動時載入一次</strong>，之後全程放在 AI 腦中——中途改了規則檔，要<strong style="color:#F0DE9E;">開新 session</strong> 才會生效
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- S39 · User Level vs Project Level -->
-  <section class="slide slide-dark" id="s39" data-slide="41">
-    <div class="slide-body" style="max-width:960px; zoom:1.12;">
-
-      <p class="slide-eyebrow">第六章 · 進階觀念</p>
-      <h2 class="slide-title" style="font-size:clamp(32px,4.5vw,64px);">設定分兩層</h2>
-      <p class="slide-lede" style="margin-top:10px; font-size:clamp(16px,1.5vw,22px);">
-        只要記住：一個跟著「你」走，一個跟著「專案」走。
-      </p>
-
-      <div class="r" style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px; width:100%;">
-        <div style="background:#050B17; border:1px solid rgba(240,222,158,0.18); border-radius:20px; padding:28px; min-height:270px;">
-          <div style="width:58px;height:58px;border-radius:18px;background:rgba(240,222,158,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-            <svg width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#F0DE9E" stroke-width="1.8"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div style="font-family:var(--font-mono); font-size:12px; font-weight:800; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">User Level</div>
-          <h3 style="font-size:26px;color:#fff;margin:0 0 14px;">跟著你這個人</h3>
-          <div style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;margin-bottom:16px;">~/.claude/</div>
-          <ul style="font-size:15px;color:rgba(255,255,255,0.76);line-height:1.75;padding-left:1.1em;margin:0;">
-            <li>所有專案都會套用</li>
-            <li>適合個人偏好、語氣、工作習慣</li>
-            <li>只在你的電腦上生效</li>
-          </ul>
-        </div>
-
-        <div style="background:#1F2C45; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:28px; min-height:270px;">
-          <div style="width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-            <svg width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7V5a2 2 0 0 1 2-2h4l2 2h4"/></svg>
-          </div>
-          <div style="font-family:var(--font-mono); font-size:12px; font-weight:800; color:#fff; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">Project Level</div>
-          <h3 style="font-size:26px;color:#fff;margin:0 0 14px;">跟著這個專案</h3>
-          <div style="font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.58);background:rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;margin-bottom:16px;">專案資料夾/.claude/</div>
-          <ul style="font-size:15px;color:rgba(255,255,255,0.76);line-height:1.75;padding-left:1.1em;margin:0;">
-            <li>只在這個專案內生效</li>
-            <li>適合團隊規範、專案規則</li>
-            <li>可以跟 repo 一起共享</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="r r-d1" style="margin-top:18px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.14);border-radius:14px;padding:14px 18px;color:rgba(255,255,255,0.75);font-size:14px;line-height:1.6;">
-        <strong style="color:#F0DE9E;">選擇原則：</strong>個人習慣放 User Level；專案或團隊規則放 Project Level。兩邊衝突時，Project Level 優先。
       </div>
 
     </div>
