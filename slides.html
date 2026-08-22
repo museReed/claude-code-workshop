@@ -2011,6 +2011,55 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
     </div>
   </section>
 
+<!-- ── Ghostty 常用操作 ────────────────────────────────────────── -->
+  <section class="slide slide-dark" id="s13ghostty">
+    <div class="slide-body" style="max-width:1240px;">
+      <p class="slide-eyebrow">Ghostty · 終端機每天會用到</p>
+      <h2 class="slide-title" style="font-size:clamp(28px,3.4vw,50px);">Ghostty 常用操作，先把終端機用順</h2>
+
+      <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:9px;">
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;padding:0 16px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:rgba(240,222,158,0.7);letter-spacing:0.06em;text-transform:uppercase;">
+          <div>快捷鍵</div><div>做什麼</div><div>什麼時候用</div><div>現場測試</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Cmd + D</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">在右邊分割一個新窗格</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">想同時跑兩件事，不想再開一個視窗</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">按 Cmd + D → 確認右邊出現新窗格，而且沿用目前資料夾</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Cmd + Shift + D</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">在下方分割一個新窗格</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">左右空間不夠，想改成上下排列</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">按 Cmd + Shift + D → 確認下方出現新窗格</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">Cmd + W</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">關閉目前使用中的窗格</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">其中一個工作做完，想把版面收乾淨</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">先點一個分割窗格 → 按 Cmd + W → 確認只關掉目前這格</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:13px;">拖入 folder + Enter</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">直接切換到 Finder 裡的資料夾</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">路徑很長，不想自己輸入</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">把 folder 拖進 Ghostty → Enter → 打 pwd 確認已切換位置</div>
+        </div>
+        <div style="display:grid;grid-template-columns:0.75fr 1fr 1.15fr 1.6fr;gap:14px;background:rgba(48,206,206,0.06);border:1px solid rgba(48,206,206,0.22);border-radius:12px;padding:14px 16px;align-items:center;">
+          <div><strong style="color:#F0DE9E;font-family:var(--font-mono);font-size:14px;">滑鼠點擊</strong></div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.80);line-height:1.45;">用滑鼠把文字游標移到指定位置</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.45;">長指令中間有字要修改，不想一直按方向鍵</div>
+          <div style="font-size:12.5px;color:#86EFAC;line-height:1.5;">先打一行但不要 Enter → 用滑鼠點中間的位置 → 確認游標移過去</div>
+        </div>
+      </div>
+
+      <div class="r" style="margin-top:15px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:14px;padding:12px 18px;">
+        <span style="font-family:var(--font-mono);font-size:13px;font-weight:900;color:#F0DE9E;flex-shrink:0;">提示</span>
+        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">這份 workshop 環境已設定 auto-cd，直接把 folder 拖進 Ghostty 再按 Enter 就會切換；用滑鼠點擊移動游標需要 Ghostty 的 shell integration。</span>
+      </div>
+    </div>
+  </section>
+
 <!-- ── Claude Code 常用指令（2026-08-16 新增）─────────────────────
      每一列多一欄「現場測試」：學生自己按一次才記得住，
      光看表格下課就忘了。 -->
@@ -4848,7 +4897,8 @@ window.addEventListener('hashchange', () => {
 });
 
 document.addEventListener('keydown', e => {
-  if (document.body.classList.contains('dbg-active')) return;
+  if (document.body.classList.contains('dbg-active') ||
+      document.body.classList.contains('cheat-sheet-open')) return;
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
     e.preventDefault();
     goTo(current + 1);
@@ -4863,6 +4913,7 @@ document.addEventListener('keydown', e => {
 document.addEventListener('click', e => {
   if (document.body.classList.contains('dbg-active')) return;
   if (e.target.closest('#dbg-panel') || e.target.closest('#dbg-btn')) return;
+  if (e.target.closest('#cheat-sheet-actions') || e.target.closest('#cheat-sheet-modal')) return;
   const slide = slides[current];
   if (e.target.closest('.nav-arrow') || e.target.closest('#slide-counter')) return;
 
@@ -5884,6 +5935,339 @@ goTo(isNaN(initSlide) ? 0 : initSlide - 1, { updateHash: false });
 
     actions.appendChild(button);
     toolbar.appendChild(actions);
+  });
+})();
+</script>
+
+<!-- ── Claude / Codex Cheat Sheets ── -->
+<style>
+  #cheat-sheet-actions {
+    position: fixed;
+    top: 16px;
+    right: 68px;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cheat-sheet-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 5px 11px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.88);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+    user-select: none;
+  }
+  .cheat-sheet-trigger:hover {
+    background: rgba(240,222,158,0.18);
+    border-color: rgba(240,222,158,0.48);
+    color: #F0DE9E;
+    transform: translateY(-1px);
+  }
+  .cheat-sheet-trigger:focus-visible,
+  #cheat-sheet-close:focus-visible {
+    outline: 2px solid #F0DE9E;
+    outline-offset: 2px;
+  }
+  body.slide-is-light .cheat-sheet-trigger {
+    background: rgba(0,0,0,0.07);
+    border-color: rgba(0,0,0,0.14);
+    color: rgba(24,24,27,0.70);
+  }
+  body.slide-is-light .cheat-sheet-trigger:hover {
+    background: rgba(24,24,27,0.12);
+    border-color: rgba(24,24,27,0.24);
+    color: #18181B;
+  }
+  #cheat-sheet-modal[hidden] { display: none; }
+  #cheat-sheet-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5,10,20,0.82);
+    backdrop-filter: blur(10px);
+  }
+  .cheat-sheet-dialog {
+    width: min(1220px, calc(100vw - 48px));
+    max-height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(240,222,158,0.28);
+    border-radius: 18px;
+    background: #0E1A2F;
+    box-shadow: 0 28px 80px rgba(0,0,0,0.46);
+  }
+  .cheat-sheet-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+  }
+  .cheat-sheet-kicker {
+    margin: 0 0 5px;
+    color: rgba(240,222,158,0.72);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+  #cheat-sheet-title {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.12;
+  }
+  #cheat-sheet-close {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 9px;
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.82);
+    font-family: var(--font-sans);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  #cheat-sheet-close:hover {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+  }
+  .cheat-sheet-scroll {
+    overflow: auto;
+    padding: 16px 22px 22px;
+  }
+  .cheat-sheet-grid {
+    min-width: 880px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .cheat-sheet-row {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr 1.15fr 1.6fr;
+    gap: 14px;
+    align-items: center;
+    padding: 11px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 11px;
+    background: rgba(255,255,255,0.04);
+  }
+  .cheat-sheet-row.is-header {
+    padding-top: 0;
+    padding-bottom: 3px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(240,222,158,0.70);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .cheat-sheet-row.is-extra {
+    border-color: rgba(48,206,206,0.26);
+    background: rgba(48,206,206,0.07);
+  }
+  .cheat-sheet-command {
+    color: #F0DE9E;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .cheat-sheet-do {
+    color: rgba(255,255,255,0.82);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .cheat-sheet-when {
+    color: rgba(255,255,255,0.60);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .cheat-sheet-test {
+    color: #86EFAC;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  @media (max-width: 760px) {
+    #cheat-sheet-actions {
+      top: 12px;
+      right: 60px;
+      gap: 6px;
+    }
+    .cheat-sheet-trigger {
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+    #cheat-sheet-modal { padding: 12px; }
+    .cheat-sheet-dialog {
+      width: calc(100vw - 24px);
+      max-height: calc(100vh - 24px);
+    }
+    .cheat-sheet-header { padding: 16px 16px 13px; }
+    .cheat-sheet-scroll { padding: 13px 16px 16px; }
+  }
+</style>
+
+<div id="cheat-sheet-actions" aria-label="常用指令 Cheat Sheet">
+  <button type="button" class="cheat-sheet-trigger" data-cheat-source="s13ghostty" data-cheat-extras="false">Ghostty Cheat Sheet</button>
+  <button type="button" class="cheat-sheet-trigger" data-cheat-source="s13d">Claude Cheat Sheet</button>
+  <button type="button" class="cheat-sheet-trigger" data-cheat-source="s13e">Codex Cheat Sheet</button>
+</div>
+
+<div id="cheat-sheet-modal" role="dialog" aria-modal="true" aria-labelledby="cheat-sheet-title" hidden>
+  <div class="cheat-sheet-dialog">
+    <div class="cheat-sheet-header">
+      <div>
+        <p class="cheat-sheet-kicker">Quick reference</p>
+        <h2 id="cheat-sheet-title"></h2>
+      </div>
+      <button type="button" id="cheat-sheet-close" aria-label="關閉 Cheat Sheet">×</button>
+    </div>
+    <div class="cheat-sheet-scroll">
+      <div id="cheat-sheet-content" class="cheat-sheet-grid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var actions = document.getElementById('cheat-sheet-actions');
+  var modal = document.getElementById('cheat-sheet-modal');
+  var title = document.getElementById('cheat-sheet-title');
+  var content = document.getElementById('cheat-sheet-content');
+  var closeButton = document.getElementById('cheat-sheet-close');
+  var lastTrigger = null;
+
+  if (!actions || !modal || !content || !closeButton) return;
+
+  var extraRows = [
+    [
+      'Snipaste → Ctrl+V',
+      '安裝 Snipaste，或用自己常用的截圖工具，把畫面放進剪貼簿後貼上',
+      '錯誤訊息或畫面很難只靠文字說清楚',
+      '截一張圖 → 回到輸入框按 Ctrl+V（macOS 可用 ⌘V）→ 確認預覽圖出現'
+    ],
+    [
+      'Typeless',
+      '用語音把需求輸入成文字',
+      '想法很多，打字跟不上時',
+      '啟動 Typeless → 按你設定的快捷鍵說一句完整需求 → 確認文字出現在輸入框'
+    ]
+  ];
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function getRows(sourceId) {
+    var source = document.getElementById(sourceId);
+    var table = source && source.querySelector('.slide-body > div');
+    if (!table) return [];
+
+    return Array.from(table.children).map(function (row) {
+      return Array.from(row.children).slice(0, 4).map(function (cell) {
+        return cell.textContent.trim();
+      });
+    }).filter(function (row) { return row.length === 4; });
+  }
+
+  function renderRow(row, index, isExtra) {
+    var classes = 'cheat-sheet-row';
+    if (index === 0) classes += ' is-header';
+    if (isExtra) classes += ' is-extra';
+
+    if (index === 0) {
+      return '<div class="' + classes + '">' + row.map(function (cell) {
+        return '<div>' + escapeHtml(cell) + '</div>';
+      }).join('') + '</div>';
+    }
+
+    return '<div class="' + classes + '">' +
+      '<div class="cheat-sheet-command">' + escapeHtml(row[0]) + '</div>' +
+      '<div class="cheat-sheet-do">' + escapeHtml(row[1]) + '</div>' +
+      '<div class="cheat-sheet-when">' + escapeHtml(row[2]) + '</div>' +
+      '<div class="cheat-sheet-test">' + escapeHtml(row[3]) + '</div>' +
+      '</div>';
+  }
+
+  function openCheatSheet(trigger) {
+    var sourceId = trigger.dataset.cheatSource;
+    var source = document.getElementById(sourceId);
+    var rows = getRows(sourceId);
+    if (!source || !rows.length) return;
+
+    lastTrigger = trigger;
+    title.textContent = source.querySelector('.slide-title').textContent.trim();
+    var sourceRows = rows.map(function (row, index) {
+      return renderRow(row, index, false);
+    }).join('');
+    var sharedRows = trigger.dataset.cheatExtras === 'false' ? '' : extraRows.map(function (row) {
+      return renderRow(row, 1, true);
+    }).join('');
+    content.innerHTML = sourceRows + sharedRows;
+
+    modal.hidden = false;
+    document.body.classList.add('cheat-sheet-open');
+    closeButton.focus();
+  }
+
+  function closeCheatSheet() {
+    if (modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('cheat-sheet-open');
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  actions.addEventListener('click', function (event) {
+    var trigger = event.target.closest('.cheat-sheet-trigger');
+    if (!trigger) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openCheatSheet(trigger);
+  });
+
+  closeButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    closeCheatSheet();
+  });
+
+  modal.addEventListener('click', function (event) {
+    event.stopPropagation();
+    if (event.target === modal) closeCheatSheet();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !modal.hidden) closeCheatSheet();
   });
 })();
 </script>
