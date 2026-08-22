@@ -2969,57 +2969,66 @@ sandbox_mode  = "workspace-write"
 
   <!-- ── Structured Questions Skill ── -->
 
-  <!-- S42 · Structured Questions: 三大痛點 + Before/After -->
+  <!-- S42 · Structured Questions: 痛點清單 + 可複製 prompts -->
   <section class="slide slide-dark" id="s42" data-slide="44">
-    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+    <div class="slide-body" style="max-width:1120px;zoom:1.02;">
 
       <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
-      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">Structured Questions：先問清楚</h2>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">四個常見痛點，四段可直接貼的 Prompt</h2>
+      <p class="slide-lede" style="margin-top:6px;font-size:clamp(14px,1.25vw,18px);color:rgba(255,255,255,0.62);">不要叫 AI 猜。複製右邊對應的 prompt，先讓它把問題問清楚。</p>
 
-      <!-- Pain 1: Brainstorming -->
-      <div class="r" style="margin-top:14px; width:100%;">
-        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❶ · 腦袋空白，不知道從哪開始</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：我想做一個 side project<br>
-              <span style="color:#F87171;">AI：好的！我幫你做一個 React Todo App…</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（你還沒想好，它就自己跑了）</span>
-            </div>
+      <div class="r" style="display:grid;grid-template-columns:0.74fr 1.55fr;gap:16px;width:100%;margin-top:16px;align-items:stretch;">
+        <div style="background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.10);border-radius:18px;padding:16px 17px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="font-family:var(--font-mono);font-size:10px;font-weight:800;color:#F87171;letter-spacing:0.08em;text-transform:uppercase;">先認出卡點</div>
+
+          <div style="display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start;">
+            <span style="width:25px;height:25px;border-radius:8px;background:rgba(248,113,113,0.12);color:#F87171;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:900;">01</span>
+            <div><strong style="font-size:14px;color:#fff;">腦袋空白</strong><p style="margin:3px 0 0;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,0.55);">還沒想好方向，AI 就替你決定題目。</p></div>
           </div>
-          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：我想做一個 side project，但我還沒有想法。用 /structured-questions 和我一起 brain storming<br>
-              <span style="color:#F0DE9E;">AI：先釐清三件事：</span><br>
-              <span style="color:#F0DE9E;">☐ 目標：練技術 / 解痛點 / 作品集？</span><br>
-              <span style="color:#F0DE9E;">☐ 規模：週末做完 / 一個月 / 長期？</span>
-            </div>
+
+          <div style="display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start;">
+            <span style="width:25px;height:25px;border-radius:8px;background:rgba(248,113,113,0.12);color:#F87171;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:900;">02</span>
+            <div><strong style="font-size:14px;color:#fff;">背景不足</strong><p style="margin:3px 0 0;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,0.55);">沒問 audience、budget、KPI 就開始做。</p></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start;">
+            <span style="width:25px;height:25px;border-radius:8px;background:rgba(248,113,113,0.12);color:#F87171;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:900;">03</span>
+            <div><strong style="font-size:14px;color:#fff;">選項不透明</strong><p style="margin:3px 0 0;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,0.55);">AI 直接選一條路，你看不到取捨。</p></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start;">
+            <span style="width:25px;height:25px;border-radius:8px;background:rgba(248,113,113,0.12);color:#F87171;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:10px;font-weight:900;">04</span>
+            <div><strong style="font-size:14px;color:#fff;">問題文字牆</strong><p style="margin:3px 0 0;font-size:11.5px;line-height:1.45;color:rgba(255,255,255,0.55);">一次丟十幾題，不知道從哪回答。</p></div>
           </div>
         </div>
-      </div>
 
-      <!-- Pain 2: Incomplete understanding -->
-      <div class="r r-d1" style="margin-top:10px; width:100%;">
-        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❷ · 你講了大概，但 AI 還不夠了解就動手</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：幫我規劃新品上市 marketing campaign<br>
-              <span style="color:#F87171;">AI：先發 Instagram、找 KOL、再投廣告…</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（沒問 target audience、budget、KPI）</span>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:0;">
+          <div style="background:#050B17;border:1px solid rgba(240,222,158,0.18);border-radius:12px;overflow:hidden;">
+            <div style="height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-family:var(--font-mono);font-size:9px;font-weight:800;color:#F0DE9E;letter-spacing:0.07em;">PROMPT 01 · 從空白開始</span>
             </div>
+            <pre style="margin:0;padding:9px 12px;font-family:var(--font-mono);font-size:10.5px;line-height:1.42;color:rgba(255,255,255,0.82);white-space:pre-wrap;overflow-x:auto;">我想做一個 side project，但還沒有方向。請使用 /structured-questions 釐清目標、想練的技能、可投入時間與作品規模；也請自行思考還缺哪些關鍵資訊，才能更完整理解我的需求。</pre>
           </div>
-          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：幫我規劃新品上市 marketing campaign（已有產品定位與 launch date），用 /structured-questions 向我確認規劃前需要的細節<br>
-              <span style="color:#F0DE9E;">AI：開始規劃前，先確認幾個會影響 campaign 的事：</span><br>
-              <span style="color:#F0DE9E;">☐ 目標：brand awareness / leads / sales？</span><br>
-              <span style="color:#F0DE9E;">☐ 對象：學生 / young professionals / B2B？</span>
+
+          <div style="background:#050B17;border:1px solid rgba(240,222,158,0.18);border-radius:12px;overflow:hidden;">
+            <div style="height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-family:var(--font-mono);font-size:9px;font-weight:800;color:#F0DE9E;letter-spacing:0.07em;">PROMPT 02 · 先補齊背景</span>
             </div>
+            <pre style="margin:0;padding:9px 12px;font-family:var(--font-mono);font-size:10.5px;line-height:1.42;color:rgba(255,255,255,0.82);white-space:pre-wrap;overflow-x:auto;">我要規劃新品上市 marketing campaign，已有產品定位與 launch date。請使用 /structured-questions 釐清目標、target audience、budget、channels 與 KPI；也請自行思考還缺哪些關鍵資訊，才能做出貼合需求的計畫。</pre>
+          </div>
+
+          <div style="background:#050B17;border:1px solid rgba(240,222,158,0.18);border-radius:12px;overflow:hidden;">
+            <div style="height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-family:var(--font-mono);font-size:9px;font-weight:800;color:#F0DE9E;letter-spacing:0.07em;">PROMPT 03 · 先比較選項</span>
+            </div>
+            <pre style="margin:0;padding:9px 12px;font-family:var(--font-mono);font-size:10.5px;line-height:1.42;color:rgba(255,255,255,0.82);white-space:pre-wrap;overflow-x:auto;">我的 Instagram 最近觸及很低。請使用 /structured-questions 提供 3 個改善方向，說明成本、速度與優缺點，標出推薦項和理由；也請自行思考還要問我哪些問題，才能判斷哪個方向真正適合。</pre>
+          </div>
+
+          <div style="background:#050B17;border:1px solid rgba(240,222,158,0.18);border-radius:12px;overflow:hidden;">
+            <div style="height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+              <span style="font-family:var(--font-mono);font-size:9px;font-weight:800;color:#F0DE9E;letter-spacing:0.07em;">PROMPT 04 · 問少而精準</span>
+            </div>
+            <pre style="margin:0;padding:9px 12px;font-family:var(--font-mono);font-size:10.5px;line-height:1.42;color:rgba(255,255,255,0.82);white-space:pre-wrap;overflow-x:auto;">請幫我規劃社群內容。使用 /structured-questions，只問最關鍵的 3 個問題；每題提供 2–3 個互斥選項、推薦項與簡短取捨，也請自行思考還缺哪些資訊才能真正釐清我的需求。</pre>
           </div>
         </div>
       </div>
@@ -3027,69 +3036,40 @@ sandbox_mode  = "workspace-write"
     </div>
   </section>
 
-  <!-- S43 · Structured Questions: 痛點 3-4 + 目標 -->
-  <section class="slide slide-dark" id="s43" data-slide="45">
-    <div class="slide-body" style="max-width:1020px; zoom:1.05;">
+  <!-- S42B · Structured Questions: 通用型 Prompt -->
+  <section class="slide slide-dark" id="s42-generic" data-slide="45">
+    <div class="slide-body" style="max-width:1080px;zoom:1.03;">
 
       <p class="slide-eyebrow">Skill ❶ · Structured Questions</p>
-      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">Structured Questions：避免亂猜</h2>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">通用 Prompt：先把需求問清楚</h2>
+      <p class="slide-lede" style="margin-top:7px;font-size:clamp(14px,1.3vw,19px);color:rgba(255,255,255,0.64);">換掉中括號裡的任務，任何企劃、研究、寫作或實作都能使用。</p>
 
-      <!-- Pain 3: Multiple solutions -->
-      <div class="r" style="margin-top:14px; width:100%;">
-        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❸ · 問題有多種解法，你不知道選哪個</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              你：我的 IG 最近觸及很低，怎麼辦？<br>
-              <span style="color:#F87171;">AI：你應該每天發 Reels…（直接排了一個月）</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（直接挑了一個方案，你不知道還有別的）</span>
-            </div>
+      <div class="r" style="display:grid;grid-template-columns:0.68fr 1.52fr;gap:18px;width:100%;margin-top:18px;align-items:stretch;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">先找決策點</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">AI 主動判斷哪些資訊會改變結果，而不是照表問問題。</p>
           </div>
-          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              <span style="color:#F0DE9E;">AI：有三個方向，我推薦 B：</span><br>
-              <span style="color:#F0DE9E;">A. 增加 Reels — 觸及快但製作成本高</span><br>
-              <span style="color:#F0DE9E;">B. 優化內容主題 — 成本低、先找有效題材 ⭐</span><br>
-              <span style="color:#F0DE9E;">C. 投放廣告 — 見效快但需要 budget</span>
-            </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">選項帶取捨</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">每題 2–3 個互斥選項，附推薦、優點與缺點。</p>
           </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">不為問而問</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">只有一種合理做法就直接處理，把注意力留給真正的選擇。</p>
+          </div>
+          <div style="padding:12px 14px;border-radius:13px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.18);font-size:12px;line-height:1.55;color:#F0DE9E;">把「我不知道怎麼問」變成 AI 幫你找出該問什麼。</div>
         </div>
-      </div>
 
-      <!-- Pain 4: Text wall questions -->
-      <div class="r r-d1" style="margin-top:10px; width:100%;">
-        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:8px;">痛點 ❹ · AI 回了一大堆問題，你迷失在文字牆中</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <div style="background:#050B17; border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F87171; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😣 Before</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              AI 想釐清社群經營需求，但一次丟出：<br>
-              <span style="color:#F87171;">「目標是什麼？經營哪個平台？target audience？每週發幾篇？內容主題？語氣？budget？KPI？…」</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（12 個問題塞在一段文字裡，你不知道從哪答起）</span>
-            </div>
+        <div style="background:#050B17;border:1px solid rgba(240,222,158,0.22);border-radius:16px;overflow:hidden;box-shadow:0 18px 44px rgba(5,11,23,0.26);display:flex;flex-direction:column;min-width:0;">
+          <div style="height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+            <span style="font-family:var(--font-mono);font-size:10px;font-weight:850;color:#F0DE9E;letter-spacing:0.08em;">通用 PROMPT · 貼到 AI Agent</span>
           </div>
-          <div style="background:#050B17; border:1px solid rgba(240,222,158,0.2); border-radius:12px; padding:12px 14px;">
-            <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;">😃 After</div>
-            <div style="font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7;">
-              <span style="color:#F0DE9E;">AI：我需要確認 3 件事：</span><br>
-              <span style="color:#F0DE9E;">☐ 目標：[品牌曝光] [互動] [名單]</span><br>
-              <span style="color:#F0DE9E;">☐ 平台：[IG] [LinkedIn] [TikTok]</span><br>
-              <span style="color:#F0DE9E;">☐ 節奏：[每週 3 篇] [每日] [campaign 制]</span><br>
-              <span style="color:rgba(255,255,255,0.3); font-size:9px;">（結構化選項，點選就好，不用打字）</span>
-            </div>
-          </div>
-        </div>
-      </div>
+          <pre style="margin:0;padding:17px 19px;font-family:var(--font-mono);font-size:11.5px;line-height:1.62;color:rgba(255,255,255,0.84);white-space:pre-wrap;overflow-x:auto;flex:1;">我想完成這個任務：[描述你的任務]。
 
-      <!-- Skill goals -->
-      <div class="r r-d1" style="margin-top:12px; width:100%; background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.12); border-radius:10px; padding:12px 16px;">
-        <div style="font-family:var(--font-mono); font-size:10px; font-weight:700; color:#F0DE9E; letter-spacing:0.06em; margin-bottom:6px;">🎯 這個 Skill 的目標</div>
-        <div style="display:flex; gap:20px; font-size:12px; color:rgba(255,255,255,0.7);">
-          <div>📈 <strong style="color:#F0DE9E;">提升提問品質</strong> — AI 幫你問出你自己沒想到的問題</div>
-          <div>🧠 <strong style="color:#F0DE9E;">降低思考成本</strong> — 不用自己整理思路，AI 幫你拆解</div>
-          <div>⚖️ <strong style="color:#F0DE9E;">降低決策失誤</strong> — 看到所有選項和推薦再做決定</div>
+請使用 /structured-questions，先辨識所有會影響結果、需要我決定的地方。
+
+如果某件事只有一種合理做法，請直接處理，不要為問而問。除了我已知的問題，你也要自行思考還缺哪些資訊，才能真正釐清需求並降低做錯方向的風險。</pre>
         </div>
       </div>
 
@@ -3098,7 +3078,7 @@ sandbox_mode  = "workspace-write"
 
   <!-- ── Auto-Rename Skill ── -->
 
-  <!-- S46 · Auto-Rename: 痛點 + Before/After -->
+  <!-- S47 · Auto-Rename: 痛點 + Before/After -->
   <section class="slide slide-dark" id="s47" data-slide="49">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
@@ -3162,6 +3142,51 @@ sandbox_mode  = "workspace-write"
           <div>🏷️ <strong style="color:#F0DE9E;">Emoji + 描述</strong> — 自動產生如「🏗️ voice profile pipeline」</div>
           <div>🤖 <strong style="color:#F0DE9E;">自動觸發</strong> — 第 5 次工具呼叫時由附帶 hook 觸發（機率性，沒觸發就手動）</div>
           <div>✏️ <strong style="color:#F0DE9E;">手動也行</strong> — 隨時說「改名」或 /auto-rename</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S47B · Auto-Rename: 用 Structured Questions 客製 -->
+  <section class="slide slide-dark" id="s47-customize" data-slide="50">
+    <div class="slide-body" style="max-width:1080px;zoom:1.03;">
+
+      <p class="slide-eyebrow">Skill ❷ · Auto-Rename · 動手客製</p>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">讓命名邏輯貼近你的工作領域</h2>
+      <p class="slide-lede" style="margin-top:7px;font-size:clamp(14px,1.3vw,19px);color:rgba(255,255,255,0.64);">用 Structured Questions 先盤點日常任務，再讓 AI 安全地修改 skill。</p>
+
+      <div class="r" style="display:grid;grid-template-columns:0.68fr 1.52fr;gap:18px;width:100%;margin-top:18px;align-items:stretch;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">你的工作語彙</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">研究、營運、行銷或專案管理，各自需要不同關鍵字。</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">你的辨識方式</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">調整分類、emoji 對應、語言、長度與保留的英文術語。</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">只改命名邏輯</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">保留 trigger、relay、hook 與安全機制，避免 skill 被改壞。</p>
+          </div>
+          <div style="padding:12px 14px;border-radius:13px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.18);font-size:12px;line-height:1.55;color:#F0DE9E;">把通用命名器，變成你的工作索引。</div>
+        </div>
+
+        <div style="background:#050B17;border:1px solid rgba(240,222,158,0.22);border-radius:16px;overflow:hidden;box-shadow:0 18px 44px rgba(5,11,23,0.26);display:flex;flex-direction:column;min-width:0;">
+          <div style="height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+            <span style="font-family:var(--font-mono);font-size:10px;font-weight:850;color:#F0DE9E;letter-spacing:0.08em;">客製 PROMPT · 貼到 AI Agent</span>
+          </div>
+          <pre style="margin:0;padding:15px 18px;font-family:var(--font-mono);font-size:10.8px;line-height:1.5;color:rgba(255,255,255,0.84);white-space:pre-wrap;overflow-x:auto;flex:1;">我想客製目前安裝的 auto-rename skill，讓 session 名稱更貼近我的日常工作與領域需求。
+
+請先找出目前實際使用的 auto-rename/SKILL.md，告訴我檔案路徑，再使用 /structured-questions 引導我決定：
+- 我最常見的任務類型、工作動詞與領域詞彙。
+- emoji 分類應如何對應我的工作情境。
+- 名稱的語言、長度、英文技術名詞與好／壞範例。
+
+你也要自行思考還缺哪些資訊，才能讓命名結果真正方便我辨識與搜尋。
+
+根據我的選擇，只修改命名判斷邏輯、關鍵字與範例；保留原本的 trigger、relay、hook 與安全規則。完成後顯示 diff，並用 5 個貼近我工作領域的 session 名稱驗證結果。</pre>
         </div>
       </div>
 
@@ -3234,6 +3259,51 @@ sandbox_mode  = "workspace-write"
           <div>📄 <strong style="color:#F0DE9E;">結構化交接</strong> — 自動記錄已完成、進行中、下一步</div>
           <div>⚠️ <strong style="color:#F0DE9E;">主動預警</strong> — 70% context 時提醒，不會突然斷掉</div>
           <div>🔗 <strong style="color:#F0DE9E;">一句話續接</strong> — 新 session 讀交接文件就能繼續</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- S50B · Handoff: 用 Structured Questions 客製交接內容 -->
+  <section class="slide slide-dark" id="s50-customize" data-slide="53">
+    <div class="slide-body" style="max-width:1080px;zoom:1.03;">
+
+      <p class="slide-eyebrow">Skill ❸ · Handoff · 動手客製</p>
+      <h2 class="slide-title" style="font-size:clamp(26px,3.5vw,48px);">讓交接文件符合你的工作方式</h2>
+      <p class="slide-lede" style="margin-top:7px;font-size:clamp(14px,1.3vw,19px);color:rgba(255,255,255,0.64);">先問清楚誰會接手、需要什麼，再調整 handoff 文件的內容模板。</p>
+
+      <div class="r" style="display:grid;grid-template-columns:0.68fr 1.52fr;gap:18px;width:100%;margin-top:18px;align-items:stretch;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">誰要接手</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">下一個 AI session、同事、主管或未來的自己，需要不同資訊。</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">什麼一定要留</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">決策、證據、風險、待辦與領域欄位，依工作情境調整。</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:15px;padding:15px 16px;">
+            <div style="font-family:var(--font-mono);font-size:9px;font-weight:850;color:#F0DE9E;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">下一步能直接做</div>
+            <p style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72);margin:0;">交接不是回顧報告；接手者要能從具體動作立刻開始。</p>
+          </div>
+          <div style="padding:12px 14px;border-radius:13px;background:rgba(240,222,158,0.08);border:1px solid rgba(240,222,158,0.18);font-size:12px;line-height:1.55;color:#F0DE9E;">好 handoff 的標準：不用重新問背景就能繼續。</div>
+        </div>
+
+        <div style="background:#050B17;border:1px solid rgba(240,222,158,0.22);border-radius:16px;overflow:hidden;box-shadow:0 18px 44px rgba(5,11,23,0.26);display:flex;flex-direction:column;min-width:0;">
+          <div style="height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(240,222,158,0.07);border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+            <span style="font-family:var(--font-mono);font-size:10px;font-weight:850;color:#F0DE9E;letter-spacing:0.08em;">客製 PROMPT · 貼到 AI Agent</span>
+          </div>
+          <pre style="margin:0;padding:15px 18px;font-family:var(--font-mono);font-size:10.8px;line-height:1.5;color:rgba(255,255,255,0.84);white-space:pre-wrap;overflow-x:auto;flex:1;">我想客製目前安裝的 handoff skill，讓交接文件更符合我的日常工作與領域需求。
+
+請先找出目前實際使用的 handoff/SKILL.md，告訴我檔案路徑，再使用 /structured-questions 引導我決定：
+- 交接文件的主要讀者與使用情境。
+- 必填章節、領域專屬欄位，以及哪些 optional section 可省略。
+- 摘要的詳細程度、證據連結格式與「下一步」應寫到多具體。
+
+你也要自行思考還缺哪些資訊，才能讓接手者不必重新詢問背景就能繼續。
+
+根據我的選擇，只修改 handoff 文件的內容模板、章節條件與範例；保留資訊蒐集、commit、session 改名與絕對路徑起始 prompt 等流程。必須保留「下一步」，空白的 optional section 要刪除。完成後顯示 diff，並產出一份符合我領域的範例 handoff 供我驗收。</pre>
         </div>
       </div>
 
