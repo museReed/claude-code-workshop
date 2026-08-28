@@ -6,3 +6,4 @@ skills-lock.json
 .DS_Store
 .vscode/
 *.swp
+__pycache__/

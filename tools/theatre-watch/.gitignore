@@ -1,0 +1,4 @@
+# 執行產出,不進版控(GitHub Actions 用 cache + artifact 保存)
+data/
+REPORT.md
+debug/

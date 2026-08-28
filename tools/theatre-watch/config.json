@@ -1,0 +1,31 @@
+{
+  "max_price": 30,
+  "delay_seconds": 3.0,
+  "targets": [
+    {
+      "name": "todaytix-under-30",
+      "source": "todaytix",
+      "url": "https://www.todaytix.com/london/category/theatre-tickets-under-30-pounds"
+    },
+    {
+      "name": "todaytix-deals",
+      "source": "todaytix",
+      "url": "https://www.todaytix.com/london/category/london-theatre-tickets-deals"
+    },
+    {
+      "name": "todaytix-theatre-week",
+      "source": "todaytix",
+      "url": "https://www.todaytix.com/london/category/london-theatre-week"
+    },
+    {
+      "name": "olt-todays-tickets",
+      "source": "official-london-theatre",
+      "url": "https://officiallondontheatre.com/todays-tickets/"
+    },
+    {
+      "name": "olt-offers",
+      "source": "official-london-theatre",
+      "url": "https://officiallondontheatre.com/offers/"
+    }
+  ]
+}
