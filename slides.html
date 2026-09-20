@@ -1410,7 +1410,7 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
 
   <!-- ── 今天的安排（2／2）· 2026-08-16 新增 ──────────────────────
        不分上下半場之後，原本的「下半場地圖」由這一頁接手，
-       並補上今天新加的三段：常用指令、筆記庫、Remote Control。 -->
+       並補上今天新加的兩段：常用指令、筆記庫。 -->
   <section class="slide slide-warm" id="s7b">
     <div class="slide-body" style="max-width:1080px;">
       <h2 class="slide-title" style="color:#18181B;">今天的安排</h2>
@@ -1442,12 +1442,6 @@ body.slide-is-light #slide-counter { color: var(--ink-4); }
         </div>
         <div style="display:grid;grid-template-columns:52px 110px 1.15fr 1.6fr;gap:22px;align-items:center;min-height:66px;border-bottom:1px solid rgba(24,24,27,0.10);">
           <div style="font-size:26px;font-weight:900;color:rgba(24,24,27,0.22);">11</div>
-          <div style="font-family:var(--font-mono);font-size:14px;color:#9A9A9A;">15 min</div>
-          <div style="font-size:18px;font-weight:800;color:#1D1D1F;">Remote Control</div>
-          <div style="font-size:14px;line-height:1.55;color:#8A8A8A;text-align:right;">人走開它繼續做 · 手機當窗口</div>
-        </div>
-        <div style="display:grid;grid-template-columns:52px 110px 1.15fr 1.6fr;gap:22px;align-items:center;min-height:66px;border-bottom:1px solid rgba(24,24,27,0.10);">
-          <div style="font-size:26px;font-weight:900;color:rgba(24,24,27,0.22);">12</div>
           <div style="font-family:var(--font-mono);font-size:14px;color:#9A9A9A;">15 min</div>
           <div style="font-size:18px;font-weight:800;color:#1D1D1F;">收尾</div>
           <div style="font-size:14px;line-height:1.55;color:#8A8A8A;text-align:right;">你已經學會什麼 · Q&amp;A</div>
@@ -4461,109 +4455,7 @@ Interests
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════
-       新增（2026-08-16）· Remote Control
-       ⚠️ 兩邊都叫 remote-control，但接上去的東西不一樣（2026-08 查證）：
-       Claude 接「正在跑的那個 session」，Codex 是「另開一個專屬遠端的 session」。
-       學生拿 Codex 想接管剛才那個會找不到——那是這一段最重要的一頁。
-       ══════════════════════════════════════════════════════════ -->
-
-  <section class="slide slide-dark" id="s-remote1">
-    <div class="slide-body" style="max-width:1040px;">
-      <p class="slide-eyebrow">進階 · Remote Control</p>
-      <h2 class="slide-title" style="font-size:clamp(30px,4vw,58px);">人不在電腦前，也能繼續</h2>
-      <p class="slide-lede" style="margin-top:10px;color:rgba(255,255,255,0.72);max-width:840px;">電腦繼續做事，手機只是一個窗口。</p>
-
-      <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;">
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
-          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">跑的還是你的電腦</div>
-          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">檔案、專案設定、MCP 都在原本那台。手機沒有跑任何東西。</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
-          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">手機做的是「回話」</div>
-          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">看進度、回答它的問題、按批准——它接著剛才的進度繼續做。</p>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px;">
-          <div style="font-size:14px;font-weight:800;color:#F0DE9E;margin-bottom:6px;">不用開對外的埠</div>
-          <p style="font-size:13px;line-height:1.55;color:rgba(255,255,255,0.70);margin:0;">連線由你的電腦主動發起，全程你這邊說了算。</p>
-        </div>
-      </div>
-
-      <div class="r" style="margin-top:18px;display:flex;align-items:center;gap:12px;background:rgba(240,222,158,0.10);border:1px solid rgba(240,222,158,0.30);border-radius:14px;padding:14px 18px;">
-        <span style="font-size:18px;flex-shrink:0;">📱</span>
-        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);">最適合的場合：<strong style="color:#fff;">剛才那種要跑好幾分鐘的任務</strong>——交代完就可以走開，用手機看它跑完。</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide slide-dark" id="s-remote2">
-    <div class="slide-body" style="max-width:1120px;">
-      <p class="slide-eyebrow">⚠️ 這一頁是重點</p>
-      <h2 class="slide-title" style="font-size:clamp(28px,3.6vw,52px);">兩邊不是同一件事</h2>
-      <p class="slide-lede" style="margin-top:8px;color:rgba(255,255,255,0.70);max-width:880px;">指令幾乎一樣，但<strong style="color:#F0DE9E;">接上去的東西不一樣</strong>。拿 Codex 想接管剛才終端裡那個 session，會找不到。</p>
-
-      <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;">
-        <div style="background:rgba(217,119,87,0.10);border:1px solid rgba(217,119,87,0.34);border-radius:18px;padding:22px;">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:#E8A06A;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Claude Code</div>
-          <div style="font-family:var(--font-mono);font-size:14px;color:#fff;background:rgba(0,0,0,0.30);border-radius:10px;padding:10px 14px;margin-bottom:14px;">claude remote-control</div>
-          <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.75;color:rgba(255,255,255,0.80);">
-            <li>接上<strong style="color:#fff;">正在跑的那個 session</strong></li>
-            <li>用 claude.ai/code 或 Claude App</li>
-            <li>掃 QR，或開它給的 session 網址</li>
-          </ul>
-        </div>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:22px;">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:900;color:rgba(255,255,255,0.75);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Codex</div>
-          <div style="font-family:var(--font-mono);font-size:14px;color:#fff;background:rgba(0,0,0,0.30);border-radius:10px;padding:10px 14px;margin-bottom:14px;">codex remote-control</div>
-          <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.75;color:rgba(255,255,255,0.80);">
-            <li>需要 CLI 0.130 以上</li>
-            <li><strong style="color:#fff;">另開一個專屬遠端的 session</strong></li>
-            <li>用 ChatGPT App 的 Remote，選裝置</li>
-            <li>接不了你已經在終端跑的那個</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.22);border-radius:14px;padding:14px 18px;">
-        <span style="width:28px;height:28px;border-radius:50%;background:rgba(248,113,113,0.18);display:inline-flex;align-items:center;justify-content:center;color:#F87171;font-weight:900;flex-shrink:0;">!</span>
-        <span style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.82);"><strong style="color:#fff;">電腦睡著就斷了</strong>——要嘛設不睡眠、要嘛接電源。還有：手機上按的「同意」跟坐在電腦前按的是同一件事，別在通勤時隨手按。</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide slide-warm" id="s-remote3">
-    <div class="slide-body" style="max-width:1080px;">
-      <p class="slide-eyebrow" style="color:rgba(24,24,27,0.45);">現場做一次 · Claude Code</p>
-      <h2 class="slide-title" style="color:#18181B;">實際接一次給你看</h2>
-      <p class="slide-lede" style="margin-top:8px;color:#555;max-width:860px;">Codex 流程一樣，差別是從 ChatGPT App 選裝置，而且是新開一個 session。</p>
-
-      <div class="r" style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;">
-        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">01 · 在電腦上開</div>
-          <div style="font-family:var(--font-mono);font-size:14px;color:#18181B;background:#F5F5F4;border-radius:8px;padding:9px 12px;">claude remote-control</div>
-        </div>
-        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">02 · 拿手機掃 QR</div>
-          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">按空白鍵可以切換 QR 顯示。</p>
-        </div>
-        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">03 · 接上之後</div>
-          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">電腦那邊照樣在跑，手機看得到<strong>同一段輸出</strong>。</p>
-        </div>
-        <div style="background:#fff;border:1px solid #E7E5E4;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-          <div style="font-family:var(--font-mono);font-size:11px;font-weight:800;color:#D97706;letter-spacing:0.06em;margin-bottom:8px;">04 · 回答它的問題</div>
-          <p style="font-size:14px;line-height:1.6;color:#18181B;margin:0;">要批准的動作，在手機上按同意就好。</p>
-        </div>
-      </div>
-
-      <div class="r" style="margin-top:16px;display:flex;align-items:center;gap:12px;background:rgba(46,125,91,0.08);border:1px solid rgba(46,125,91,0.20);border-radius:14px;padding:13px 18px;">
-        <span style="width:26px;height:26px;border-radius:50%;background:rgba(46,125,91,0.16);display:inline-flex;align-items:center;justify-content:center;color:#2E7D5B;font-weight:900;flex-shrink:0;">▶</span>
-        <span style="font-size:13.5px;line-height:1.6;color:#1D5B42;"><strong>練習：</strong>叫它做一件要跑幾分鐘的事 → 開 remote control、手機接上 → 闔上筆電（不要關機）→ 在手機上追加一句要求，看電腦那邊有沒有照做。</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHOWCASE · Frontend-Design 成品展示 -->
+<!-- SHOWCASE · Frontend-Design 成品展示 -->
   <section class="slide slide-dark" id="s69" data-slide="70">
     <div class="slide-body" style="max-width:1020px; zoom:1.05;">
 
@@ -4627,11 +4519,6 @@ Interests
           <div style="font-size:24px; margin-bottom:8px;">⌨️</div>
           <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">每天會用到的指令</div>
           <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">/clear · /context · /rewind · /resume<br>走錯方向就按 Esc 打斷它</div>
-        </div>
-        <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:16px;">
-          <div style="font-size:24px; margin-bottom:8px;">📱</div>
-          <div style="font-size:14px; font-weight:700; color:#F0DE9E; margin-bottom:6px;">人不在也能繼續</div>
-          <div style="font-size:11px; color:rgba(255,255,255,0.55); line-height:1.6;">Remote Control · 手機當窗口<br>Claude 接原 session，Codex 另開一個</div>
         </div>
         <div style="background:rgba(240,222,158,0.06); border:1px solid rgba(240,222,158,0.15); border-radius:12px; padding:16px;">
           <div style="font-size:24px; margin-bottom:8px;">🗂</div>
